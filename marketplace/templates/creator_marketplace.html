@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Add a for loop here. for listing in "every listing in database". Then show each listing-->
+
+{% for listing in creator_listings %}
+    <div class="container">
+        <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+            <div class="row no-gutters">
+            <div class="col-md-3">
+                <img src="https://d.newsweek.com/en/full/1423312/schrute.jpg?w=1600&h=1600&q=88&f=8ef671808b8d0f3b5537abbdb80e2304" class="card-img" alt="..." style="max-width: 100%; max-height: 100%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">{{ listing.blog_url }}</h5>
+                <p class="card-text">{{ listing.niche }}</p>
+                <p class="card-text"><small class="text-muted">{{ listing.monthly_views }}</small></p>
+                </div>
+                <button class="btn btn-primary">View</button>
+            </div>
+            </div>
+        </div>
+
+    </div> 
+{% endfor %}
+
+{% endblock content %}

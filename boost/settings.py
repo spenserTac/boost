@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'creator_listings',
     'sponsor_listings',
     'marketplace',
-    'essentials'
+    'essentials',
 ]
 
 MIDDLEWARE = [

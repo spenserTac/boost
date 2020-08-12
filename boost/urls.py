@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', essentials_views.home, name='home'),
     path('creators/', include('creator_listings.urls')),
+    path('sponsors/', include('sponsor_listings.urls')),
+    path('marketplace/', include('marketplace.urls')),
 ]
