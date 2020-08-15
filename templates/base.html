@@ -3,6 +3,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Sign In Stuff-->
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,6 +44,24 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
+
+            {% if user.is_authenticated %}
+            <div class="form-inline my-2 my-lg-0">
+                <a href="{% url 'logout' %}"><button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button></a>
+            </div>
+            <div class="form-inline my-2 my-lg-0">
+                <p>Logged In As: {{ user.username }}</p>
+            </div>
+
+            {% else %}
+            <div class="form-inline my-2 my-lg-0">
+                <a href="{% url 'login' %}"><button class="btn btn-success my-2 my-sm-0" type="submit">Login</button></a>
+            </div>
+            <div class="form-inline my-2 my-lg-0">
+                <a href="{% url 'signup' %}"><button class="btn btn-success my-2 my-sm-0" type="submit">Signup</button></a>
+            </div>
+            {% endif %}
+            
           </ul>
         </div>
       </nav>

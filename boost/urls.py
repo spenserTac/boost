@@ -23,4 +23,5 @@ urlpatterns = [
     path('creators/', include('creator_listings.urls')),
     path('sponsors/', include('sponsor_listings.urls')),
     path('marketplace/', include('marketplace.urls')),
+    path('account/', include('users.urls')),
 ]

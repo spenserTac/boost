@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <br>
+    <br>
+
+    <div class="container justify-content-center">
+<!--
+        <div class="row">
+            <br>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <form method="post">
+                    {% csrf_token %}
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Enter username" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password1" id="exampleInputPassword1" placeholder="Password" required>
+                  </div>
+                     <div class="form-group">
+                    <label for="exampleInputPassword1">Confirm Password</label>
+                    <input type="password" class="form-control" name="password2" id="exampleInputPassword1" placeholder="confirm password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        This is the bootstrap for a login. But the built in Django login system is more secure. That's what'll be used for
+        now, but this'll likly be chagned later since it doesn't look very good.
+
+--> 
+        <h1 style="text-align: center;">Create Account</h1>
+
+        <br>
+        <br>
+
+        <form method="POST">
+
+            {% csrf_token %}
+<!--
+            <div class="form-row">
+                <div class="col">
+                    <input name="fname" type="text" class="form-control" placeholder="First name" required>
+                </div>
+                <div class="col">
+                    <input name="lname" type="text" class="form-control" placeholder="Last name" required>
+                </div>
+            </div>
+-->
+            <br>
+
+            
+            
+            <br>
+<!--
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <select id="inputState" class="form-control" required>
+                      <option selected>United States</option>
+                      <option>...</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Phone Number">
+                </div>
+            </div>
+ -->         
+ 
+            <div class="form-group">
+                <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <input name="password1" type="password" class="form-control" placeholder="Password" required>
+                </div>
+
+                <div class="col">
+                    <input name="password2" type="password" class="form-control" placeholder="confirm password" required>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="col-auto d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mb-2">Create Account</button>
+            </div>
+        </form>
+   
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn" data-theme="light"></div>
+            <script>
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
+            }
+            </script>
+
+            <br>
+
+            <div class="d-flex justify-content-center">
+                <span class="form-text text-muted">Already have an account? <a href="{% url 'login' %}">Sign In</a></span>
+            </div>
+
+            <br>
+
+            <div class="d-flex justify-content-center">
+                <span class="form-text text-muted" style="text-align: center;">By creating a Boost account, you're agreeing to acceptBoost's <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a></span>
+            </div>
+    </div>
+
+
+{% endblock content %}
