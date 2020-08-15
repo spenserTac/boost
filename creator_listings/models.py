@@ -3,7 +3,7 @@ from django.db import models
 class BlogListingCreationModel(models.Model):
     blog_url = models.CharField(max_length=300)
     niche = models.CharField(max_length=300)
-    age = models.IntegerField()
+    age = models.CharField(max_length=300)
     monthly_views = models.CharField(max_length=300)
 
     def __str__(self):
