@@ -7,7 +7,9 @@ def blogger_listing_creation(request):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST or None)
         if form.is_valid():
+            form.save(commit=False).creator = request.user
             form.save()
+        print(form.errors)
         return redirect('home')
         
     else:

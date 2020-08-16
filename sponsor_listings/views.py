@@ -8,6 +8,7 @@ def sponsor_listing_creation(request):
         form = SponsorListingCreationForm(request.POST or None)
 
         if form.is_valid():
+            form.save(commit=False).creator = request.user
             form.save()
 
             return redirect('home')
