@@ -11,6 +11,19 @@ def creator_marketplace(request):
 
     return render(request, 'creator_marketplace.html', context)
 
+
+
+def creator_marketplace_listing_view(request, id=None):
+    listing = BlogListingCreationModel.objects.get(id=id)
+
+    context = {
+        'listing': listing
+    }
+
+    return render(request, 'creator_marketplace_listing_view.html', context)
+
+
+
 def sponsor_marketplace(request):
     sponsor_listings = SponsorListingCreationModel.objects.all()
 
@@ -19,3 +32,14 @@ def sponsor_marketplace(request):
     }
 
     return render(request, 'sponsor_marketplace.html', context)
+
+
+
+def sponsor_marketplace_listing_view(request, id=None):
+    listing = SponsorListingCreationModel.objects.get(id=id)
+
+    context = {
+        'listing': listing
+    }
+
+    return render(request, 'sponsor_marketplace_listing_view.html', context)

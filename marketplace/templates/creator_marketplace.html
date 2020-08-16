@@ -127,7 +127,7 @@
                                 <h5 class="card-title">{{ listing.blog_url }}</h5>
                                 <p class="card-text">{{ listing.niche }}</p>
                                 <p class="card-text"><small class="text-muted">{{ listing.monthly_views }}</small></p>
-                                <a href="#"><button>View Listing</button></a>
+                                <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
                             </div>
                         </div>
                         </div>

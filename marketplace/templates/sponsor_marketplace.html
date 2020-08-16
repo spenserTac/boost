@@ -127,6 +127,7 @@
                                 <h5 class="card-title">{{ listing.product }}</h5>
                                 <p class="card-text">{{ listing.niche }}</p>
                                 <p class="card-text"><small class="text-muted">{{ listing.money }}</small></p>
+                                <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
                             </div>
                         </div>
                         </div>
