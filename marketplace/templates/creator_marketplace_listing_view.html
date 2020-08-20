@@ -6,7 +6,29 @@
         <h1>This is where all the listing details and data will be</h1>
         <br>
         <br>
-        <h1>Blog URL: {{ listing.blog_url }}</h1>
+        <h1>Product: {{ listing.blog_url }}</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input name="watched_creator" class="btn btn-primary" id="watch_button" type="submit" value="Watch">
+            <script>
+                var watch_button = document.getElementById("watch_button");
+                watch_button.addEventListener('click', func);
+
+                function func(){
+                    if (watch_button.value === 'Watch') {
+                        watch_button.value = 'Watching';
+                        watch_button.className = 'btn btn-warning';
+                    } else {
+                        watch_button.value = 'Watching';
+                        watch_button.value = 'Watch';
+                        watch_button.className = 'btn btn-primary';
+                    }
+                }
+            </script>
+        </form>
     </div>
 
 {% endblock content %}

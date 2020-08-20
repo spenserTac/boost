@@ -29,3 +29,7 @@ def signup(request):
 
         return render(request, 'signup.html', context)
 
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')

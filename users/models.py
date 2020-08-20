@@ -1,11 +1,10 @@
 from django.db import models
+from creator_listings.models import BlogListingCreationModel
+from sponsor_listings.models import SponsorListingCreationModel
+from django.contrib.auth.models import User
 
-class UserCreationModel(models.Model):
-    first_name = models.CharField(max_length=300)
-    last_name = models.CharField(max_length=300)
-    email = models.CharField(max_length=300)
-    phone = models.CharField(max_length=300)
-    password = models
+class UserWatchDashboardModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    watched_creator = models.TextField(null=True)
+    watched_sponsor = models.TextField(null=True)
 
-    def __str__(self):
-        return (self.first_name + self.last_name + " - " + self.email)
