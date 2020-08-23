@@ -4,6 +4,13 @@ from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
 
 
+'''
+
+!!! Add ability to add pictures, files, and urls to orders. And any other stuff that may be necessary.
+
+'''
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=True)
 
@@ -31,22 +38,21 @@ class Profile(models.Model):
 # Orders for creators (creators will see these in their dashboard where they can review, accept/deny them. The "buyer" will then be notified
 #       via email and text)
 class CreatorOrderModel(models.Model):
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
-    creator_listing = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, related_name='creator_listing')
-
-    # If it's a sponsor ordering a creator
-    buyers_listing_for_sponsor = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
-    what_services_sponsor_is_looking_for = models.CharField(max_length=500, blank=True, null=True)
-    what_services_sponsor_is_looking_for_detailed = models.TextField(max_length=1000, blank=True, null=True)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='buyer_username')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='creator_username')
+    creator_listing = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, null=True, related_name='creator_listing')
 
 
-    # If it's a creator ordering a creator (probably for a shoutout)
-    buyers_listing_for_creator = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE,blank=True, null=True, related_name='buyers_creator_listing')
-    what_services_creator_is_looking_for = models.CharField(max_length=500, blank=True, null=True)
-    what_services_creator_is_looking_fordetailed = models.TextField(max_length=1000, blank=True, null=True)
+    buyer_listing = models.CharField(max_length=500, blank=True, null=True)
+
+    
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
+    service = models.CharField(max_length=500, blank=True, null=True)
+    service_detailed = models.TextField(max_length=1000, blank=True, null=True)
 
     def __str__(self):
-        return ('BUYER: [SPONSOR] ' + str(self.buyers_listing_for_sponsor) + ' - [CREATOR] ' + str(self.buyers_listing_for_creator) + ' | CREATOR: ' + str(self.creator_listing))
+        return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
 
 # Orders for sponsors (sponsors will see these in their dashboard where they can review, accept/deny them. The "buyer" (only creators)
