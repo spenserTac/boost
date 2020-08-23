@@ -20,14 +20,14 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="InputwebsiteUrl">Blog's Url</label>
-                    <input type="text" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="Blog's Url">
+                    <input value="{{ listing.blog_url }}" type="text" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="Blog's Url">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="Inputniche">Niche</label>
-                    <select type="text" name="niche" id="Inputniche" class="form-control">
-                        <option selected>Choose...</option>
+                    <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control">
+                        <option selected>{{ listing.niche }}</option>
                         <option>Technology</option>
                         <option>Health</option>
                         <option>Fitness</option>
@@ -40,13 +40,13 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputSiteAge">Blog's Age</label>
-                    <input type="text" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="Blog's Age">
+                    <input value="{{ listing.age }}" type="text" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="Blog's Age">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputSiteMonthlyVisits">Blog's Monthly Visits</label>
-                    <input type="text" name="monthly_views" type="text" class="form-control" id="inputSiteMonthlyVisits" placeholder="Blog's Monthly Visits">
+                    <input value="{{ listing.monthly_views }}" type="text" name="monthly_views" type="text" class="form-control" id="inputSiteMonthlyVisits" placeholder="Blog's Monthly Visits">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

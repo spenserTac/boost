@@ -1,0 +1,10 @@
+3rd Party Modules (modules/api's that you have to use pip install for) (This should normally be done with a development environment,
+	and only the files that are used within the project will be shown)
+
+
+1. Django Bootsrap Modal Form -> django-bootstrap-modal-forms
+(pip install django-bootstrap-modal-forms)
+
+https://pypi.org/project/django-bootstrap-modal-forms/
+
+2.

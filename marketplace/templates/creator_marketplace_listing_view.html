@@ -3,32 +3,28 @@
 {% block content %}
 
     <div class="container">
+        
         <h1>This is where all the listing details and data will be</h1>
         <br>
         <br>
         <h1>Product: {{ listing.blog_url }}</h1>
+        <h1>Following: {{ following }}</h1>
 
-        <form method="POST">
+        {% if following %}
+            <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-success">Watching</button></a>
+        {% else %}
+            <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-success">Watch</button></a>
+        {% endif %}
 
-            {% csrf_token %}
 
-            <input name="watched_creator" class="btn btn-primary" id="watch_button" type="submit" value="Watch">
-            <script>
-                var watch_button = document.getElementById("watch_button");
-                watch_button.addEventListener('click', func);
+        {% if ordered %}
+            <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-primary">Unorder</button></a>
+        {% else %}
+        <!-- Button trigger modal -->
+            <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-primary">Order</button></a>
+        {% endif %}
+        
 
-                function func(){
-                    if (watch_button.value === 'Watch') {
-                        watch_button.value = 'Watching';
-                        watch_button.className = 'btn btn-warning';
-                    } else {
-                        watch_button.value = 'Watching';
-                        watch_button.value = 'Watch';
-                        watch_button.className = 'btn btn-primary';
-                    }
-                }
-            </script>
-        </form>
     </div>
 
 {% endblock content %}

@@ -5,18 +5,45 @@ from .forms import BlogListingCreationForm
 
 def blogger_listing_creation(request):
     if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST or None)
+        form = BlogListingCreationForm(request.POST)
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save()
-        print(form.errors)
+
         return redirect('home')
-        
-    else:
-        '''all_tasks = BlogListingCreationModel.objects.all()
-
+    
+    '''if (id):
+        listing = BlogListingCreationModel.objects.get(id=id)
         context = {
-        'all_tasks': all_tasks
-         }'''
+            'listing': listing
+        }
 
-        return render(request, 'blog_listing_creation.html')
+        return render(request, 'blog_listing_creation.html', context)'''
+
+    return render(request, 'blog_listing_creation.html')
+
+def blogger_listing_update(request, id=None):
+    listing = BlogListingCreationModel.objects.get(id=id)
+    context = {
+        'listing':listing
+    }
+    if request.method == 'POST':
+        form = BlogListingCreationForm(request.POST, instance=listing)
+        if form.is_valid():
+            form.save()
+
+        return redirect('home')
+    return render(request, 'blog_listing_creation.html', context)
+
+def blogger_listing_delete(request, id=None):
+    listing = BlogListingCreationModel.objects.get(id=id)
+    context = {
+        'listing':listing
+    }
+    listing.delete()
+
+    return redirect('dashboard')
+    
+
+
+

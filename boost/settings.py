@@ -37,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd party
+    'bootstrap_modal_forms',
+
+    # user created apps
     'creator_listings',
     'sponsor_listings',
     'marketplace',
     'essentials',
-    'users',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

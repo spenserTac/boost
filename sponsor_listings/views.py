@@ -6,25 +6,42 @@ from .forms import SponsorListingCreationForm
 def sponsor_listing_creation(request):
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST or None)
-
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save()
 
             return redirect('home')
-        elif (form.is_valid() == False):
-            #messages.success(request, ("There was an error: %s" % form.errors))
-            
-            return redirect('sponsor_listing')  
-
-        #messages.success(request, ("Sponsor Listing Successfully Created!"))
         
-        
-    else:
-        '''all_tasks = BlogListingCreationModel.objects.all()
+        '''if (id):
+            listing = SponsorListingCreationModel.objects.get(id=id)
+            context = {
+                'listing': listing
+            }
 
-        context = {
-        'all_tasks': all_tasks
-         }'''
+            return render(request, 'sponsor_listing_creation.html', context)'''
+    return render(request, 'sponsor_listing_creation.html')
 
-        return render(request, 'sponsor_listing_creation.html')
+
+def sponsor_listing_update(request, id=None):
+    listing = SponsorListingCreationModel.objects.get(id=id)
+    context = {
+        'listing':listing
+    }
+    if request.method == 'POST':
+        form = SponsorListingCreationForm(request.POST, instance=listing)
+        if form.is_valid():
+            form.save()
+
+        return redirect('home')
+    return render(request, 'sponsor_listing_creation.html', context) 
+
+
+def sponsor_listing_delete(request, id=None):
+    listing = SponsorListingCreationModel.objects.get(id=id)
+    context = {
+        'listing':listing
+    }
+    listing.delete()
+
+    return redirect('dashboard')
+    
