@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
-    'bootstrap_modal_forms',
+    # 'bootstrap_modal_forms',
 
     # user created apps
     'creator_listings',

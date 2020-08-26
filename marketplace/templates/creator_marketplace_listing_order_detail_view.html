@@ -19,7 +19,7 @@
             <div class="form-group col-md-4">
                 <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
                 <select name="buyer_listing" id="inputListing" class="form-control">
-                  <option selected>Choose...</option>
+                  <option selected>{{ prev_c_order.buyer_listing }}</option>
     
                     {% for listing in buyers_sponsor_listings %}
 
@@ -45,7 +45,7 @@
             <br>
               <div class="form-group col-md-4">
                 <select name="service" id="inputService" class="form-control">
-                  <option selected>Choose...</option>
+                  <option selected>{{ prev_c_order.service }}</option>
                   <option>Review</option>
                   <option>Shoutout</option>
                   <option>Tutorial</option>
@@ -65,7 +65,7 @@
                     </small>
 
                 </label>
-                <textarea name="service_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="service_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ prev_c_order.service_detailed }}</textarea>
               </div>
 
 

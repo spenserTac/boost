@@ -1,5 +1,6 @@
 import simplejson as json
-from python_stuff.converter import string_to_list, list_to_string #self made python file
+# self made python file
+from python_stuff.converter import string_to_list, list_to_string
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -29,10 +30,14 @@ def creator_marketplace(request):
     return render(request, 'creator_marketplace.html', context)
 
 # The detail page of a creator marketplace listing
+
+
 def creator_marketplace_listing_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
-    user = User.objects.get(username=request.user.username) # current logged in user
-    users_profile = Profile.objects.get(user=user) # current looged in user's Profile
+    # current logged in user
+    user = User.objects.get(username=request.user.username)
+    # current looged in user's Profile
+    users_profile = Profile.objects.get(user=user)
 
     # Seeing if the currently loggin user is following this post
     if (listing in users_profile.creators_watched.all()):
@@ -45,7 +50,7 @@ def creator_marketplace_listing_view(request, id=None):
         ordered = True
     else:
         ordered = False
-    
+
     context = {
         'listing': listing,
         'following': following,
@@ -57,11 +62,14 @@ def creator_marketplace_listing_view(request, id=None):
 ##### watching #####
 
 # The logic for watching and unwatching a listing
+
+
 def creator_marketplace_listing_watch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.creators_watched.add(listing)
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
+
 
 def creator_marketplace_listing_unwatch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
@@ -72,6 +80,8 @@ def creator_marketplace_listing_unwatch_view(request, id=None):
 ##### ordering #####
 
 # The logic for ordering and unordering a listing
+
+
 def creator_marketplace_listing_order_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
@@ -84,14 +94,18 @@ def creator_marketplace_listing_order_view(request, id=None):
 
     creator = listing.creator
 
-    #prev_c_order = None
-    '''if (CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)):
-        prev_c_order = CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)'''
+    prev_c_order = None
+
+    try:
+        prev_c_order = CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)
+    except:
+        prev_c_order = None
+
     
-            
 
     if (request.method == 'POST'):
-        form = CreatorOrderForm(request.POST or None) # add instance field for updating -> , instance=prev_c_order
+        # add instance field for updating -> , instance=prev_c_order
+        form = CreatorOrderForm(request.POST, instance=prev_c_order)
 
         if (form.is_valid()):
             obj = form.save(commit=False)
@@ -121,24 +135,22 @@ def creator_marketplace_listing_order_view(request, id=None):
         'creator': creator,
         'buyers_sponsor_listings': buyers_sponsor_listings,
         'buyers_creator_listings': buyers_creator_listings,
-        #'prev_c_order': prev_c_order
+        'prev_c_order': prev_c_order
     }
 
     return render(request, 'creator_marketplace_listing_order_detail_view.html', context)
-    #return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
+    # return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
+
 
 def creator_marketplace_listing_unorder_view(request, id=None):
     marketplace_c_listing = BlogListingCreationModel.objects.get(id=id)
     current_users_profile = Profile.objects.get(user=request.user)
-    creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=marketplace_c_listing)
+    creator_order = CreatorOrderModel.objects.get(
+        buyer=request.user, creator_listing=marketplace_c_listing)
 
     creator_order.delete()
     current_users_profile.creators_u_ordered.remove(marketplace_c_listing)
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': marketplace_c_listing.id}))
-
-
-
-
 
 
 #
@@ -156,10 +168,14 @@ def sponsor_marketplace(request):
     return render(request, 'sponsor_marketplace.html', context)
 
 # The detail page of a sponsor marketplace listing
+
+
 def sponsor_marketplace_listing_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
-    user = User.objects.get(username=request.user.username) # current logged in user
-    users_profile = Profile.objects.get(user=user) # current looged in user's Profile
+    # current logged in user
+    user = User.objects.get(username=request.user.username)
+    # current looged in user's Profile
+    users_profile = Profile.objects.get(user=user)
 
     # Seeing if the currently loggin user is following this post
     if (listing in users_profile.sponsors_watched.all()):
@@ -184,11 +200,14 @@ def sponsor_marketplace_listing_view(request, id=None):
 ##### watching #####
 
 # The logic for watching and unwatching a listing
+
+
 def sponsor_marketplace_listing_watch_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.sponsors_watched.add(listing)
     return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
+
 
 def sponsor_marketplace_listing_unwatch_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
@@ -199,11 +218,14 @@ def sponsor_marketplace_listing_unwatch_view(request, id=None):
 ##### ordering #####
 
 # The logic for ordering and unordering a listing
+
+
 def sponsor_marketplace_listing_order_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.sponsors_u_ordered.add(listing)
     return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
+
 
 def sponsor_marketplace_listing_unorder_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
