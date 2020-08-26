@@ -77,8 +77,6 @@ def creator_marketplace_listing_order_view(request, id=None):
     profile = Profile.objects.get(user=request.user)
     profile.creators_u_ordered.add(listing)
 
-    form = CreatorOrderForm()
-
     buyer = request.user
     buyer_profile = Profile.objects.get(user=buyer)
     buyers_sponsor_listings = buyer.sponsorlistingcreationmodel_set.all()
@@ -86,69 +84,57 @@ def creator_marketplace_listing_order_view(request, id=None):
 
     creator = listing.creator
 
+    #prev_c_order = None
+    '''if (CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)):
+        prev_c_order = CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)'''
     
             
 
     if (request.method == 'POST'):
-        form = CreatorOrderForm(request.POST) # add instance field for updating
+        form = CreatorOrderForm(request.POST or None) # add instance field for updating -> , instance=prev_c_order
 
-        print(form.errors)
-        print(buyer) #spense
-        print(creator) #spense
-        print(listing) #s
-
-       
-        obj = form.save(commit=False)
-        obj.buyer = buyer
-        obj.creator = creator
-        obj.creator_listing = listing
-
-
-        if (obj.is_valid()):
-        
-            '''obj = form.save(commit=False)
+        if (form.is_valid()):
+            obj = form.save(commit=False)
 
             obj.buyer = buyer
             obj.creator = creator
-            obj.creator_listing = listing'''
-                
+            obj.creator_listing = listing
+
+            buyer_listing = form.cleaned_data['buyer_listing']
             creator_l = BlogListingCreationModel.objects.all()
             sponsor_l = SponsorListingCreationModel.objects.all()
 
-        
+            for l in creator_l:
+                if (str(l) == str(buyer_listing)):
+                    obj.buyers_listing_c = l
 
-            buyer_l = obj.cleaned_data['buyer_listing']
-
-            if (buyer_l in creator_l):
-                obj.buyers_listing_c = buyer_l
-            elif(buyer_l in sponsor_l):
-                obj.buyers_listing_s = buyer_l
+            for l in sponsor_l:
+                if (str(l) == str(buyer_listing)):
+                    obj.buyers_listing_s = l
 
             obj.save()
 
         return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
     context = {
-        'form': form,
         'buyer': buyer,
         'creator': creator,
         'buyers_sponsor_listings': buyers_sponsor_listings,
         'buyers_creator_listings': buyers_creator_listings,
+        #'prev_c_order': prev_c_order
     }
 
     return render(request, 'creator_marketplace_listing_order_detail_view.html', context)
     #return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
 def creator_marketplace_listing_unorder_view(request, id=None):
-    listing = BlogListingCreationModel.objects.get(id=id)
-    profile = Profile.objects.get(user=request.user)
-    profile.creators_u_ordered.remove(listing)
-    return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
+    marketplace_c_listing = BlogListingCreationModel.objects.get(id=id)
+    current_users_profile = Profile.objects.get(user=request.user)
+    creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=marketplace_c_listing)
 
-'''# The detail page for ordering a creator
-def creator_marketplace_listing_order_detail_view(request, id=None):
-    pass
-'''
+    creator_order.delete()
+    current_users_profile.creators_u_ordered.remove(marketplace_c_listing)
+    return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': marketplace_c_listing.id}))
 
 
 

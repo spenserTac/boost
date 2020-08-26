@@ -38,9 +38,9 @@ class Profile(models.Model):
 # Orders for creators (creators will see these in their dashboard where they can review, accept/deny them. The "buyer" will then be notified
 #       via email and text)
 class CreatorOrderModel(models.Model):
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='buyer_username')
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='creator_username')
-    creator_listing = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, null=True, related_name='creator_listing')
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username')
+    creator_listing = models.ForeignKey(BlogListingCreationModel, blank=True, on_delete=models.CASCADE, null=True, related_name='creator_listing')
 
 
     buyer_listing = models.CharField(max_length=500, blank=True, null=True)
@@ -48,6 +48,7 @@ class CreatorOrderModel(models.Model):
     
     buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
     buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
+
     service = models.CharField(max_length=500, blank=True, null=True)
     service_detailed = models.TextField(max_length=1000, blank=True, null=True)
 

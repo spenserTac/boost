@@ -11,6 +11,8 @@ urlpatterns = [
     # Watching and unwatching listings
     path('dashboard/unwatch_c/<int:id>/', views.dashboard_unwatch_c, name='dashboard_unwatch_c'),
     path('dashboard/unwatch_s/<int:id>/', views.dashboard_unwatch_s, name='dashboard_unwatch_s'),
+    path('dashboard/caccept/<int:id>/', views.dashboard_unwatch_s, name='dashboard_creator_order_accept'),
+    path('dashboard/cdecline/<int:id>/', views.dashboard_unwatch_s, name='dashboard_creator_order_decline'),
 
     # Unordering listings
     path('dashboard/unorder_c/<int:id>/', views.dashboard_unorder_c, name='dashboard_unorder_c'),

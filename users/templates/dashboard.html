@@ -13,13 +13,34 @@
 
         <h1>Orders: </h1>
         <h3>Creator Orders: </h3>
-        <!--
+
+        
             {% for c_order in c_orders %}
-                <a href="{% url 'creator_marketplace_listing_view' id=c_order.id %}">{{ c_order }}</a>
-                <a href="{% url 'dashboard_creator_order_accept' id=c_order.id %}"><button>Accept</button></a>
-                <ahref="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
+                {% if c_order.buyers_listing_s %}
+                    <h5>Buyers S Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_order.buyers_listing_s.id %}">{{ c_order.buyers_listing_s }}</a></h5>
+                    <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
+                    <h5>The listing of yours that they are ordering: {{ c_order.creator_listing }}</h5>
+                    <a href="{% url 'dashboard_creator_order_accept' id=c_order.id %}"><button>Accept</button></a>
+                    <a href="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
+                    <br>
+                    <small>----------------------------------------------------------------</small>
+
+                {% elif c_order.buyers_listing_c %}
+                    <h5>Buyers C Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_order.buyers_listing_c.id %}">{{ c_order.buyers_listing_c }}</a></h5>
+                    <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
+                    <h5>The listing of yours that they are ordering: {{ c_order.creator_listing }}</h5>
+                    <a href="{% url 'dashboard_creator_order_accept' id=c_order.id %}"><button>Accept</button></a>
+                    <a href="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
+                    <br>
+                    <small>----------------------------------------------------------------</small>    
+                {% endif %}
             {% endfor %}
-        -->
+
+            {% if c_orders_len == 0 %}
+                <h5>>>> You have no orders for any of your creator listings</h5>
+            {% endif %}
+        
+       
 
 
         <h3>Sponsor Orders: </h3>
@@ -39,6 +60,7 @@
         {% for creator in c_ordered %}
             <a href="{% url 'creator_marketplace_listing_view' id=creator.id %}">{{ creator }}</a>
             <a href="{% url 'dashboard_unorder_c' id=creator.id %}"><button>Unorder</button></a>
+            <a href="{% url 'creator_marketplace_listing_order_view' id=creator.id %}">Edit</a>
         {% endfor %}
 
         <h3>Sponsors Ordered: </h3>

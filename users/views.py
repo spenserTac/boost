@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, CreatorOrderModel, SponsorOrderModel
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
+
 
 def signup(request):
     if request.method == 'POST':
@@ -33,8 +35,20 @@ def dashboard(request):
     
     c_watching = profile.creators_watched.all()
     s_watching = profile.sponsors_watched.all()
+
+    #s_orders = SponsorOrderModel.objects.get(creator=user)
+    c_orders = CreatorOrderModel.objects.filter(creator=user)
+    c_orders_len = c_orders.count()
+    #creator_orders = CreatorOrderModel.objects.all()
+    #c_orders = user.creatorodermodel_set.all()
+    #s_orders = all_s_orders.sponsorordermodel_set.all()
+    for i in c_orders:
+        print('---------------------')
+        print(i.buyers_listing_s)
+
     c_ordered = profile.creators_u_ordered.all()
     s_ordered = profile.sponsors_u_ordered.all()
+
 
     #The created listings of each type (creator and sponsor), if they created any
     personal_creator_listings = user.bloglistingcreationmodel_set.all()
@@ -45,12 +59,21 @@ def dashboard(request):
         'personal_s_listings': personal_sponsor_listings,
         's_watching': s_watching,
         'c_watching': c_watching,
-        'c_ordered': c_ordered,
         's_ordered': s_ordered,
+        'c_ordered': c_ordered,
+        #'s_orders': s_orders,
+        'c_orders': c_orders,
+        'c_orders_len': c_orders_len,
         'profile': profile,
     }
 
     return render(request, 'dashboard.html', context)
+
+
+
+#
+# Watch and unwatch feature on dashboard
+#
 
 def dashboard_unwatch_c(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
@@ -67,8 +90,10 @@ def dashboard_unwatch_s(request, id=None):
     return redirect('dashboard')
 
 
-
+#
 # Unordering creators and sponsors
+#
+
 def dashboard_unorder_c(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
     listing = users_profile.creators_u_ordered.get(id=id)
@@ -81,6 +106,17 @@ def dashboard_unorder_s(request, id=None):
     listing = users_profile.sponsors_u_ordered.get(id=id)
     users_profile.sponsors_u_ordered.remove(listing)
     
+    return redirect('dashboard')
+
+
+#
+# Accept and decline system on dashboard (for orders)
+#
+
+def dashboard_creator_order_accept(request, id=None):
+    return redirect('dashboard')
+
+def dashboard_creator_order_decline(request, id=None):
     return redirect('dashboard')
 
 
