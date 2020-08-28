@@ -24,8 +24,8 @@ class Profile(models.Model):
     sponsors_who_ordered_u = models.ManyToManyField(SponsorListingCreationModel, blank=True, related_name='sponsors_who_ordered_u')
 
 
-    '''def __str__(self):
-        return (str(self.user) + '\'s profile')'''
+    def __str__(self):
+        return (str(self.user) + '\'s profile')
 
     def profiles_listings(self):
         return self.bloglistingcreationmodel_set.all(), self.sponsorlistingcreationset.all()
@@ -38,16 +38,16 @@ class Profile(models.Model):
 # Orders for creators (creators will see these in their dashboard where they can review, accept/deny them. The "buyer" will then be notified
 #       via email and text)
 class CreatorOrderModel(models.Model):
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username')
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username')
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username_creator_order')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_creator_listing')
     creator_listing = models.ForeignKey(BlogListingCreationModel, blank=True, on_delete=models.CASCADE, null=True, related_name='creator_listing')
 
 
     buyer_listing = models.CharField(max_length=500, blank=True, null=True)
 
     
-    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
-    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True)
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_s_listing_for_c_order")
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_c_listing_for_c_order")
 
     service = models.CharField(max_length=500, blank=True, null=True)
     service_detailed = models.TextField(max_length=1000, blank=True, null=True)
@@ -59,17 +59,20 @@ class CreatorOrderModel(models.Model):
 # Orders for sponsors (sponsors will see these in their dashboard where they can review, accept/deny them. The "buyer" (only creators)
 #       will then be notified via email and text)
 class SponsorOrderModel(models.Model):
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
-    sponsor_listing = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name='buyer_username_sponsor_order')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_sponsor_listing')
+    sponsor_listing = models.ForeignKey(SponsorListingCreationModel, blank=True, on_delete=models.CASCADE, related_name='sponsor_listing')
 
-    # This is the buyer, who technically isn't buying anything, they're basically asking the sponsor if they'd like to
-    #       sponsor them
-    buyers_listing_for_creator = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE)
+    buyer_listing = models.CharField(max_length=500, blank=True, null=True)
+
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_s_listing_for_s_order")
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_c_listing_for_s_order")
+
     services_creator_is_willing_to_provide = models.CharField(max_length=500, blank=False)
     services_creator_is_willing_to_provide_detailed = models.TextField(max_length=1000, blank=True)
 
     def __str__(self):
-        return ('BUYER: [CREATOR]' + str(self.buyer) + ' | SPONSOR: ' + str(self.sponsor_listing))
+        return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.sponsor_listing))
 
 
 
