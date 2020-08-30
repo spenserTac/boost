@@ -45,8 +45,16 @@ def creator_marketplace_listing_view(request, id=None):
     else:
         following = False
 
+
+    creator_listing_exists = None
+    try:
+        l = CreatorOrderModel.objects.get(buyer=user, creator_listing=listing)
+        creator_listing_exists = True
+    except CreatorOrderModel.DoesNotExist:
+        pass     
+
     # Seeing if the currently loggin user has ordered this post
-    if (listing in users_profile.creators_u_ordered.all()):
+    if (listing in users_profile.creators_u_ordered.all() and creator_listing_exists):
         ordered = True
     else:
         ordered = False
@@ -182,8 +190,15 @@ def sponsor_marketplace_listing_view(request, id=None):
     else:
         following = False
 
+    sponsor_listing_exists = None
+    try:
+        l = SponsorOrderModel.objects.get(buyer=user, sponsor_listing=listing)
+        sponsor_listing_exists = True
+    except SponsorOrderModel.DoesNotExist:
+        pass
+
     # Seeing if the currently loggin user has ordered this post
-    if (listing in users_profile.sponsors_u_ordered.all()):
+    if (listing in users_profile.sponsors_u_ordered.all() and sponsor_listing_exists):
         ordered = True
     else:
         ordered = False

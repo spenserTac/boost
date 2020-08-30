@@ -23,7 +23,6 @@ class Profile(models.Model):
     creators_who_ordered_u = models.ManyToManyField(BlogListingCreationModel, blank=True, related_name='creators_who_ordered_u')
     sponsors_who_ordered_u = models.ManyToManyField(SponsorListingCreationModel, blank=True, related_name='sponsors_who_ordered_u')
 
-
     def __str__(self):
         return (str(self.user) + '\'s profile')
 
@@ -52,6 +51,9 @@ class CreatorOrderModel(models.Model):
     service = models.CharField(max_length=500, blank=True, null=True)
     service_detailed = models.TextField(max_length=1000, blank=True, null=True)
 
+    # Accepted, denied, or the default in review
+    status = models.CharField(max_length=100, blank=True, null=True, default='In Review')
+
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
@@ -71,10 +73,54 @@ class SponsorOrderModel(models.Model):
     services_creator_is_willing_to_provide = models.CharField(max_length=500, blank=False)
     services_creator_is_willing_to_provide_detailed = models.TextField(max_length=1000, blank=True)
 
+    # Accepted, denied, or the default in review
+    status = models.CharField(max_length=100, blank=True, null=True, default='In Review')
+
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.sponsor_listing))
 
 
+class AcceptedCreatorOrderModel(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username_accepted_creator_order')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_accepted_creator_listing')
+    creator_listing = models.ForeignKey(BlogListingCreationModel, blank=True, on_delete=models.CASCADE, null=True, related_name='accepted_creator_listing')
+
+
+    buyer_listing = models.CharField(max_length=500, blank=True, null=True)
+
+    
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_s_listing_for_c_order")
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_c_listing_for_c_order")
+
+    service = models.CharField(max_length=500, blank=True, null=True)
+    service_detailed = models.TextField(max_length=1000, blank=True, null=True)
+
+    # Accepted, denied, or the default in review
+    status = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return ('STATUS: ' + str(self.status) + ' | BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
+
+
+
+class AcceptedSponsorOrderModel(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name='buyer_username_accepted_sponsor_order')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_accepted_sponsor_listing')
+    sponsor_listing = models.ForeignKey(SponsorListingCreationModel, blank=True, on_delete=models.CASCADE, related_name='accepted_sponsor_listing')
+
+    buyer_listing = models.CharField(max_length=500, blank=True, null=True)
+
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_s_listing_for_s_order")
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_c_listing_for_s_order")
+
+    services_creator_is_willing_to_provide = models.CharField(max_length=500, blank=False)
+    services_creator_is_willing_to_provide_detailed = models.TextField(max_length=1000, blank=True)
+
+    # Accepted, denied, or the default in review
+    status = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.sponsor_listing))
 
 
 
