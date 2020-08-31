@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, CreatorOrderModel, SponsorOrderModel,AcceptedCreatorOrderModel, AcceptedSponsorOrderModel
+from .models import Profile, CreatorOrderModel, SponsorOrderModel,AcceptedCreatorOrderModel, AcceptedSponsorOrderModel, CompletedOrderModel
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
@@ -241,6 +241,7 @@ def dashboard_sponsor_order_accept(request, id=None):
     return redirect('dashboard')
 
 def dashboard_sponsor_order_decline(request, id=None):
+
     try:
         #c_listing = BlogListingCreationModel.objects.get(id=id)
         c_order = CreatorOrderModel.objects.get(id=id)
@@ -254,5 +255,75 @@ def dashboard_sponsor_order_decline(request, id=None):
         s_order.status = 'Declined'
 
         s_order.delete()
+
+    return redirect('dashboard')
+
+
+def dashboard_creator_order_complete(request, id=None):
+    order = AcceptedCreatorOrderModel.objects.get(id=id)
+    order.status = 'complete'
+    order.save()
+
+
+    try:
+        #c_listing = BlogListingCreationModel.objects.get(id=id)
+        c_order = AcceptedCreatorOrderModel.objects.get(id=id)
+        c_order.status = 'Complete'
+
+        c_order.save()
+
+        # Accepted creator order (after creator clicks accept)
+        cc_order = CompletedOrderModel(
+            buyer=c_order.buyer,
+            creator=c_order.creator,
+            creator_listing=c_order.creator_listing,
+            buyer_listing=c_order.buyer_listing,
+            buyers_listing_s=c_order.buyers_listing_s,
+            buyers_listing_c=c_order.buyers_listing_c,
+            service=c_order.service,
+            service_detailed=c_order.service_detailed,
+            status=c_order.status
+            )
+
+        cc_order.save()
+        c_order.delete()
+
+    except CreatorOrderModel.DoesNotExist:
+        #s_listing = SponsorListingCreationModel.objects.get(id=id)
+        s_order = SponsorOrderModel.objects.get(id=id)
+        s_order.status = 'Accepted - In Process'
+
+        s_order.save()
+
+        # Accepted creator order (after creator clicks accept)
+        as_order = AcceptedSponsorOrderModel(
+            buyer=s_order.buyer,
+            creator=s_order.creator,
+            sponsor_listing=s_order.sponsor_listing,
+            buyer_listing=s_order.buyer_listing,
+            buyers_listing_s=s_order.buyers_listing_s,
+            buyers_listing_c=s_order.buyers_listing_c,
+            services_creator_is_willing_to_provide=s_order.services_creator_is_willing_to_provide,
+            services_creator_is_willing_to_provide_detailed=s_order.services_creator_is_willing_to_provide_detailed,
+            status=s_order.status
+
+        )
+        
+        as_order.save()
+        s_order.delete()
+
+    return redirect('dashboard')
+
+
+def dashboard_sponsor_order_complete(request, id=None):
+    order = AcceptedSponsorOrderModel.objects.get(id=id)
+    order.status = 'complete'
+    order.save()
+
+    return redirect('dashboard')
+
+def dashboard_withdraw_order(request, id=None):
+    order = AcceptedCreatorOrderModel.objects.get(id=id)
+    order.delete()
 
     return redirect('dashboard')

@@ -99,9 +99,10 @@
     <h1><u>Accepted ORDERS</u></h1>
 <!-- Dropdown for accepted creator orders -->
     <div>
+
         <p>
             <a class="btn btn-primary" data-toggle="collapse" data-target="#collapseAcceptedCreatorOrders" role="button">
-            Accepted Creator Orders
+            Accepted Orders
             </a>
         </p>
 
@@ -112,15 +113,18 @@
                     {% if c_accepted_order.buyers_listing_s %}
                         <div class="collapse" id="collapseAcceptedCreatorOrders">
                             <div class="card card-body">
-                                <h1>s Buyers Listing: {{ c_accepted_order.buyers_listing_s }}</h1>
+                                <h1>s Buyers Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=c_accepted_order.buyers_listing_s.id %}">{{ c_accepted_order }}</a></h1>
+                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
+                                <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button>Withdraw</button></a>
                             </div>
-                        </div>
-                    {% endif %}  
+                        </div> 
                     
-                    {% if c_accepted_order.buyers_listing_c %}
+                    {% elif c_accepted_order.buyers_listing_c %}
                         <div class="collapse" id="collapseAcceptedCreatorOrders">
                             <div class="card card-body">
-                                <h1>c Buyers Listing: {{ c_accepted_order.buyers_listing_c }}</h1>
+                                <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.buyers_listing_c.id %}">{{ c_accepted_order }}</a></h1>
+                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
+                                <button>Withdraw</button>
                             </div>
                         </div>
                     {% endif %} 
@@ -135,10 +139,9 @@
             </div>
         {% endif %}
 
-
     </div>
 
-<!-- Dropdown for accepted sponsor orders -->
+<!-- Dropdown for accepted sponsor orders 
     <div>
         <p>
             <a class="btn btn-primary" data-toggle="collapse" data-target="#collapseAcceptedSponsorOrders" role="button">
@@ -153,15 +156,18 @@
                     {% if s_accepted_order.buyers_listing_s %}
                         <div class="collapse" id="collapseAcceptedSponsorOrders">
                             <div class="card card-body">
-                                <h1>s Buyers Listing: {{ s_accepted_order.buyers_listing_s }}</h1>
+                                <h1>s Buyers Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=s_accepted_order.buyers_listing_s.id %}">{{ s_accepted_order }}</a></h1>
+                                <a href="{% url 'dashboard_sponsor_order_complete' id=s_accepted_order.id %}"><button>Mark As Completed</button></a>
+                                <button>Withdraw</button>
                             </div>
-                        </div>
-                    {% endif %}  
+                        </div> 
                     
-                    {% if s_accepted_order.buyers_listing_c %}
+                    {% elif s_accepted_order.buyers_listing_c %}
                         <div class="collapse" id="collapseAcceptedSponsorOrders">
                             <div class="card card-body">
-                                <h1>c Buyers Listing: {{ s_accepted_order.buyers_listing_c }}</h1>
+                                <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=s_accepted_order.buyers_listing_c.id %}">{{ s_accepted_order }}</a></h1>
+                                <a href="{% url 'dashboard_creator_order_complete' id=s_accepted_order.id %}"><button>Mark As Completed</button></a>
+                                <button>Withdraw</button>
                             </div>
                         </div>
                     {% endif %} 
@@ -180,8 +186,8 @@
 
     </div>
 
-    <hr>
-
+-->
+<hr>
 
     <!--
 

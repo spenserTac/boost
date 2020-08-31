@@ -122,6 +122,28 @@ class AcceptedSponsorOrderModel(models.Model):
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.sponsor_listing))
 
+class CompletedOrderModel(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username_completed_creator_order')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_completed_creator_listing')
+    creator_listing = models.ForeignKey(BlogListingCreationModel, blank=True, on_delete=models.CASCADE, null=True, related_name='completed_creator_listing')
+
+
+    buyer_listing = models.CharField(max_length=500, blank=True, null=True)
+
+    
+    buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_completed_s_listing_for_c_order")
+    buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_completed_c_listing_for_c_order")
+
+    service = models.CharField(max_length=500, blank=True, null=True)
+    service_detailed = models.TextField(max_length=1000, blank=True, null=True)
+
+    # Accepted, denied, or the default in review
+    status = models.CharField(max_length=100, blank=True, null=True)
+
+
+    def __str__(self):
+        return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
+
 
 
 

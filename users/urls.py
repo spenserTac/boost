@@ -22,4 +22,9 @@ urlpatterns = [
 
     path('dashboard/saccept/<int:id>/', views.dashboard_sponsor_order_accept, name='dashboard_sponsor_order_accept'),
     path('dashboard/sdecline/<int:id>/', views.dashboard_sponsor_order_decline, name='dashboard_sponsor_order_decline'),
+
+    path('dashboard/ccomplete/<int:id>/', views.dashboard_creator_order_complete, name='dashboard_creator_order_complete'),
+    path('dashboard/scomplete/<int:id>/', views.dashboard_sponsor_order_complete, name='dashboard_sponsor_order_complete'),
+
+    path('dashboard/withdraw/<int:id>/<int:a_id', views.dashboard_withdraw_order, name='dashboard_withdraw_order'),
 ]
