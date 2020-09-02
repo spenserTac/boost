@@ -15,6 +15,9 @@ urlpatterns = [
     # Unordering listings
     path('dashboard/unorder_c/<int:id>/', views.dashboard_unorder_c, name='dashboard_unorder_c'),
     path('dashboard/unorder_s/<int:id>/', views.dashboard_unorder_s, name='dashboard_unorder_s'),
+    path('dashboard/unorder_a_c/<int:id>/', views.dashbord_unorder_accepted_c, name='dashbord_unorder_accepted_c'),
+
+
 
     # Accepting and declining orders
     path('dashboard/caccept/<int:id>/', views.dashboard_creator_order_accept, name='dashboard_creator_order_accept'),

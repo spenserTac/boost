@@ -202,7 +202,21 @@
         <a href="{% url 'creator_marketplace_listing_view' id=creator.creator_listing.id %}">{{ creator.creator_listing }}</a>
         <a href="{% url 'dashboard_unorder_c' id=creator.creator_listing.id %}"><button>Unorder</button></a>
         <a href="{% url 'creator_marketplace_listing_order_view' id=creator.creator_listing.id %}"><button>Edit</button></a>
-        <span>STATUS: {{ creator.status }}</span>
+        <span style="color: blue;">STATUS: {{ creator.status }}</span>
+        <hr>
+    {% endfor %}
+
+    {% for a_creator_order in accepted_c_orders %}
+        <a href="{% url 'creator_marketplace_listing_view' id=a_creator_order.creator_listing.id %}">{{ a_creator_order.creator_listing }}</a>
+        <a href="{% url 'dashbord_unorder_accepted_c' id=a_creator_order.id %}"><button>Unorder</button></a>
+        <span style="color: blue;">STATUS: {{ a_creator_order.status }}</span>
+        <hr>
+    {% endfor %}
+
+    {% for c_creator_order in completed_c_orders %}
+        <a href="{% url 'creator_marketplace_listing_view' id=c_creator_order.creator_listing.id %}">{{ c_creator_order.creator_listing }}</a>
+        <span style="color: blue;">STATUS: {{ c_creator_order.status }}</span>
+        <hr>
     {% endfor %}
 
     <h3>Sponsors Ordered: </h3>

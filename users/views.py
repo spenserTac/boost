@@ -31,15 +31,25 @@ def dashboard(request):
     c_watching = profile.creators_watched.all()
     s_watching = profile.sponsors_watched.all()
 
+    # The logged in users creator listings
     c_orders = CreatorOrderModel.objects.filter(creator=user)
     c_orders_len = c_orders.count()
 
+    # The logged in users sponsor listings
     s_orders = SponsorOrderModel.objects.filter(creator=user)
     s_orders_len = s_orders.count()
 
+    # The creator and sponsor ORDERS the logged in user has made
     c_ordered = CreatorOrderModel.objects.filter(buyer=user) # profile.creators_u_ordered.all()
     s_ordered = SponsorOrderModel.objects.filter(buyer=user) # profile.sponsors_u_ordered.all()
 
+    # The ACCEPTED creator and sponsor ORDERS the logged in user has made
+    accepted_c_orders = AcceptedCreatorOrderModel.objects.filter(buyer=user)
+
+    # The COMPLETED creator and sponsor ORDERS the logged in user has made
+    completed_c_orders = CompletedOrderModel.objects.filter(buyer=user)
+
+    # The orders that the logged in user has made
     c_accepted_orders = AcceptedCreatorOrderModel.objects.filter(creator=user)
     c_accepted_orders_len = c_accepted_orders.count()
     s_accepted_orders = AcceptedSponsorOrderModel.objects.filter(creator=user)
@@ -70,6 +80,9 @@ def dashboard(request):
         'c_accepted_orders_len': c_accepted_orders_len,
         's_accepted_orders': s_accepted_orders,
         's_accepted_orders_len': s_accepted_orders_len,
+
+        'accepted_c_orders': accepted_c_orders,
+        'completed_c_orders': completed_c_orders,
 
         'profile': profile,
     }
@@ -107,6 +120,12 @@ def dashboard_unorder_c(request, id=None):
     creator_order.delete()
     
     return redirect('dashboard')
+
+def dashbord_unorder_accepted_c(request, id=None):
+    order = AcceptedCreatorOrderModel.objects.get(id=id)
+    order.delete()
+    return redirect('dashboard')
+
 
 def dashboard_unorder_s(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
