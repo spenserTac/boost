@@ -12,25 +12,7 @@
 
             <br>
             <br>
-            
-            <!-- Input for the buyers listing -->
-            <h2>Choose which of your listings you'd like to offer to this creator</h2>
-            <br>
-            <div class="form-group col-md-4">
-                <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
-                <select name="buyer_listing" id="inputListing" class="form-control">
-                  <option selected>{{ prev_c_order.buyer_listing }}</option>
-    
-                    {% for listing in buyers_sponsor_listings %}
-
-                        <option>{{ listing }}</option>
-
-                    {% endfor %}
-                  <option>...</option>
-                </select>
-              </div>
-              
-
+         
             <!-- Input for the buyers requested service -->
             <br>
             <h2>Choose which service you'd like the creator to do</h2>

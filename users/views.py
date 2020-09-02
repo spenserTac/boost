@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, CreatorOrderModel, SponsorOrderModel,AcceptedCreatorOrderModel, AcceptedSponsorOrderModel, CompletedOrderModel
+from .models import Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel, CompletedOrderModel
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
+from .forms import CreatorOrderForm
 
 
 def signup(request):
@@ -191,54 +192,86 @@ def dashboard_creator_order_decline(request, id=None):
 
 
 def dashboard_sponsor_order_accept(request, id=None): 
-    try:
-        #c_listing = BlogListingCreationModel.objects.get(id=id)
-        c_order = CreatorOrderModel.objects.get(id=id)
-        c_order.status = 'Accepted - In Process'
 
-        c_order.save()
+    order = SponsorOrderModel.objects.get(id=id)
 
-        # Accepted creator order (after creator clicks accept)
-        ac_order = AcceptedCreatorOrderModel(
-            buyer=c_order.buyer,
-            creator=c_order.creator,
-            creator_listing=c_order.creator_listing,
-            buyer_listing=c_order.buyer_listing,
-            buyers_listing_s=c_order.buyers_listing_s,
-            buyers_listing_c=c_order.buyers_listing_c,
-            service=c_order.service,
-            service_detailed=c_order.service_detailed,
-            status=c_order.status
-            )
+    creator_listing = BlogListingCreationModel.objects.get(id=order.buyers_listing_c.id)
+    profile = Profile.objects.get(user=request.user)
 
-        ac_order.save()
-        c_order.delete()
+    profile.creators_u_ordered.add(creator_listing)
 
-    except CreatorOrderModel.DoesNotExist:
-        #s_listing = SponsorListingCreationModel.objects.get(id=id)
-        s_order = SponsorOrderModel.objects.get(id=id)
-        s_order.status = 'Accepted - In Process'
+    buyer = request.user
+    buyer_profile = Profile.objects.get(user=buyer)
+    buyers_sponsor_listings = buyer.sponsorlistingcreationmodel_set.all()
+    buyers_creator_listings = buyer.bloglistingcreationmodel_set.all()
 
-        s_order.save()
+    creator = creator_listing.creator
 
-        # Accepted creator order (after creator clicks accept)
-        as_order = AcceptedSponsorOrderModel(
-            buyer=s_order.buyer,
-            creator=s_order.creator,
-            sponsor_listing=s_order.sponsor_listing,
-            buyer_listing=s_order.buyer_listing,
-            buyers_listing_s=s_order.buyers_listing_s,
-            buyers_listing_c=s_order.buyers_listing_c,
-            services_creator_is_willing_to_provide=s_order.services_creator_is_willing_to_provide,
-            services_creator_is_willing_to_provide_detailed=s_order.services_creator_is_willing_to_provide_detailed,
-            status=s_order.status
+    if (request.method == 'POST'):
+        # add instance field for updating -> , instance=prev_c_order
+        form = CreatorOrderForm(request.POST or None)
 
-        )
-        
-        as_order.save()
-        s_order.delete()
+        if (form.is_valid()):
+            obj = form.save(commit=False)
+            
+            order.status = 'Accepted - In Process'
 
-    return redirect('dashboard')
+            order.save()
+
+            # Accepted creator order (after creator clicks accept)
+            
+
+            '''obj.buyer = buyer
+            obj.creator = creator
+            obj.creator_listing = listing
+
+            buyer_listing = form.cleaned_data['buyer_listing']
+            creator_l = BlogListingCreationModel.objects.all()
+            sponsor_l = SponsorListingCreationModel.objects.all()
+
+            for l in creator_l:
+                if (str(l) == str(buyer_listing)):
+                    obj.buyers_listing_c = l
+
+            for l in sponsor_l:
+                if (str(l) == str(buyer_listing)):
+                    obj.buyers_listing_s = l'''
+
+           
+            ac_order = AcceptedCreatorOrderModel(
+                buyer=request.user,
+                creator=creator_listing.creator,
+                creator_listing=creator_listing,
+                buyer_listing=order.sponsor_listing,
+                buyers_listing_s=order.sponsor_listing,
+
+                service=obj.service,
+                service_detailed=obj.service_detailed,
+
+                status='Accepted - In Progress'
+                )
+
+            ac_order.save()
+            order.delete()
+
+            #obj.save()
+
+            '''s_order = SponsorOrderModel.objects.get(id=id)
+            s_order.status = 'Accepted - In Process'
+            s_order.delete()'''
+
+            return redirect('dashboard')
+
+        ''' 
+        if (request.method == 'POST'):
+        form = CreatorOrderForm(request.POST or None)
+        form.buyer = request.user
+        if (form.is_valid()):
+            form.save()
+        '''
+
+
+    return render(request, 'acceptedcreator.html')
 
 def dashboard_sponsor_order_decline(request, id=None):
 

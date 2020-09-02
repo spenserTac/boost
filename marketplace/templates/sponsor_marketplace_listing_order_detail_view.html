@@ -14,20 +14,13 @@
             <br>
             
             <!-- Input for the buyers listing -->
-            <h2>Choose which of your listings you'd like to offer to this creator</h2>
+            <h2>Choose which of your listings you'd like to offer to this Sponsor</h2>
             <br>
             <div class="form-group col-md-4">
                 <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
                 <select name="buyer_listing" id="inputListing" class="form-control">
                   <option selected>{{ prev_s_order.buyer_listing }}</option>
     
-                    {% for listing in buyers_sponsor_listings %}
-
-                        <option>{{ listing }}</option>
-
-                    {% endfor %}
-
-
                     {% for listing in buyers_creator_listings %}
 
                         <option>{{ listing }}</option>
@@ -41,7 +34,9 @@
 
             <!-- Input for the buyers requested service -->
             <br>
-            <h2>Choose which service you'd like the creator to do</h2>
+            <h2>Choose which services you're willing to do</h2>
+            <small>This should be a checkbox - sponsor will see what was checked in dashboard under sponsor orders</small>
+            <small>When they click accept, it will transfer them to a url to fill out what they want</small>
             <br>
               <div class="form-group col-md-4">
                 <select name="services_creator_is_willing_to_provide" id="inputService" class="form-control">
@@ -55,7 +50,7 @@
 
               <!-- Input for service detail-->
               <br>
-              <h2>Describe what you'd like the creator to do</h2>
+              <h2>Describe in detail what you'll be able to provide the sponsor</h2>
               <!-- Add ability to add pictures/files and urls -->
               <br>
               <div class="form-group">

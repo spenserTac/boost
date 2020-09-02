@@ -64,17 +64,11 @@
             </a>
         </p>
         <div class="collapse" id="collapseSponsorOrders">
-            {% for s_order in s_orders %}
-                {% if s_order.buyers_listing_s %}
-                    <div class="card card-body">
-                        <h5>Buyers S Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.buyers_listing_s.id %}">{{ s_order.buyers_listing_s }}</a></h5>
-                        <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
-                        <h5>The listing of yours that they are ordering: {{ s_order.creator_listing }}</h5>
-                        <a href="{% url 'dashboard_sponsor_order_accept' id=s_order.id %}"><button>Accept</button></a>
-                        <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button>Decline</button></a>
-                    </div>
 
-                {% elif s_order.buyers_listing_c %}
+            {% for s_order in s_orders %}
+
+                {% if s_order.buyers_listing_c %}
+
                     <div class="card card-body">
                         <h5>Buyers C Listing: <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></h5>
                         <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
@@ -82,14 +76,21 @@
                         <a href="{% url 'dashboard_sponsor_order_accept' id=s_order.id %}"><button>Accept</button></a>
                         <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button>Decline</button></a>
                     </div>
+
                 {% endif %}
+
             {% endfor %}
 
             {% if s_orders_len == 0 %}
+
                 <div class="card card-body">
+
                     <h5>>>> You have no orders for any of your sponsor listings</h5>
+
                 </div>
+
             {% endif %}
+
         </div>
     </div>
 
@@ -138,7 +139,6 @@
                 </div>
             </div>
         {% endif %}
-
     </div>
 
 <!-- Dropdown for accepted sponsor orders 
@@ -195,7 +195,7 @@
 
     -->
 
-    <h1>Orders You've Made:</h1>
+    <h1>Current Orders:</h1>
 
     <h3>Creators Ordered: </h3>
     {% for creator in c_ordered %}
