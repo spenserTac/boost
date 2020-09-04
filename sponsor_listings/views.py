@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .models import SponsorListingCreationModel
 from .forms import SponsorListingCreationForm
 
+@login_required(login_url='login')
 def sponsor_listing_creation(request):
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST or None)
@@ -21,7 +24,7 @@ def sponsor_listing_creation(request):
             return render(request, 'sponsor_listing_creation.html', context)'''
     return render(request, 'sponsor_listing_creation.html')
 
-
+@login_required(login_url='login')
 def sponsor_listing_update(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     context = {
@@ -35,7 +38,7 @@ def sponsor_listing_update(request, id=None):
         return redirect('home')
     return render(request, 'sponsor_listing_creation.html', context) 
 
-
+@login_required(login_url='login')
 def sponsor_listing_delete(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     context = {

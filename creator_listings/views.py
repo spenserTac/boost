@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .models import BlogListingCreationModel
 from .forms import BlogListingCreationForm
 
+@login_required(login_url='login')
 def blogger_listing_creation(request):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST)
@@ -22,6 +25,7 @@ def blogger_listing_creation(request):
 
     return render(request, 'blog_listing_creation.html')
 
+@login_required(login_url='login')
 def blogger_listing_update(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     context = {
@@ -35,6 +39,7 @@ def blogger_listing_update(request, id=None):
         return redirect('home')
     return render(request, 'blog_listing_creation.html', context)
 
+@login_required(login_url='login')
 def blogger_listing_delete(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     context = {

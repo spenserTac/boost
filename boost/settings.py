@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     # 'bootstrap_modal_forms',
+    'django_filters',
 
     # user created apps
     'creator_listings',

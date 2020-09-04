@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 from .models import Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel, CompletedOrderModel
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
@@ -11,19 +13,22 @@ from .forms import CreatorOrderForm
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('home')
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'User Created For: ' + user)
+
+        return redirect('login')
     else:
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         context = {
             'form': form,
         }
         return render(request, 'signup.html', context)
 
 
-
+@login_required(login_url='login')
 def dashboard(request):
     user = User.objects.get(username=request.user.username) # current logged in user
     profile = Profile.objects.get(user=user) # current logged in users Profile

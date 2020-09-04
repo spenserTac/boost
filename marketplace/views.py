@@ -1,14 +1,14 @@
 import simplejson as json
 # self made python file
-from python_stuff.converter import string_to_list, list_to_string
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from users.models import Profile, CreatorOrderModel, SponsorOrderModel
-from django.contrib.auth.models import User
 from users.forms import CreatorOrderForm, SponsorOrderForm
 
 
@@ -31,7 +31,7 @@ def creator_marketplace(request):
 
 # The detail page of a creator marketplace listing
 
-
+@login_required(login_url='login')
 def creator_marketplace_listing_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     # current logged in user
@@ -176,7 +176,7 @@ def sponsor_marketplace(request):
 
 # The detail page of a sponsor marketplace listing
 
-
+@login_required(login_url='login')
 def sponsor_marketplace_listing_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     # current logged in user

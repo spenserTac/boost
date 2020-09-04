@@ -7,4 +7,7 @@
 
 https://pypi.org/project/django-bootstrap-modal-forms/
 
-2.
+2. Django Filter -> django-filter
+(pip install django-filter)
+
+https://pypi.org/project/django-filter/
