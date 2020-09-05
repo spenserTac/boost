@@ -10,6 +10,7 @@ from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from users.models import Profile, CreatorOrderModel, SponsorOrderModel
 from users.forms import CreatorOrderForm, SponsorOrderForm
+from .filters import CreatorListingFilter, SponsorListingFilter
 
 
 #from .forms import UserWatchDashboardForm
@@ -23,8 +24,35 @@ from users.forms import CreatorOrderForm, SponsorOrderForm
 def creator_marketplace(request):
     creator_listings = BlogListingCreationModel.objects.all()
 
+    # Returns a list of all the names of the input tags that have been checked
+    niche_query = request.GET.getlist('niche')
+
+    niches = {
+        "Business": "", 
+        "Educational": "", 
+        "Entertainment": "",
+        "Fashion": "",
+        "Food": "",
+        "Health": "",
+        "Lifestyle": "",
+        "Technology": "",
+        "Travel": "",
+        "Other": ""
+        }
+
+    for niche in niche_query:
+        if niche in niche_query:
+            niches[str(niche)] = "checked"
+        else: 
+            niches[str(niche)] = ""
+
+    if niche_query != "" and niche_query is not None and len(niche_query) != 0:
+        creator_listings = creator_listings.filter(niche__in=niche_query)
+
     context = {
-        'creator_listings': creator_listings
+        'creator_listings': creator_listings,
+        'niches': niches,
+        #'c_listing_filter': c_listing_filter,
     }
 
     return render(request, 'creator_marketplace.html', context)

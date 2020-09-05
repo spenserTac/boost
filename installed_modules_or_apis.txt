@@ -2,12 +2,14 @@
 	and only the files that are used within the project will be shown)
 
 
-1. Django Bootsrap Modal Form -> django-bootstrap-modal-forms
+1. django-bootstrap-modal-forms
 (pip install django-bootstrap-modal-forms)
-
 https://pypi.org/project/django-bootstrap-modal-forms/
 
-2. Django Filter -> django-filter
+2. django-filter
 (pip install django-filter)
-
 https://pypi.org/project/django-filter/
+
+2/ django-allauth
+(pip install django-allauth)
+https://pypi.org/project/django-allauth/
