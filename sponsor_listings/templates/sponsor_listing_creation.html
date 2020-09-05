@@ -24,14 +24,14 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputProduct">Product/Business Name</label>
-                    <input name="product" class="form-control" id="inputProduct" placeholder="Product/Business Name">
+                    <input value="{{ listing.product }}" name="product" class="form-control" id="inputProduct" placeholder="Product/Business Name">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputNiche">Niche</label>
                     <select name="niche" id="inputNiche" class="form-control">
-                        <option selected>Choose...</option>
+                        <option selected>{{ listing.niche }}</option>
                         <option>Technology</option>
                         <option>Health</option>
                         <option>Fitness</option>
@@ -44,13 +44,13 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputMoney">How Much You'd Like To Pay</label>
-                    <input name="money" type="text" class="form-control" id="inputMoney" placeholder="$">
+                    <input value="{{ listing.money }}" name="money" type="text" class="form-control" id="inputMoney" placeholder="$">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputSiteMonthlyVisitsMin">Minimum Monthly Visits From Blog</label>
-                    <input name="monthly_views_min" type="text" class="form-control" id="inputSiteMonthlyVisitsMin" placeholder="Blog's Minimum Monthly Visits">
+                    <input value="{{ listing.monthly_views_min }}" name="monthly_views_min" type="text" class="form-control" id="inputSiteMonthlyVisitsMin" placeholder="Blog's Minimum Monthly Visits">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

@@ -12,10 +12,10 @@
     <div class="row">
 
         <!-- Filter Form -->
-
+        <form method="GET">
             <div class="col-lg-3">
                 <div class="dropdown">
-                    <h6>Filter By</h6>
+                    <h6>Filter By</h6>                                  
 
                     <hr>
                     
@@ -27,30 +27,16 @@
                             <form>
                                 <div>
                                     <ul style="list-style: none; padding-left: 0;">
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Technology
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Health
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Other
-                                                </label>
-                                            </div>
-                                        </li>
+                                        {% for niche, check in niches.items %}
+                                            <li>
+                                                <div class="form-check">
+                                                    <input name="niche" class="form-check-input" type="checkbox" value="{{ niche }}" id="defaultCheck1" {% if check == 'checked' %} checked="True" {% endif %}>
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                    {{ niche }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </form>
@@ -109,7 +95,9 @@
                         </div>
                     </div>
                 </div>
+                <button type="submit">Search</button>
             </div>
+        </form>
 
         <!-- END Filter Form -->
 
@@ -125,7 +113,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ listing.blog_url }}</h5>
-                                <p class="card-text">{{ listing.niche }}</p>
+                                <p title="{{ listing.niche }}" class="card-text">{{ listing.niche }}</p>
                                 <p class="card-text"><small class="text-muted">{{ listing.monthly_views }}</small></p>
                                 <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
                             </div>

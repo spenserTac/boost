@@ -31,51 +31,39 @@
                 </form>
             </div>
         </div>
-
         This is the bootstrap for a login. But the built in Django login system is more secure. That's what'll be used for
         now, but this'll likly be chagned later since it doesn't look very good.
-
 --> 
         <h1 style="text-align: center;">Create Account</h1>
 
         <br>
         <br>
 
+
         <form method="POST">
 
             {% csrf_token %}
-<!--
-            <div class="form-row">
-                <div class="col">
-                    <input name="fname" type="text" class="form-control" placeholder="First name" required>
-                </div>
-                <div class="col">
-                    <input name="lname" type="text" class="form-control" placeholder="Last name" required>
-                </div>
-            </div>
--->
-            <br>
+            <!-- {{ form.errors }} -->
 
-            
-            
             <br>
-<!--
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <select id="inputState" class="form-control" required>
-                      <option selected>United States</option>
-                      <option>...</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Phone Number">
-                </div>
-            </div>
- -->         
+            <br>         
  
             <div class="form-group">
                 <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
             </div>
+
+            <small>Not Required</small>
+            <div class="form-row">
+                <div class="col">
+                    <input name="first_name" class="form-control" placeholder="First Name">
+                </div>
+
+                <div class="col">
+                    <input name="last_name" class="form-control" placeholder="Last Name">
+                </div>
+            </div>
+
+            <br>
 
             <div class="form-row">
                 <div class="col">
@@ -90,6 +78,7 @@
             <br>
 
             <div class="col-auto d-flex justify-content-center">
+                
                 <button type="submit" class="btn btn-primary mb-2">Create Account</button>
             </div>
         </form>
@@ -103,7 +92,7 @@
             <script>
             function onSignIn(googleUser) {
                 // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
+                var profile = googleUser.getBasicprofile();
                 console.log("ID: " + profile.getId()); // Don't send this directly to your server!
                 console.log('Full Name: ' + profile.getName());
                 console.log('Given Name: ' + profile.getGivenName());

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="container">
+            <h1>You are ordering a sponsor</h1>
+            <hr>
+
+            <br>
+            <br>
+            
+            <!-- Input for the buyers listing -->
+            <h2>Choose which of your listings you'd like to offer to this Sponsor</h2>
+            <br>
+            <div class="form-group col-md-4">
+                <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
+                <select name="buyer_listing" id="inputListing" class="form-control">
+                  <option selected>{{ prev_s_order.buyer_listing }}</option>
+    
+                    {% for listing in buyers_creator_listings %}
+
+                        <option>{{ listing }}</option>
+
+                    {% endfor %}
+
+                  <option>...</option>
+                </select>
+              </div>
+              
+
+            <!-- Input for the buyers requested service -->
+            <br>
+            <h2>Choose which services you're willing to do</h2>
+            <small>This should be a checkbox - sponsor will see what was checked in dashboard under sponsor orders</small>
+            <small>When they click accept, it will transfer them to a url to fill out what they want</small>
+            <br>
+              <div class="form-group col-md-4">
+                <select name="services_creator_is_willing_to_provide" id="inputService" class="form-control">
+                  <option selected>{{ prev_s_order.services_creator_is_willing_to_provide }}</option>
+                  <option>Review</option>
+                  <option>Shoutout</option>
+                  <option>Tutorial</option>
+                  <option>Mention</option>
+                </select>
+              </div>
+
+              <!-- Input for service detail-->
+              <br>
+              <h2>Describe in detail what you'll be able to provide the sponsor</h2>
+              <!-- Add ability to add pictures/files and urls -->
+              <br>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">
+                    <small id="emailHelp" class="form-text text-muted">
+                        This is optional, but we recommend you fill this out to better aid the creator
+                    </small>
+
+                </label>
+                <textarea name="services_creator_is_willing_to_provide_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ prev_s_order.services_creator_is_willing_to_provide_detailed }}</textarea>
+              </div>
+
+            <button type="submit">Submit</button>
+        </div>
+
+    </form>
+
+{% endblock content %}

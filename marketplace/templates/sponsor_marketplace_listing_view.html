@@ -7,6 +7,19 @@
         <br>
         <br>
         <h1>Product: {{ listing.product }}</h1>
+        <h1>Following: {{ following }}</h1>
+
+        {% if following %}
+            <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-success">Watching</button></a>
+        {% else %}
+            <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-success">Watch</button></a>
+        {% endif %}
+
+        {% if ordered %}
+            <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button class="btn btn-success">Unorder</button></a>
+        {% else %}
+            <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button class="btn btn-outline-success">Order</button></a>
+        {% endif %}
     </div>
 
 {% endblock content %}

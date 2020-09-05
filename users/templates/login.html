@@ -6,21 +6,38 @@
     <br>
 
     <div class="container justify-content-center">
+        
 
         <h1 style="text-align: center;">Login</h1>
 
         <br>
         <br>
 
+        
+
+        {% for message in messages %}
+
+            <p>{{ message }}</p>
+
+        {% endfor %}
+
         <form method="POST">
 
             {% csrf_token %}
             
-            <div style=" text-align: center;">
-                {{ form.as_p }}
-            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
+                </div>
 
-            <br>
+                <div class="form-row">
+                    <div class="row">
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                </div>
+
+                    <br>
+                    <br>
+            </div>
 
             <div class="col-auto d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary mb-2">Login</button>
@@ -36,7 +53,7 @@
             <script>
             function onSignIn(googleUser) {
                 // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
+                var profile = googleUser.getBasicprofile();
                 console.log("ID: " + profile.getId()); // Don't send this directly to your server!
                 console.log('Full Name: ' + profile.getName());
                 console.log('Given Name: ' + profile.getGivenName());
