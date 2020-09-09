@@ -10,6 +10,13 @@ https://pypi.org/project/django-bootstrap-modal-forms/
 (pip install django-filter)
 https://pypi.org/project/django-filter/
 
-2/ django-allauth
+3. django-allauth
 (pip install django-allauth)
 https://pypi.org/project/django-allauth/
+
+4. paypalhttp 
+(pip install paypalhttp)
+https://pypi.org/project/paypalhttp/
+
+5. responses
+pip install responses

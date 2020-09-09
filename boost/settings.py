@@ -35,11 +35,19 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+
+    # Put this here for google login
+    'django.contrib.sites',
+
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
     # 'bootstrap_modal_forms',
     'django_filters',
+    'allauth',
+    'allauth.account', 
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     # user created apps
     'creator_listings',
@@ -130,3 +138,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'home'
+
+# Django all auth settings
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+
+    # 'allauth' specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+SITE_ID = 1

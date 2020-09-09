@@ -8,10 +8,10 @@ class BlogListingCreationModel(models.Model):
     niche = models.CharField(max_length=300, default=None)
     age = models.CharField(max_length=300, default=None)
     monthly_views = models.CharField(max_length=300, default=None)
-    #description = models.CharField(max_length=30000, default=None)
-    #language = models.CharField(max_length=300, default=None)
-    #blog_catagory = models.CharField(max_length=300, default=None)
-    #blog_name = models.CharField(max_length=300, default=None)
+    description = models.CharField(max_length=30000, default=None, null=True, blank=True)
+    language = models.CharField(max_length=300, default=None, null=True, blank=True)
+    blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
+    blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.blog_url
