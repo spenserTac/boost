@@ -20,3 +20,10 @@ https://pypi.org/project/paypalhttp/
 
 5. responses
 pip install responses
+
+6. Google api python client
+(pip install --upgrade google-api-python-client)
+
+7. Oauth 2 Client
+(pip install --upgrade oauth2client)
+

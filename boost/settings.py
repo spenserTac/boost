@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 3rd party
     # 'bootstrap_modal_forms',
     'django_filters',
+    
     'allauth',
     'allauth.account', 
     'allauth.socialaccount',

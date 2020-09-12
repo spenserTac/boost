@@ -12,6 +12,7 @@ class BlogListingCreationModel(models.Model):
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
+    google_a_csv = models.FileField(default=None, null=True, blank=True)
 
     def __str__(self):
         return self.blog_url

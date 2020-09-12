@@ -11,6 +11,9 @@ from django.contrib.auth.models import User
 from .forms import CreatorOrderForm
 
 
+def account(request):
+    return render(request, 'account.html')
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load socialaccount %}
+{% providers_media_js %}
+
 {% block content %}
 
     <br>
@@ -49,6 +52,11 @@
         <hr>
         <br>
 
+        <!-- This <img> src is just a hard coded url, instead download the image in static files and internaly link to it -->
+        <a href="{% provider_login_url "google" %}"><img src="https://user-images.githubusercontent.com/1531669/41761606-83b5bd42-762a-11e8-811a-b78fdf68bc04.png"></a>
+
+
+        <!-- Original Google Login Stuff - It's wrong though
         <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn" data-theme="light"></div>
             <script>
             function onSignIn(googleUser) {
@@ -74,6 +82,7 @@
             </div>
 
             <br>
+        -->
 
     </div>
 
