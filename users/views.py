@@ -11,8 +11,53 @@ from django.contrib.auth.models import User
 from .forms import CreatorOrderForm
 
 
-def account(request):
-    return render(request, 'account.html')
+def account(request, id=None):
+    user = User.objects.get(username=request.user.username)
+
+    personal_c_pending_listings = len(CreatorOrderModel.objects.filter(creator=user))
+    personal_s_pending_listings = len(SponsorOrderModel.objects.filter(creator=user))
+    personal_caccepted_listings = len(AcceptedCreatorOrderModel.objects.filter(creator=user))
+    personal_saccepted_listings = len(AcceptedSponsorOrderModel.objects.filter(creator=user))
+    personal_completed = len(CompletedOrderModel.objects.filter(creator=user))
+
+    personal_creator_listings = user.bloglistingcreationmodel_set.all()
+    personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
+
+    i = 0
+    ic = 0
+    is_ = 0
+    for l in personal_creator_listings:
+        i += 1
+        ic += 1
+
+    for l in personal_sponsor_listings:
+        i += 1
+        is_ += 1
+
+    ip = 0
+    ia = 0
+    ic = 0
+
+    context = {
+        'personal_c_listings': personal_creator_listings,
+        'personal_s_listings': personal_sponsor_listings,
+        'num_of_c_listings': ic,
+        'num_of_s_listings': is_,
+        'num_of_total_listings': i,
+        'num_of_cp_listings': personal_c_pending_listings,
+        'num_of_sp_listings': personal_s_pending_listings,
+        'num_of_ca_listings': personal_caccepted_listings,
+        'num_of_ca_listings': personal_saccepted_listings,
+        'num_of_completed_listings': personal_completed,
+    }
+    
+    return render(request, 'account.html', context)
+
+def delete_account(request):
+    user = User.objects.get(username=request.user.username)
+    user.delete()
+
+    return redirect('home')
 
 def signup(request):
     if request.method == 'POST':

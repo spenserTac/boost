@@ -3,17 +3,92 @@
 {% block content %}
 
 <div class="container">
-    <h1>This is your account {{ user }}</h1>
+    <h1>Account Settings for {{ user }}</h1>
 
-    <br>
     <hr>
+    <br>
+    <br>   
 
     <h3>Features to be added: </h3>
-    <h5>1. Reset Email (username)</h5>
-    <h5>2. Reset Password</h5>
-    <h5>3. Basic display of stats</h5>
-    <h5>4. Display of listings w/ similar features to that part of the dashbaord</h5>
-    <h5>5. Delete Account (along w/ all listings associated w/ that account)</h5>
+    <h5>--- 1. Reset Email (username)</h5>
+    <h5>--- 2. Reset Password</h5>
+    <h5>--- 3. Basic display of stats</h5>
+    <h5>--- 4. Display of listings w/ similar features to that part of the dashboard</h5>
+    <h5>--- 5. Delete Account (along w/ all listings associated w/ that account)</h5>
+
+    <br>
+
+    <h3>Your Stats</h3>
+    
+    <hr>
+    <br>
+
+    <span>Total Number of Listings: {{ num_of_total_listings }}</span>
+    <br>
+    <span>Number of Creator Listings: {{ num_of_c_listings }}</span>
+    <br>
+    <span>Number of Sponsor Listings: {{ num_of_s_listings }}</span>
+
+    <br>
+    <br>
+
+    <span>Total Pending Creator Orders: {{ num_of_cp_listings }}</span>
+    <br>
+    <span>Total Pending Sponsor Orders: {{ num_of_sp_listings }}</span>
+    <br>
+    <span>Total Accepted Creator Orders: {{ num_of_ca_listings }}</span>
+    <br>
+    <span>Total Accepted Sponsor Orders: {{ num_of_sa_listings }}</span>
+    <br>
+    <span>Total Completed Orders: {{ num_of_completed_listings }}</span>
+
+    <br>
+
+    <br>
+
+    <h3>Your Account Login</h3>
+
+    <hr>
+    <br>
+
+    <span>Your Username/Email: <b>{{ user.username }}</b></span> <a href="#">Change Password</a>
+    <br>
+    <span>Your Password: ####### </span> <a href="#">Change Password</a>
+
+    <br>
+    <br>
+
+    <h3>Your Listings</h3>
+
+    <hr>
+    <br>
+
+    <h3>Your Creator Listings: </h3>
+    {% for listing in personal_c_listings %}
+    <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}">{{ listing }}</a>
+    <a href="{% url 'blog_listing_update' id=listing.id %}"><button>Edit</button></a>
+    <a href="{% url 'blog_listing_delete' id=listing.id %}"><button>Delete</button></a>
+    {% endfor %}
+
+    <h3>Your Sponsor Listings: </h3>
+    {% for listing in personal_s_listings %}
+    <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}">{{ listing }}</a>
+    <a href="{% url 'sponsor_listing_update' id=listing.id %}"><button>Edit</button></a>
+    <a href="{% url 'sponsor_listing_delete' id=listing.id %}"><button>Delete</button></a>
+
+    {% endfor %}
+    <br>
+
+    <hr>
+    <br>
+
+    <h3>Delete Account</h3>
+
+    <hr>
+    <br>
+
+    <a href="{% url 'delete_account' %}" style="color: red;">Delete Account</a>
+
 </div>
 
 {% endblock content %}

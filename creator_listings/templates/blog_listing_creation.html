@@ -19,14 +19,52 @@
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="InputwebsiteUrl">Blog's Url</label>
-                    <input value="{{ listing.blog_url }}" type="text" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="Blog's Url">
+                    <label for="InputwebsiteUrl">Blog's Name</label>
+                    <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="Blog's Name" required>
                 </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="InputwebsiteUrl">Blog's Url</label>
+                    <input value="{{ listing.blog_url }}" type="url" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="https://" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputSiteAge">Blog's Age</label>
+                    <input value="{{ listing.age }}" type="integer" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="Blog's Age" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="Inputlanguage">Language</label>
+                    <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" required>
+                        <option selected>{{ listing.language }}</option>
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>German</option>
+                        <option>Chinese</option>
+                        <option>Japanese</option>  
+                        <option>Russian</option>   
+                        <option>Italian</option>                 
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
+            <hr>
+
+            <h2>Lets Get To Know Your Blog</h2>
+            <br>
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="Inputniche">Niche</label>
-                    <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control">
+                    <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
                         <option selected>{{ listing.niche }}</option>
                         <option>Business</option>
                         <option>Educational</option>
@@ -41,19 +79,92 @@
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputSiteAge">Blog's Age</label>
-                    <input value="{{ listing.age }}" type="text" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="Blog's Age">
-                </div>
+
+            <label>What Type Of Articles Are ON Your Blog?</label>
+            
+            <ul style="list-style: none;">
+                {% for type, id in types.items %}
+                    <li>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck{{ id }}" name="blog_type" value="{{ type }}">
+                            <label class="custom-control-label" for="customCheck{{ id }}">{{ type }}</label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <br>
+            <hr>
+
+            <h3>Describe Your Blog To Us</h3>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Tagline</label>
+                <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters."></textarea>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputSiteMonthlyVisits">Blog's Monthly Visits</label>
-                    <input value="{{ listing.monthly_views }}" type="text" name="monthly_views" type="text" class="form-control" id="inputSiteMonthlyVisits" placeholder="Blog's Monthly Visits">
-                </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Audience Description</label>
+                <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Sponsor Description</label>
+                <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell ups what you're looking for in a sponsor. 2-3 paragraph min."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Upload A Listing Image</label>
+                <input type="file" class="form-control-file" name="creator_img">
+            </div>
+
+            <br>
+            <hr>
+
+            <h2>Google Analytics Traffic</h2>
+            <br>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Google Analytics CSV data</label>
+                <input type="file" class="form-control-file" name="google_a_csv">
+            </div>
+
+            <br>
+            <hr>
+
+            <h2>Notifications</h2>
+            <br>
+
+            <div class="form-group col-md-12">
+                <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
+                <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email">
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
+                <input value="{{ listing.number }}" type="text" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
+            </div>
+
+            <br>
+            <hr>
+
+            <h2>Payment</h2>
+            <br>
+
+            <div class="form-group col-md-12">
+                <label for="InputwebsiteUrl">PayPal Email You'd Like To Associate With This Listing</label>
+                <input value="{{ listing.paypal_email }}" type="email" name="paypal_email" class="form-control" id="InputwebsiteUrl" placeholder="PayPal Email" required>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Finished</button>
+            <br>
+
         </form>
     </div>
 
