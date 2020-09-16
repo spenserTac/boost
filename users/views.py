@@ -108,8 +108,6 @@ def dashboard(request):
     s_accepted_orders = AcceptedSponsorOrderModel.objects.filter(creator=user)
     s_accepted_orders_len = s_accepted_orders.count()
 
-    # c_order_status = CreatorOrderModel.objects.filter(buyer=user)
-
     # The created listings of each type (creator and sponsor), if they created any
     personal_creator_listings = user.bloglistingcreationmodel_set.all()
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
