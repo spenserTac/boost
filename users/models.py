@@ -145,6 +145,20 @@ class CompletedOrderModel(models.Model):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
 
+class SupportTicket(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='support_ticket_creator'),
+    email = models.CharField(max_length=500, blank=True, null=True),
+    problem = models.TextField(max_length=5000, blank=True, null=True)
+
+    def __str__(self):
+        return('CREATOR: ' + str(self.creator) + 'EMAIL: ' + str(self.email))
 
 
+class FeatureTicket(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='feature_ticket_creator'),
+    email = models.CharField(max_length=500, blank=True, null=True),
+    feature = models.TextField(max_length=5000, blank=True, null=True)
+
+    def __str__(self):
+        return('CREATOR: ' + str(self.creator) + 'EMAIL: ' + str(self.email))
 

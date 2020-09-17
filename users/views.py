@@ -4,11 +4,13 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .forms import CustomUserCreationForm
-from .models import Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel, CompletedOrderModel
+from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
+CompletedOrderModel)
+
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
-from .forms import CreatorOrderForm
+from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm
 
 
 def account(request, id=None):
@@ -75,6 +77,31 @@ def signup(request):
         }
         return render(request, 'signup.html', context)
 
+def support_contact(request):
+    if request.method == 'POST':
+        form = SupportTicketForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=False).creator = request.user
+            form.save()
+
+            return redirect('home')
+
+    return render(request, 'support.html')
+
+def feature_add(request):
+    if request.method == 'POST':
+        form = FeatureTicketForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=False).creator = request.user
+            form.save()
+
+            return redirect('home')
+
+        print(form.errors, '--------------')
+
+    return render(request, 'feature.html')
 
 @login_required(login_url='login')
 def dashboard(request):

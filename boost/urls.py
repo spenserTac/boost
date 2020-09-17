@@ -24,6 +24,7 @@ urlpatterns = [
     path('sponsors/', include('sponsor_listings.urls')),
     path('marketplace/', include('marketplace.urls')),
     path('account/', include('users.urls')),
+    path('contact/', include('users.urls')),
 
     # Google login
     path('accounts/', include('allauth.urls')),
