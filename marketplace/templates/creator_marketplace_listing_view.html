@@ -9,6 +9,14 @@
         <br>
         <h1>Product: {{ listing.blog_url }}</h1>
         <h1>Following: {{ following }}</h1>
+        <h1>Niche: {{ listing.niche }}</h1>
+        <h1>Blog Age: {{ listing.age }}</h1>
+
+        <hr>
+
+        <h3>Tagline: {{ listing.tagline }}</h3>
+
+        <br>
 
         {% if following %}
             <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-success">Watching</button></a>
