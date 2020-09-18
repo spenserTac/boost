@@ -2,13 +2,173 @@
 
 {% block content %}
 
-<h1>Homepage</h1>
+<div class="container">
+  
+    <br>
+    <br>
 
-<br>
+    <div class="d-none d-lg-block">
 
-<h1>{{ user }}</h1>
+        <div class="jumbotron">
+            <h1 class="display-3">Hey {% if user.first_name %} {{ user.first_name }}{% endif %}, thanks for checking out my web app!</h1>
 
-<h3>Features that'll be added on homepage: 1. intro video, 2. infographic</h3>
+            <hr class="my-4">
+
+            <h3>
+                Take a look around the site. See if this is somthing that you'd use for your
+                blog and/or business. This is just the prototype of the prototype, so keep that in mind.
+            </h3> 
+
+            <br>
+            
+            <h3>
+                I'm looking for your opinion on the concept, not so much feature (like if this is somthing 
+                you'd use, is the concept confusing, etc.).
+            </h3>
+
+            <br>
+
+            <h3>
+                Below is a list of imporvments that I know need to be made.
+            </h3>
+
+            <br>
+
+            <h3>
+                If you can't figure out what the business is, click the button below (probably not a good sign for me)
+            </h3>
+
+            <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal" data-target="#exampleModalCenter">
+                Business Info
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    ...
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <br>
+            
+            <hr>
+            
+            <h5>
+                Improvments:
+                    Marketplace: 
+                        1. Improve filter system
+                    Listing Creation:
+                        1. POO
+            </h5>
+            
+            <br>
+            <br>
+
+            <p>If you have any improvments or features I could add, just click the button below. Thanks!</p>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'feature_add' %}" role="button">Response/Opinion</a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="d-lg-none ">
+
+        <div class="jumbotron">
+            <h1 class="display-6 text-center">Hey {% if user.first_name %} {{ user.first_name }}{% endif %}, thanks for checking out my web app!</h1>
+
+            <hr class="my-4">
+
+            <h3 class="font-weight-light text-center">
+                Take a look around the site. See if this is somthing that you'd use for your
+                blog and/or business. This is just the prototype of the prototype, so keep that in mind.
+            </h3> 
+
+            <br>
+            
+            <h3 class="font-weight-light text-center">
+                I'm looking for your opinion on the concept, not so much feature (like if this is somthing 
+                you'd use, is the concept confusing, etc.).
+            </h3>
+
+            <br>
+
+            <h3 class="font-weight-light text-center">
+                Below is a list of imporvments that I know need to be made.
+            </h3>
+
+            <br>
+
+            <h3 class="font-weight-light text-center">
+                If you can't figure out what the business is, click the button below (probably not a good sign for me)
+            </h3>
+
+            <br>
+
+            <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal" data-target="#exampleModalCenter">
+                Business Info
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    ...
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <br>
+            
+            <hr>
+            
+            <h5 class="font-weight-light text-center">
+                Improvments:
+                    Marketplace: 
+                        1. Improve filter system
+                    Listing Creation:
+                        1. POO
+            </h5>
+            
+            <br>
+            <br>
+            href="{% url 'feature_add' %}"
+            <p>If you have any improvments or features I could add, just click the button below. Thanks!</p>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg mx-auto d-block" href="{% url 'feature_add' %}" role="button">Response/Opinion</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
 
 
 {% endblock content %}
