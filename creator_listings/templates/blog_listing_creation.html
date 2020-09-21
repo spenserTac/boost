@@ -4,173 +4,294 @@
 
 <!-- Blogger Listing Creation Form -->
 
-    <br>
-    <br>
+    <!-- Only shows up for LG and bigger (computers) -->
+    <div class="view d-none d-lg-block" style=" height: 400px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+          <div class="container d-flex h-100 align-items-center justify-content-center">
+            <div class="row">
+              <div class="col-md-12 white-text text-center">
+                <div class="col-md-8 p-lg-5 mx-auto my-auto">
+                    <h1 class="font-weight-bold display-1">Create A Blog Listing</h1>
+                    <br>
+                    <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>                    
+                </div>
+              </div>
+            </div>         
+        </div>
+    </div>
+
+      <!-- Only shows up for MD and smaller (everything else) -->
+      <div class="view d-lg-none" style=" height: 280px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+          <div class="container d-flex align-items-center justify-content-center">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12 white-text text-center">
+                <br>
+                <h1 class="font-weight-bold display-4">Create A Blog Listing</h1>
+                <br>
+                <p class="lead font-weight-normal">Here you can create your blog listing so sponsors can view your website.</p>
+              </div>
+            </div>
+        </div>
+      </div>
+
 
     <div class="container">
-        <h1 class="text-center font-weight-bold display-4">Create a Blog Listing</h1>
-        <hr>
+        
+            <hr class="my-5">    
 
-        <br>
-        <br>
+            <div class="d-flex justify-content-center mx-3">
+                <form method="POST">
 
-        <form method="POST">
+                {% csrf_token %}
 
-            {% csrf_token %}
+                    <h1 class="font-weight-normal text-center">Your Blog's Info</h1>
+                    <br>
 
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="InputwebsiteUrl">Blog's Name</label>
-                    <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="Blog's Name" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="InputwebsiteUrl">Blog's Url</label>
-                    <input value="{{ listing.blog_url }}" type="url" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="https://" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputSiteAge">Blog's Age</label>
-                    <input value="{{ listing.age }}" type="integer" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="Blog's Age" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="Inputlanguage">Language</label>
-                    <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" required>
-                        <option selected>{{ listing.language }}</option>
-                        <option>English</option>
-                        <option>Spanish</option>
-                        <option>German</option>
-                        <option>Chinese</option>
-                        <option>Japanese</option>  
-                        <option>Russian</option>   
-                        <option>Italian</option>                 
-                        <option>Other</option>
-                    </select>
-                </div>
-            </div>
-
-            <br>
-            <hr>
-
-            <h2>Lets Get To Know Your Blog</h2>
-            <br>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="Inputniche">Niche</label>
-                    <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
-                        <option selected>{{ listing.niche }}</option>
-                        <option>Business</option>
-                        <option>Educational</option>
-                        <option>Entertainment</option>
-                        <option>Fashion</option>
-                        <option>Food</option>  
-                        <option>Health</option>   
-                        <option>Lifestyle</option>                 
-                        <option>Technology</option>
-                        <option>Travel</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-            </div>
-
-            <label>What Type Of Articles Are ON Your Blog?</label>
-            
-            <ul style="list-style: none;">
-                {% for type, id in types.items %}
-                    <li>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck{{ id }}" name="blog_type" value="{{ type }}">
-                            <label class="custom-control-label" for="customCheck{{ id }}">{{ type }}</label>
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="InputwebsiteUrl">Blog's Name</label>
+                                <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="John Doe's Blog" required>
+                            </div>
                         </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            
-            <br>
-            <hr>
 
-            <h3>Describe Your Blog To Us</h3>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="InputwebsiteUrl">Blog's Url</label>
+                                <input value="{{ listing.blog_url }}" type="url" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="https://" required>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Tagline</label>
-                <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters."></textarea>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputSiteAge">Years Active</label>
+                                <input value="{{ listing.age }}" type="integer" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="3" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="Inputlanguage">Language</label>
+                                <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" placeholder="EX: English" required>
+                                    <option selected>{{ listing.language }}</option>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>German</option>
+                                    <option>Chinese</option>
+                                    <option>Japanese</option>  
+                                    <option>Russian</option>   
+                                    <option>Italian</option>                 
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <br>
+
+                    <h2 class="font-weight-normal text-center">Lets Get To Know Your Blog</h2>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="Inputniche">Niche</label>
+                                <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
+                                    <option selected>{{ listing.niche }}</option>
+                                    <option>Business</option>
+                                    <option>Educational</option>
+                                    <option>Entertainment</option>
+                                    <option>Fashion</option>
+                                    <option>Food</option>  
+                                    <option>Health</option>   
+                                    <option>Lifestyle</option>                 
+                                    <option>Technology</option>
+                                    <option>Travel</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <label>What Type Of Articles Are On Your Blog?</label>
+                        
+                        <ul style="list-style: none;">
+                            {% for type, id in types.items %}
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck{{ id }}" name="blog_type" value="{{ type }}">
+                                        <label class="custom-control-label" for="customCheck{{ id }}">{{ type }}</label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <br>
+
+                    <h1 class="font-weight-normal text-center">Describe Your Blog To Us</h1>
+                    
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Tagline</label>
+                            <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters.">{{ listing.tagline }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs.">{{ listing.overview_description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Audience Description</label>
+                            <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min.">{{ listing.audience_description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Sponsor Description</label>
+                            <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell ups what you're looking for in a sponsor. 2-3 paragraph min.">{{ listing.sponsor_description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Upload A Listing Image</label>
+                            <input type="file" class="form-control-file" name="creator_img">
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <br>
+
+                    <h2 class="font-weight-normal text-center">Google Analytics Traffic</h2>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Upload Google Analytics CSV data</label>
+                            <input type="file" class="form-control-file" name="google_a_csv">
+                            <br>
+                            <a class="text-center" href="#howToUploadGoogleAnalyticsModal" data-toggle="modal">How do I do this?</a>
+                            <br>
+                            <a class="text-center" href="#whatIsThisForGAModal" data-toggle="modal">What is this For?</a>
+
+
+
+                            <!-- Modal - How do I do this -->
+                            <div class="modal fade" id="howToUploadGoogleAnalyticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">How To Upload Google Analytics Data</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        1. Poop Your Pants
+                                        2. Do It Again
+                                        3. Have Fun
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Modal - What is this For?-->
+                            <div class="modal fade" id="whatIsThisForGAModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">How To Upload Google Analytics Data</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        1. IDK
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <br>
+
+                    <h2 class="font-weight-normal text-center">Notifications Via Text and Email</h2>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                        <small style="color: red;">These aren't required, but they're highly recommended.</small>
+                        <br>
+                        <br>
+                    
+                        <div class="form-group col-md-12">
+                            <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
+                            <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
+                            <input value="{{ listing.number }}" type="text" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <br>
+
+                    <h2 class="font-weight-normal text-center">Payment</h2>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                        <div class="form-group col-md-12">
+                            <label for="InputwebsiteUrl">PayPal Email You'd Like To Associate With This Listing</label>
+                            <input value="{{ listing.paypal_email }}" type="email" name="paypal_email" class="form-control" id="InputwebsiteUrl" placeholder="PayPal Email" required>
+                        </div>
+                    
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Finish Listing</button>
+                    </div>
+                    
+                    <br>
+
+                </form>
             </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Audience Description</label>
-                <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Sponsor Description</label>
-                <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell ups what you're looking for in a sponsor. 2-3 paragraph min."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Upload A Listing Image</label>
-                <input type="file" class="form-control-file" name="creator_img">
-            </div>
-
-            <br>
-            <hr>
-
-            <h2>Google Analytics Traffic</h2>
-            <br>
-
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Upload Google Analytics CSV data</label>
-                <input type="file" class="form-control-file" name="google_a_csv">
-            </div>
-
-            <br>
-            <hr>
-
-            <h2>Notifications</h2>
-            <br>
-
-            <div class="form-group col-md-12">
-                <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
-                <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email">
-            </div>
-
-            <div class="form-group col-md-12">
-                <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
-                <input value="{{ listing.number }}" type="text" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
-            </div>
-
-            <br>
-            <hr>
-
-            <h2>Payment</h2>
-            <br>
-
-            <div class="form-group col-md-12">
-                <label for="InputwebsiteUrl">PayPal Email You'd Like To Associate With This Listing</label>
-                <input value="{{ listing.paypal_email }}" type="email" name="paypal_email" class="form-control" id="InputwebsiteUrl" placeholder="PayPal Email" required>
-            </div>
-
-            <br>
-
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Finished</button>
-            </div>
-            
-            <br>
-
-        </form>
     </div>
 
 <!-- END Blogger Listing Creation Form -->
