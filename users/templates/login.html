@@ -8,81 +8,76 @@
     <br>
     <br>
 
-    <div class="container justify-content-center">
-        
+    <div class="container">
 
-        <h1 style="text-align: center;">Login</h1>
-
-        <br>
-        <br>
-
-        
-
-        {% for message in messages %}
-
-            <p>{{ message }}</p>
-
-        {% endfor %}
-
-        <form method="POST">
-
-            {% csrf_token %}
-            
-            <div class="col">
-                <div class="form-group row">
-                    <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="row">
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
-                </div>
-
-                    <br>
-                    <br>
-            </div>
-
-            <div class="col-auto d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary mb-2">Login</button>
-            </div>
-        </form>
-   
-
-        <br>
+        <h1 class="font-weight-normal text-center display-3">Boost</h1>
         <hr>
         <br>
+        
+        <div class="d-flex justify-content-center mx-3">
 
-        <!-- This <img> src is just a hard coded url, instead download the image in static files and internaly link to it -->
-        <a href="{% provider_login_url "google" %}"><img src="https://user-images.githubusercontent.com/1531669/41761606-83b5bd42-762a-11e8-811a-b78fdf68bc04.png"></a>
+            {% for message in messages %}
 
+                <p>{{ message }}</p>
 
-        <!-- Original Google Login Stuff - It's wrong though
-        <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn" data-theme="light"></div>
-            <script>
-            function onSignIn(googleUser) {
-                // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicprofile();
-                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-                console.log('Full Name: ' + profile.getName());
-                console.log('Given Name: ' + profile.getGivenName());
-                console.log('Family Name: ' + profile.getFamilyName());
-                console.log("Image URL: " + profile.getImageUrl());
-                console.log("Email: " + profile.getEmail());
-
-                // The ID token you need to pass to your backend:
-                var id_token = googleUser.getAuthResponse().id_token;
-                console.log("ID Token: " + id_token);
-            }
-            </script>
+            {% endfor %}
 
             <br>
-
-            <div class="d-flex justify-content-center">
-                <span class="form-text text-muted">Don't have an account? <a href="{% url 'signup' %}">Register</a></span>
-            </div>
-
             <br>
-        -->
+
+            <div class="col-auto d-flex justify-content-center">
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                        <div class="form-row">
+                            <h1 class="font-weight-normal">Login</h1>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <h5>Email</h5>
+                                <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <h5>Password</h5>
+                                <input name="password" type="password" class="form-control" placeholder="Password" required>
+                                <a href="#">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-block btn-primary my-2 mx-1">Login</button>
+                            <a class="ml-1" href="{% url 'signup' %}">Create A Boost Account.</a>
+
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <hr>
+                        <br>
+
+                        <div class="text-center">
+
+                            <button class="btn btn-success" type="button" href="{% provider_login_url "google" %}">Google</button>
+                        
+                        </div>
+
+                        <br>
+
+                    </div>
+
+                </form>
+
+            </div>                
+            
+        </div>
 
     </div>
 

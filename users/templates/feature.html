@@ -2,32 +2,57 @@
 
 {% block content %}
 
+    <!-- Only shows up for LG and bigger (computers) -->
+    <div class="view d-none d-lg-block" style=" height: 400px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="container d-flex h-100 align-items-center justify-content-center">
+        <div class="row">
+          <div class="col-md-12 white-text text-center">
+            <div class="col-md-8 p-lg-5 mx-auto my-auto">
+                <h1 class="font-weight-bold display-1">Feature Request</h1>
+                <br>
+                <p class="lead font-weight-normal">A place to tell us about any features you'd like added.</p>                    
+            </div>
+          </div>
+        </div>         
+      </div>
+    </div>
+
+  <!-- Only shows up for MD and smaller (everything else) -->
+  <div class="view d-lg-none" style=" height: 280px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="container d-flex align-items-center justify-content-center">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12 white-text text-center">
+            <br>
+            <h1 class="font-weight-bold display-4">Feature Request</h1>
+            <br>
+            <p class="lead font-weight-normal">A place to tell us about any features you'd like added.</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
 <div class="container">
 
-    
-    <br>
-    <br>
+  <hr class="my-5">
 
     <div class="row">
 
         <div class="col">
-            <h1 class="text-center font-weight-bold display-4">Request a feature</h1>
-            <hr>
-            <br>
-            <br>
-
+        
             <form method="POST">
 
                 {% csrf_token %}
 
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email to contact you">
-                </div>
+                <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email to contact you">
+                  </div>
 
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Describe the feature(s) you'd like added</label>
-                    <textarea class="form-control" name="problem" id="exampleFormControlTextarea1" rows="6"></textarea>
+                  <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Describe the feature(s) you'd like added</label>
+                      <textarea class="form-control" name="problem" id="exampleFormControlTextarea1" rows="6"></textarea>
+                  </div>
                 </div>
 
                 <div class="text-center">
@@ -35,7 +60,7 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 
-              </form>
+            </form>
               
       </div>
 
