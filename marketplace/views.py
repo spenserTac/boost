@@ -193,8 +193,33 @@ def creator_marketplace_listing_unorder_view(request, id=None):
 def sponsor_marketplace(request):
     sponsor_listings = SponsorListingCreationModel.objects.all()
 
+    niche_query = request.GET.getlist('niche')
+
+    niches = {
+        "Business": "", 
+        "Educational": "", 
+        "Entertainment": "",
+        "Fashion": "",
+        "Food": "",
+        "Health": "",
+        "Lifestyle": "",
+        "Technology": "",
+        "Travel": "",
+        "Other": ""
+        }
+
+    for niche in niche_query:
+        if niche in niche_query:
+            niches[str(niche)] = "checked"
+        else: 
+            niches[str(niche)] = ""
+
+    if niche_query != "" and niche_query is not None and len(niche_query) != 0:
+        sponsor_listings = sponsor_listings.filter(niche__in=niche_query)
+
     context = {
-        'sponsor_listings': sponsor_listings
+        'sponsor_listings': sponsor_listings,
+        'niches': niches,
     }
 
     return render(request, 'sponsor_marketplace.html', context)

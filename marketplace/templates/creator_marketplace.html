@@ -109,44 +109,44 @@
 
             <!-- Listings -->
 
-                <div class="col-10">
-                    {% for listing in creator_listings %}
-                        <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+            <div class="col-10">
+                {% for listing in creator_listings %}
+                    <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
 
-                            <div class="row no-gutters" style="max-width: 100%; max-height: 100%;">
+                        <div class="row no-gutters" style="max-width: 100%; max-height: 100%;">
 
-                                <div class="col m-3">
-                                    <img src="https://wallpapercave.com/wp/0PULYfE.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">
-                                </div>
+                            <div class="col m-3">
+                                <img src="https://wallpapercave.com/wp/0PULYfE.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">
+                            </div>
 
-                                <div class="col-7 my-4 d-flex flex-column">
-                                    
+                            <div class="col-7 my-4 d-flex flex-column">
+                                
 
-                                        <div>
-                                            <h5 class="card-title">{{ listing.blog_name }}</h5>
-                                        </div>
+                                    <div>
+                                        <h5 class="card-title">{{ listing.blog_name }}</h5>
+                                    </div>
 
-                                        <div class="justify-content-center">
-                                            <p title="{{ listing.niche }}" class="card-text">Niche</p>
-                                            <p><small class="text-muted">{{ listing.niche }}</small></p>
-                                        </div>
+                                    <div class="justify-content-center">
+                                        <p title="{{ listing.niche }}" class="card-text">Niche</p>
+                                        <p><small class="text-muted">{{ listing.niche }}</small></p>
+                                    </div>
 
-                                        <div>
-                                            <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
-                                        </div>
-
-                                    
-                                </div>
-
+                                    <div>
+                                        <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
+                                    </div>
+   
                             </div>
 
                         </div>
-                    {% endfor %}
-                </div>
+
+                    </div>
+                {% endfor %}
+            </div>
 
             <!-- END Listings -->
 
         </div>
+
     </div>
 
     <!-- Creator Marketplace view for phones and tablets -->

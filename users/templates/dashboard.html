@@ -22,219 +22,220 @@
     <br>
     <br>
     
-    <div class="row">
+    
+        <div class="row">
 
-        <div class="col-12 d-flex">
+            <div class="col-12 d-flex">
 
-            <button class="btn btn-block btn-primary mx-1 h-90" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseCreatorOrders" >Creator Orders</button>
-            <button class="btn btn-block btn-warning m-0 mx-1 h-90" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseSponsorOrders" >Sponsor Orders</button>
-            <button class="btn btn-block btn-success m-0 mx-1 h-90" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseAcceptedCreatorOrders" role="button">Accepted Orders</button>
-            <button class="btn btn-block btn-danger m-0 mx-1 h-90" style="border-radius: 0px;">Order History</button>
-            <button class="btn btn-block btn-info m-0 mx-1 h-90" style="border-radius: 0px;">Your Listings</button>
-            <button class="btn btn-block btn-secondary m-0 mx-1 h-90" style="border-radius: 0px;">Watching</button>
+                <button type="button" class="btn btn-block btn-primary mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseCreatorOrders" aria-haspopup="true" aria-expanded="false">Creator Orders</button>
+                <button type="button" class="btn btn-block btn-warning m-0 mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseSponsorOrders" aria-haspopup="true" aria-expanded="false">Sponsor Orders</button>
+                <button type="button" class="btn btn-block btn-success m-0 mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" data-toggle="collapse" data-target="#collapseAcceptedCreatorOrders" role="button" aria-haspopup="true" aria-expanded="false">Accepted Orders</button>
+                <button type="button" class="btn btn-block btn-danger m-0 mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" aria-haspopup="true" aria-expanded="false">Order History</button>
+                <button type="button" class="btn btn-block btn-info m-0 mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" aria-haspopup="true" aria-expanded="false">Your Listings</button>
+                <button type="button" class="btn btn-block btn-secondary m-0 mx-1 h-90 dropdown-toggle" style="border-radius: 0px;" aria-haspopup="true" aria-expanded="false">Watching</button>
+
+            </div>
 
         </div>
 
-    </div>
+        <!-- Creator order collapse -->
+        <div class="collapse" id="collapseCreatorOrders">
+            {% for c_order in c_orders %}
+                    {% if c_order.buyers_listing_s %}
+                    <div class="card card-body">
+                        <h5>Buyers Sponsor Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=c_order.buyers_listing_s.id %}">{{ c_order.buyers_listing_s }}</a></h5>
+                        <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
+                        <hr>
+                        <h5>The listing of yours that they are ordering: <a href="{% url 'creator_marketplace_listing_view' id=c_order.creator_listing.id %}">{{ c_order.creator_listing }}</a></h5>
+                        <hr>
+                        <h5>The Service They're Looking For: {{ c_order.service }}</h5>
+                        <hr>
+                        <h5>Description of what they'd like:</h5> 
+                        <span>{{ c_order.service_detailed }}</span>
+                        <hr>
+                        <h5>Payout: ${{ c_order.buyers_listing_s.money }}</h5>
+                        <br>
 
-    <!-- Creator order collapse -->
-    <div class="collapse" id="collapseCreatorOrders">
-        {% for c_order in c_orders %}
-                {% if c_order.buyers_listing_s %}
-                <div class="card card-body">
-                    <h5>Buyers Sponsor Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=c_order.buyers_listing_s.id %}">{{ c_order.buyers_listing_s }}</a></h5>
-                    <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
-                    <hr>
-                    <h5>The listing of yours that they are ordering: <a href="{% url 'creator_marketplace_listing_view' id=c_order.creator_listing.id %}">{{ c_order.creator_listing }}</a></h5>
-                    <hr>
-                    <h5>The Service They're Looking For: {{ c_order.service }}</h5>
-                    <hr>
-                    <h5>Description of what they'd like:</h5> 
-                    <span>{{ c_order.service_detailed }}</span>
-                    <hr>
-                    <h5>Payout: ${{ c_order.buyers_listing_s.money }}</h5>
-                    <br>
-
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creatorAcceptModal">
-                        Accept
-                    </button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="creatorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                            If you accept thi order, that means you'll work on it.
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="{% url 'dashboard_creator_order_accept' id=c_order.id %}"><button>Yes, I'm Sure</button></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                    <a href="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
-                </div>
-                {% endif %}   
-        {% endfor %}
-        
-            {% if c_orders_len == 0 %}
-            <div class="card card-body">
-                <h5>>>> You have no orders for any of your creator listings</h5>
-            </div>
-            {% endif %}
-    </div>
-
-    <!-- Sponsor order collapse -->
-    <div class="collapse" id="collapseSponsorOrders">
-
-        {% for s_order in s_orders %}
-
-            {% if s_order.buyers_listing_c %}
-
-                <div class="card card-body">
-                    <h5>Buyers Creator Listing: <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></h5>
-                    <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
-                    <hr>
-                    <h5>The listing of yours that they are ordering: <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id %}">{{ s_order.sponsor_listing }}</a></h5>
-                    <hr>
-                    <h5>The services they're willing to do: {{ s_order.services_creator_is_willing_to_provide }}</h5>
-                    <hr>
-                    <h5>Description of order: </h5>
-                    <span>{{ s_order.services_creator_is_willing_to_provide_detailed }}</span>
-                    <hr>
-                    <h5>Your Payout: ${{ s_order.sponsor_listing.money }}</h5>
-                    <br>
-
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sponsorAcceptModal">
-                        Accept Creator
-                    </button>
-                    <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button>Decline</button></a>
-                    
-                    <!-- Sponsor Accept Modal -->
-                    <div class="modal fade" id="sponsorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Accepting {{ s_order }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                            ...
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="{% url 'dashboard_sponsor_order_accept' id=s_order.id %}">
-                                <button type="button" class="btn btn-primary">Yes, I'm Sure</button>
-                            </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            {% endif %}
-
-        {% endfor %}
-
-        {% if s_orders_len == 0 %}
-
-            <div class="card card-body">
-
-                <h5>>>> You have no orders for any of your sponsor listings</h5>
-
-            </div>
-
-        {% endif %}
-
-    </div>
-
-    <!-- Accepted order collapse -->
-    <div>
-        {% if c_accepted_orders_len >= 1 %}
-                {% for c_accepted_order in c_accepted_orders %}
-                    {% if c_accepted_order.buyers_listing_s %}
-                        <div class="collapse" id="collapseAcceptedCreatorOrders">
-                            <div class="card card-body">
-                                <h5>Buyers Sponsor Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=c_accepted_order.buyers_listing_s.id %}">{{ c_accepted_order.buyers_listing_s }}</a></h5>
-                                <small>You've acepted this order. Make sure to work on it.</small>
-                                <hr>
-                                <h5>The listing of yours that they are ordering: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.creator_listing.id %}">{{ c_accepted_order.creator_listing }}</a></h5>
-                                <hr>
-                                <h5>The Service They're Looking For: {{ c_accepted_order.service }}</h5>
-                                <hr>
-                                <h5>Description of what they'd like:</h5> 
-                                <span>{{ c_accepted_order.service_detailed }}</span>
-                                <hr>
-                                <h5>Payout: ${{ c_accepted_order.buyers_listing_s.money }}</h5>
-                                <br>
-
-
-
-
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creatorCompletedModal">
-                                        Mark As Completed
-                                    </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="creatorCompletedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Order</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        ...
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}">
-                                                <button type="button" class="btn btn-primary">You're Sure</button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creatorAcceptModal">
+                            Accept
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="creatorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                                 </div>
-
-                                <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button>Withdraw</button></a>
+                                <div class="modal-body">
+                                If you accept thi order, that means you'll work on it.
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="{% url 'dashboard_creator_order_accept' id=c_order.id %}"><button>Yes, I'm Sure</button></a>
+                                </div>
                             </div>
-                        </div> 
-                    
-                    {% elif c_accepted_order.buyers_listing_c %}
-                        <div class="collapse" id="collapseAcceptedCreatorOrders">
-                            <div class="card card-body">
-                                <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.buyers_listing_c.id %}">{{ c_accepted_order }}</a></h1>
-                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
-                                <button>Withdraw</button>
                             </div>
                         </div>
-                    {% endif %} 
-                {% endfor %}
-        {% endif %}
 
-        {% if c_accepted_orders_len < 1 %}
-            <div class="collapse" id="collapseAcceptedCreatorOrders">
+                        <a href="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
+                    </div>
+                    {% endif %}   
+            {% endfor %}
+            
+                {% if c_orders_len == 0 %}
                 <div class="card card-body">
-                    <h1>You Have No Accepted Orders</h1>
+                    <h5>>>> You have no orders for any of your creator listings</h5>
                 </div>
-            </div>
-        {% endif %}
-    </div>
+                {% endif %}
+        </div>
+
+        <!-- Sponsor order collapse -->
+        <div class="collapse" id="collapseSponsorOrders">
+
+            {% for s_order in s_orders %}
+
+                {% if s_order.buyers_listing_c %}
+
+                    <div class="card card-body">
+                        <h5>Buyers Creator Listing: <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></h5>
+                        <small>Checkout their listing to see if you approve. If you do, click ACCEPT. If you don't click DECLINE.</small>
+                        <hr>
+                        <h5>The listing of yours that they are ordering: <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id %}">{{ s_order.sponsor_listing }}</a></h5>
+                        <hr>
+                        <h5>The services they're willing to do: {{ s_order.services_creator_is_willing_to_provide }}</h5>
+                        <hr>
+                        <h5>Description of order: </h5>
+                        <span>{{ s_order.services_creator_is_willing_to_provide_detailed }}</span>
+                        <hr>
+                        <h5>Your Payout: ${{ s_order.sponsor_listing.money }}</h5>
+                        <br>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sponsorAcceptModal">
+                            Accept Creator
+                        </button>
+                        <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button>Decline</button></a>
+                        
+                        <!-- Sponsor Accept Modal -->
+                        <div class="modal fade" id="sponsorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Accepting {{ s_order }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                ...
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="{% url 'dashboard_sponsor_order_accept' id=s_order.id %}">
+                                    <button type="button" class="btn btn-primary">Yes, I'm Sure</button>
+                                </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+            {% if s_orders_len == 0 %}
+
+                <div class="card card-body">
+
+                    <h5>>>> You have no orders for any of your sponsor listings</h5>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Accepted order collapse -->
+        <div>
+            {% if c_accepted_orders_len >= 1 %}
+                    {% for c_accepted_order in c_accepted_orders %}
+                        {% if c_accepted_order.buyers_listing_s %}
+                            <div class="collapse" id="collapseAcceptedCreatorOrders">
+                                <div class="card card-body">
+                                    <h5>Buyers Sponsor Listing: <a href="{% url 'sponsor_marketplace_listing_view' id=c_accepted_order.buyers_listing_s.id %}">{{ c_accepted_order.buyers_listing_s }}</a></h5>
+                                    <small>You've acepted this order. Make sure to work on it.</small>
+                                    <hr>
+                                    <h5>The listing of yours that they are ordering: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.creator_listing.id %}">{{ c_accepted_order.creator_listing }}</a></h5>
+                                    <hr>
+                                    <h5>The Service They're Looking For: {{ c_accepted_order.service }}</h5>
+                                    <hr>
+                                    <h5>Description of what they'd like:</h5> 
+                                    <span>{{ c_accepted_order.service_detailed }}</span>
+                                    <hr>
+                                    <h5>Payout: ${{ c_accepted_order.buyers_listing_s.money }}</h5>
+                                    <br>
+
+
+
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creatorCompletedModal">
+                                            Mark As Completed
+                                        </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="creatorCompletedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            ...
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}">
+                                                    <button type="button" class="btn btn-primary">You're Sure</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button>Withdraw</button></a>
+                                </div>
+                            </div> 
+                        
+                        {% elif c_accepted_order.buyers_listing_c %}
+                            <div class="collapse" id="collapseAcceptedCreatorOrders">
+                                <div class="card card-body">
+                                    <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.buyers_listing_c.id %}">{{ c_accepted_order }}</a></h1>
+                                    <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
+                                    <button>Withdraw</button>
+                                </div>
+                            </div>
+                        {% endif %} 
+                    {% endfor %}
+            {% endif %}
+
+            {% if c_accepted_orders_len < 1 %}
+                <div class="collapse" id="collapseAcceptedCreatorOrders">
+                    <div class="card card-body">
+                        <h1>You Have No Accepted Orders</h1>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
 
     <br>
     <br>

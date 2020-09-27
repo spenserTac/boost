@@ -4,140 +4,244 @@
 
 <!-- Add a for loop here. for listing in "every listing in database". Then show each listing-->
 
-<br>
-<br>
-
-
 <div class="container">
-    <div class="row">
 
-        <!-- Filter Form -->
+    <div class="d-none d-lg-block">
 
-            <div class="col-lg-3">
-                <div class="dropdown">
-                    <h6>Filter By</h6>
+        <br>
+        <br>
 
-                    <hr>
-                    
-                    <div>
-                        <div>
+        <div class="row">
+
+            <!-- Filter Form -->
+
+                
+            <div class="col-2">
+                <form method="GET">
+                    <div class="col">
+                        <div class="dropdown">
+                            <h5>Filter By</h5>                                  
+
+                            <hr>
+                            
                             <div>
-                                <h6 class="dropdown-toggle">Niche</h6>
+                                <div>
+                                    <div>
+                                        <h6 class="dropdown-toggle">Niche</h6>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <ul style="list-style: none; padding-left: 0;">
+                                                {% for niche, check in niches.items %}
+                                                    <li>
+                                                        <div class="form-check">
+                                                            <input name="niche" class="form-check-input font-weight-normal" type="checkbox" value="{{ niche }}" id="defaultCheck1" {% if check == 'checked' %} checked="True" {% endif %}>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            {{ niche }}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <hr>
+
+                                <div>
+                                    <div>
+                                        <h6 class="dropdown-toggle">Language</h6>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <ul style="list-style: none; padding-left: 0;">
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        English
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        Spanish
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        Other
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <form>
-                                <div>
-                                    <ul style="list-style: none; padding-left: 0;">
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Technology
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Health
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Other
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </form>
                         </div>
-
-                        <hr>
-
-                        <div>
-                            <form>
-                                <div>
-                                    <h6>Blog Age</h6>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formControlRange"></label>
-                                    <input type="range" class="form-control-range" id="formControlRange">
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <hr>
-
-                        <div>
-                            <div>
-                                <h6 class="dropdown-toggle">Language</h6>
-                            </div>
-                            <form>
-                                <div>
-                                    <ul style="list-style: none; padding-left: 0;">
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                English
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Spanish
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                Other
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </form>
-                        </div>
+                        <button class="btn btn-block btn-success" type="submit">Search</button>
                     </div>
-                </div>
+                </form>
             </div>
 
-        <!-- END Filter Form -->
 
-        <!-- Listings -->
+            <!-- END Filter Form -->
+
+            <!-- Listings -->
+
+                <div class="col-10">
+                    {% for listing in sponsor_listings %}
+                        <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+                            
+                            <div class="row no-gutters" style="max-width: 100%; max-height: 100%;">
+
+                                <div class="col m-3">
+                                    <img src="https://cdn.wallpapersafari.com/98/79/EY5PA6.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">
+                                </div>
+
+                                <div class="col-md-8">
+
+                                    <div class="card-body">
+
+                                        <h5 class="card-title">{{ listing.product }}</h5>
+                                        <p class="card-text">{{ listing.niche }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ listing.money }}</small></p>
+                                        <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            <!-- END Listings -->
+
+        </div>
+
+    </div>
+
+    <div class="d-lg-none">
+
+        <a class="btn btn-primary mt-3" data-toggle="collapse" data-target="#collapseCreatorOrders" role="button">
+            Filter By
+        </a>
+
+        <hr>
+
+        <div class="row">
+
+            <!-- Filter Form -->
+            <div class="collapse" id="collapseCreatorOrders">
+                
+                <form method="GET">
+                    <div class="col">
+                        <div class="dropdown">
+                            
+                            <div>
+                                <div>
+                                    <div>
+                                        <h6 class="dropdown-toggle">Niche</h6>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <ul style="list-style: none; padding-left: 0;">
+                                                {% for niche, check in niches.items %}
+                                                    <li>
+                                                        <div class="form-check">
+                                                            <input name="niche" class="form-check-input" type="checkbox" value="{{ niche }}" id="defaultCheck1" {% if check == 'checked' %} checked="True" {% endif %}>
+                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            {{ niche }}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <hr>
+        
+                                <div>
+                                    <div>
+                                        <h6 class="dropdown-toggle">Language</h6>
+                                    </div>
+                                    <form>
+                                        <div>
+                                            <ul style="list-style: none; padding-left: 0;">
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        English
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        Spanish
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                        Other
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-block btn-success" type="submit">Search</button>
+                        <hr class="my-3">
+                    </div>
+                </form>
+
+            </div>
 
             <div class="col">
                 {% for listing in sponsor_listings %}
                     <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+                        
                         <div class="row no-gutters" style="max-width: 100%; max-height: 100%;">
-                        <div class="col-md-4">
-                            <img src="https://cdn.wallpapersafari.com/98/79/EY5PA6.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ listing.product }}</h5>
-                                <p class="card-text">{{ listing.niche }}</p>
-                                <p class="card-text"><small class="text-muted">{{ listing.money }}</small></p>
-                                <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
+
+                            <div class="col m-3">
+                                <img src="https://cdn.wallpapersafari.com/98/79/EY5PA6.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">
                             </div>
-                        </div>
+
+                            <div class="col-md-8">
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">{{ listing.product }}</h5>
+                                    <p class="card-text">{{ listing.niche }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ listing.money }}</small></p>
+                                    <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}"><button>View Listing</button></a>
+                            
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
 
-        <!-- END Listings -->
-
     </div>
+
 </div>
 
 {% endblock content %}
