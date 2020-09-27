@@ -1,37 +1,95 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div style="background-color: #fbfbfb;">
+        <div class="container" style="background-color: #fbfbfb;">
+            
+            <div class="row">
 
-    <div class="container">
-        
-        <h1>This is where all the listing details and data will be</h1>
-        <br>
-        <br>
-        <h1>Product: {{ listing.blog_url }}</h1>
-        <h1>Following: {{ following }}</h1>
-        <h1>Niche: {{ listing.niche }}</h1>
-        <h1>Blog Age: {{ listing.age }}</h1>
+                <div class="col-8 my-3">
 
-        <hr>
+                    <div class="my-3 p-3 border rounded" style="background-color: white;">
 
-        <h3>Tagline: {{ listing.tagline }}</h3>
+                        <h1>Name + Pic will go here</h1>
+                        <h1>and tagline</h1>
+                        
+                    </div>
+                    
+                    <hr class="my-4">
 
-        <br>
+                    <div class="my-3 p-3 border rounded" style="background-color: white;">
+                        
+                        <h1>Google analytics stuff will go here</h1>
+                        <h1>and some graphs and what not</h1>
+                        
+                    </div class="my-3 p-3 border rounded" style="background-color: white;">
 
-        {% if following %}
-            <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-success">Watching</button></a>
-        {% else %}
-            <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-success">Watch</button></a>
-        {% endif %}
+                    <hr class="my-4">
+
+                    <div class="my-3 p-3 border rounded" style="background-color: white;">
+                        
+                        <h1>A detailed description of all</h1>
+                        <h1>the stuff will go here</h1>
+                        
+                    </div>
+
+                    <hr class="my-4">
+
+                </div>
+
+                <div class="col-4 my-3">
+
+                    <br>
+                    <br>
+
+                    {% if following %}
+                        <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+                    {% else %}
+                        <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+                    {% endif %}
+
+                    <hr class="my-4" style="width: 50%;">
+
+                    {% if ordered %}
+                        <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+                    {% else %}
+            
+                        <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+                    {% endif %} 
+
+                    <br>
+                    <hr>
+                    <br>
+
+                    <div class="p-3 border rounded" style="background-color: white;">
+                        
+                        <h1>This will be some</h1>
+                        <h1>about the creator stuff</h1>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!--
+            {% if following %}
+                <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+            {% else %}
+                <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+            {% endif %}
 
 
-        {% if ordered %}
-            <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-primary">Unorder</button></a>
-        {% else %}
-        <!-- Button trigger modal -->
-            <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
-        {% endif %}        
-
+            {% if ordered %}
+                <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+            {% else %}
+            
+                <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+            {% endif %}        
+            -->
+        </div>
     </div>
 
 {% endblock content %}

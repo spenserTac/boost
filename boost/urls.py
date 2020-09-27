@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from essentials import views as essentials_views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', essentials_views.home, name='home'),
