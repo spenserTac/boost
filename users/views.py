@@ -92,8 +92,10 @@ def support_contact(request):
 def feature_add(request):
     if request.method == 'POST':
         form = FeatureTicketForm(request.POST)
-
+        print("------------ 1 ------------")
         if form.is_valid():
+            print("------------ 2 ------------")
+
             form.save(commit=False).creator = request.user
             form.save()
 
@@ -137,7 +139,9 @@ def dashboard(request):
 
     # The created listings of each type (creator and sponsor), if they created any
     personal_creator_listings = user.bloglistingcreationmodel_set.all()
+    p_c_listing_len = personal_creator_listings.count()
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
+    p_s_listing_len = personal_sponsor_listings.count()
 
     context = {
         'personal_c_listings': personal_creator_listings,
@@ -161,6 +165,14 @@ def dashboard(request):
 
         'accepted_c_orders': accepted_c_orders,
         'completed_c_orders': completed_c_orders,
+
+        'total_orders_num': (c_orders_len + s_orders_len),
+        'total_acc_orders_num': (c_accepted_orders_len + s_accepted_orders_len),
+
+        'p_c_listing_len': p_c_listing_len,
+        'p_s_listing_len': p_s_listing_len,
+
+        'total_listings_num': (p_c_listing_len + p_s_listing_len),
 
         'profile': profile,
     }

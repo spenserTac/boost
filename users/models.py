@@ -146,19 +146,20 @@ class CompletedOrderModel(models.Model):
 
 
 class SupportTicket(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='support_ticket_creator'),
-    email = models.CharField(max_length=500, blank=True, null=True),
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='support_ticket_creator')
+    email = models.CharField(max_length=500, blank=True, null=True)
     problem = models.TextField(max_length=5000, blank=True, null=True)
 
     def __str__(self):
         return('CREATOR: ' + str(self.creator) + 'EMAIL: ' + str(self.email))
 
 
+
+
 class FeatureTicket(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='feature_ticket_creator'),
-    email = models.CharField(max_length=500, blank=True, null=True),
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='feature_request_creator')
+    email = models.CharField(max_length=500, blank=True, null=True)
     feature = models.TextField(max_length=5000, blank=True, null=True)
 
     def __str__(self):
-        return('CREATOR: ' + str(self.creator) + 'EMAIL: ' + str(self.email))
-
+        return('CREATOR: ' + str(self.creator) + ' - EMAIL: ' + str(self.email))
