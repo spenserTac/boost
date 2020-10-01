@@ -113,6 +113,10 @@ def dashboard(request):
     c_watching = profile.creators_watched.all()
     s_watching = profile.sponsors_watched.all()
 
+    c_watch_len = c_watching.count()
+    s_watch_len = s_watching.count()
+    total_watch_len = c_watch_len + s_watch_len
+
     # The logged in users creator listings
     c_orders = CreatorOrderModel.objects.filter(creator=user)
     c_orders_len = c_orders.count()
@@ -149,6 +153,8 @@ def dashboard(request):
 
         's_watching': s_watching,
         'c_watching': c_watching,
+
+        'total_watch_len': total_watch_len,
 
         's_ordered': s_ordered,
         'c_ordered': c_ordered,
@@ -328,23 +334,7 @@ def dashboard_sponsor_order_accept(request, id=None):
             order.save()
 
             # Accepted creator order (after creator clicks accept)
-            
-
-            '''obj.buyer = buyer
-            obj.creator = creator
-            obj.creator_listing = listing
-
-            buyer_listing = form.cleaned_data['buyer_listing']
-            creator_l = BlogListingCreationModel.objects.all()
-            sponsor_l = SponsorListingCreationModel.objects.all()
-
-            for l in creator_l:
-                if (str(l) == str(buyer_listing)):
-                    obj.buyers_listing_c = l
-
-            for l in sponsor_l:
-                if (str(l) == str(buyer_listing)):
-                    obj.buyers_listing_s = l'''
+           
 
            
             ac_order = AcceptedCreatorOrderModel(
@@ -365,19 +355,7 @@ def dashboard_sponsor_order_accept(request, id=None):
 
             #obj.save()
 
-            '''s_order = SponsorOrderModel.objects.get(id=id)
-            s_order.status = 'Accepted - In Process'
-            s_order.delete()'''
-
             return redirect('dashboard')
-
-        ''' 
-        if (request.method == 'POST'):
-        form = CreatorOrderForm(request.POST or None)
-        form.buyer = request.user
-        if (form.is_valid()):
-            form.save()
-        '''
 
 
     return render(request, 'acceptedcreator.html')
@@ -455,7 +433,6 @@ def dashboard_creator_order_complete(request, id=None):
         s_order.delete()
 
     return redirect('dashboard')
-
 
 def dashboard_sponsor_order_complete(request, id=None):
     order = AcceptedSponsorOrderModel.objects.get(id=id)
