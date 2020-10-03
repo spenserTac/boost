@@ -154,6 +154,9 @@ def dashboard(request):
         's_watching': s_watching,
         'c_watching': c_watching,
 
+        'c_watch_len': c_watch_len,
+        's_watch_len': s_watch_len,
+
         'total_watch_len': total_watch_len,
 
         's_ordered': s_ordered,
@@ -435,6 +438,7 @@ def dashboard_creator_order_complete(request, id=None):
     return redirect('dashboard')
 
 def dashboard_sponsor_order_complete(request, id=None):
+    
     order = AcceptedSponsorOrderModel.objects.get(id=id)
     order.status = 'complete'
     order.save()
