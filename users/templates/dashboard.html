@@ -22,6 +22,7 @@
   </div>
 -->
 
+
 <div class="container-fluid" style="background-color: #f2f3f6;">
     
     <br>
@@ -452,7 +453,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button class="btn btn-primary mx-2">Decline</button></a>
+                                                                <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button class="btn btn-primary mx-2">Withdraw</button></a>
                                                             </div>
                                                     </div>
                                                     </div>
@@ -481,26 +482,487 @@
                             </button>
                         </h5>
                         </div>
+
                         <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="card-body">
+
+                            
+
+                                <div class="row">
+
+                                    <div class="col-12 mx-auto">
+                                      
+                                      <div class="m-1" id="MainMenu">
+
+                                        <div class="list-group">
+
+                                          <a href="#demo3" class="list-group-item" style="border-color: white; color: black" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle font-weight-normal">Creator History</h5></a>
+                                          
+                                          <div class="collapse" id="demo3">
+
+                                            <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors </h5> <i class="fa fa-caret-down"></i></a>
+                                            
+                                            <div class="collapse list-group-submenu" id="SubMenu1">
+
+                                                {% for order in s_ordered %}
+
+                                                    <div class="row">
+                                                    
+                                                        <div class="col-10 align-self-center mx-auto">
+                                                        
+                                                            <div class="card text-center m-2">
+
+                                                                <div class="card-header">
+                                                                    <ul class="nav nav-tabs card-header-tabs">
+                                                                        <li class="nav-item">
+                                                                        <a class="nav-link active">{{ order.sponsor_listing.product }}</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                        <a class="nav-link disabled">Payout: ${{ order.sponsor_listing.money }}</a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                        <a class="nav-link disabled">{{ order.services_creator_is_willing_to_provide }}</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                        
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                        
+                                                                        <div class="col-5 border-right">
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <h5 class="my-4">Ordered Sponsor Listing:</h5>
+                                                                                    <h5 class="my-4">Your (Creator) Listing:</h5>
+                                                                                    <h5 class="my-4">Service:</h5>
+                                                                                    <h5 class="my-4">Payout:</h5>
+                                                                                    <h5 class="my-4">Status:</h5>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.sponsor_listing.id %}">{{ order.sponsor_listing }}</a></p>
+                                                                                    <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.buyers_listing_c.id %}">{{ order.buyers_listing_c }}</a></p>
+                                                                                    <p class="my-4"> {{ order.services_creator_is_willing_to_provide }}</p>
+                                                                                    <p class="my-4"> ${{ order.buyers_listing_s.money }}</p>
+                                                                                    <p class="my-4"> {{ order.status }}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-7  p-2 pl-4">
+                                                                            <h5>Order Details</h5>
+                                                                            <p>{{ order.services_creator_is_willing_to_provide_detailed }}</p>
+                                                                        </div>
+                        
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end">
+
+                                                                        <a class="mx-2" href="{% url 'sponsor_marketplace_listing_order_view' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Edit</button></a>
+                                                                        <a class=" mx-2" href="{% url 'dashboard_unorder_s' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Unorder</button></a>
+                                                                
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                {% endfor %}
+
+                                                    <!-- Some stuff they had in here before
+                                                    <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 1 a</a>
+                                                    <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 2 b</a>
+                                                    <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1"> Subitem 3 c <i class="fa fa-caret-down"></i></a>
+                                                    --> 
+                                                    <!--
+                                                    <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
+
+                                                        <a href="#" class="list-group-item" data-parent="#SubSubMenu1">after the __> Sub sub item 1</a>
+                                                        <a href="#" class="list-group-item" data-parent="#SubSubMenu1">after the __> Sub sub item 2</a>
+
+                                                    </div>
+                                                    -->
+
+                                            </div>
+
+                                            <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted </h5> <i class="fa fa-caret-down"></i></a>
+                                            
+                                                <div class="collapse list-group-submenu" id="SubMenu2">
+
+                                                    {% for order in accepted_c_orders %}
+
+                                                        {% if order.who_initiated_order == 'creator' %}
+
+                                                            <div class="row">
+                                                            
+                                                                <div class="col-10 align-self-center mx-auto">
+                                                                
+                                                                    <div class="card text-center m-2">
+
+                                                                        <div class="card-header">
+                                                                            <ul class="nav nav-tabs card-header-tabs">
+                                                                                <li class="nav-item">
+                                                                                <a class="nav-link active">{{ order.buyers_listing_s.product }}</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                <a class="nav-link disabled">Payout: ${{ order.buyers_listing_s.money }}</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                <a class="nav-link disabled">Service: {{ order.service }}</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                
+                                                                                <div class="col-5 border-right">
+                                                                                    <div class="row">
+                                                                                        <div class="col-6">
+                                                                                            <h5 class="my-4">Ordered Sponsor Listing:</h5>
+                                                                                            <h5 class="my-4">Your (Creator) Listing:</h5>
+                                                                                            <h5 class="my-4">Service:</h5>
+                                                                                            <h5 class="my-4">Payout:</h5>
+                                                                                            <h5 class="my-4">Status:</h5>
+                                                                                        </div>
+                                                                                        <div class="col-6">
+                                                                                            <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}">{{ order.buyers_listing_s }}</a></p>
+                                                                                            <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}">{{ order.buyers_listing_c }}</a></p>
+                                                                                            <p class="my-4"> {{ order.service }}</p>
+                                                                                            <p class="my-4"> ${{ order.buyers_listing_s.money }}</p>
+                                                                                            <p class="my-4"> {{ order.status }}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-7  p-2 pl-4">
+                                                                                    <h5>Order Details</h5>
+                                                                                    <p>{{ order.service_detailed }}</p>
+                                                                                </div>
+                                
+                                                                            </div>
+                                                                            <div class="d-flex justify-content-end">
+
+                                                                                <div class="d-flex justify-content-end">
+                                                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
+                                                                                        Complete
+                                                                                    </button>
+                                                                                    
+                                                                                    <!-- Modal -->
+                                                                                    <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title text-center" id="exampleModalLongTitle">Completed Sponsor Order</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                    If you proceed, you are stating that
+                                                                                                    you've completed the sponsors order and have posted
+                                                                                                    the requested content. You will also be paid once you
+                                                                                                    proceed.
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                                    <a href="{% url 'dashboard_creator_order_complete' id=order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </div>
+                                    
+                                                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
+                                                                                        Withdraw
+                                                                                    </button>
+                                                                                    
+                                                                                    <!-- Modal -->
+                                                                                    <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title text-center" id="exampleModalLongTitle">Withdraw From Sponsor Order</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                    If you withdraw from this order, you are stating that
+                                                                                                    you are unable to complete this sponsors order. The sponsor 
+                                                                                                    will be refunded and you will not be paid. 
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                                    <a href="{% url 'dashboard_withdraw_order' id=order.id %}"><button class="btn btn-primary mx-2">Withdraw</button></a>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                        
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                
+                                                            </div>
+
+                                                        {% endif %}
+
+                                                    {% endfor %}
+                                                </div>
+                                            
+                                            <a href="javascript:;" class="list-group-item">Subitem 3</a>
+
+                                          </div>
+
+                                          <a href="#demo4" class="list-group-item" style="border-color: white;" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle">Sponsor History</h5></a>
+                                          
+                                          <div class="collapse" id="demo4">
+
+                                            <a href="" class="list-group-item">Subitem 1</a>
+                                            <a href="" class="list-group-item">Subitem 2</a>
+                                            <a href="" class="list-group-item">Subitem 3</a>
+
+                                          </div>
+
+                                        </div>
+
+                                      </div>
+                                      
+                                    </div>  
+
+                                  </div>
+
+                                <!-- Previous order history design
+
+                                <div class="accordion" id="accordionExample">
+
+                                    <div class="card text-center" style="border-color: white;">
+    
+                                      <div class="card-header" id="headingOne" style="background-color: white;">
+                                        <h2 class="mb-0">
+                                          <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
+                                            <h5>Creator History <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">?</span></h5>
+                                          </button>
+                                        </h2>
+                                      </div>
 
 
-                                <div class="row text-center">
 
-                                    <div class="col">
 
-                                        <h3>C</h3>
+                                  
+                                      <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 
+
+
+
+
+                                        
+                                        <div class="card-body">
+
+                                            <div class="card-header" id="headingOne" style="background-color: white;">
+                                                <h2 class="mb-0">
+
+                                                  <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
+                                                    <h5>Current Sponsor Orders</h5>
+                                                  </button>
+
+                                                    <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                        <div class="card-body">
+                                                            {% for personal_c_listing in personal_c_listings %}
+    
+                                                                <div class="row">
+                                                                    
+                                                                    <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
+                                                                    <button class="m-1 btn btn-primary btn-sm">Edit</button>
+                                                                    
+                    
+                                                                    
+                                                                    <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
+                                                                        Delete
+                                                                    </button>
+                                                                    
+                                                                    
+                                                                    <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    If you proceed, you will perminatley delete this listing. There
+                                                                                    is no way to get it back if you delete it. This action is perminate.
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <a href="{% url 'blog_listing_delete' id=personal_c_listing.id %}"><button class="btn btn-danger">Delete Listing</button></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+    
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+
+                                                  <br>
+
+                                                  <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentAcceptedSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
+                                                    <h5>Current Accepted Sponsor Orders</h5>
+                                                  </button>
+
+                                                    <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                        <h1>2</h1>
+                                                    </div>
+                                                  
+                                                  <br>
+
+                                                  <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
+                                                    <h5>Completed Orders</h5>
+                                                  </button>
+
+                                                    <div id="collapseCreatorCompletedOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                        <h1>3</h1>
+                                                    </div>
+
+                                                </h2>
+                                              </div>
+
+
+                                              <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                                              </div>
+
+
+
+
+
+
+
+
+                                            {% for personal_c_listing in personal_c_listings %}
+    
+                                                <div class="row">
+                                                    
+                                                    <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
+                                                    <button class="m-1 btn btn-primary btn-sm">Edit</button>
+                                                    
+    
+                                                    
+                                                    <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
+                                                        Delete
+                                                    </button>
+                                                    
+                                                    
+                                                    <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    If you proceed, you will perminatley delete this listing. There
+                                                                    is no way to get it back if you delete it. This action is perminate.
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <a href="{% url 'blog_listing_delete' id=personal_c_listing.id %}"><button class="btn btn-danger">Delete Listing</button></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+    
+                                            {% endfor %}
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+                                      </div>
+    
                                     </div>
-
-                                    <div class="col">
-
-                                        <h3>S</h3>
-
+    
+                                    <div class="card text-center" style="border-color: white;">
+    
+                                      <div class="card-header" id="headingTwo" style="background-color: white;">
+                                        <h2 class="mb-0">
+                                          <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
+                                            <h5>Sponsor Listings <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ p_s_listing_len }}</span></h5>
+                                          </button>
+                                        </h2>
+                                      </div>
+    
+                                      <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                          
+                                        <div class="card-body">
+                                            {% for personal_s_listing in personal_s_listings %}
+    
+                                                <div class="row">
+                                                    
+                                                    <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
+                                                    <button class="m-1 btn btn-primary btn-sm">Edit</button>
+                                                    
+    
+                                                    
+                                                    <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
+                                                        Delete
+                                                    </button>
+                                                    
+                                                    
+                                                    <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Listing</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    If you proceed, you will perminatley delete this listing. There
+                                                                    is no way to get it back if you delete it. This action is perminate.
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <a href="{% url 'sponsor_listing_delete' id=personal_s_listing.id %}"><button class="btn btn-danger">Delete Listing</button></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+    
+                                            {% endfor %}                                    
+                                        </div>
+                                      </div>
+    
                                     </div>
-
+    
                                 </div>
-
+                            
+                            -->
 
 
 
@@ -533,8 +995,10 @@
                                     <a href="{% url 'dashboard_unorder_s' id=sponsor.sponsor_listing.id %}"><button>Unorder</button></a>
                                     <a href="{% url 'sponsor_marketplace_listing_order_view' id=sponsor.sponsor_listing.id %}"><button>Edit</button></a>
                                     <span>STATUS: {{ sponsor.status }}</span>
-                                {% endfor %}                        </div>
-                            </div>
+                                {% endfor %}                        
+                            
+                            
+                        </div>
                     </div>
     
                 </div>
@@ -675,6 +1139,7 @@
                             </div>
     
                         </div>
+
                     </div>
     
                     <hr class="my-2" style="opacity: 0;">

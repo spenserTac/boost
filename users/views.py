@@ -260,7 +260,8 @@ def dashboard_creator_order_accept(request, id=None):
             buyers_listing_c=c_order.buyers_listing_c,
             service=c_order.service,
             service_detailed=c_order.service_detailed,
-            status=c_order.status
+            status=c_order.status,
+            who_initiated_order='sponsor'
             )
 
         ac_order.save()
@@ -350,7 +351,8 @@ def dashboard_sponsor_order_accept(request, id=None):
                 service=obj.service,
                 service_detailed=obj.service_detailed,
 
-                status='Accepted - In Progress'
+                status='Accepted - In Progress',
+                who_initiated_order = 'creator'
                 )
 
             ac_order.save()

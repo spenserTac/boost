@@ -36,102 +36,111 @@
     <hr class="my-5">
 
     <div class="d-flex justify-content-center mx-3">
-      
-      <form method="POST">
 
-          {% csrf_token %}
+      <div class="row">
 
-          
-            <h1 class="font-weight-normal text-center">Choose which of your listings you'd like to offer to this Sponsor</h1>
-            <br>
+        <div class="col-md-7 col-xs-10 mx-auto">
 
-              <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-                
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
-                    <select name="buyer_listing" id="inputListing" class="form-control">
-                      <option selected>{{ prev_s_order.buyer_listing }}</option>
-        
-                        {% for listing in buyers_creator_listings %}
+          <form method="POST">
 
-                            <option>{{ listing }}</option>
+              {% csrf_token %}
 
-                        {% endfor %}
-
-                      <option>...</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-
-              <br>
-              <br>
-              <hr>
-              <br>
-              <br>
-                
-
-              <!-- Input for the buyers requested service -->
-              <h1 class="font-weight-normal text-center">Choose which services you're willing to do</h1>
-              <br>
-
-              <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-
-                <small>This should be a checkbox - sponsor will see what was checked in dashboard under sponsor orders</small>
-                <small>When they click accept, it will transfer them to a url to fill out what they want</small>
-
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <select name="services_creator_is_willing_to_provide" id="inputService" class="form-control">
-                      <option selected>{{ prev_s_order.services_creator_is_willing_to_provide }}</option>
-                      <option>Review</option>
-                      <option>Shoutout</option>
-                      <option>Tutorial</option>
-                      <option>Mention</option>
-                    </select>
-                  </div>
-                </div>
               
-              </div>
-
-              <br>
-              <br>
-              <hr>
-              <br>
-              <br>
-
-                <!-- Input for service detail-->
-                <h1 class="font-weight-normal text-center">Describe in detail what you'll be able to provide the sponsor</h1>
+                <h1 class="font-weight-normal text-center">Choose which of your listings you'd like to offer to this Sponsor</h1>
                 <br>
 
-                <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                  <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                    
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
+                        <select name="buyer_listing" id="inputListing" class="form-control">
+                          <option selected>{{ prev_s_order.buyer_listing }}</option>
+            
+                            {% for listing in buyers_creator_listings %}
 
-                  <div class="form-row">
-                    <div class="form-group col-md-12">
-                      <label for="exampleFormControlTextarea1">
-                          <small id="emailHelp" class="form-text text-muted">
-                              This is optional, but we recommend you fill this out to better aid the creator
-                          </small>
-                      </label>
-                      <textarea name="services_creator_is_willing_to_provide_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ prev_s_order.services_creator_is_willing_to_provide_detailed }}</textarea>
+                                <option>{{ listing }}</option>
+
+                            {% endfor %}
+
+                          <option>...</option>
+                        </select>
+                      </div>
                     </div>
+
                   </div>
-                </div>
 
-                <br>
-                <br>
-                <br>
+                  <br>
+                  <br>
+                  <hr>
+                  <br>
+                  <br>
+                    
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">Finish Order</button>
-                </div>
-                
-                <br>
-          
+                  <!-- Input for the buyers requested service -->
+                  <h1 class="font-weight-normal text-center">Choose which services you're willing to do</h1>
+                  <br>
 
-      </form>
+                  <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                    <small>This should be a checkbox - sponsor will see what was checked in dashboard under sponsor orders</small>
+                    <small>When they click accept, it will transfer them to a url to fill out what they want</small>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <select name="services_creator_is_willing_to_provide" id="inputService" class="form-control">
+                          <option selected>{{ prev_s_order.services_creator_is_willing_to_provide }}</option>
+                          <option>Review</option>
+                          <option>Shoutout</option>
+                          <option>Tutorial</option>
+                          <option>Mention</option>
+                          <option>All</option>
+                        </select>
+                      </div>
+                    </div>
+                  
+                  </div>
+
+                  <br>
+                  <br>
+                  <hr>
+                  <br>
+                  <br>
+
+                    <!-- Input for service detail-->
+                    <h1 class="font-weight-normal text-center">Describe in detail what you'll be able to provide the sponsor</h1>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+
+                      <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <label for="exampleFormControlTextarea1">
+                              <small id="emailHelp" class="form-text text-muted">
+                                  This is optional, but we recommend you fill this out to better aid the creator
+                              </small>
+                          </label>
+                          <textarea name="services_creator_is_willing_to_provide_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ prev_s_order.services_creator_is_willing_to_provide_detailed }}</textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Finish Order</button>
+                    </div>
+                    
+                    <br>
+              
+
+          </form>
+
+        </div>
+
+      </div>
       
     </div>
 
