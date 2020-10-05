@@ -127,13 +127,15 @@ def dashboard(request):
 
     # The creator and sponsor ORDERS the logged in user has made
     c_ordered = CreatorOrderModel.objects.filter(buyer=user) # profile.creators_u_ordered.all()
+    c_ordered_len = c_ordered.count()
     s_ordered = SponsorOrderModel.objects.filter(buyer=user) # profile.sponsors_u_ordered.all()
+    s_ordered_len = s_ordered.count()
 
     # The ACCEPTED creator and sponsor ORDERS the logged in user has made
     accepted_c_orders = AcceptedCreatorOrderModel.objects.filter(buyer=user)
 
     # The COMPLETED creator and sponsor ORDERS the logged in user has made
-    completed_c_orders = CompletedOrderModel.objects.filter(buyer=user)
+    completed_c_orders = CompletedOrderModel.objects.filter(creator=user)
 
     # The orders that the logged in user has made
     c_accepted_orders = AcceptedCreatorOrderModel.objects.filter(creator=user)
@@ -161,6 +163,9 @@ def dashboard(request):
 
         's_ordered': s_ordered,
         'c_ordered': c_ordered,
+
+        'c_ordered_len': c_ordered_len,
+        's_ordered_len': s_ordered_len,
 
         's_orders': s_orders,
         's_orders_len': s_orders_len,
@@ -407,12 +412,14 @@ def dashboard_creator_order_complete(request, id=None):
             buyers_listing_c=c_order.buyers_listing_c,
             service=c_order.service,
             service_detailed=c_order.service_detailed,
-            status=c_order.status
+            status=c_order.status,
+            who_initiated_order=c_order.who_initiated_order
             )
 
         cc_order.save()
         c_order.delete()
 
+    #This should probably be removed and has no functions
     except CreatorOrderModel.DoesNotExist:
         #s_listing = SponsorListingCreationModel.objects.get(id=id)
         s_order = SponsorOrderModel.objects.get(id=id)
