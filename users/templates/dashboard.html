@@ -1630,12 +1630,12 @@
                 <div class="col-6">
 
                     <div class="card border-left-primary shadow py-2"
-                        style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px; height: 80%;">
+                        style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px; height: 70%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mt-2 text-center">
+                                <div class="col pt-1 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #4f74df">Orders</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_orders_num }}</h4></div>
                                 </div>
@@ -1649,12 +1649,12 @@
                 <div class="col-6">
 
                     <div class="card border-left-primary shadow py-2"
-                        style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px; height: 80%;">
+                        style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px; height: 70%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col text-center">
+                                <div class="col pb-3 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #f6c240;">Accepted Orders</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_acc_orders_num }}</h4></div>
                                 </div>
@@ -1672,12 +1672,12 @@
                 <div class="col-6">
 
                     <div class="card border-left-primary shadow py-2"
-                        style="background-color: white; color: black; border-color: white; border-left-color: #1cc88a; border-width: 9px; border-radius: 6px; height: 80%;">
+                        style="background-color: white; color: black; border-color: white; border-left-color: #1cc88a; border-width: 9px; border-radius: 6px; height: 70%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mb-2 text-center">
+                                <div class="col mb-2 pb-5 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #1cc88a;">Money Made / Spent</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">$0 / $0</h4></div>
                                 </div>
@@ -1691,12 +1691,12 @@
                 <div class="col-6">
 
                     <div class="card border-left-primary shadow py-2"
-                        style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px; height: 80%;">
+                        style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px; height: 70%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mt-4 text-center">
+                                <div class="col pt-4 my-auto text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #3abacc;">Listings</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_listings_num }}</h4></div>
                                 </div>
@@ -1710,7 +1710,7 @@
             </div>
 
 
-            <div class="row mt-4">
+            <div class="row">
 
                 <!-- These are the main dropdowns -->
                 <div class="mx-auto">
@@ -1830,16 +1830,14 @@
 
                                 {% for s_order in s_orders %}
                                     {% if s_order.buyers_listing_c %}
-                                        <div class="card text-center m-2">
+                                        <div class="card text-center m-2 ml-3">
 
                                             <div class="card-header">
                                                 <ul class="nav nav-tabs card-header-tabs">
                                                     <li class="nav-item">
                                                     <a class="nav-link active">{{ s_order.buyers_listing_c.blog_name }}</a>
                                                     </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link disabled">Niche: {{ s_order.buyers_listing_c.niche }}</a>
-                                                    </li>
+
                                                     <li class="nav-item">
                                                     <a class="nav-link disabled">{{ s_order.services_creator_is_willing_to_provide }}</a>
                                                     </li>
@@ -1847,35 +1845,33 @@
                                             </div>
 
                                             <div class="card-body">
-                                                <div class="row">
-
-                                                    <div class="col-5 border-right">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <h5 class="my-4">Ordered Listing:</h5>
-                                                                <h5 class="my-4">Creators Listing:</h5>
-                                                                <h5 class="my-4">Provided Service:</h5>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id%}">{{ s_order.sponsor_listing }}</a></p>
-                                                                <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></p>
-                                                                <p class="my-4"> {{ s_order.services_creator_is_willing_to_provide }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-7  p-2 pl-4">
-                                                        <h5>Order Details</h5>
-                                                        <p>{{ s_order.services_creator_is_willing_to_provide_detailed }}</p>
-                                                    </div>
+                                                <div class="row mb-1">
+                                                  <div class="col-6">
+                                                      <h5 class="my-4">Ordered Listing:</h5>
+                                                      <h5 class="my-4">Creators Listing:</h5>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id%}">{{ s_order.sponsor_listing }}</a></p>
+                                                      <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></p>
+                                                  </div>
 
                                                 </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#sponsorModal">
+                                                <hr>
+                                                <div class="row mt-1 mb-3 mx-auto">
+                                                  <div class="mx-auto" style="max-width: 250px">
+                                                    <h5 class="text-center">Order Details</h5>
+                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed }}</p>
+                                                  </div>
+
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+
+                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#sponsorModal1">
                                                         Accept
                                                     </button>
 
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="sponsorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal fade" id="sponsorModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">

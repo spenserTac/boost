@@ -11,13 +11,13 @@
             <div class="col-md-8 p-lg-5 mx-auto my-auto">
                 <h1 class="font-weight-bold display-1">Order Details</h1>
                 <br>
-                <p class="lead font-weight-normal">This is where you'll give the creator some details for what you're looking for.</p>                    
+                <p class="lead font-weight-normal">This is where you'll give the creator some details for what you're looking for.</p>
             </div>
           </div>
-        </div>         
+        </div>
       </div>
     </div>
-  
+
     <!-- Only shows up for MD and smaller (everything else) -->
     <div class="view d-lg-none" style=" height: 280px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <div class="container d-flex align-items-center justify-content-center">
@@ -46,25 +46,25 @@
 
                 {% csrf_token %}
 
-                
+
                   <h1 class="font-weight-normal text-center">Choose which of your listings you'd like to offer to this creator</h1>
                   <br>
-                    
-                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;"> 
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
                       <div class="form-row">
                         <div class="form-group col-md-12">
                             <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
-                            <select name="buyer_listing" id="inputListing" class="form-control">
+                            <select name="buyer_listing" id="inputListing" class="form-control" required>
                               <option selected>{{ prev_c_order.buyer_listing }}</option>
-                
+
                                 {% for listing in buyers_sponsor_listings %}
 
                                     <option>{{ listing }}</option>
 
                                 {% endfor %}
 
-                              <option>...</option>
+
                             </select>
                           </div>
                         </div>
@@ -75,7 +75,7 @@
                       <hr>
                       <br>
                       <br>
-                      
+
 
                     <h1 class="font-weight-normal text-center">Choose which service you'd like the creator to do</h1>
                     <br>
@@ -87,7 +87,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-12">
 
-                          <select name="service" id="inputService" class="form-control">
+                          <select name="service" id="inputService" class="form-control" required>
                             <option selected>{{ prev_c_order.service }}</option>
                             <option>Review</option>
                             <option>Shoutout</option>
@@ -116,16 +116,16 @@
                         <div class="form-group col-md-12">
                           <label for="exampleFormControlTextarea1">
                               <small id="emailHelp" class="form-text text-muted">
-                                  This is optional, but we recommend you fill this out to better aid the creator
+                                  This is where you'll give a detailed description of what you want the creator to do.
                               </small>
 
                           </label>
-                          <textarea name="service_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ prev_c_order.service_detailed }}</textarea>
+                          <textarea name="service_detailed" class="form-control" id="exampleFormControlTextarea1" rows="3" required>{{ prev_c_order.service_detailed }}</textarea>
                         </div>
                       </div>
                     </div>
 
-                    
+
                     <br>
                     <br>
                     <br>
@@ -133,14 +133,14 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Finish Order</button>
                     </div>
-                    
+
                     <br>
                     <br>
                     <br>
                     <hr>
                     <br>
                     <h1>The PayPal Payment isn't finished,
-                      but instead of having the button above, this PayPal 
+                      but instead of having the button above, this PayPal
                       Payment will be used.
                     </h1>
 
@@ -164,25 +164,25 @@
                               color: 'gold',
                               layout: 'vertical',
                               label: 'paypal',
-                              
+
                             },
 
                             type: {
                               method: 'submit'
                             },
-                    
+
                             createOrder: function(data, actions) {
                               return actions.order.create({
                                 purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
                               });
                             },
-                    
+
                             onApprove: function(data, actions) {
                               return actions.order.capture().then(function(details) {
                                 alert('Transaction completed by ' + details.payer.name.given_name + '!');
                               });
                             },
-                    
+
                             onError: function(err) {
                               console.log(err);
                             }
@@ -196,7 +196,7 @@
             </form>
 
           </div>
-          
+
         </div>
 
       </div>
