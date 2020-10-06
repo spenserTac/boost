@@ -2,33 +2,12 @@
 
 {% block content %}
 
-
-    
-
-<!-- Only shows up for LG and bigger (computers) -->
-<!--
-<div class="view d-none d-lg-block" style=" height: 400px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="container d-flex h-100 align-items-center justify-content-center">
-      <div class="row">
-        <div class="col-md-12 white-text text-center">
-          <div class="col-md-8 p-lg-5 mx-auto my-auto">
-              <h1 class="font-weight-bold display-1">Dashboard</h1>
-              <br>
-              <p class="lead font-weight-normal">A place to see your stuff.</p>                    
-          </div>
-        </div>
-      </div>         
-    </div>
-  </div>
--->
-
-
 <div class="container-fluid" style="background-color: #f2f3f6;">
-    
+
     <br>
     <br>
 
-    <div class="d-none d-md-block mx-5">
+    <div class="d-none d-lg-block mx-5">
 
         <!-- These are the info squares at the top -->
         <div class="row justify-content-center d-flex justify-content-arround">
@@ -36,9 +15,9 @@
             <!-- Old button dropdown design
 
             <div class="col-2 mb-4">
-                 
-                <button class="btn btn-block border-left-primary shadow btn-lg dropdown-toggle" 
-                        style="background-color: white; color: black; border-left-color: red; border-width: 9px; border-radius: 6px;" 
+
+                <button class="btn btn-block border-left-primary shadow btn-lg dropdown-toggle"
+                        style="background-color: white; color: black; border-left-color: red; border-width: 9px; border-radius: 6px;"
                         type="button" aria-haspopup="true" aria-expanded="false" type="button" data-toggle="collapse" data-target="#collapseCreatorOrders1" data-toggle="dropdown">
 
                         <div class="row no-gutters align-items-center">
@@ -50,7 +29,7 @@
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
-                    
+
                 </button>
 
             </div>
@@ -58,13 +37,13 @@
 
             <div class="col-3 mb-4">
 
-                <div class="card border-left-primary shadow py-2" 
+                <div class="card border-left-primary shadow py-2"
                      style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px; height: 80%;">
 
                     <div class="card-body">
                         <div class="row align-items-center pb-3">
 
-                            <div class="col mr-2 text-center">
+                            <div class="col text-center">
                                 <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #4f74df">Orders</h5></div>
                                 <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_orders_num }}</h4></div>
                             </div>
@@ -77,13 +56,13 @@
 
             <div class="col-3 mb-4">
 
-                <div class="card border-left-primary shadow py-2" 
+                <div class="card border-left-primary shadow py-2"
                      style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px; height: 80%;">
 
                     <div class="card-body">
                         <div class="row align-items-center pb-3">
 
-                            <div class="col mr-2 text-center">
+                            <div class="col text-center">
                                 <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #f6c240;">Accepted Orders</h5></div>
                                 <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_acc_orders_num }}</h4></div>
                             </div>
@@ -96,13 +75,13 @@
 
             <div class="col-3 mb-4">
 
-                <div class="card border-left-primary shadow py-2" 
+                <div class="card border-left-primary shadow py-2"
                      style="background-color: white; color: black; border-color: white; border-left-color: #1cc88a; border-width: 9px; border-radius: 6px; height: 80%;">
 
                     <div class="card-body">
                         <div class="row align-items-center pb-3">
 
-                            <div class="col mr-2 text-center">
+                            <div class="col text-center">
                                 <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #1cc88a;">Money Made / Spent</h5></div>
                                 <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">$0 / $0</h4></div>
                             </div>
@@ -115,13 +94,13 @@
 
             <div class="col-3 mb-4">
 
-                <div class="card border-left-primary shadow py-2" 
+                <div class="card border-left-primary shadow py-2"
                      style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px; height: 80%;">
 
                     <div class="card-body">
                         <div class="row align-items-center pb-3">
 
-                            <div class="col mr-2 text-center">
+                            <div class="col text-center">
                                 <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #3abacc;">Listings</h5></div>
                                 <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_listings_num }}</h4></div>
                             </div>
@@ -141,7 +120,7 @@
 
                 <!-- The Creator & Sponsor Order Section -->
                 <div id="accordion">
-    
+
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingOne" style="background-color: white; border-color: white;">
                         <h5 class="mb-0 text-center">
@@ -152,7 +131,7 @@
                             </button>
                         </h5>
                         </div>
-                    
+
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             {% for c_order in c_orders %}
                                 {% if c_order.buyers_listing_s %}
@@ -201,7 +180,7 @@
                                                 <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#creatorModal">
                                                     Accept
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="creatorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -231,14 +210,14 @@
 
                                     <hr style="width: 25%;">
 
-                                {% endif %}   
+                                {% endif %}
                             {% endfor %}
                         </div>
 
                     </div>
-    
+
                     <hr class="my-2" style="opacity: 0;">
-    
+
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingTwo" style="background-color: white; border-color: white;">
                         <h5 class="mb-0 text-center">
@@ -249,9 +228,9 @@
                             </button>
                         </h5>
                         </div>
-    
+
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-    
+
                             {% for s_order in s_orders %}
                                 {% if s_order.buyers_listing_c %}
                                     <div class="card text-center m-2">
@@ -297,7 +276,7 @@
                                                 <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#sponsorModal">
                                                     Accept
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="sponsorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -329,22 +308,22 @@
 
                                     <hr style="width: 25%;">
 
-                                {% endif %}   
+                                {% endif %}
                             {% endfor %}
-    
+
                         </div>
-    
+
                     </div>
-    
+
                 </div>
-    
+
                 <br>
                 <hr style="width: 75%;">
                 <br>
-    
+
                 <!-- The Accepted Orders & Order History Section -->
                 <div id="accordion">
-                    
+
                     <!-- Accepted Orders -->
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingOne" style=" background-color: white; border-color: white;">
@@ -356,7 +335,7 @@
                             </button>
                         </h5>
                         </div>
-                    
+
                         <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
                             {% if c_accepted_orders %}
@@ -407,7 +386,7 @@
                                                 <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
                                                     Complete
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -435,7 +414,7 @@
                                                 <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
                                                     Withdraw
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -448,8 +427,8 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 If you withdraw from this order, you are stating that
-                                                                you are unable to complete this sponsors order. The sponsor 
-                                                                will be refunded and you will not be paid. 
+                                                                you are unable to complete this sponsors order. The sponsor
+                                                                will be refunded and you will not be paid.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -461,16 +440,16 @@
                                             </div>
                                         </div>
 
-                                    </div> 
+                                    </div>
 
-                                {% endfor %} 
+                                {% endfor %}
                             {% endif %}
-    
+
                         </div>
                     </div>
-    
+
                     <hr class="my-2" style="opacity: 0;">
-    
+
                     <!-- Order History -->
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingTwo" style=" background-color: white; border-color: white;">
@@ -488,25 +467,25 @@
                                 <div class="row">
 
                                     <div class="col-12 mx-auto">
-                                      
+
                                       <div class="m-1" id="MainMenu">
 
                                         <div class="list-group">
 
                                           <a href="#demo3" class="list-group-item" style="border-color: white; color: black" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle font-weight-normal">Creator History</h5></a>
-                                          
+
                                           <div class="collapse" id="demo3">
 
                                             <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
-                                            
+
                                             <div class="collapse list-group-submenu" id="SubMenu1">
 
                                                 {% for order in s_ordered %}
 
                                                     <div class="row">
-                                                    
+
                                                         <div class="col-10 align-self-center mx-auto">
-                                                        
+
                                                             <div class="card text-center m-2">
 
                                                                 <div class="card-header">
@@ -522,10 +501,10 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                        
+
                                                                 <div class="card-body">
                                                                     <div class="row">
-                        
+
                                                                         <div class="col-5 border-right">
                                                                             <div class="row">
                                                                                 <div class="col-6">
@@ -548,20 +527,20 @@
                                                                             <h5>Order Details</h5>
                                                                             <p>{{ order.services_creator_is_willing_to_provide_detailed }}</p>
                                                                         </div>
-                        
+
                                                                     </div>
                                                                     <div class="d-flex justify-content-end">
 
                                                                         <a class="mx-2" href="{% url 'sponsor_marketplace_listing_order_view' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Edit</button></a>
                                                                         <a class=" mx-2" href="{% url 'dashboard_unorder_s' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Unorder</button></a>
-                                                                
+
                                                                     </div>
                                                                 </div>
 
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                     </div>
 
                                                 {% endfor %}
@@ -570,7 +549,7 @@
                                                     <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 1 a</a>
                                                     <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 2 b</a>
                                                     <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1"> Subitem 3 c <i class="fa fa-caret-down"></i></a>
-                                                    --> 
+                                                    -->
                                                     <!--
                                                     <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
 
@@ -583,7 +562,7 @@
                                             </div>
 
                                             <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
-                                            
+
                                                 <div class="collapse list-group-submenu" id="SubMenu2">
 
                                                     {% for order in accepted_c_orders %}
@@ -591,9 +570,9 @@
                                                         {% if order.who_initiated_order == 'creator' %}
 
                                                             <div class="row">
-                                                            
+
                                                                 <div class="col-10 align-self-center mx-auto">
-                                                                
+
                                                                     <div class="card text-center m-2">
 
                                                                         <div class="card-header">
@@ -609,10 +588,10 @@
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-                                
+
                                                                         <div class="card-body">
                                                                             <div class="row">
-                                
+
                                                                                 <div class="col-5 border-right">
                                                                                     <div class="row">
                                                                                         <div class="col-6">
@@ -635,7 +614,7 @@
                                                                                     <h5>Order Details</h5>
                                                                                     <p>{{ order.service_detailed }}</p>
                                                                                 </div>
-                                
+
                                                                             </div>
                                                                             <div class="d-flex justify-content-end">
 
@@ -643,7 +622,7 @@
                                                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
                                                                                         Complete
                                                                                     </button>
-                                                                                    
+
                                                                                     <!-- Modal -->
                                                                                     <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -667,11 +646,11 @@
                                                                                         </div>
                                                                                         </div>
                                                                                     </div>
-                                    
+
                                                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
                                                                                         Withdraw
                                                                                     </button>
-                                                                                    
+
                                                                                     <!-- Modal -->
                                                                                     <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -684,8 +663,8 @@
                                                                                                 </div>
                                                                                                 <div class="modal-body">
                                                                                                     If you withdraw from this order, you are stating that
-                                                                                                    you are unable to complete this sponsors order. The sponsor 
-                                                                                                    will be refunded and you will not be paid. 
+                                                                                                    you are unable to complete this sponsors order. The sponsor
+                                                                                                    will be refunded and you will not be paid.
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -695,27 +674,27 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                        
+
                                                                             </div>
                                                                         </div>
 
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                             </div>
 
                                                         {% endif %}
 
                                                     {% endfor %}
                                                 </div>
-                                            
+
                                             <a href="#SubMenu3" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Completed Orders </h5> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu" id="SubMenu3">
-                                                    
+
                                                     <a href="#SubMenu4" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders You Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                    
+
                                                         <div class="collapse list-group-submenu" id="SubMenu4">
 
                                                             {% for order in completed_c_orders %}
@@ -723,11 +702,11 @@
                                                                 {% if order.who_initiated_order == 'creator' %}
 
                                                                     <div class="row">
-                                                                
+
                                                                         <div class="col-10 align-self-center mx-auto">
-                                                                        
+
                                                                             <div class="card text-center m-2">
-        
+
                                                                                 <div class="card-header">
                                                                                     <ul class="nav nav-tabs card-header-tabs">
                                                                                         <li class="nav-item">
@@ -741,10 +720,10 @@
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
-                                        
+
                                                                                 <div class="card-body">
                                                                                     <div class="row">
-                                        
+
                                                                                         <div class="col-5 border-right">
                                                                                             <div class="row">
                                                                                                 <div class="col-6">
@@ -767,25 +746,25 @@
                                                                                             <h5>Order Details</h5>
                                                                                             <p>{{ order.service_detailed }}</p>
                                                                                         </div>
-                                        
+
                                                                                     </div>
-                                                                                    
+
                                                                                 </div>
-        
+
                                                                             </div>
-        
+
                                                                         </div>
-                                                                        
+
                                                                     </div>
 
                                                                 {% endif %}
 
                                                             {% endfor %}
-                                                            
+
                                                         </div>
-                                                    
+
                                                     <a href="#SubMenu5" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders Sponsor Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+
                                                         <div class="collapse list-group-submenu" id="SubMenu5">
 
                                                             {% for order in completed_c_orders %}
@@ -793,11 +772,11 @@
                                                                 {% if order.who_initiated_order == 'sponsor' %}
 
                                                                     <div class="row">
-                                                                
+
                                                                         <div class="col-10 align-self-center mx-auto">
-                                                                        
+
                                                                             <div class="card text-center m-2">
-        
+
                                                                                 <div class="card-header">
                                                                                     <ul class="nav nav-tabs card-header-tabs">
                                                                                         <li class="nav-item">
@@ -811,10 +790,10 @@
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
-                                        
+
                                                                                 <div class="card-body">
                                                                                     <div class="row">
-                                        
+
                                                                                         <div class="col-5 border-right">
                                                                                             <div class="row">
                                                                                                 <div class="col-6">
@@ -837,42 +816,42 @@
                                                                                             <h5>Order Details</h5>
                                                                                             <p>{{ order.service_detailed }}</p>
                                                                                         </div>
-                                        
+
                                                                                     </div>
-                                                                                    
+
                                                                                 </div>
-        
+
                                                                             </div>
-        
+
                                                                         </div>
-                                                                        
+
                                                                     </div>
 
                                                                 {% endif %}
 
                                                             {% endfor %}
-                                                                
+
                                                         </div>
-                                                
+
                                                 </div>
-                                          
+
                                         </div>
 
                                           <!-- Sponsor History -->
                                           <a href="#demo4" class="list-group-item" style="border-color: white; color: black;" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle font-weight-normal">Sponsor History</h5></a>
-                                          
+
                                           <div class="collapse" id="demo4">
 
                                             <a href="#SubMenu4" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Creators </h5> <i class="fa fa-caret-down"></i></a>
-                                            
+
                                             <div class="collapse list-group-submenu" id="SubMenu4">
 
                                                 {% for order in c_ordered %}
 
                                                     <div class="row">
-                                                    
+
                                                         <div class="col-10 align-self-center mx-auto">
-                                                        
+
                                                             <div class="card text-center m-2">
 
                                                                 <div class="card-header">
@@ -888,10 +867,10 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                        
+
                                                                 <div class="card-body">
                                                                     <div class="row">
-                        
+
                                                                         <div class="col-5 border-right">
                                                                             <div class="row">
                                                                                 <div class="col-6">
@@ -913,20 +892,20 @@
                                                                             <h5>Order Details</h5>
                                                                             <p>{{ order.service_detailed }}</p>
                                                                         </div>
-                        
+
                                                                     </div>
                                                                     <div class="d-flex justify-content-end">
 
                                                                         <a class="mx-2" href="{% url 'creator_marketplace_listing_order_view' id=order.creator_listing.id %}"><button class="btn btn-primary">Edit</button></a>
                                                                         <a class=" mx-2" href="{% url 'dashboard_unorder_c' id=order.creator_listing.id %}"><button class="btn btn-primary">Unorder</button></a>
-                                                                
+
                                                                     </div>
                                                                 </div>
 
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                     </div>
 
                                                 {% endfor %}
@@ -934,7 +913,7 @@
                                             </div>
 
                                             <a href="#SubMenu5" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Creators That Accepted </h5> <i class="fa fa-caret-down"></i></a>
-                                            
+
                                                 <div class="collapse list-group-submenu" id="SubMenu5">
 
                                                     {% for order in accepted_c_orders %}
@@ -942,9 +921,9 @@
                                                         {% if order.who_initiated_order == 'sponsor' %}
 
                                                             <div class="row">
-                                                            
+
                                                                 <div class="col-10 align-self-center mx-auto">
-                                                                
+
                                                                     <div class="card text-center m-2">
 
                                                                         <div class="card-header">
@@ -960,11 +939,11 @@
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-                                
+
                                                                         <div class="card-body">
 
                                                                             <div class="row">
-                        
+
                                                                                 <div class="col-5 border-right">
                                                                                     <div class="row">
                                                                                         <div class="col-6">
@@ -985,15 +964,15 @@
                                                                                     <h5>Order Details</h5>
                                                                                     <p>{{ order.service_detailed }}</p>
                                                                                 </div>
-                                
+
                                                                             </div>
-                                                                        
+
                                                                         </div>
 
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                             </div>
 
                                                         {% endif %}
@@ -1001,13 +980,13 @@
                                                     {% endfor %}
 
                                                 </div>
-                                            
+
                                             <a href="#SubMenu6" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Completed Orders </h5> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu" id="SubMenu6">
-                                                    
+
                                                     <a href="#SubMenu7" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders You Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                    
+
                                                         <div class="collapse list-group-submenu" id="SubMenu7">
 
                                                             {% for order in completed_c_orders %}
@@ -1015,11 +994,11 @@
                                                                 {% if order.who_initiated_order == 'sponsor' %}
 
                                                                 <div class="row">
-                                                            
+
                                                                     <div class="col-10 align-self-center mx-auto">
-                                                                    
+
                                                                         <div class="card text-center m-2">
-    
+
                                                                             <div class="card-header">
                                                                                 <ul class="nav nav-tabs card-header-tabs">
                                                                                     <li class="nav-item">
@@ -1033,11 +1012,11 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                    
+
                                                                             <div class="card-body">
-    
+
                                                                                 <div class="row">
-                            
+
                                                                                     <div class="col-5 border-right">
                                                                                         <div class="row">
                                                                                             <div class="col-6">
@@ -1058,25 +1037,25 @@
                                                                                         <h5>Order Details</h5>
                                                                                         <p>{{ order.service_detailed }}</p>
                                                                                     </div>
-                                    
+
                                                                                 </div>
-                                                                            
+
                                                                             </div>
-    
+
                                                                         </div>
-    
+
                                                                     </div>
-                                                                    
+
                                                                 </div>
 
                                                                 {% endif %}
 
                                                             {% endfor %}
-                                                            
+
                                                         </div>
-                                                    
+
                                                     <a href="#SubMenu8" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders Creator Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+
                                                         <div class="collapse list-group-submenu" id="SubMenu8">
 
                                                             {% for order in completed_c_orders %}
@@ -1084,11 +1063,11 @@
                                                                 {% if order.who_initiated_order == 'creator' %}
 
                                                                 <div class="row">
-                                                            
+
                                                                     <div class="col-10 align-self-center mx-auto">
-                                                                    
+
                                                                         <div class="card text-center m-2">
-    
+
                                                                             <div class="card-header">
                                                                                 <ul class="nav nav-tabs card-header-tabs">
                                                                                     <li class="nav-item">
@@ -1102,11 +1081,11 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                    
+
                                                                             <div class="card-body">
-    
+
                                                                                 <div class="row">
-                            
+
                                                                                     <div class="col-5 border-right">
                                                                                         <div class="row">
                                                                                             <div class="col-6">
@@ -1127,23 +1106,23 @@
                                                                                         <h5>Order Details</h5>
                                                                                         <p>{{ order.service_detailed }}</p>
                                                                                     </div>
-                                    
+
                                                                                 </div>
-                                                                            
+
                                                                             </div>
-    
+
                                                                         </div>
-    
+
                                                                     </div>
-                                                                    
+
                                                                 </div>
 
                                                                 {% endif %}
 
                                                             {% endfor %}
-                                                                
+
                                                         </div>
-                                                
+
                                                 </div>
 
                                           </div>
@@ -1151,8 +1130,8 @@
                                         </div>
 
                                       </div>
-                                      
-                                    </div>  
+
+                                    </div>
 
                                   </div>
 
@@ -1168,7 +1147,7 @@
                                 <div class="accordion" id="accordionExample">
 
                                     <div class="card text-center" style="border-color: white;">
-    
+
                                       <div class="card-header" id="headingOne" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
@@ -1180,14 +1159,14 @@
 
 
 
-                                  
+
                                       <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 
 
 
 
 
-                                        
+
                                         <div class="card-body">
 
                                             <div class="card-header" id="headingOne" style="background-color: white;">
@@ -1200,19 +1179,19 @@
                                                     <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <div class="card-body">
                                                             {% for personal_c_listing in personal_c_listings %}
-    
+
                                                                 <div class="row">
-                                                                    
+
                                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                                    
-                    
-                                                                    
+
+
+
                                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                                         Delete
                                                                     </button>
-                                                                    
-                                                                    
+
+
                                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
@@ -1233,9 +1212,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    
+
                                                                 </div>
-    
+
                                                             {% endfor %}
                                                         </div>
                                                     </div>
@@ -1249,7 +1228,7 @@
                                                     <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <h1>2</h1>
                                                     </div>
-                                                  
+
                                                   <br>
 
                                                   <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
@@ -1272,19 +1251,19 @@
 
 
                                             {% for personal_c_listing in personal_c_listings %}
-    
+
                                                 <div class="row">
-                                                    
+
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                    
-    
-                                                    
+
+
+
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                         Delete
                                                     </button>
-                                                    
-                                                    
+
+
                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -1305,22 +1284,22 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
-    
+
                                             {% endfor %}
                                         </div>
 
 
 
 
-    
+
                                       </div>
-    
+
                                     </div>
-    
+
                                     <div class="card text-center" style="border-color: white;">
-    
+
                                       <div class="card-header" id="headingTwo" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
@@ -1328,24 +1307,24 @@
                                           </button>
                                         </h2>
                                       </div>
-    
+
                                       <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                          
+
                                         <div class="card-body">
                                             {% for personal_s_listing in personal_s_listings %}
-    
+
                                                 <div class="row">
-                                                    
+
                                                     <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                    
-    
-                                                    
+
+
+
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                         Delete
                                                     </button>
-                                                    
-                                                    
+
+
                                                     <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -1366,43 +1345,43 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
-    
-                                            {% endfor %}                                    
+
+                                            {% endfor %}
                                         </div>
                                       </div>
-    
+
                                     </div>
-    
+
                                 </div>
-                            
+
                             -->
-                       
-                        
-                        
-                        
+
+
+
+
                         </div>
                     </div>
-    
+
                 </div>
-    
+
             </div>
-    
+
             <!-- These are the side dropdowns -->
             <div class="col-3 mx-auto">
 
                 <div id="accordion">
-    
+
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingOne" style=" background-color: white; border-color: white;">
                         <h5 class="mb-0 text-center">
                             <button class="btn dropdown-toggle collapsed" style="vertical-align: middle;" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapseOne">
-                                <strong><h2>Your Listings <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_listings_num }}</span></h2></strong>
+                                <strong><h3>Your Listings <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_listings_num }}</span></h3></strong>
                             </button>
                         </h5>
                         </div>
-                    
+
                         <div id="collapse5" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 
                             <div class="accordion" id="accordionExample">
@@ -1416,23 +1395,23 @@
                                       </button>
                                     </h2>
                                   </div>
-                              
+
                                   <div id="collapseCreatorListings" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    
+
                                     <div class="card-body">
                                         {% for personal_c_listing in personal_c_listings %}
 
                                             <div class="row">
-                                                
+
                                                 <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                 <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                
+
 
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                     Delete
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
@@ -1454,7 +1433,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                         {% endfor %}
@@ -1475,21 +1454,21 @@
                                   </div>
 
                                   <div id="collapseSponsorListings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                      
+
                                     <div class="card-body">
                                         {% for personal_s_listing in personal_s_listings %}
 
                                             <div class="row">
-                                                
+
                                                 <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                 <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                
+
 
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                     Delete
                                                 </button>
-                                                
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
@@ -1511,28 +1490,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
-                                        {% endfor %}                                    
+                                        {% endfor %}
                                     </div>
                                   </div>
 
                                 </div>
 
                             </div>
-    
+
                         </div>
 
                     </div>
-    
+
                     <hr class="my-2" style="opacity: 0;">
-    
+
                     <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px;">
                         <div class="card-header" id="headingTwo" style=" background-color: white; border-color: white;">
                         <h5 class="mb-0 text-center">
                             <button class="btn dropdown-toggle" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapseTwo">
-                                <strong><h2>Watching <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_watch_len }}</span></h2></strong>
+                                <strong><h3>Watching <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_watch_len }}</span></h3></strong>
                             </button>
                         </h5>
                         </div>
@@ -1550,9 +1529,9 @@
                                       </button>
                                     </h2>
                                   </div>
-                              
+
                                   <div id="collapseCreatorWatching" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    
+
                                     <div class="card-body">
 
                                         {% for creator_l in c_watching %}
@@ -1561,7 +1540,7 @@
 
                                                 <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=creator_l.id %}">{{ creator_l }}</a>
                                                 <a href="{% url 'dashboard_unwatch_c' id=creator_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
-                                                 
+
                                             </div>
 
                                         {% endfor %}
@@ -1583,18 +1562,18 @@
                                   </div>
 
                                   <div id="collapseSponsorWatching" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                      
+
                                     <div class="card-body">
                                         {% for sponsor_l in s_watching %}
 
                                             <div class="row">
-                                                
+
                                                 <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=sponsor_l.id %}">{{ sponsor_l }}</a>
                                                 <a href="{% url 'dashboard_unwatch_s' id=sponsor_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
-                                                
+
                                             </div>
 
-                                        {% endfor %}  
+                                        {% endfor %}
 
                                     </div>
                                   </div>
@@ -1605,11 +1584,11 @@
 
                         </div>
                     </div>
-    
+
                 </div>
 
                 <br>
-                
+
                 <div class="card shadow">
                     <h2 class="card-header text-center">Stats</h2>
 
@@ -1622,30 +1601,41 @@
                         <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len }}</h5></li>
 
                         <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
-                        
+
                     </ul>
                 </div>
 
             </div>
-    
+
         </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
     </div>
 
-    <div class="d-md-none">
-        
+    <div class="d-lg-none">
+
             <!-- These are the info squares at the top -->
             <div class="row justify-content-center d-flex justify-content-arround">
 
-                <div class="col-3 mb-4">
+                <div class="col-6">
 
-                    <div class="card border-left-primary shadow py-2" 
+                    <div class="card border-left-primary shadow py-2"
                         style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px; height: 80%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mr-2 text-center">
+                                <div class="col mt-2 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #4f74df">Orders</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_orders_num }}</h4></div>
                                 </div>
@@ -1656,15 +1646,15 @@
 
                 </div>
 
-                <div class="col-3 mb-4">
+                <div class="col-6">
 
-                    <div class="card border-left-primary shadow py-2" 
+                    <div class="card border-left-primary shadow py-2"
                         style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px; height: 80%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mr-2 text-center">
+                                <div class="col text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #f6c240;">Accepted Orders</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_acc_orders_num }}</h4></div>
                                 </div>
@@ -1675,15 +1665,19 @@
 
                 </div>
 
-                <div class="col-3 mb-4">
+            </div>
 
-                    <div class="card border-left-primary shadow py-2" 
+            <div class="row justify-content-center d-flex justify-content-arround">
+
+                <div class="col-6">
+
+                    <div class="card border-left-primary shadow py-2"
                         style="background-color: white; color: black; border-color: white; border-left-color: #1cc88a; border-width: 9px; border-radius: 6px; height: 80%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mr-2 text-center">
+                                <div class="col mb-2 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #1cc88a;">Money Made / Spent</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">$0 / $0</h4></div>
                                 </div>
@@ -1694,15 +1688,15 @@
 
                 </div>
 
-                <div class="col-3 mb-4">
+                <div class="col-6">
 
-                    <div class="card border-left-primary shadow py-2" 
+                    <div class="card border-left-primary shadow py-2"
                         style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px; height: 80%;">
 
                         <div class="card-body">
                             <div class="row align-items-center pb-3">
 
-                                <div class="col mr-2 text-center">
+                                <div class="col mt-4 text-center">
                                     <div class="text-xs text-primary text-uppercase mb-1"><h5 class="font-weight-bold" style="color: #3abacc;">Listings</h5></div>
                                     <div class="h5 mb-0 text-gray-800"><h4 class="font-weight-bold">{{ total_listings_num }}</h4></div>
                                 </div>
@@ -1715,25 +1709,26 @@
 
             </div>
 
+
             <div class="row mt-4">
 
                 <!-- These are the main dropdowns -->
-                <div class="col-8 mx-auto">
+                <div class="mx-auto">
 
                     <!-- The Creator & Sponsor Order Section -->
                     <div id="accordion">
-        
+
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingOne" style="background-color: white; border-color: white;">
                             <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle collapsed" style="vertical-align: middle;" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <strong><h2>Creator Orders <span class="badge badge-pill badge-secondary" style="background-color: #4f74df;">{{ c_orders_len }}</span></h2></strong>
+                                    <strong><h3>Creator Orders <span class="badge badge-pill badge-secondary" style="background-color: #4f74df;">{{ c_orders_len }}</span></h3></strong>
                                     <small style="color: grey;">Orders For Your Creator Listings</small>
                                     <br>
                                 </button>
                             </h5>
                             </div>
-                        
+
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                 {% for c_order in c_orders %}
                                     {% if c_order.buyers_listing_s %}
@@ -1782,7 +1777,7 @@
                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#creatorModal">
                                                         Accept
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="creatorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1812,27 +1807,27 @@
 
                                         <hr style="width: 25%;">
 
-                                    {% endif %}   
+                                    {% endif %}
                                 {% endfor %}
                             </div>
 
                         </div>
-        
+
                         <hr class="my-2" style="opacity: 0;">
-        
+
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #4f74df; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingTwo" style="background-color: white; border-color: white;">
                             <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <strong><h2>Sponsor Orders <span class="badge badge-pill badge-secondary" style="background-color: #4f74df;">{{ s_orders_len }}</span></h2></strong>
+                                    <strong><h3>Sponsor Orders <span class="badge badge-pill badge-secondary" style="background-color: #4f74df;">{{ s_orders_len }}</span></h3></strong>
                                     <small style="color: grey;">Orders For Your Sponsor Listings</small>
                                     <br>
                                 </button>
                             </h5>
                             </div>
-        
+
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        
+
                                 {% for s_order in s_orders %}
                                     {% if s_order.buyers_listing_c %}
                                         <div class="card text-center m-2">
@@ -1878,7 +1873,7 @@
                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#sponsorModal">
                                                         Accept
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="sponsorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1910,34 +1905,34 @@
 
                                         <hr style="width: 25%;">
 
-                                    {% endif %}   
+                                    {% endif %}
                                 {% endfor %}
-        
+
                             </div>
-        
+
                         </div>
-        
+
                     </div>
-        
+
                     <br>
                     <hr style="width: 75%;">
                     <br>
-        
+
                     <!-- The Accepted Orders & Order History Section -->
                     <div id="accordion">
-                        
+
                         <!-- Accepted Orders -->
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingOne" style=" background-color: white; border-color: white;">
                             <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle collapsed" style="vertical-align: middle;" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
-                                    <strong><h2>Accepted Orders <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ total_acc_orders_num }}</span></h2></strong>
-                                    <small style="color: grey;">Orders That You've Accepted As A Creator</small>
+                                    <strong><h3>Accepted Orders <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ total_acc_orders_num }}</span></h3></strong>
+                                    <small style="color: grey;">Orders You've Accepted As A Creator</small>
                                     <br>
                                 </button>
                             </h5>
                             </div>
-                        
+
                             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
                                 {% if c_accepted_orders %}
@@ -1988,7 +1983,7 @@
                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
                                                         Complete
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2016,7 +2011,7 @@
                                                     <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
                                                         Withdraw
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2029,8 +2024,8 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     If you withdraw from this order, you are stating that
-                                                                    you are unable to complete this sponsors order. The sponsor 
-                                                                    will be refunded and you will not be paid. 
+                                                                    you are unable to complete this sponsors order. The sponsor
+                                                                    will be refunded and you will not be paid.
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2042,22 +2037,22 @@
                                                 </div>
                                             </div>
 
-                                        </div> 
+                                        </div>
 
-                                    {% endfor %} 
+                                    {% endfor %}
                                 {% endif %}
-        
+
                             </div>
                         </div>
-        
+
                         <hr class="my-2" style="opacity: 0;">
-        
+
                         <!-- Order History -->
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #f6c240; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingTwo" style=" background-color: white; border-color: white;">
                                 <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapseTwo">
-                                    <strong><h2>Order History</h2></strong>
+                                    <strong><h3>Order History</h3></strong>
                                     <small style="color: grey;">Current & Past Orders</small>
                                     <br>
                                 </button>
@@ -2069,25 +2064,25 @@
                                     <div class="row">
 
                                         <div class="col-12 mx-auto">
-                                        
+
                                         <div class="m-1" id="MainMenu">
 
                                             <div class="list-group">
 
                                             <a href="#demo3" class="list-group-item" style="border-color: white; color: black" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle font-weight-normal">Creator History</h5></a>
-                                            
-                                            <div class="collapse" id="demo3">
 
-                                                <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+                                            <div class="collapse mx-auto" id="demo3">
+
+                                                <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors </h6> <i class="fa fa-caret-down"></i></a>
+
                                                 <div class="collapse list-group-submenu" id="SubMenu1">
 
                                                     {% for order in s_ordered %}
 
                                                         <div class="row">
-                                                        
+
                                                             <div class="col-10 align-self-center mx-auto">
-                                                            
+
                                                                 <div class="card text-center m-2">
 
                                                                     <div class="card-header">
@@ -2103,10 +2098,10 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                            
+
                                                                     <div class="card-body">
                                                                         <div class="row">
-                            
+
                                                                             <div class="col-5 border-right">
                                                                                 <div class="row">
                                                                                     <div class="col-6">
@@ -2129,20 +2124,20 @@
                                                                                 <h5>Order Details</h5>
                                                                                 <p>{{ order.services_creator_is_willing_to_provide_detailed }}</p>
                                                                             </div>
-                            
+
                                                                         </div>
                                                                         <div class="d-flex justify-content-end">
 
                                                                             <a class="mx-2" href="{% url 'sponsor_marketplace_listing_order_view' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Edit</button></a>
                                                                             <a class=" mx-2" href="{% url 'dashboard_unorder_s' id=order.sponsor_listing.id %}"><button class="btn btn-primary">Unorder</button></a>
-                                                                    
+
                                                                         </div>
                                                                     </div>
 
                                                                 </div>
 
                                                             </div>
-                                                            
+
                                                         </div>
 
                                                     {% endfor %}
@@ -2151,7 +2146,7 @@
                                                         <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 1 a</a>
                                                         <a href="#" class="list-group-item" data-parent="#SubMenu1"> Subitem 2 b</a>
                                                         <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1"> Subitem 3 c <i class="fa fa-caret-down"></i></a>
-                                                        --> 
+                                                        -->
                                                         <!--
                                                         <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
 
@@ -2163,8 +2158,8 @@
 
                                                 </div>
 
-                                                <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+                                                <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="font-weight-normal">Currently Ordered <h6 class="dropdown-toggle font-weight-normal">Sponsors That Accepted</h6></h6> <i class="fa fa-caret-down"></i></a>
+
                                                     <div class="collapse list-group-submenu" id="SubMenu2">
 
                                                         {% for order in accepted_c_orders %}
@@ -2172,9 +2167,9 @@
                                                             {% if order.who_initiated_order == 'creator' %}
 
                                                                 <div class="row">
-                                                                
+
                                                                     <div class="col-10 align-self-center mx-auto">
-                                                                    
+
                                                                         <div class="card text-center m-2">
 
                                                                             <div class="card-header">
@@ -2190,10 +2185,10 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                    
+
                                                                             <div class="card-body">
                                                                                 <div class="row">
-                                    
+
                                                                                     <div class="col-5 border-right">
                                                                                         <div class="row">
                                                                                             <div class="col-6">
@@ -2216,7 +2211,7 @@
                                                                                         <h5>Order Details</h5>
                                                                                         <p>{{ order.service_detailed }}</p>
                                                                                     </div>
-                                    
+
                                                                                 </div>
                                                                                 <div class="d-flex justify-content-end">
 
@@ -2224,7 +2219,7 @@
                                                                                         <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
                                                                                             Complete
                                                                                         </button>
-                                                                                        
+
                                                                                         <!-- Modal -->
                                                                                         <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2248,11 +2243,11 @@
                                                                                             </div>
                                                                                             </div>
                                                                                         </div>
-                                        
+
                                                                                         <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
                                                                                             Withdraw
                                                                                         </button>
-                                                                                        
+
                                                                                         <!-- Modal -->
                                                                                         <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2265,8 +2260,8 @@
                                                                                                     </div>
                                                                                                     <div class="modal-body">
                                                                                                         If you withdraw from this order, you are stating that
-                                                                                                        you are unable to complete this sponsors order. The sponsor 
-                                                                                                        will be refunded and you will not be paid. 
+                                                                                                        you are unable to complete this sponsors order. The sponsor
+                                                                                                        will be refunded and you will not be paid.
                                                                                                     </div>
                                                                                                     <div class="modal-footer">
                                                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2276,27 +2271,27 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                            
+
                                                                                 </div>
                                                                             </div>
 
                                                                         </div>
 
                                                                     </div>
-                                                                    
+
                                                                 </div>
 
                                                             {% endif %}
 
                                                         {% endfor %}
                                                     </div>
-                                                
-                                                <a href="#SubMenu3" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Completed Orders </h5> <i class="fa fa-caret-down"></i></a>
+
+                                                <a href="#SubMenu3" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Completed Orders </h6> <i class="fa fa-caret-down"></i></a>
 
                                                     <div class="collapse list-group-submenu" id="SubMenu3">
-                                                        
-                                                        <a href="#SubMenu4" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders You Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                        
+
+                                                        <a href="#SubMenu4" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Orders You Initiated </h6> <i class="fa fa-caret-down"></i></a>
+
                                                             <div class="collapse list-group-submenu" id="SubMenu4">
 
                                                                 {% for order in completed_c_orders %}
@@ -2304,11 +2299,11 @@
                                                                     {% if order.who_initiated_order == 'creator' %}
 
                                                                         <div class="row">
-                                                                    
+
                                                                             <div class="col-10 align-self-center mx-auto">
-                                                                            
+
                                                                                 <div class="card text-center m-2">
-            
+
                                                                                     <div class="card-header">
                                                                                         <ul class="nav nav-tabs card-header-tabs">
                                                                                             <li class="nav-item">
@@ -2322,10 +2317,10 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </div>
-                                            
+
                                                                                     <div class="card-body">
                                                                                         <div class="row">
-                                            
+
                                                                                             <div class="col-5 border-right">
                                                                                                 <div class="row">
                                                                                                     <div class="col-6">
@@ -2348,25 +2343,25 @@
                                                                                                 <h5>Order Details</h5>
                                                                                                 <p>{{ order.service_detailed }}</p>
                                                                                             </div>
-                                            
+
                                                                                         </div>
-                                                                                        
+
                                                                                     </div>
-            
+
                                                                                 </div>
-            
+
                                                                             </div>
-                                                                            
+
                                                                         </div>
 
                                                                     {% endif %}
 
                                                                 {% endfor %}
-                                                                
+
                                                             </div>
-                                                        
-                                                        <a href="#SubMenu5" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders Sponsor Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                    
+
+                                                        <a href="#SubMenu5" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Orders Sponsor Initiated </h6> <i class="fa fa-caret-down"></i></a>
+
                                                             <div class="collapse list-group-submenu" id="SubMenu5">
 
                                                                 {% for order in completed_c_orders %}
@@ -2374,11 +2369,11 @@
                                                                     {% if order.who_initiated_order == 'sponsor' %}
 
                                                                         <div class="row">
-                                                                    
+
                                                                             <div class="col-10 align-self-center mx-auto">
-                                                                            
+
                                                                                 <div class="card text-center m-2">
-            
+
                                                                                     <div class="card-header">
                                                                                         <ul class="nav nav-tabs card-header-tabs">
                                                                                             <li class="nav-item">
@@ -2392,10 +2387,10 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </div>
-                                            
+
                                                                                     <div class="card-body">
                                                                                         <div class="row">
-                                            
+
                                                                                             <div class="col-5 border-right">
                                                                                                 <div class="row">
                                                                                                     <div class="col-6">
@@ -2418,42 +2413,42 @@
                                                                                                 <h5>Order Details</h5>
                                                                                                 <p>{{ order.service_detailed }}</p>
                                                                                             </div>
-                                            
+
                                                                                         </div>
-                                                                                        
+
                                                                                     </div>
-            
+
                                                                                 </div>
-            
+
                                                                             </div>
-                                                                            
+
                                                                         </div>
 
                                                                     {% endif %}
 
                                                                 {% endfor %}
-                                                                    
+
                                                             </div>
-                                                    
+
                                                     </div>
-                                            
+
                                             </div>
 
                                             <!-- Sponsor History -->
                                             <a href="#demo4" class="list-group-item" style="border-color: white; color: black;" data-toggle="collapse" data-parent="#MainMenu"><h5 class="dropdown-toggle font-weight-normal">Sponsor History</h5></a>
-                                            
+
                                             <div class="collapse" id="demo4">
 
-                                                <a href="#SubMenu4" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Creators </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+                                                <a href="#SubMenu4" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered Creators </h6> <i class="fa fa-caret-down"></i></a>
+
                                                 <div class="collapse list-group-submenu" id="SubMenu4">
 
                                                     {% for order in c_ordered %}
 
                                                         <div class="row">
-                                                        
+
                                                             <div class="col-10 align-self-center mx-auto">
-                                                            
+
                                                                 <div class="card text-center m-2">
 
                                                                     <div class="card-header">
@@ -2469,10 +2464,10 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                            
+
                                                                     <div class="card-body">
                                                                         <div class="row">
-                            
+
                                                                             <div class="col-5 border-right">
                                                                                 <div class="row">
                                                                                     <div class="col-6">
@@ -2494,28 +2489,28 @@
                                                                                 <h5>Order Details</h5>
                                                                                 <p>{{ order.service_detailed }}</p>
                                                                             </div>
-                            
+
                                                                         </div>
                                                                         <div class="d-flex justify-content-end">
 
                                                                             <a class="mx-2" href="{% url 'creator_marketplace_listing_order_view' id=order.creator_listing.id %}"><button class="btn btn-primary">Edit</button></a>
                                                                             <a class=" mx-2" href="{% url 'dashboard_unorder_c' id=order.creator_listing.id %}"><button class="btn btn-primary">Unorder</button></a>
-                                                                    
+
                                                                         </div>
                                                                     </div>
 
                                                                 </div>
 
                                                             </div>
-                                                            
+
                                                         </div>
 
                                                     {% endfor %}
 
                                                 </div>
 
-                                                <a href="#SubMenu5" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Creators That Accepted </h5> <i class="fa fa-caret-down"></i></a>
-                                                
+                                                <a href="#SubMenu5" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="font-weight-normal">Currently Ordered <h6 class="dropdown-toggle font-weight-normal">Creators That Accepted</h6></h6> <i class="fa fa-caret-down"></i></a>
+
                                                     <div class="collapse list-group-submenu" id="SubMenu5">
 
                                                         {% for order in accepted_c_orders %}
@@ -2523,9 +2518,9 @@
                                                             {% if order.who_initiated_order == 'sponsor' %}
 
                                                                 <div class="row">
-                                                                
+
                                                                     <div class="col-10 align-self-center mx-auto">
-                                                                    
+
                                                                         <div class="card text-center m-2">
 
                                                                             <div class="card-header">
@@ -2541,11 +2536,11 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                    
+
                                                                             <div class="card-body">
 
                                                                                 <div class="row">
-                            
+
                                                                                     <div class="col-5 border-right">
                                                                                         <div class="row">
                                                                                             <div class="col-6">
@@ -2566,15 +2561,15 @@
                                                                                         <h5>Order Details</h5>
                                                                                         <p>{{ order.service_detailed }}</p>
                                                                                     </div>
-                                    
+
                                                                                 </div>
-                                                                            
+
                                                                             </div>
 
                                                                         </div>
 
                                                                     </div>
-                                                                    
+
                                                                 </div>
 
                                                             {% endif %}
@@ -2582,13 +2577,13 @@
                                                         {% endfor %}
 
                                                     </div>
-                                                
-                                                <a href="#SubMenu6" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Completed Orders </h5> <i class="fa fa-caret-down"></i></a>
+
+                                                <a href="#SubMenu6" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Completed Orders </h6> <i class="fa fa-caret-down"></i></a>
 
                                                     <div class="collapse list-group-submenu" id="SubMenu6">
-                                                        
-                                                        <a href="#SubMenu7" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders You Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                        
+
+                                                        <a href="#SubMenu7" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Orders You Initiated </h6> <i class="fa fa-caret-down"></i></a>
+
                                                             <div class="collapse list-group-submenu" id="SubMenu7">
 
                                                                 {% for order in completed_c_orders %}
@@ -2596,11 +2591,11 @@
                                                                     {% if order.who_initiated_order == 'sponsor' %}
 
                                                                     <div class="row">
-                                                                
+
                                                                         <div class="col-10 align-self-center mx-auto">
-                                                                        
+
                                                                             <div class="card text-center m-2">
-        
+
                                                                                 <div class="card-header">
                                                                                     <ul class="nav nav-tabs card-header-tabs">
                                                                                         <li class="nav-item">
@@ -2614,11 +2609,11 @@
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
-                                        
+
                                                                                 <div class="card-body">
-        
+
                                                                                     <div class="row">
-                                
+
                                                                                         <div class="col-5 border-right">
                                                                                             <div class="row">
                                                                                                 <div class="col-6">
@@ -2639,25 +2634,25 @@
                                                                                             <h5>Order Details</h5>
                                                                                             <p>{{ order.service_detailed }}</p>
                                                                                         </div>
-                                        
+
                                                                                     </div>
-                                                                                
+
                                                                                 </div>
-        
+
                                                                             </div>
-        
+
                                                                         </div>
-                                                                        
+
                                                                     </div>
 
                                                                     {% endif %}
 
                                                                 {% endfor %}
-                                                                
+
                                                             </div>
-                                                        
-                                                        <a href="#SubMenu8" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Orders Creator Initiated </h5> <i class="fa fa-caret-down"></i></a>
-                                                    
+
+                                                        <a href="#SubMenu8" class="list-group-item ml-5" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Orders Creator Initiated </h6> <i class="fa fa-caret-down"></i></a>
+
                                                             <div class="collapse list-group-submenu" id="SubMenu8">
 
                                                                 {% for order in completed_c_orders %}
@@ -2665,11 +2660,11 @@
                                                                     {% if order.who_initiated_order == 'creator' %}
 
                                                                     <div class="row">
-                                                                
+
                                                                         <div class="col-10 align-self-center mx-auto">
-                                                                        
+
                                                                             <div class="card text-center m-2">
-        
+
                                                                                 <div class="card-header">
                                                                                     <ul class="nav nav-tabs card-header-tabs">
                                                                                         <li class="nav-item">
@@ -2683,11 +2678,11 @@
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
-                                        
+
                                                                                 <div class="card-body">
-        
+
                                                                                     <div class="row">
-                                
+
                                                                                         <div class="col-5 border-right">
                                                                                             <div class="row">
                                                                                                 <div class="col-6">
@@ -2708,23 +2703,23 @@
                                                                                             <h5>Order Details</h5>
                                                                                             <p>{{ order.service_detailed }}</p>
                                                                                         </div>
-                                        
+
                                                                                     </div>
-                                                                                
+
                                                                                 </div>
-        
+
                                                                             </div>
-        
+
                                                                         </div>
-                                                                        
+
                                                                     </div>
 
                                                                     {% endif %}
 
                                                                 {% endfor %}
-                                                                    
+
                                                             </div>
-                                                    
+
                                                     </div>
 
                                             </div>
@@ -2732,8 +2727,8 @@
                                             </div>
 
                                         </div>
-                                        
-                                        </div>  
+
+                                        </div>
 
                                     </div>
 
@@ -2749,7 +2744,7 @@
                                     <div class="accordion" id="accordionExample">
 
                                         <div class="card text-center" style="border-color: white;">
-        
+
                                         <div class="card-header" id="headingOne" style="background-color: white;">
                                             <h2 class="mb-0">
                                             <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
@@ -2761,14 +2756,14 @@
 
 
 
-                                    
+
                                         <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 
 
 
 
 
-                                            
+
                                             <div class="card-body">
 
                                                 <div class="card-header" id="headingOne" style="background-color: white;">
@@ -2781,19 +2776,19 @@
                                                         <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                             <div class="card-body">
                                                                 {% for personal_c_listing in personal_c_listings %}
-        
+
                                                                     <div class="row">
-                                                                        
+
                                                                         <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                                        
-                        
-                                                                        
+
+
+
                                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                                             Delete
                                                                         </button>
-                                                                        
-                                                                        
+
+
                                                                         <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog modal-dialog-centered">
                                                                                 <div class="modal-content">
@@ -2814,9 +2809,9 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
+
                                                                     </div>
-        
+
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
@@ -2830,7 +2825,7 @@
                                                         <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                             <h1>2</h1>
                                                         </div>
-                                                    
+
                                                     <br>
 
                                                     <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
@@ -2853,19 +2848,19 @@
 
 
                                                 {% for personal_c_listing in personal_c_listings %}
-        
+
                                                     <div class="row">
-                                                        
+
                                                         <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                        
-        
-                                                        
+
+
+
                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                             Delete
                                                         </button>
-                                                        
-                                                        
+
+
                                                         <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -2886,22 +2881,22 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-        
+
                                                 {% endfor %}
                                             </div>
 
 
 
 
-        
+
                                         </div>
-        
+
                                         </div>
-        
+
                                         <div class="card text-center" style="border-color: white;">
-        
+
                                         <div class="card-header" id="headingTwo" style="background-color: white;">
                                             <h2 class="mb-0">
                                             <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
@@ -2909,24 +2904,24 @@
                                             </button>
                                             </h2>
                                         </div>
-        
+
                                         <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                            
+
                                             <div class="card-body">
                                                 {% for personal_s_listing in personal_s_listings %}
-        
+
                                                     <div class="row">
-                                                        
+
                                                         <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                        
-        
-                                                        
+
+
+
                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                             Delete
                                                         </button>
-                                                        
-                                                        
+
+
                                                         <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -2947,43 +2942,49 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-        
-                                                {% endfor %}                                    
+
+                                                {% endfor %}
                                             </div>
                                         </div>
-        
+
                                         </div>
-        
+
                                     </div>
-                                
+
                                 -->
-                        
-                            
-                            
-                            
+
+
+
+
                             </div>
                         </div>
-        
+
                     </div>
-        
+
                 </div>
-        
+
+
+                <br>
+                <hr class="my-5" style="width: 75%;">
+                <br>
+
+
                 <!-- These are the side dropdowns -->
-                <div class="col-3 mx-auto">
+                <div class="mx-auto">
 
                     <div id="accordion">
-        
+
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingOne" style=" background-color: white; border-color: white;">
                             <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle collapsed" style="vertical-align: middle;" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapseOne">
-                                    <strong><h2>Your Listings <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_listings_num }}</span></h2></strong>
+                                    <strong><h3>Your Listings <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_listings_num }}</span></h3></strong>
                                 </button>
                             </h5>
                             </div>
-                        
+
                             <div id="collapse5" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 
                                 <div class="accordion" id="accordionExample">
@@ -2997,23 +2998,23 @@
                                         </button>
                                         </h2>
                                     </div>
-                                
+
                                     <div id="collapseCreatorListings" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                        
+
                                         <div class="card-body">
                                             {% for personal_c_listing in personal_c_listings %}
 
                                                 <div class="row">
-                                                    
+
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                    
+
 
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                         Delete
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -3035,7 +3036,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
                                             {% endfor %}
@@ -3056,21 +3057,21 @@
                                     </div>
 
                                     <div id="collapseSponsorListings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                        
+
                                         <div class="card-body">
                                             {% for personal_s_listing in personal_s_listings %}
 
                                                 <div class="row">
-                                                    
+
                                                     <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-                                                    
+
 
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                         Delete
                                                     </button>
-                                                    
+
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -3092,28 +3093,28 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
-                                            {% endfor %}                                    
+                                            {% endfor %}
                                         </div>
                                     </div>
 
                                     </div>
 
                                 </div>
-        
+
                             </div>
 
                         </div>
-        
+
                         <hr class="my-2" style="opacity: 0;">
-        
+
                         <div class="card shadow border-left-primary" style="background-color: white; color: black; border-color: white; border-left-color: #3abacc; border-width: 9px; border-radius: 6px;">
                             <div class="card-header" id="headingTwo" style=" background-color: white; border-color: white;">
                             <h5 class="mb-0 text-center">
                                 <button class="btn dropdown-toggle" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapseTwo">
-                                    <strong><h2>Watching <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_watch_len }}</span></h2></strong>
+                                    <strong><h3>Watching <span class="badge badge-pill badge-secondary" style="background-color: #3abacc;">{{ total_watch_len }}</span></h3></strong>
                                 </button>
                             </h5>
                             </div>
@@ -3131,9 +3132,9 @@
                                         </button>
                                         </h2>
                                     </div>
-                                
+
                                     <div id="collapseCreatorWatching" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                        
+
                                         <div class="card-body">
 
                                             {% for creator_l in c_watching %}
@@ -3142,7 +3143,7 @@
 
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=creator_l.id %}">{{ creator_l }}</a>
                                                     <a href="{% url 'dashboard_unwatch_c' id=creator_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
-                                                    
+
                                                 </div>
 
                                             {% endfor %}
@@ -3164,18 +3165,18 @@
                                     </div>
 
                                     <div id="collapseSponsorWatching" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                        
+
                                         <div class="card-body">
                                             {% for sponsor_l in s_watching %}
 
                                                 <div class="row">
-                                                    
+
                                                     <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=sponsor_l.id %}">{{ sponsor_l }}</a>
                                                     <a href="{% url 'dashboard_unwatch_s' id=sponsor_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
-                                                    
+
                                                 </div>
 
-                                            {% endfor %}  
+                                            {% endfor %}
 
                                         </div>
                                     </div>
@@ -3186,11 +3187,11 @@
 
                             </div>
                         </div>
-        
+
                     </div>
 
                     <br>
-                    
+
                     <div class="card shadow">
                         <h2 class="card-header text-center">Stats</h2>
 
@@ -3203,21 +3204,25 @@
                             <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len }}</h5></li>
 
                             <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
-                            
+
                         </ul>
                     </div>
 
                 </div>
-        
+
             </div>
-        
+
+            <br>
+            <br>
+            <br>
+            <br>
 
     </div>
 
     <br>
     <br>
-    
-    
+
+
 
         <!-- Creator order collapse -->
         <div class="collapse" id="collapseCreatorOrders">
@@ -3231,7 +3236,7 @@
                         <hr>
                         <h5>The Service They're Looking For: {{ c_order.service }}</h5>
                         <hr>
-                        <h5>Description of what they'd like:</h5> 
+                        <h5>Description of what they'd like:</h5>
                         <span>{{ c_order.service_detailed }}</span>
                         <hr>
                         <h5>Payout: ${{ c_order.buyers_listing_s.money }}</h5>
@@ -3241,7 +3246,7 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creatorAcceptModal">
                             Accept
                         </button>
-                        
+
                         <!-- Modal -->
                         <div class="modal fade" id="creatorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -3265,9 +3270,9 @@
 
                         <a href="{% url 'dashboard_creator_order_decline' id=c_order.id %}"><button>Decline</button></a>
                     </div>
-                    {% endif %}   
+                    {% endif %}
             {% endfor %}
-            
+
                 {% if c_orders_len == 0 %}
                 <div class="card card-body">
                     <h5>>>> You have no orders for any of your creator listings</h5>
@@ -3301,7 +3306,7 @@
                             Accept Creator
                         </button>
                         <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button>Decline</button></a>
-                        
+
                         <!-- Sponsor Accept Modal -->
                         <div class="modal fade" id="sponsorAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -3357,7 +3362,7 @@
                                     <hr>
                                     <h5>The Service They're Looking For: {{ c_accepted_order.service }}</h5>
                                     <hr>
-                                    <h5>Description of what they'd like:</h5> 
+                                    <h5>Description of what they'd like:</h5>
                                     <span>{{ c_accepted_order.service_detailed }}</span>
                                     <hr>
                                     <h5>Payout: ${{ c_accepted_order.buyers_listing_s.money }}</h5>
@@ -3395,8 +3400,8 @@
 
                                     <a href="{% url 'dashboard_withdraw_order' id=c_accepted_order.id %}"><button>Withdraw</button></a>
                                 </div>
-                            </div> 
-                        
+                            </div>
+
                         {% elif c_accepted_order.buyers_listing_c %}
                             <div class="collapse" id="collapseAcceptedCreatorOrders">
                                 <div class="card card-body">
@@ -3405,7 +3410,7 @@
                                     <button>Withdraw</button>
                                 </div>
                             </div>
-                        {% endif %} 
+                        {% endif %}
                     {% endfor %}
             {% endif %}
 
@@ -3419,18 +3424,9 @@
         </div>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    
+
+
 
 </div>
 
