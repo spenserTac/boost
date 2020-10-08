@@ -1,46 +1,92 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <div class="d-none d-lg-block">
     <div style="background-color: #fbfbfb;">
+
         <div class="container" style="background-color: #fbfbfb;">
-            
+
             <div class="row">
 
-                <div class="col-8 my-3">
+              <div class="col-8 my-3">
 
-                    <div class="my-3 p-3 border rounded" style="background-color: white;">
+                  <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
-                        <h1>Product Name + Pic will go here</h1>
-                        <h1>and tagline</h1>
-                        
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="font-weight-normal pb-2" style="color: grey;">{{ listing.product }}</h5>
+                        <h4 class="pb-2">{{ listing.tagline }}</h4>
+                        <img src="https://gualapackgroup.com/wp-content/uploads/2017/03/business-background.jpg" class="card-img-top">
+                      </div>
                     </div>
-                    
-                    <hr class="my-4">
+                  </div>
 
-                    <div class="my-3 p-3 border rounded" style="background-color: white;">
-                        
-                        <h1>I'm not sure what's gonna go here, but</h1>
-                        <h1>it'll be somthing</h1>
-                        
-                    </div class="my-3 p-3 border rounded" style="background-color: white;">
+                  <hr class="my-4">
 
-                    <hr class="my-4">
+                  <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
-                    <div class="my-3 p-3 border rounded" style="background-color: white;">
-                        
-                        <h1>A detailed description of all</h1>
-                        <h1>the stuff will go here</h1>
-                        
-                    </div>
+                      <div class="row">
+                        <div class="col">
 
-                    <hr class="my-4">
+                          <div class="card">
+                            <div class="card-header">
+                              <h5 class="m-0">Overview Description</h5>
+                            </div>
+                            <div class="card-body">
+                              <p class="card-text">{{ listing.overview_description }}</p>
+                            </div>
+                          </div>
 
-                </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="row">
+                        <div class="col">
+
+                          <div class="card">
+                            <div class="card-header">
+                              <h5 class="m-0">Audience Description</h5>
+                            </div>
+                            <div class="card-body">
+                              <p class="card-text">{{ listing.audience_description }}</p>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="row">
+                        <div class="col">
+
+                          <div class="card">
+                            <div class="card-header">
+                              <h5 class="m-0">What This Sponsor Is Looking For In A Creator</h5>
+                            </div>
+                            <div class="card-body">
+                              <p class="card-text">{{ listing.creator_description }}</p>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                  </div>
+
+              </div>
 
                 <div class="col-4 my-3">
 
                     <br>
                     <br>
+                    <h5 class="font-weight-normal ml-1" style="color: grey;">Payout</h5>
+                    <div class="row mb-2">
+                      <h2 class="font-weight-bold ml-3">${{ listing.money }}</h2>
+                      <h4 class="font-weight-normal mt-2 ml-2">USD</h4>
+                    </div>
 
                     {% if following %}
                         <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
@@ -53,19 +99,44 @@
                     {% if ordered %}
                         <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
                     {% else %}
-            
+
                         <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
-                    {% endif %} 
+                    {% endif %}
 
                     <br>
                     <hr>
                     <br>
 
-                    <div class="p-3 border rounded" style="background-color: white;">
-                        
-                        <h1>This will be some</h1>
-                        <h1>about the sponsor stuff</h1>
-                        
+                    <div class="card shadow">
+                      <h5 class="card-header text-center">About The Sponsor</h5>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
+                        <p class="card-text">Listing Info: {{ listing.tagline }}</p>
+
+
+                        <div class="accordion" id="accordionExample">
+                          <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Other Listings By This Sponsor
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                {% for l in all_users_listings %}
+                                  <a href="{% url 'sponsor_marketplace_listing_view' id=l.id %}">{{ l }}</a>
+                                  <br>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
                     </div>
 
                 </div>
@@ -76,5 +147,146 @@
 
         </div>
     </div>
+  </div>
 
+  <div class="d-lg-none">
+    <div class="container" style="background-color: #fbfbfb;">
+
+        <div class="row">
+
+            <div class="col-12 my-3">
+
+                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="font-weight-normal pb-2" style="color: grey;">{{ listing.product }}</h5>
+                      <h4 class="pb-2">{{ listing.tagline }}</h4>
+                      <img src="https://gualapackgroup.com/wp-content/uploads/2017/03/business-background.jpg" class="card-img-top">
+                    </div>
+                  </div>
+
+                </div>
+
+                <h5 class="font-weight-normal ml-1 pt-2" style="color: grey;">Payout</h5>
+                <div class="row mb-2">
+                  <h2 class="font-weight-bold ml-3">${{ listing.money }}</h2>
+                  <h4 class="font-weight-normal mt-2 ml-2">USD</h4>
+                </div>
+
+                {% if following %}
+                    <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+                {% else %}
+                    <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+                {% endif %}
+
+                <hr class="my-4" style="width: 50%;">
+
+                {% if ordered %}
+                    <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+                {% else %}
+
+                    <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+
+                {% endif %}
+
+                <hr class="my-4">
+
+                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+
+                    <div class="row">
+                      <div class="col">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="m-0">Overview Description</h5>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">{{ listing.overview_description }}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                      <div class="col">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="m-0">Audience Description</h5>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">{{ listing.audience_description }}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                      <div class="col">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="m-0">What This Sponsor Is Looking For In A Creator</h5>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">{{ listing.creator_description }}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                </div>
+
+
+                <br>
+                <hr>
+                <br>
+
+                    <div class="card shadow">
+                      <h5 class="card-header text-center">About The Sponsor</h5>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
+                        <p class="card-text">Listing Info: {{ listing.tagline }}</p>
+
+
+                        <div class="accordion" id="accordionExample">
+                          <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Other Listings By This Creator
+                                </button>
+                              </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                {% for l in all_users_listings %}
+                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l }}</a>
+                                  <br>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+        <br>
+    </div>
+  </div>
 {% endblock content %}

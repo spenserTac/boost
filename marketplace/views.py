@@ -25,8 +25,8 @@ def creator_marketplace(request):
     niche_query = request.GET.getlist('niche')
 
     niches = {
-        "Business": "", 
-        "Educational": "", 
+        "Business": "",
+        "Educational": "",
         "Entertainment": "",
         "Fashion": "",
         "Food": "",
@@ -40,15 +40,25 @@ def creator_marketplace(request):
     for niche in niche_query:
         if niche in niche_query:
             niches[str(niche)] = "checked"
-        else: 
+        else:
             niches[str(niche)] = ""
 
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         creator_listings = creator_listings.filter(niche__in=niche_query)
 
+
+    profile = Profile.objects.get(user=request.user)
+
+    watching = []
+
+    for listing in creator_listings:
+        if (listing in profile.creators_watched.all()):
+            watching.append(listing)
+
     context = {
         'creator_listings': creator_listings,
         'niches': niches,
+        'watching': watching
         #'c_listing_filter': c_listing_filter,
     }
 
@@ -63,6 +73,7 @@ def creator_marketplace_listing_view(request, id=None):
     user = User.objects.get(username=request.user.username)
     # current looged in user's Profile
     users_profile = Profile.objects.get(user=user)
+    all_users_listings = BlogListingCreationModel.objects.filter(creator=listing.creator)
 
     # Seeing if the currently loggin user is following this post
     if (listing in users_profile.creators_watched.all()):
@@ -76,7 +87,7 @@ def creator_marketplace_listing_view(request, id=None):
         l = CreatorOrderModel.objects.get(buyer=user, creator_listing=listing)
         creator_listing_exists = True
     except CreatorOrderModel.DoesNotExist:
-        pass     
+        pass
 
     # Seeing if the currently loggin user has ordered this post
     if (listing in users_profile.creators_u_ordered.all() and creator_listing_exists):
@@ -87,7 +98,8 @@ def creator_marketplace_listing_view(request, id=None):
     context = {
         'listing': listing,
         'following': following,
-        'ordered': ordered
+        'ordered': ordered,
+        'all_users_listings': all_users_listings
     }
 
     return render(request, 'creator_marketplace_listing_view.html', context)
@@ -95,7 +107,13 @@ def creator_marketplace_listing_view(request, id=None):
 ##### watching #####
 
 # The logic for watching and unwatching a listing
-
+'''
+def creator_marketplace_watch_view(request, id=None):
+    listing = BlogListingCreationModel.objects.get(id=id)
+    profile = Profile.objects.get(user=request.user)
+    profile.creators_watched.add(listing)
+    return redirect('creator_marketplace')
+'''
 
 def creator_marketplace_listing_watch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
@@ -134,7 +152,7 @@ def creator_marketplace_listing_order_view(request, id=None):
     except:
         prev_c_order = None
 
-    
+
 
     if (request.method == 'POST'):
         # add instance field for updating -> , instance=prev_c_order
@@ -195,9 +213,11 @@ def sponsor_marketplace(request):
 
     niche_query = request.GET.getlist('niche')
 
+    profile = Profile.objects.get(user=request.user)
+
     niches = {
-        "Business": "", 
-        "Educational": "", 
+        "Business": "",
+        "Educational": "",
         "Entertainment": "",
         "Fashion": "",
         "Food": "",
@@ -211,15 +231,24 @@ def sponsor_marketplace(request):
     for niche in niche_query:
         if niche in niche_query:
             niches[str(niche)] = "checked"
-        else: 
+        else:
             niches[str(niche)] = ""
 
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         sponsor_listings = sponsor_listings.filter(niche__in=niche_query)
 
+    watching = []
+
+    for listing in sponsor_listings:
+        print('1--- ', listing)
+        if (listing in profile.sponsors_watched.all()):
+            watching.append(listing)
+            print('2---', listing)
+
     context = {
         'sponsor_listings': sponsor_listings,
         'niches': niches,
+        'watching': watching
     }
 
     return render(request, 'sponsor_marketplace.html', context)
@@ -233,6 +262,8 @@ def sponsor_marketplace_listing_view(request, id=None):
     user = User.objects.get(username=request.user.username)
     # current looged in user's Profile
     users_profile = Profile.objects.get(user=user)
+
+    all_users_listings = SponsorListingCreationModel.objects.filter(creator=listing.creator)
 
     # Seeing if the currently loggin user is following this post
     if (listing in users_profile.sponsors_watched.all()):
@@ -256,7 +287,8 @@ def sponsor_marketplace_listing_view(request, id=None):
     context = {
         'listing': listing,
         'following': following,
-        'ordered': ordered
+        'ordered': ordered,
+        'all_users_listings': all_users_listings
     }
 
     return render(request, 'sponsor_marketplace_listing_view.html', context)

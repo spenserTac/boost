@@ -29,10 +29,10 @@
 
                 <form method="POST">
 
-                    {% csrf_token %}        
-                    
+                    {% csrf_token %}
+
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-                        
+
                         <div class="form-row">
                             <h1 class="font-weight-normal">Create Account</h1>
                         </div>
@@ -41,7 +41,7 @@
 
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
                         </div>
@@ -73,19 +73,19 @@
 
                         </div>
 
-                        
+
                         <br>
                         <br>
                         <hr>
                         <br>
 
                         <div class="text-center">
-                            <a href="{% provider_login_url "google" %}">Google Signup</a>
+                            <a href="{% provider_login_url "google" %}"><img class="m-0 p-0" src="https://persistiq.com/assets/google_sign_up.png" style="width: 30%; height: 30%;"></a>
                             <div class="d-flex justify-content-center my-5">
                                 <span class="form-text text-muted" style="text-align: center;">By creating a Boost account, you're agreeing to acceptBoost's <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a></span>
                             </div>
                         </div>
-                                                   
+
                     </div>
 
                 </form>
@@ -93,7 +93,7 @@
             </div>
 
         </div>
-   
+
     </div>
 
 

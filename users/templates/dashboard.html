@@ -7,33 +7,11 @@
     <br>
     <br>
 
+    <!-- Only for large screens and up -->
     <div class="d-none d-lg-block mx-5">
 
         <!-- These are the info squares at the top -->
         <div class="row justify-content-center d-flex justify-content-arround">
-
-            <!-- Old button dropdown design
-
-            <div class="col-2 mb-4">
-
-                <button class="btn btn-block border-left-primary shadow btn-lg dropdown-toggle"
-                        style="background-color: white; color: black; border-left-color: red; border-width: 9px; border-radius: 6px;"
-                        type="button" aria-haspopup="true" aria-expanded="false" type="button" data-toggle="collapse" data-target="#collapseCreatorOrders1" data-toggle="dropdown">
-
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Creators ({{ c_orders_len }})</div>
-                            </div>
-                            <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-
-                </button>
-
-            </div>
-            -->
 
             <div class="col-3 mb-4">
 
@@ -143,10 +121,10 @@
                                                 <a class="nav-link active">{{ c_order.buyers_listing_s.product }}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                <a class="nav-link disabled">Payment: ${{ c_order.buyers_listing_s.money }}</a>
+                                                <a class="nav-link disabled">Payout: ${{ c_order.buyers_listing_s.money }}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                <a class="nav-link disabled">{{ c_order.service }}</a>
+                                                <a class="nav-link disabled">Service: {{ c_order.service }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -244,7 +222,7 @@
                                                 <a class="nav-link disabled">Niche: {{ s_order.buyers_listing_c.niche }}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                <a class="nav-link disabled">{{ s_order.services_creator_is_willing_to_provide }}</a>
+                                                <a class="nav-link disabled">Serivce: {{ s_order.services_creator_is_willing_to_provide }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -349,10 +327,10 @@
                                                 <a class="nav-link active">{{ c_accepted_order.buyers_listing_s.product }}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                <a class="nav-link disabled">${{ c_accepted_order.buyers_listing_s.money }}</a>
+                                                <a class="nav-link disabled">Payout: ${{ c_accepted_order.buyers_listing_s.money }}</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                <a class="nav-link disabled">{{ c_accepted_order.service }}</a>
+                                                <a class="nav-link disabled">Service: {{ c_accepted_order.service }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1622,6 +1600,7 @@
 
     </div>
 
+    <!-- Only for large screens and up -->
     <div class="d-lg-none">
 
             <!-- These are the info squares at the top -->
@@ -1708,7 +1687,7 @@
                 </div>
 
             </div>
-
+            <!-- End info squares -->
 
             <div class="row">
 
@@ -1830,7 +1809,78 @@
 
                                 {% for s_order in s_orders %}
                                     {% if s_order.buyers_listing_c %}
-                                        <div class="card text-center m-2 ml-3">
+                                    <div class="card text-center m-2">
+
+                                        <div class="card-header">
+                                            <ul class="nav nav-tabs card-header-tabs">
+                                                <li class="nav-item">
+                                                <a class="nav-link active">{{ s_order.buyers_listing_c.blog_name }}</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link disabled">Niche: {{ s_order.buyers_listing_c.niche }}</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link disabled">{{ s_order.services_creator_is_willing_to_provide }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <div class="col-5 border-right">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h5 class="my-4">Ordered Listing:</h5>
+                                                            <h5 class="my-4">Creators Listing:</h5>
+                                                            <h5 class="my-4">Provided Service:</h5>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id%}">{{ s_order.sponsor_listing }}</a></p>
+                                                            <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></p>
+                                                            <p class="my-4"> {{ s_order.services_creator_is_willing_to_provide }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7  p-2 pl-4">
+                                                    <h5>Order Details</h5>
+                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed }}</p>
+                                                </div>
+
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#sponsorModal">
+                                                    Accept
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="sponsorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-center" id="exampleModalLongTitle">Accepting Sponsor Order</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                If you accept this order,
+                                                                that means you'll be allowing the creator to create content for you,
+                                                                in which you'll later pay them for, once they have designated it as complete.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <a href="{% url 'dashboard_sponsor_order_accept' id=s_order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
+                                                            </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                                <a href="{% url 'dashboard_sponsor_order_decline' id=s_order.id %}"><button class="btn btn-primary mx-2">Decline</button></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                             <div class="card-header">
                                                 <ul class="nav nav-tabs card-header-tabs">
@@ -1844,7 +1894,8 @@
                                                 </ul>
                                             </div>
 
-                                            <div class="card-body">
+                                            <div class="card-body" style="max-width: 100%">
+                                                <!--
                                                 <div class="row mb-1">
                                                   <div class="col-6">
                                                       <h5 class="my-4">Ordered Listing:</h5>
@@ -1856,7 +1907,40 @@
                                                   </div>
 
                                                 </div>
+                                                -->
+
+                                                <div class="row mb-1">
+                                                  <div class="col-12 p-0">
+
+                                                    <div class="row mx-1">
+
+                                                      <div class="col-4 p-0">
+                                                        <h5 class="m-0 pt-1">Ordered Listing:</h5>
+                                                      </div>
+
+                                                      <div class="col-8">
+                                                        <h5 class=""><a href="{% url 'sponsor_marketplace_listing_view' id=s_order.sponsor_listing.id%}">{{ s_order.sponsor_listing }}</a></h5>
+                                                      </div>
+
+                                                    </div>
+
+                                                    <div class="row mx-1">
+
+                                                      <div class="col-4 p-0">
+                                                        <h5 class="m-0 pt-1">Creators Listing:</h5>
+                                                      </div>
+
+                                                      <div class="col-8">
+                                                        <h5 class=""><a<a href="{% url 'creator_marketplace_listing_view' id=s_order.buyers_listing_c.id %}">{{ s_order.buyers_listing_c }}</a></h5>
+                                                      </div>
+
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+
                                                 <hr>
+
                                                 <div class="row mt-1 mb-3 mx-auto">
                                                   <div class="mx-auto" style="max-width: 250px">
                                                     <h5 class="text-center">Order Details</h5>
