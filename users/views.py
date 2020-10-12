@@ -10,7 +10,7 @@ CompletedOrderModel)
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
-from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm
+from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm, SponsorEditForm, SponsorReviewForm
 
 
 def account(request, id=None):
@@ -52,7 +52,7 @@ def account(request, id=None):
         'num_of_ca_listings': personal_saccepted_listings,
         'num_of_completed_listings': personal_completed,
     }
-    
+
     return render(request, 'account.html', context)
 
 def delete_account(request):
@@ -91,17 +91,15 @@ def support_contact(request):
 
 def feature_add(request):
     if request.method == 'POST':
+
         form = FeatureTicketForm(request.POST)
-        print("------------ 1 ------------")
+
         if form.is_valid():
-            print("------------ 2 ------------")
 
             form.save(commit=False).creator = request.user
             form.save()
 
             return redirect('home')
-
-        print(form.errors, '--------------')
 
     return render(request, 'feature.html')
 
@@ -109,7 +107,7 @@ def feature_add(request):
 def dashboard(request):
     user = User.objects.get(username=request.user.username) # current logged in user
     profile = Profile.objects.get(user=user) # current logged in users Profile
-    
+
     c_watching = profile.creators_watched.all()
     s_watching = profile.sponsors_watched.all()
 
@@ -149,7 +147,10 @@ def dashboard(request):
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
     p_s_listing_len = personal_sponsor_listings.count()
 
+
     context = {
+
+
         'personal_c_listings': personal_creator_listings,
         'personal_s_listings': personal_sponsor_listings,
 
@@ -193,6 +194,80 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
+
+def dashboard_send_review(request, id=None):
+    # 1. This is for the creator to send over the content they made to the sponsor
+    #    so they can view it and approve it.
+    # 2. There'll be form stuff here so the content the creator adds to this url
+    #    is saved in the DB, so it can then be displayed to the sponsor in the
+    #    "Creators To Review" section in the dashboard.
+
+    listing = AcceptedCreatorOrderModel.objects.get(id=id)
+    turn = listing.turn
+
+    if(request.method == 'POST'):
+
+        form = SponsorReviewForm(request.POST)
+
+        if form.is_valid():
+            file = form.cleaned_data.get('review_file')
+            listing.review_file = file
+            listing.turn = 's'
+            listing.save()
+
+            return redirect('dashboard')
+
+
+    content = {
+        'listing': listing,
+    }
+
+
+    return render(request, 'send_review.html')
+
+def dashboard_s_acc(request, id=None):
+    # 1. Make "sponsor_change" = None in the DB for this specific order.
+    # 2. Do logic to put this order back in the "Sponsor Accepted Orders" tab,
+    #    and in the tamplate there's logic for displaying the right buttons
+    # 3. Add escrow.com script here for the sponsor.
+    listing = AcceptedCreatorOrderModel.objects.get(id=id)
+
+    listing.turn = 'c'
+
+    listing.sponsor_approves = True
+    listing.save()
+
+    content = {
+        'listing': listing,
+    }
+    return redirect('dashboard')
+
+def dashboard_s_edit(request, id=None):
+    # 1. There'll be form stuff here, and all this funciton is designed for is
+    #    to add whatever edits the sponsor wants to make to the creators content
+
+    listing = AcceptedCreatorOrderModel.objects.get(id=id)
+
+    turn = listing.turn
+
+    if(request.method == 'POST'):
+        form = SponsorEditForm(request.POST)
+
+        if form.is_valid():
+            edit = form.cleaned_data.get('edits')
+            listing.edits = edit
+            listing.turn = 'c'
+            listing.save()
+
+            return redirect('dashboard')
+
+
+    content = {
+        'listing': listing,
+    }
+
+    return render(request, 's_edit.html', content)
+
 #
 # Watch and unwatch feature on dashboard
 #
@@ -201,14 +276,14 @@ def dashboard_unwatch_c(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
     listing = users_profile.creators_watched.get(id=id)
     users_profile.creators_watched.remove(listing)
-    
+
     return redirect('dashboard')
 
 def dashboard_unwatch_s(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
     listing = users_profile.sponsors_watched.get(id=id)
     users_profile.sponsors_watched.remove(listing)
-    
+
     return redirect('dashboard')
 
 #
@@ -222,7 +297,7 @@ def dashboard_unorder_c(request, id=None):
 
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=listing)
     creator_order.delete()
-    
+
     return redirect('dashboard')
 
 def dashbord_unorder_accepted_c(request, id=None):
@@ -238,7 +313,7 @@ def dashboard_unorder_s(request, id=None):
 
     sponsor_order = SponsorOrderModel.objects.get(buyer=request.user, sponsor_listing=listing)
     sponsor_order.delete()
-    
+
     return redirect('dashboard')
 
 #
@@ -246,7 +321,7 @@ def dashboard_unorder_s(request, id=None):
 #
 # Add functionality: send user an email that their order has been accepted or declined
 
-def dashboard_creator_order_accept(request, id=None): 
+def dashboard_creator_order_accept(request, id=None):
 
     try:
         #c_listing = BlogListingCreationModel.objects.get(id=id)
@@ -292,10 +367,10 @@ def dashboard_creator_order_accept(request, id=None):
             status=s_order.status
 
         )
-        
+
         as_order.save()
         s_order.delete()
-       
+
 
     return redirect('dashboard')
 
@@ -315,7 +390,7 @@ def dashboard_creator_order_decline(request, id=None):
     return redirect('dashboard')
 
 
-def dashboard_sponsor_order_accept(request, id=None): 
+def dashboard_sponsor_order_accept(request, id=None):
 
     order = SponsorOrderModel.objects.get(id=id)
 
@@ -337,15 +412,15 @@ def dashboard_sponsor_order_accept(request, id=None):
 
         if (form.is_valid()):
             obj = form.save(commit=False)
-            
+
             order.status = 'Accepted - In Process'
 
             order.save()
 
             # Accepted creator order (after creator clicks accept)
-           
 
-           
+
+
             ac_order = AcceptedCreatorOrderModel(
                 buyer=request.user,
                 creator=creator_listing.creator,
@@ -440,14 +515,14 @@ def dashboard_creator_order_complete(request, id=None):
             status=s_order.status
 
         )
-        
+
         as_order.save()
         s_order.delete()
 
     return redirect('dashboard')
 
 def dashboard_sponsor_order_complete(request, id=None):
-    
+
     order = AcceptedSponsorOrderModel.objects.get(id=id)
     order.status = 'complete'
     order.save()

@@ -46,14 +46,15 @@ def creator_marketplace(request):
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         creator_listings = creator_listings.filter(niche__in=niche_query)
 
-
-    profile = Profile.objects.get(user=request.user)
-
     watching = []
 
-    for listing in creator_listings:
-        if (listing in profile.creators_watched.all()):
-            watching.append(listing)
+    if (request.user.is_authenticated):
+        profile = Profile.objects.get(user=request.user)
+
+
+        for listing in creator_listings:
+            if (listing in profile.creators_watched.all()):
+                watching.append(listing)
 
     context = {
         'creator_listings': creator_listings,
@@ -213,8 +214,6 @@ def sponsor_marketplace(request):
 
     niche_query = request.GET.getlist('niche')
 
-    profile = Profile.objects.get(user=request.user)
-
     niches = {
         "Business": "",
         "Educational": "",
@@ -239,11 +238,12 @@ def sponsor_marketplace(request):
 
     watching = []
 
-    for listing in sponsor_listings:
-        print('1--- ', listing)
-        if (listing in profile.sponsors_watched.all()):
-            watching.append(listing)
-            print('2---', listing)
+    if (request.user.is_authenticated):
+        profile = Profile.objects.get(user=request.user)
+
+        for listing in sponsor_listings:
+            if (listing in profile.sponsors_watched.all()):
+                watching.append(listing)
 
     context = {
         'sponsor_listings': sponsor_listings,

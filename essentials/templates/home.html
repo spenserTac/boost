@@ -2,66 +2,7 @@
 
 {% block content %}
 
-
-    <!--
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-
-          <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">Welcome To Boost</h1>
-            <p class="lead font-weight-normal">Take a look around the site. See if this is somthing that you'd use for your
-                blog and/or business. This is just the prototype of the prototype, so keep that in mind.</p>
-            <a class="btn btn-outline-secondary" href="#">Creator Marketplace</a>
-            <a class="btn btn-outline-secondary" href="#">Sponsor Marketplace</a>
-          </div>
-
-          <div class="product-device box-shadow d-none d-md-block"></div>
-          <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-
-        </div>
-    
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-
-            <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 w-100 text-center text-white overflow-hidden">
-
-              <div class="my-3 py-3">
-                <h2 class="display-5">Creators</h2>
-                <p class="lead">To get sponsors to find you, you first need to make a listing. Click the button below to get started.</p>
-                <br>
-                <a href="{% url 'blog_listing' %}"><button class="btn my-2 my-sm-0 mx-4" style="background-color: #8bd8bd;" type="submit">Make a creator listing</button></a>
-              </div>
-
-
-              
-              <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-              </div>
-               
-            
-            </div>
-
-
-            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 w-100 text-center overflow-hidden">
-
-              <div class="my-3 p-3">
-                <h2 class="display-5">Sponsors</h2>
-                <p class="lead">To sponosr creators, you need to make a listing first. Click the button below to get started.</p>
-                <br>
-                <a href="{% url 'sponsor_listing' %}"><button class="btn my-2 my-sm-0 mx-4" style="background-color: #8bd8bd;" type="submit">Make a sponsor listing</button></a>
-              </div>
-              
-
-              
-              <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-              </div>
-              
-            
-            </div>
-        </div>
-    -->
-
-
-    
-
-    <!-- Only shows up for LG and bigger (computers) -->
+    <!-- Only shows up for LG and bigger - Top Background Thing (computers) -->
     <div class="view d-none d-lg-block" style=" height: 500px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light align-items-center">
@@ -79,19 +20,12 @@
                     <p class="lead font-weight-normal">An Open and Free Marketplace For Creators and Sponsors To Connect. There's a deal for everyone.</p>
 
                     <br>
-                    
+
                     <a class="btn btn-light btn-lg px-3 mr-2" href="{% url 'creator_marketplace' %}">Creator Marketplace</a>
                     <a class="btn btn-light btn-lg px-3 ml-2" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
-                    
+
                 </div>
 
-                <!--
-                <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s"><strong>Welcome To Boost</strong></h1>
-                <br>
-                <h5 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Open and Free Sponsorship Marketplace</strong></h5>
-                <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">portfolio</a>
-                <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">About me</a>
-                  -->
               </div>
               <!--Grid column-->
             </div>
@@ -102,9 +36,9 @@
         <!-- Mask & flexbox options-->
     </div>
       <!-- Full Page Intro -->
-    
 
-      <!-- Only shows up for MD and smaller (everything else) -->
+
+      <!-- Only shows up for MD and smaller - Top Background Thing (everything else) -->
       <div class="view d-lg-none" style=" height: 400px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light align-items-center">
@@ -132,245 +66,88 @@
       </div>
 
 
-
-
-
-<!--
-  <div class="container">
-
-    
-    <div class="row mx-1">
-
-        
-        <div class="col-md-12 mb-4">
-            <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2832%29.jpg);">
-                <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                    <div>
-                        <h6 class="purple-text"><i class="fas fa-plane"></i><strong> Travel</strong></h6>
-                        <h3 class="card-title py-3 font-weight-bold"><strong>This is the card title</strong></h3>
-                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                            Odit sed qui, dolorum!</p>
-                        <a class="btn btn-secondary btn-rounded"><i class="far fa-clone left"></i> View project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
-        
-        <div class="col-md-6 mb-4">
-            <div class="card card-image" style="background-size: contain ; background-image: url(https://assets.entrepreneur.com/content/3x2/2000/1394152735-6-ways-analyze-creative-ideas.jpg);">
-                <div class=" mask rgba-black-strong text-black text-center d-flex align-items-center py-5 px-4">
-                    <div>
-                        <h6 class="pink-text"><i class="fas fa-chart-pie"></i><strong> Marketing</strong></h6>
-                        <h3 class="card-title py-3 font-weight-bold"><strong>This is the card title</strong></h3>
-                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                            Odit sed qui, dolorum!</p>
-                        <a class="btn btn-pink btn-rounded"><i class="far fa-clone left"></i> View project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6 mb-4">
-            <div class="card card-image" style="background-size: contain ; background-image: url(https://reputationtoday.in/wp-content/uploads/2018/04/business-growth.jpg);">
-                <div class="text-black text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                    <div>
-                        <h6 class="green-text"><i class="far fa-eye"></i><strong> Entertainment</strong></h6>
-                        <h3 class="card-title py-3 font-weight-bold"><strong>This is the card title</strong></h3>
-                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                            Odit sed qui, dolorum!</p>
-                        <a class="btn btn-success btn-rounded"><i class="far fa-clone left"></i> View project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
-    </div>
-    
-    -->
-
-
-
-
-
-
-    <!-- 
-    <div class="d-none d-lg-block">
-
-        <div class="jumbotron">
-            <h1 class="display-3">Hey {% if user.first_name %} {{ user.first_name }}{% endif %}, thanks for checking out my web app!</h1>
-
-            <hr class="my-4">
-
-            <h3>
-                Take a look around the site. See if this is somthing that you'd use for your
-                blog and/or business. This is just the prototype of the prototype, so keep that in mind.
-            </h3> 
-
-            <br>
-            
-            <h3>
-                I'm looking for your opinion on the concept, not so much feature (like if this is somthing 
-                you'd use, is the concept confusing, etc.).
-            </h3>
-
-            <br>
-
-            <h3>
-                Below is a list of imporvments that I know need to be made.
-            </h3>
-
-            <br>
-
-            <h3>
-                If you can't figure out what the business is, click the button below (probably not a good sign for me)
-            </h3>
-
-            <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal" data-target="#exampleModalCenter">
-                Business Info
-            </button>
-            
-            Modal 
-
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                    ...
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <br>
-            
-            <hr>
-            
-            <h5>
-                Improvments:
-                    Marketplace: 
-                        1. Improve filter system
-                    Listing Creation:
-                        1. POO
-            </h5>
-            
-            <br>
-            <br>
-
-            <p>If you have any improvments or features I could add, just click the button below. Thanks!</p>
-            <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{% url 'feature_add' %}" role="button">Response/Opinion</a>
-            </p>
-        </div>
-
-    </div>
-
-    <div class="d-lg-none ">
-
-        <div class="jumbotron">
-            <h1 class="display-6 text-center">Hey {% if user.first_name %} {{ user.first_name }}{% endif %}, thanks for checking out my web app!</h1>
-
-            <hr class="my-4">
-
-            <h3 class="font-weight-light text-center">
-                Take a look around the site. See if this is somthing that you'd use for your
-                blog and/or business. This is just the prototype of the prototype, so keep that in mind.
-            </h3> 
-
-            <br>
-            
-            <h3 class="font-weight-light text-center">
-                I'm looking for your opinion on the concept, not so much feature (like if this is somthing 
-                you'd use, is the concept confusing, etc.).
-            </h3>
-
-            <br>
-
-            <h3 class="font-weight-light text-center">
-                Below is a list of imporvments that I know need to be made.
-            </h3>
-
-            <br>
-
-            <h3 class="font-weight-light text-center">
-                If you can't figure out what the business is, click the button below (probably not a good sign for me)
-            </h3>
-
-            <br>
-
-            <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal" data-target="#exampleModalCenter">
-                Business Info
-            </button>
-            
-            <!-- Modal -->
-
-            
         <div class="container">
 
             <hr class="my-5">
 
+            <h1 class="display-3 font-weight-bold text-center">Choose Your Path</h1>
+            <hr style="width: 30%;">
+            <br>
+            <br>
 
             <div class="row">
 
                 <div class="col">
-                  
-                    <div class="jumbotron text-center">
-                        <h1 class="display-4 font-weight-bold">Creators</h1>
-                        <p class="lead">creators ... blah blah blah</p>
+
+                    <div class="jumbotron text-center border shadow-lg">
+                        <h1 class="display-4 font-weight-bold">Creator</h1>
+                        <p class="lead">Those who create content.</p>
                         <hr class="my-4">
-                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+                        <h4 class="font-weight-bold">Create a Listing and Get Sponsored</h4>
+                        <p class="grey-text">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+
+                        <br>
+
+                        <h4 class="font-weight-bold">Get Offers</h4>
+                        <p class="grey-text">When a sponsor likes your listing, they can make an offer, which you can accept or decline.</p>
+
+                        <br>
+
+                        <h4 class="font-weight-bold">Get Paid</h4>
+                        <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
+
                         <br>
                         <p class="lead">
-                          <a class="btn btn-primary btn-lg" href="#" role="button">Make a Creator Listing</a>
+                          <a class="btn btn-primary btn-lg" href="{% url 'blog_listing' %}" role="button">Make a Creator Listing</a>
                         </p>
+
                       </div>
 
                 </div>
 
                 <div class="col">
 
-                    <div class="jumbotron text-center">
-                        <h1 class="display-4 font-weight-bold">Sponsors</h1>
-                        <p class="lead">THink of somthing good</p>
+                    <div class="jumbotron text-center border shadow-lg">
+                        <h1 class="display-4 font-weight-bold">Sponsor</h1>
+                        <p class="lead">Those who seek advertisement.</p>
                         <hr class="my-4">
-                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+                        <h4 class="font-weight-bold">Create a Listing and Attract Creators</h4>
+                        <p class="grey-text">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
+
+                        <br>
+
+                        <h4 class="font-weight-bold">Get Offers</h4>
+                        <p class="grey-text">When a sponsor likes your listing, they can make an offer, which you can accept or decline.</p>
+
+                        <br>
+
+                        <h4 class="font-weight-bold">Get Paid</h4>
+                        <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
+
                         <br>
                         <p class="lead">
-                          <a class="btn btn-primary btn-lg" href="#" role="button">Make a Sponsor Listing</a>
+                          <a class="btn btn-primary btn-lg" href="{% url 'sponsor_listing' %}" role="button">Make a Sponsor Listing</a>
                         </p>
                       </div>
 
                 </div>
-            
+
             </div>
 
             <br>
             <br>
             <br>
-            
-            
-            
+
+
+
 
             <div class="row wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
 
                 <!--Grid column-->
                 <div class="col-lg-6 col-md-12 px-4">
-      
+
                   <!--First row-->
                   <div class="row">
                     <div class="col-1 mr-3">
@@ -382,9 +159,9 @@
                     </div>
                   </div>
                   <!--/First row-->
-      
+
                   <div style="height:30px"></div>
-      
+
                   <!--Second row-->
                   <div class="row">
                     <div class="col-1 mr-3">
@@ -397,9 +174,9 @@
                     </div>
                   </div>
                   <!--/Second row-->
-      
+
                   <div style="height:30px"></div>
-      
+
                   <!--Third row-->
                   <div class="row">
                     <div class="col-1 mr-3">
@@ -411,13 +188,13 @@
                     </div>
                   </div>
                   <!--/Third row-->
-      
+
                 </div>
                 <!--/Grid column-->
-      
+
                 <!--Grid column-->
                 <div class="col-lg-6 col-md-12">
-      
+
                   <h4 class="font-weight-bold text-center mb-4">Watch our "5 min Quick Start" tutorial</h4>
                   <p class="h5 text-center mb-4">(This is just a placeholder video.)</p>
                   <div class="embed-responsive embed-responsive-16by9">
@@ -425,7 +202,7 @@
                   </div>
                 </div>
                 <!--/Grid column-->
-      
+
             </div>
 
             <br>
@@ -436,7 +213,7 @@
             <p class="h5 text-center mb-4">More stuff will be added to this page.</p>
 
 
-            
+
         </div>
 
 

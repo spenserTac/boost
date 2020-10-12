@@ -10,10 +10,10 @@
             <div class="col-md-8 p-lg-5 mx-auto my-auto">
                 <h1 class="font-weight-bold display-1">Feature Request</h1>
                 <br>
-                <p class="lead font-weight-normal">A place to tell us about any features you'd like added.</p>                    
+                <p class="lead font-weight-normal">A place to tell us about any features you'd like added.</p>
             </div>
           </div>
-        </div>         
+        </div>
       </div>
     </div>
 
@@ -35,24 +35,78 @@
 
   <hr class="my-5">
 
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <div class="col">
-        
+        <div class="col-lg-7 col-xs-12 align-self-center">
+
             <form method="POST">
 
                 {% csrf_token %}
 
                 <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-                  
+
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email to contact you">
                   </div>
 
+
+                  <p>
+                    <a class="btn btn-primary py-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Click Here If You're a Creator</a>
+                    <button class="btn btn-primary py-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Click Here If You're a Sponsor</button>
+                  </p>
+                  <div class="row mb-2">
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <div class="card card-body">
+                            Share your feedback on concepts and features of the Boost platform. I'm looking for feedback on usability, concepts, flow-process, etc.
+                            Please answer these three questions and feel free to provide extra feedback if you want.
+                            <br>
+                            <br>
+                            <ul style="list-style-type: none; padding-left: 0;">
+                              <li>1. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
+                              <li>2. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
+                              <li>3. </li>
+                            </ul>
+                            <br>
+                            <b>Features Under Construction (no feedback needed): </b> 1. creators sending in files for review (files are not viewable). 2. ...
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample2">
+                        <div class="card card-body">
+                          Share your feedback on concepts and features of the Boost platform. I'm looking for feedback on usability, concepts, flow-process, etc.
+                          Please answer these three questions and feel free to provide extra feedback if you want.
+                          <br>
+                          <br>
+                          <ul style="list-style-type: none; padding-left: 0;">
+                            <li>1. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
+                            <li>2. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
+                            <li>3. </li>
+                          </ul>
+                          <br>
+                          <b>Features Under Construction (no feedback needed): </b> 1. creators sending in files for review (files are not viewable). 2. ...
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
                   <div class="form-group">
                       <label for="exampleFormControlTextarea1">Describe the feature(s) you'd like added</label>
-                      <textarea class="form-control" name="feature" id="exampleFormControlTextarea1" rows="6"></textarea>
+                      <textarea class="form-control" name="feature" id="exampleFormControlTextarea1" rows="6">
+1.
+2.
+3.
+
+Extra Feedback:
+</textarea>
                   </div>
                 </div>
 
@@ -60,9 +114,9 @@
                   <br>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                
+
             </form>
-              
+
       </div>
 
 </div>

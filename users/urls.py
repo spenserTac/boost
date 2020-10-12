@@ -28,6 +28,10 @@ urlpatterns = [
     path('dashboard/caccept/<int:id>/', views.dashboard_creator_order_accept, name='dashboard_creator_order_accept'),
     path('dashboard/cdecline/<int:id>/', views.dashboard_creator_order_decline, name='dashboard_creator_order_decline'),
 
+    path('dashboard/review/<int:id>/', views.dashboard_send_review, name='dashboard_send_review'),
+    path('dashboard/faccept/<int:id>/', views.dashboard_s_acc, name='dashboard_s_acc'),
+    path('dashboard/sedit/<int:id>/', views.dashboard_s_edit, name='dashboard_s_edit'),
+
     path('dashboard/saccept/<int:id>/', views.dashboard_sponsor_order_accept, name='dashboard_sponsor_order_accept'),
     path('dashboard/sdecline/<int:id>/', views.dashboard_sponsor_order_decline, name='dashboard_sponsor_order_decline'),
 

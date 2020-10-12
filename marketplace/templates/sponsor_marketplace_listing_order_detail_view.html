@@ -10,7 +10,7 @@
           <div class="col-md-8 p-lg-5 mx-auto my-auto">
               <h1 class="font-weight-bold display-1">Order Details</h1>
               <br>
-              <p class="lead font-weight-normal">This is where you'll give the sponsor some details for what you can offer.</p>
+              <p class="lead font-weight-normal">This is where you'll give the sponsor some details on your offer.</p>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
             <br>
             <h1 class="font-weight-bold display-4">Order Details</h1>
             <br>
-            <p class="lead font-weight-normal">This is where you'll give the sponsor some details for what you can offer.</p>
+            <p class="lead font-weight-normal">This is where you'll give the sponsor some details on your offer.</p>
           </div>
         </div>
     </div>
@@ -46,14 +46,18 @@
               {% csrf_token %}
 
 
-                <h1 class="font-weight-normal text-center">Choose which of your listings you'd like to offer to this Sponsor</h1>
+                <h1 class="font-weight-normal text-center">Choose the listing you'd like to offer this Sponsor</h1>
                 <br>
 
                   <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
                     <div class="form-row">
                       <div class="form-group col-md-12">
-                        <span>Don't have a listing? Create one if you're a <a href="{% url 'sponsor_listing' %}">sponsor</a> or a <a href="{% url 'blog_listing' %}">creator</a></span>
+                        <label for="exampleFormControlTextarea1">
+                            <small id="emailHelp" class="form-text text-muted">
+                              Don't have a listing? Create one <a href="{% url 'blog_listing' %}">here</a>.
+                            </small>
+                        </label>
                         <select name="buyer_listing" id="inputListing" class="form-control" required>
                           <option selected>{{ prev_s_order.buyer_listing }}</option>
 
@@ -77,16 +81,22 @@
 
 
                   <!-- Input for the buyers requested service -->
-                  <h1 class="font-weight-normal text-center">Choose which services you're willing to do</h1>
+                  <h1 class="font-weight-normal text-center">Choose the service(s) you're offering</h1>
                   <br>
 
                   <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-
+                    <!--
                     <small>This should be a checkbox - sponsor will see what was checked in dashboard under sponsor orders</small>
                     <small>When they click accept, it will transfer them to a url to fill out what they want</small>
+                    -->
 
                     <div class="form-row">
                       <div class="form-group col-md-12">
+                        <label for="exampleFormControlTextarea1">
+                            <small id="emailHelp" class="form-text text-muted">
+                              Choose the service(s) you're interested in offering.
+                            </small>
+                        </label>
                         <select name="services_creator_is_willing_to_provide" id="inputService" class="form-control" required>
                           <option selected>{{ prev_s_order.services_creator_is_willing_to_provide }}</option>
                           <option>Review</option>
@@ -107,7 +117,7 @@
                   <br>
 
                     <!-- Input for service detail-->
-                    <h1 class="font-weight-normal text-center">Describe in detail what you'll be able to provide the sponsor</h1>
+                    <h1 class="font-weight-normal text-center">Give a description.</h1>
                     <br>
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">

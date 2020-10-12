@@ -44,7 +44,7 @@ class CreatorOrderModel(models.Model):
 
     buyer_listing = models.CharField(max_length=500, blank=True, null=True)
 
-    
+
     buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_s_listing_for_c_order")
     buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_c_listing_for_c_order")
 
@@ -88,7 +88,7 @@ class AcceptedCreatorOrderModel(models.Model):
 
     buyer_listing = models.CharField(max_length=500, blank=True, null=True)
 
-    
+
     buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_s_listing_for_c_order")
     buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_accepted_c_listing_for_c_order")
 
@@ -99,6 +99,14 @@ class AcceptedCreatorOrderModel(models.Model):
     status = models.CharField(max_length=100, blank=True, null=True)
 
     who_initiated_order = models.CharField(max_length=100, blank=True, null=True)
+
+    sponsor_approves = models.BooleanField(default=False, null=False)
+
+    turn = models.CharField(default='c', max_length=10, blank=True, null=True)
+
+    edits = models.CharField(max_length=10000, blank=True, null=True)
+
+    review_file = models.FileField(upload_to='boost/users/review/', max_length=100, default=None, null=True, blank=True)
 
     def __str__(self):
         return ('STATUS: ' + str(self.status) + ' | BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
@@ -124,6 +132,7 @@ class AcceptedSponsorOrderModel(models.Model):
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.sponsor_listing))
 
+
 class CompletedOrderModel(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='buyer_username_completed_creator_order')
     creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='creator_username_completed_creator_listing')
@@ -132,7 +141,7 @@ class CompletedOrderModel(models.Model):
 
     buyer_listing = models.CharField(max_length=500, blank=True, null=True)
 
-    
+
     buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_completed_s_listing_for_c_order")
     buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_completed_c_listing_for_c_order")
 
@@ -155,8 +164,6 @@ class SupportTicket(models.Model):
 
     def __str__(self):
         return('CREATOR: ' + str(self.creator) + 'EMAIL: ' + str(self.email))
-
-
 
 
 class FeatureTicket(models.Model):

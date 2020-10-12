@@ -21,11 +21,12 @@
                 <p>{{ message }}</p>
 
             {% endfor %}
+            <br>
 
             <br>
             <br>
 
-            <div class="col-auto d-flex justify-content-center">
+            <div class="col-lg-6 col-xs-12 d-flex justify-content-center">
                 <form method="POST">
 
                     {% csrf_token %}
@@ -66,7 +67,7 @@
                         <div class="text-center">
 
 
-                            <a href="{% provider_login_url "google" %}"><img src="https://ghnewshub.com/media/icons/social/large/google-signin-button.png" style="width: 30%; height: 30%;"></a>
+                            <a href="{% provider_login_url "google" %}"><img src="https://ghnewshub.com/media/icons/social/large/google-signin-button.png" style="width: 60%; height: 60%;"></a>
 
                         </div>
 
