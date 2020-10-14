@@ -20,7 +20,6 @@ class BlogListingCreationModel(models.Model):
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
     google_a_csv = models.FileField(upload_to='uploads/', default=None, null=True, blank=True)
-    paypal_email = models.CharField(max_length=300, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.blog_url or ""
