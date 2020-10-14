@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,9 +45,9 @@ INSTALLED_APPS = [
     # 3rd party
     # 'bootstrap_modal_forms',
     'django_filters',
-    
+
     'allauth',
-    'allauth.account', 
+    'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
@@ -155,3 +156,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
+#djnago_heroku.settings(locals())

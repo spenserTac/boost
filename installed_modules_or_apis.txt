@@ -27,3 +27,5 @@ pip install responses
 7. Oauth 2 Client
 (pip install --upgrade oauth2client)
 
+8. django-heroku
+
