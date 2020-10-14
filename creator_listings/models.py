@@ -13,7 +13,7 @@ class BlogListingCreationModel(models.Model):
     overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
     audience_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
     sponsor_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
-    
+
     email = models.CharField(max_length=300, default=None, null=True, blank=True)
     number = models.CharField(max_length=300, default=None, null=True, blank=True)
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
@@ -21,7 +21,6 @@ class BlogListingCreationModel(models.Model):
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
     google_a_csv = models.FileField(upload_to='uploads/', default=None, null=True, blank=True)
     paypal_email = models.CharField(max_length=300, default=None, null=True, blank=True)
-    creator_img = models.ImageField(upload_to='static/images', default=None, null=True, blank=True)
 
     def __str__(self):
         return self.blog_url or ""
