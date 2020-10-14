@@ -10,11 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='bloglistingcreationmodel',
-            name='creator_img',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to='uploads/'),
-        ),
+        
         migrations.AlterField(
             model_name='bloglistingcreationmodel',
             name='google_a_csv',
