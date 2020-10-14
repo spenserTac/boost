@@ -21,18 +21,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='bloglistingcreationmodel',
-            name='creator_img',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to=''),
-        ),
-        migrations.AddField(
-            model_name='bloglistingcreationmodel',
             name='overview_description',
             field=models.CharField(blank=True, default=None, max_length=50000, null=True),
-        ),
-        migrations.AddField(
-            model_name='bloglistingcreationmodel',
-            name='paypal_email',
-            field=models.CharField(blank=True, default=None, max_length=300, null=True),
         ),
         migrations.AddField(
             model_name='bloglistingcreationmodel',
