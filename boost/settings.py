@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
 
     # Put this here for google login
-    'django.contrib.sites',
+    #'django.contrib.sites',
 
     'django.contrib.messages',
     'django.contrib.staticfiles',
