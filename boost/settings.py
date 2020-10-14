@@ -137,6 +137,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
@@ -157,4 +158,4 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-#djnago_heroku.settings(locals())
+djnago_heroku.settings(locals())
