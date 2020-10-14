@@ -165,6 +165,8 @@ def creator_marketplace_listing_order_view(request, id=None):
             obj.buyer = buyer
             obj.creator = creator
             obj.creator_listing = listing
+            obj.payout = form.cleaned_data['payout']
+
 
             buyer_listing = form.cleaned_data['buyer_listing']
             creator_l = BlogListingCreationModel.objects.all()
@@ -178,6 +180,7 @@ def creator_marketplace_listing_order_view(request, id=None):
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_s = l
 
+            print('------------', form.cleaned_data)
             obj.save()
 
         return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
@@ -345,6 +348,7 @@ def sponsor_marketplace_listing_order_view(request, id=None):
             obj.buyer = buyer
             obj.creator = creator
             obj.sponsor_listing = listing
+
 
             buyer_listing = form.cleaned_data['buyer_listing']
             creator_l = BlogListingCreationModel.objects.all()

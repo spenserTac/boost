@@ -54,6 +54,8 @@ class CreatorOrderModel(models.Model):
     # Accepted, denied, or the default in review
     status = models.CharField(max_length=100, blank=True, null=True, default='In Review')
 
+    payout = models.CharField(max_length=10000, blank=True, null=True, default=0)
+
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
@@ -108,6 +110,8 @@ class AcceptedCreatorOrderModel(models.Model):
 
     review_file = models.FileField(upload_to='boost/users/review/', max_length=100, default=None, null=True, blank=True)
 
+    payout = models.CharField(max_length=10000,default=0, blank=True, null=True)
+
     def __str__(self):
         return ('STATUS: ' + str(self.status) + ' | BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
@@ -152,6 +156,8 @@ class CompletedOrderModel(models.Model):
     status = models.CharField(max_length=100, blank=True, null=True)
 
     who_initiated_order = models.CharField(max_length=100, blank=True, null=True)
+
+    payout = models.CharField(max_length=100000, blank=True, null=True)
 
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))

@@ -45,48 +45,148 @@
 
                 <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
+                  <div class="text-center">
+                    <small class="mx-auto">Feature requests will be answered within 12-24 hours.<br>All conversations will be held through given email.<br><br></small>
+                  </div>
+
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email to contact you">
                   </div>
 
 
-                  <p>
-                    <a class="btn btn-primary py-2" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Click Here If You're a Creator</a>
-                    <button class="btn btn-primary py-2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Click Here If You're a Sponsor</button>
+                  <p class="text-center my-4 mx-2">
+                    <a class="btn btn-warning py-2 m-1" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Click Here If You're a Creator</a>
+                    <button class="btn btn-warning py-2 m-1" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Click Here If You're a Sponsor</button>
                   </p>
-                  <div class="row mb-2">
+                  <div class="row">
                     <div class="col">
-                      <div class="collapse multi-collapse" id="multiCollapseExample1">
+                      <div class="collapse multi-collapse mb-5 border border-warning rounded" id="multiCollapseExample1">
                         <div class="card card-body">
+                          <h5 class="text-center">For Creator</h5>
+                          <br>
+                            This platform is supposed to connect creators and sponsors, through an open and free marketplace, designed to skip the tedious and time consuming
+                            task of trying to find sponsorship or quality content to sponsor. As of right now, only blogs are supported, but in the future, this
+                            platform will support every type of creator (YouTubers, Instagramers, etc.).<br><br>NOTE: If you initate an order (you contact the sponsor), when
+                            the order is finalized, Boost will take a service fee of 10%. If the sponsor initates the order, you'll recive the full payemnt (the sponsor
+                            pays a 10% service fee.)<br><br>
                             Share your feedback on concepts and features of the Boost platform. I'm looking for feedback on usability, concepts, flow-process, etc.
-                            Please answer these three questions and feel free to provide extra feedback if you want.
+                            <br><br>Please answer these three questions and feel free to provide extra feedback if you want, I'd really appreciate it.
+                            <br>
+
+                            <hr class="my-4 mx-auto" style="width: 55%;">
+
+                            <div class="row">
+                              <div class="col">
+                                <ul class="m-0" style="list-style-type: none; padding-left: 0;">
+                                  <li>1. Is this platform somthing you would use? Why or why not?</li>
+                                  <br>
+                                  <li>2. Is the presentation/layout of this webiste confusing in any way? If so, how?</li>
+                                  <br>
+                                  <li>3. Would you prefer using this platform for finding sponsorship over the traditional route (agency or cold calling/emailing)? Why?</li>
+                                  <br>
+                                  <li>4. Is the process of an order (accept/decline -> send content for sponsor to review -> edits or approved)
+                                    seem tedeous or do you like it for the assurance that the sponsor will approve of the content you made. Explain.</li>
+                                  <br>
+                                  <li>5. Do you like that the order is finalized through an escrow? Why?</li>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <hr class="my-4 mx-auto" style="width: 55%;">
+
+                            <h5>Features Under Construction (no feedback needed):</h5>
+                            <div class="row">
+                              <div class="col">
+                                <ul class="m-0" style="list-style-type: none; padding-left: 0;">
+                                  <li>1. creators sending in files for review (files are not viewable).</li>
+                                  <br>
+                                  <li>2. Filter system is not complete.</li>
+                                  <br>
+                                  <li>3. Escrow/payemnt process is not functional.</li>
+                                  <br>
+                                  <li>4. Creators Google Analytics is not functional.</li>
+                                  <br>
+                                  <li>5. Lisitng pictures are not working.</li>
+                                  <br>
+                                  <li>6. Account Page is not fully functional or doesn't look good.</li>
+                                  <br>
+                                  <li>7. There are no alerts when somthing happens (order is made, order is accepted, etc.)</li>
+                                </ul>
+                              </div>
+                            </div>
+
                             <br>
                             <br>
-                            <ul style="list-style-type: none; padding-left: 0;">
-                              <li>1. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
-                              <li>2. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
-                              <li>3. </li>
-                            </ul>
-                            <br>
-                            <b>Features Under Construction (no feedback needed): </b> 1. creators sending in files for review (files are not viewable). 2. ...
+
+                            <h5 class="text-center">Thank You Very Much {{ user.first_name }}!</h5>
+
                         </div>
                       </div>
                     </div>
+
+                  </div>
+                  <div class="row">
                     <div class="col">
-                      <div class="collapse multi-collapse" id="multiCollapseExample2">
+                      <div class="collapse multi-collapse mb-5 border border-warning rounded" id="multiCollapseExample2">
                         <div class="card card-body">
+                          <h5 class="text-center">For Sponsor</h5>
+                          <br>
+                          This platform is supposed to connect creators and sponsors, through an open and free marketplace, designed to skip the tedious and time consuming
+                          task of trying to find sponsorship or quality content to sponsor. As of right now, only blogs are supported, but in the future, this
+                          platform will support every type of creator (YouTubers, Instagramers, etc.).<br><br>NOTE: If you initate an order (you contact the creator), when
+                          the order is finalized, Boost will require a service fee of 10%. If the creator initates the order, there's no fee (We take a 10% service fee on the creators side.)<br><br>
                           Share your feedback on concepts and features of the Boost platform. I'm looking for feedback on usability, concepts, flow-process, etc.
-                          Please answer these three questions and feel free to provide extra feedback if you want.
+                          <br><br>Please answer these three questions and feel free to provide extra feedback if you want.
+
+                          <br>
+                          <hr class="my-4 mx-auto" style="width: 55%;">
+
+                          <div class="row">
+                            <div class="col">
+                              <ul class="m-0" style="list-style-type: none; padding-left: 0;">
+                                <li>1. Is this platform somthing you would use? Why or why not?</li>
+                                <br>
+                                <li>2. Is the presentation/layout of this webiste confusing in any way? If so, how?</li>
+                                <br>
+                                <li>3. Would you prefer using this platform for finding sponsorship over the traditional route (agency or cold calling/emailing)? Why?</li>
+                                <br>
+                                <li>4. Is the process of an order (accept/decline -> send content for sponsor to review -> edits or approved)
+                                  seem tedeous or do you like it for the assurance that the sponsor will approve of the content you made. Explain.</li>
+                                <br>
+                                <li>5. Do you like that the order is finalized through an escrow? Why?</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <hr class="my-4 mx-auto" style="width: 55%;">
+
+                          <h5>Features Under Construction (no feedback needed):</h5>
+                          <div class="row">
+                            <div class="col">
+                              <ul class="m-0" style="list-style-type: none; padding-left: 0;">
+                                <li>1. creators sending in files for review (files are not viewable).</li>
+                                <br>
+                                <li>2. Filter system is not complete.</li>
+                                <br>
+                                <li>3. Escrow/payemnt process is not functional.</li>
+                                <br>
+                                <li>4. Creators Google Analytics is not functional.</li>
+                                <br>
+                                <li>5. Lisitng pictures are not working.</li>
+                                <br>
+                                <li>6. Account Page is not fully functional or doesn't look good.</li>
+                                <br>
+                                <li>7. There are no alerts when somthing happens (order is made, order is accepted, etc.)</li>
+                              </ul>
+                            </div>
+                          </div>
+
                           <br>
                           <br>
-                          <ul style="list-style-type: none; padding-left: 0;">
-                            <li>1. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
-                            <li>2. ssssssssssssssssssssssssssssssssssssss<br>ssssssssssssssssssssssssssss </li>
-                            <li>3. </li>
-                          </ul>
-                          <br>
-                          <b>Features Under Construction (no feedback needed): </b> 1. creators sending in files for review (files are not viewable). 2. ...
+
+                          <h5 class="text-center">Thank You very Much {{ user.first_name }}</h5>
+
                         </div>
                       </div>
                     </div>
@@ -94,16 +194,14 @@
 
 
 
-
-
-
-
                   <div class="form-group">
                       <label for="exampleFormControlTextarea1">Describe the feature(s) you'd like added</label>
-                      <textarea class="form-control" name="feature" id="exampleFormControlTextarea1" rows="6">
+                      <textarea class="form-control" name="feature" id="exampleFormControlTextarea1" rows="8">
 1.
 2.
 3.
+4.
+5.
 
 Extra Feedback:
 </textarea>

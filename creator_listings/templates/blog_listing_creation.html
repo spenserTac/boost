@@ -12,10 +12,10 @@
                 <div class="col-md-8 p-lg-5 mx-auto my-auto">
                     <h1 class="font-weight-bold display-1">Create A Blog Listing</h1>
                     <br>
-                    <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>                    
+                    <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>
                 </div>
               </div>
-            </div>         
+            </div>
         </div>
     </div>
 
@@ -35,8 +35,8 @@
 
 
     <div class="container">
-        
-            <hr class="my-5">    
+
+            <hr class="my-5">
 
             <div class="d-flex justify-content-center mx-3">
                 <form method="POST">
@@ -53,7 +53,7 @@
                                 <label for="InputwebsiteUrl">Blog's Name</label>
                                 <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="John Doe's Blog" required>
                             </div>
-                            
+
                         </div>
 
                         <div class="form-row">
@@ -79,15 +79,15 @@
                                     <option>Spanish</option>
                                     <option>German</option>
                                     <option>Chinese</option>
-                                    <option>Japanese</option>  
-                                    <option>Russian</option>   
-                                    <option>Italian</option>                 
+                                    <option>Japanese</option>
+                                    <option>Russian</option>
+                                    <option>Italian</option>
                                     <option>Other</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                
+
                     <br>
                     <br>
                     <hr>
@@ -107,9 +107,9 @@
                                     <option>Educational</option>
                                     <option>Entertainment</option>
                                     <option>Fashion</option>
-                                    <option>Food</option>  
-                                    <option>Health</option>   
-                                    <option>Lifestyle</option>                 
+                                    <option>Food</option>
+                                    <option>Health</option>
+                                    <option>Lifestyle</option>
                                     <option>Technology</option>
                                     <option>Travel</option>
                                     <option>Other</option>
@@ -118,7 +118,7 @@
                         </div>
 
                         <label>What Type Of Articles Are On Your Blog?</label>
-                        
+
                         <ul style="list-style: none;">
                             {% for type, id in types.items %}
                                 <li>
@@ -130,7 +130,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    
+
                     <br>
                     <br>
                     <hr>
@@ -138,7 +138,7 @@
                     <br>
 
                     <h1 class="font-weight-normal text-center">Describe Your Blog To Us</h1>
-                    
+
                     <br>
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
@@ -234,7 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
 
                     <br>
@@ -251,7 +251,7 @@
                         <small style="color: red;">These aren't required, but they're highly recommended.</small>
                         <br>
                         <br>
-                    
+
                         <div class="form-group col-md-12">
                             <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
                             <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email">
@@ -266,30 +266,12 @@
 
                     <br>
                     <br>
-                    <hr>
-                    <br>
-                    <br>
-
-                    <h2 class="font-weight-normal text-center">Payment</h2>
-                    <br>
-
-                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-
-                        <div class="form-group col-md-12">
-                            <label for="InputwebsiteUrl">PayPal Email You'd Like To Associate With This Listing</label>
-                            <input value="{{ listing.paypal_email }}" type="email" name="paypal_email" class="form-control" id="InputwebsiteUrl" placeholder="PayPal Email" required>
-                        </div>
-                    
-                    </div>
-
-                    <br>
-                    <br>
                     <br>
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Finish Listing</button>
                     </div>
-                    
+
                     <br>
 
                 </form>

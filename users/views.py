@@ -235,6 +235,7 @@ def dashboard_s_acc(request, id=None):
     listing.turn = 'c'
 
     listing.sponsor_approves = True
+    listing.status = 'Approved'
     listing.save()
 
     content = {
@@ -341,7 +342,8 @@ def dashboard_creator_order_accept(request, id=None):
             service=c_order.service,
             service_detailed=c_order.service_detailed,
             status=c_order.status,
-            who_initiated_order='sponsor'
+            who_initiated_order='sponsor',
+            payout=c_order.payout,
             )
 
         ac_order.save()
@@ -412,6 +414,7 @@ def dashboard_sponsor_order_accept(request, id=None):
 
         if (form.is_valid()):
             obj = form.save(commit=False)
+            obj.payout = form.cleaned_data['payout']
 
             order.status = 'Accepted - In Process'
 
@@ -432,7 +435,8 @@ def dashboard_sponsor_order_accept(request, id=None):
                 service_detailed=obj.service_detailed,
 
                 status='Accepted - In Progress',
-                who_initiated_order = 'creator'
+                who_initiated_order = 'creator',
+                payout = obj.payout,
                 )
 
             ac_order.save()
@@ -488,7 +492,8 @@ def dashboard_creator_order_complete(request, id=None):
             service=c_order.service,
             service_detailed=c_order.service_detailed,
             status=c_order.status,
-            who_initiated_order=c_order.who_initiated_order
+            who_initiated_order=c_order.who_initiated_order,
+            payout=c_order.payout
             )
 
         cc_order.save()
