@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
 
     # Put this here for google login
-
+    'django.contrib.sites',
 
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'django.contrib.sites',
+
 
     # user created apps
     'creator_listings',
