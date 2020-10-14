@@ -1,6 +1,3 @@
-import simplejson as json
-# self made python file
-
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
