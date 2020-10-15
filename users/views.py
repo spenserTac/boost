@@ -70,7 +70,7 @@ def signup(request):
             messages.success(request, 'User Created For: ' + user)
 
             return redirect('login')
-            #Make some messages for success and not success.
+            messages.error(request, 'Invalid Input For Password')
         context = {
             'form': form,
         }
