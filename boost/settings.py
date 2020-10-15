@@ -30,9 +30,9 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS').split(',')]
+ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS')]
 
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+#EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
 
 # Application definition
