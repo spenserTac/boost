@@ -201,18 +201,6 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
-def dashboard_blogger_listing_update(request, id=None):
-    listing = BlogListingCreationModel.objects.get(id=id)
-    context = {
-        'listing':listing
-    }
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST, instance=listing)
-        if form.is_valid():
-            form.save()
-
-        return redirect('home')
-    return render(request, 'blog_listing_creation.html', context)
 
 
 def dashboard_send_review(request, id=None):

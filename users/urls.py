@@ -12,10 +12,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('deleteaccount/', views.delete_account, name='delete_account'),
 
-    #Edit Creator Lisitngs
-    path('update/<int:id>/', views.dashboard_blogger_listing_update, name='dashboard_blog_listing_update'),
-    #path('delete/<int:id>/', views.dashboard_blogger_listing_delete, name='blog_listing_delete'),
-
     # Watching and unwatching listings
     path('dashboard/unwatch_c/<int:id>/', views.dashboard_unwatch_c, name='dashboard_unwatch_c'),
     path('dashboard/unwatch_s/<int:id>/', views.dashboard_unwatch_s, name='dashboard_unwatch_s'),
