@@ -70,6 +70,10 @@ def signup(request):
             messages.success(request, 'User Created For: ' + user)
 
             return redirect('login')
+        context = {
+            'form': form,
+        }
+        return render(request, 'signup.html', context)
 
     else:
         form = CustomUserCreationForm(request.POST)
