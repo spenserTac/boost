@@ -80,13 +80,6 @@
 
                 <div class="col-4 my-3">
 
-                    <br>
-                    <br>
-                    <div class="row mb-2">
-                      <h2 class="font-weight-bold ml-3">${{ listing.money }}</h2>
-                      <h4 class="font-weight-normal mt-2 ml-2">USD</h4>
-                    </div>
-
                     {% if following %}
                         <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
                     {% else %}
@@ -168,7 +161,6 @@
                 </div>
 
                 <div class="row mb-2">
-                  <h2 class="font-weight-bold ml-3">${{ listing.money }}</h2>
                   <h4 class="font-weight-normal mt-2 ml-2">USD</h4>
                 </div>
 
