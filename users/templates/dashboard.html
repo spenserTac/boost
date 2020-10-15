@@ -1624,7 +1624,7 @@
                                             <div class="row">
 
                                                 <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
-                                                <a href="{% url 'dashboard_blog_listing_update' id=listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
+                                                <a href="{% url 'blog_listing_update' id=personal_c_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
 
 
                                                 <!-- Button trigger modal -->
@@ -1681,7 +1681,7 @@
                                             <div class="row">
 
                                                 <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
-                                                <a><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
+                                                <a href="{% url 'sponsor_listing_update' id=personal_s_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
 
 
                                                 <!-- Button trigger modal -->
