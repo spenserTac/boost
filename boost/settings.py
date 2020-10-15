@@ -32,6 +32,8 @@ DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS').split(',')]
 
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+
 
 # Application definition
 
