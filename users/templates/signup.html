@@ -64,18 +64,19 @@
                                 <input name="password2" type="password" class="form-control" placeholder="confirm password" required>
                             </div>
 
+                            {% for message in messages %}
+
+                                <br>
+                                <b><p class="text-center mb-2" style="color: red;">{{ message }}</p></b>
+                                <b><p>Password Needs to be at leat 8 characters long and can't be entirely numeric.</p></b>
+                                <br>
+
+                            {% endfor %}
+
                             <div class="d-flex justify-content-center mb-2 mt-4">
                                 <span class="form-text text-muted" style="text-align: center;">Boost is protected and the <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a> apply.</span>
                             </div>
 
-                            {% for message in messages %}
-
-                                <br>
-                                <p class="text-center mb-2" style="color: red;">{{ message }}</p>
-                                <p>Password Needs to be at leat 8 characters long and can't be entirely numeric.</p>
-                                <br>
-
-                            {% endfor %}
 
                             <button type="submit" class="btn btn-block btn-primary mt-4 mx-1">Create Account</button>
                             <p class="ml-1 my-2">Have A Boost Account? </p><a class="ml-1 my-2" href="{% url 'login' %}">Login In Here.</a>
