@@ -11,11 +11,14 @@
     <div class="container">
 
       {% if messages %}
-      <h3>{{ messages }}</h3>
+      <ul class="messages">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
       <br>
       <br>
       {% endif %}
-
 
 
         <h1 class="font-weight-normal text-center display-3">Boost</h1>
