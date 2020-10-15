@@ -69,7 +69,8 @@ def signup(request):
             user = form.cleaned_data.get('username')
             messages.success(request, 'User Created For: ' + user)
 
-        return redirect('login')
+            return redirect('login')
+
     else:
         form = CustomUserCreationForm(request.POST)
         context = {
