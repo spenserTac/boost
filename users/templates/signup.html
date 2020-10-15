@@ -13,10 +13,12 @@
       {% if messages %}
       <ul class="messages">
           {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          <li>{{ message }}</li>
           {% endfor %}
       </ul>
       {% endif %}
+
+      <br>
 
         <h1 class="font-weight-normal text-center display-3">Boost</h1>
         <hr>
