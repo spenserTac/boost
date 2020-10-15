@@ -67,9 +67,8 @@
                             {% for message in messages %}
 
                                 <br>
-                                <br>
-                                <b><p class="text-center mb-2 mx-auto" style="color: red;">{{ message }}</p></b>
-                                <b><p class="text-center mx-auto">Password Needs to be at leat 8 characters long and can't be entirely numeric.</p></b>
+                                <p class="text-center mb-2 mx-auto font-weight-bold" style="color: red;">{{ message }}</p>
+                                <p class="text-center mx-auto font-weight-bold">Password Needs to be at leat 8 characters long and can't be entirely numeric.</p>
                                 <br>
 
                             {% endfor %}
