@@ -70,6 +70,7 @@ def signup(request):
             messages.success(request, 'User Created For: ' + user)
 
             return redirect('login')
+            #Make some messages for success and not success.
         context = {
             'form': form,
         }
