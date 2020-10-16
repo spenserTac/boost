@@ -106,7 +106,11 @@
                                 <li class="nav-item">
                                   <a class="nav-link active" style="color: black;">{{ listing.product }}</a>
                                 </li>
-                                
+                                {% if listing.url %}
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{ listing.url }}">{{ listing.url }}</a>
+                                  </li>
+                                {% endif %}
                                 <li class="nav-item">
                                   <a class="nav-link disabled" style="color: #636363;">Niche: {{ listing.niche }}</a>
                                 </li>
