@@ -84,6 +84,7 @@ def signup(request):
         }
         return render(request, 'signup.html', context)
 
+@login_required(login_url='login')
 def support_contact(request):
     if request.method == 'POST':
         form = SupportTicketForm(request.POST)
