@@ -166,7 +166,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                   <div class="card-body">
                                     {% for l in all_users_listings %}
-                                      <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l }}</a>
+                                      <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l.blog_name }}</a>
                                       <br>
                                     {% endfor %}
                                   </div>
