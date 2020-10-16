@@ -96,6 +96,7 @@ def support_contact(request):
 
     return render(request, 'support.html')
 
+@login_required(login_url='login')
 def feature_add(request):
     if request.method == 'POST':
 
