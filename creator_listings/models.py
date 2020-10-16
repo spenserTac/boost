@@ -9,12 +9,12 @@ class BlogListingCreationModel(models.Model):
     age = models.CharField(max_length=300, default=None, null=True, blank=True)
     monthly_views = models.CharField(max_length=300, default=None, null=True, blank=True)
 
-    tagline = models.CharField(max_length=120, default=None, null=True, blank=True)
-    overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
-    audience_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
-    sponsor_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
+    tagline = models.CharField(max_length=1000, default=None, null=True, blank=True)
+    overview_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
+    audience_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
+    sponsor_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
 
-    
+
     number = models.CharField(max_length=300, default=None, null=True, blank=True)
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
