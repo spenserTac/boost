@@ -30,7 +30,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS')]
+ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS').split(',')]
 
 #EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
@@ -166,6 +166,18 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+'''
+
+    Incase you get a "Site matching query does not exist" error,
+    run these commands in this projects root directory and then change the ID
+    to whatever is printed out.
+
+python manage.py  shell
+from django.contrib.sites.models import Site
+print(Site.objects.get(name='example.com').id)
+
+'''
+
+SITE_ID = 4
 
 django_heroku.settings(locals())
-SITE_ID = 1
