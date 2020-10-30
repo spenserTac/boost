@@ -22,7 +22,7 @@
 
     <!-- Nav Bar -->
     <!-- Either #243665 (Dark blue) or 4831d4 (purple) or #262626 (darkish black) -->
-    <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top" style="background-color: #262626;">
+    <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top shadow-sm" style="background-color: #262626;">
 
 
       <a class="py-2" href="{% url 'home' %}">
@@ -48,6 +48,7 @@
               </div>
             </li>
 
+            {% if user.profile.type == 'none' %}
             <li class="nav-item">
               <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
             </li>
@@ -55,6 +56,20 @@
             <li class="nav-item">
               <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
             </li>
+           {% endif %}
+
+            {% if user.profile.type == 'creator' %}
+            <li class="nav-item">
+              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
+            </li>
+           {% endif %}
+
+
+           {% if user.profile.type == 'sponsor' %}
+            <li class="nav-item">
+              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
+            </li>
+           {% endif %}
 
             <li class="nav-item">
               <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595; white-space: nowrap;" href="{% url 'feature_add' %}">Feature Request</a>

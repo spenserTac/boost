@@ -4,9 +4,12 @@ from django.contrib.auth.decorators import login_required
 
 from .models import SponsorListingCreationModel
 from .forms import SponsorListingCreationForm
+from users.models import Profile
 
 @login_required(login_url='login')
 def sponsor_listing_creation(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
 
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST or None)
@@ -16,8 +19,21 @@ def sponsor_listing_creation(request):
             form.save()
 
             return redirect('home')
-        
+
     return render(request, 'sponsor_listing_creation.html')
+
+
+@login_required(login_url='login')
+def sponsor_listing_creation_type_s(request):
+
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    profile.type = 'sponsor'
+    profile.save()
+
+    return redirect('sponsor_listing')
+
 
 @login_required(login_url='login')
 def sponsor_listing_update(request, id=None):
@@ -31,7 +47,7 @@ def sponsor_listing_update(request, id=None):
             form.save()
 
         return redirect('home')
-    return render(request, 'sponsor_listing_creation.html', context) 
+    return render(request, 'sponsor_listing_creation.html', context)
 
 @login_required(login_url='login')
 def sponsor_listing_delete(request, id=None):
@@ -42,4 +58,3 @@ def sponsor_listing_delete(request, id=None):
     listing.delete()
 
     return redirect('dashboard')
-    

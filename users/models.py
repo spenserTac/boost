@@ -23,6 +23,8 @@ class Profile(models.Model):
     creators_who_ordered_u = models.ManyToManyField(BlogListingCreationModel, blank=True, related_name='creators_who_ordered_u')
     sponsors_who_ordered_u = models.ManyToManyField(SponsorListingCreationModel, blank=True, related_name='sponsors_who_ordered_u')
 
+    type = models.CharField(max_length=320, default='none', null=True, blank=True)
+
     def __str__(self):
         return (str(self.user) + '\'s profile')
 

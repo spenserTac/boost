@@ -12,6 +12,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('deleteaccount/', views.delete_account, name='delete_account'),
 
+    path('dashboard/creator/', views.dashboard_type_c, name='dashboard_type_c'),
+    path('dashboard/sponsor/', views.dashboard_type_s, name='dashboard_type_s'),
+
     # Watching and unwatching listings
     path('dashboard/unwatch_c/<int:id>/', views.dashboard_unwatch_c, name='dashboard_unwatch_c'),
     path('dashboard/unwatch_s/<int:id>/', views.dashboard_unwatch_s, name='dashboard_unwatch_s'),

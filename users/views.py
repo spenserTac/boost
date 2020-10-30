@@ -84,6 +84,9 @@ def signup(request):
         }
         return render(request, 'signup.html', context)
 
+
+
+
 @login_required(login_url='login')
 def support_contact(request):
     if request.method == 'POST':
@@ -114,6 +117,11 @@ def feature_add(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+
+    #
+    # Basic Info
+    #
+
     user = User.objects.get(username=request.user.username) # current logged in user
     profile = Profile.objects.get(user=user) # current logged in users Profile
 
@@ -124,13 +132,25 @@ def dashboard(request):
     s_watch_len = s_watching.count()
     total_watch_len = c_watch_len + s_watch_len
 
-    # The logged in users creator listings
+
+
+    #
+    # Orders on users listings
+    #
+
+    # The logged in users creator listing orders
     c_orders = CreatorOrderModel.objects.filter(creator=user)
     c_orders_len = c_orders.count()
 
-    # The logged in users sponsor listings
+    # The logged in users sponsor listing orders
     s_orders = SponsorOrderModel.objects.filter(creator=user)
     s_orders_len = s_orders.count()
+
+
+
+    #
+    # Orders user has made
+    #
 
     # The creator and sponsor ORDERS the logged in user has made
     c_ordered = CreatorOrderModel.objects.filter(buyer=user) # profile.creators_u_ordered.all()
@@ -138,24 +158,53 @@ def dashboard(request):
     s_ordered = SponsorOrderModel.objects.filter(buyer=user) # profile.sponsors_u_ordered.all()
     s_ordered_len = s_ordered.count()
 
+
+
+    #
+    # Accepted Orders
+    #
+
     # The ACCEPTED creator and sponsor ORDERS the logged in user has made
     accepted_c_orders = AcceptedCreatorOrderModel.objects.filter(buyer=user)
+
+
+
+    # The orders that the logged in user has accepted whether they initiated or not
+    c_accepted_orders = AcceptedCreatorOrderModel.objects.filter(creator=user).exclude(status='escrow')
+    c_accepted_orders_len = c_accepted_orders.count()
+
+    c_accepted_orders_s = AcceptedCreatorOrderModel.objects.filter(buyer=user).exclude(status='escrow')
+    c_accepted_orders_len_s = c_accepted_orders_s.count()
+
+
+    # The orders that have gone to ESCROW status
+    c_accepted_orders_escrow = AcceptedCreatorOrderModel.objects.filter(creator=user, status='escrow')
+    c_accepted_orders_escrow_len = c_accepted_orders_escrow.count()
+
+    c_accepted_orders_escrow_s = AcceptedCreatorOrderModel.objects.filter(buyer=user, status='escrow')
+    c_accepted_orders_escrow_len_s = c_accepted_orders_escrow_s.count()
+
+
+
+
+    s_accepted_orders = AcceptedSponsorOrderModel.objects.filter(creator=user)
+    s_accepted_orders_len = s_accepted_orders.count()
+
+
+
 
     # The COMPLETED creator and sponsor ORDERS the logged in user has made
     completed_c_orders = CompletedOrderModel.objects.filter(creator=user)
 
-    # The orders that the logged in user has made
-    c_accepted_orders = AcceptedCreatorOrderModel.objects.filter(creator=user)
-    c_accepted_orders_len = c_accepted_orders.count()
-    s_accepted_orders = AcceptedSponsorOrderModel.objects.filter(creator=user)
-    s_accepted_orders_len = s_accepted_orders.count()
+
+
+
 
     # The created listings of each type (creator and sponsor), if they created any
     personal_creator_listings = user.bloglistingcreationmodel_set.all()
     p_c_listing_len = personal_creator_listings.count()
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
     p_s_listing_len = personal_sponsor_listings.count()
-
 
     context = {
 
@@ -184,6 +233,15 @@ def dashboard(request):
 
         'c_accepted_orders': c_accepted_orders,
         'c_accepted_orders_len': c_accepted_orders_len,
+
+        'c_accepted_orders_escrow': c_accepted_orders_escrow,
+        'c_accepted_orders_escrow_len': c_accepted_orders_escrow_len,
+        'c_accepted_orders_escrow_s': c_accepted_orders_escrow_s,
+        'c_accepted_orders_escrow_len_s': c_accepted_orders_escrow_len_s,
+
+        'c_accepted_orders_s': c_accepted_orders_s,
+        'c_accepted_orders_len_s': c_accepted_orders_len_s,
+
         's_accepted_orders': s_accepted_orders,
         's_accepted_orders_len': s_accepted_orders_len,
 
@@ -202,6 +260,32 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+
+
+@login_required(login_url='login')
+def dashboard_type_c(request):
+
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    profile.type = 'creator'
+    profile.save()
+
+    return redirect('dashboard')
+
+@login_required(login_url='login')
+def dashboard_type_s(request):
+
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    profile.type = 'sponsor'
+    profile.save()
+
+    return redirect('dashboard')
+
 
 
 
@@ -245,8 +329,17 @@ def dashboard_s_acc(request, id=None):
     listing.turn = 'c'
 
     listing.sponsor_approves = True
-    listing.status = 'Approved'
+    listing.status = 'escrow'
     listing.save()
+
+    #Put both Escrow.com PAY API scripts here (one for if the seller
+    # initiated the deal, and one for if the creator initieated the deal.
+    # The only difference between the two is which side the serverice fee is taken from.)
+
+    # listing.sponsor_link = r.json()['landing_page']
+    # listing.token = r.json()['token']
+    # listing.transaction_id = r.json()['transaction_id']
+    # listing.save()
 
     content = {
         'listing': listing,
