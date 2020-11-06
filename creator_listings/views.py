@@ -32,14 +32,12 @@ def blogger_listing_creation(request):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST)
 
-        print('before')
-        csv_file = request.FILES['google_a_csv']
-        print(csv_file.name)
-        print('after')
-
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).blog_type = type_query
+
+            if(form.save(commit=False).google_a_scv):
+                csv_file = request.FILES['google_a_csv']
 
             form.save()
 
@@ -125,7 +123,7 @@ def blogger_listing_update(request, id=None):
         'listing':listing
     }
     if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST, instance=listing)
+        form = BlogListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
             form.save()
 

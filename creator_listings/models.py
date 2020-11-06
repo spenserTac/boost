@@ -19,7 +19,16 @@ class BlogListingCreationModel(models.Model):
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
-    google_a_csv = models.FileField(upload_to='uploads/', default=None, null=True, blank=True)
+    def google_a_csv_upload_path(instance, filename):
+        # instance is the instance of the model.
+        # if user creates a listing, the try will fail, if they're updating, the try will pass.
+        try:
+            if instance.google_a_csv:
+                os.remove('media/listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename))
+                return 'listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename)
+        except:        
+            return 'listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename)
+    google_a_csv = models.FileField(upload_to=google_a_csv_upload_path, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.blog_url or ""
