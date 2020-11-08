@@ -200,6 +200,7 @@
                         <label>What Type Of Articles Are On Your Blog?</label>
 
                         <ul style="list-style: none;">
+                          <!--
                             {% for type, id in types.items %}
                                 <li>
                                     <div class="custom-control custom-checkbox">
@@ -208,7 +209,23 @@
                                     </div>
                                 </li>
                             {% endfor %}
+                          -->
+
+                            {% for btype in types %}
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{btype}}" name="types"
+                                    {% if btype in listing.blog_type %}
+                                        checked
+                                    {% endif %}
+                                  >
+                                <label class="form-check-label" for="defaultCheck1">
+                                  {{btype}}
+                                </label>
+                              </div>
+                           {% endfor %}
+
                         </ul>
+
                     </div>
 
                     <br>
@@ -301,7 +318,7 @@
                                       <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     {% endif %}
 
-                                  
+
 																</div>
 
 														</div>
@@ -376,6 +393,39 @@
                             <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
                             <input value="{{ listing.number }}" type="text" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
                         </div>
+
+
+
+
+                        <div class="form-group col-md-12">
+                          <label>Choose Which Notifications You'd Like To Recieve</label>
+                          <br>
+                          <small class="text-center">It's recommended that you choose all of them, so you'll be
+                            <br>
+                            notified about everything that happens to your listings.</small>
+
+                          <br>
+                          <br>
+
+
+                          {% for notification in notification_types %}
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_types"
+                              {% if notification in listing.notification_type %}
+                                  checked
+                              {% endif %}
+                              >
+                              <label class="form-check-label" for="defaultCheck1">
+                                {{notification}}
+                              </label>
+                            </div>
+                         {% endfor %}
+
+
+                      </div>
+
+
+
 
                     </div>
 

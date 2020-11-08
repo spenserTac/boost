@@ -19,6 +19,7 @@ class BlogListingCreationModel(models.Model):
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
+    notification_type = models.CharField(max_length=30000, default=None, null=True, blank=True)
     def google_a_csv_upload_path(instance, filename):
         # instance is the instance of the model.
         # if user creates a listing, the try will fail, if they're updating, the try will pass.

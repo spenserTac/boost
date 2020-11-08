@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from .decorators import user_is_entry_author
+
 from .models import BlogListingCreationModel
 from users.models import Profile
 from .forms import BlogListingCreationForm
@@ -16,18 +18,30 @@ def blogger_listing_creation(request):
         #return redirect('dashboard')
 
 
-    types = {
-        'Review': 1,
-        'Informative': 2,
-        'Discussion': 3,
-        'Tutorial': 4,
-        'Other': 5,
-    }
+    types = [
+        'Review',
+        'Informative',
+        'Discussion',
+        'Tutorial',
+        'Other',
+    ]
+
+    notification_types = [
+
+        'Initial',
+        'Accepted',
+        'Escrow',
+        'Completed'
+
+    ]
 
     context = {
         'types': types,
+        'notification_types': notification_types,
         'profile': profile,
     }
+
+    print(notification_types)
 
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST, request.FILES)
@@ -35,6 +49,9 @@ def blogger_listing_creation(request):
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).blog_type = type_query
+
+            form.save(commit=False).notification_type = request.POST.getlist('notification_types')
+            form.save(commit=False).blog_type = request.POST.getlist('types')
 
             form.save()
 
@@ -55,20 +72,47 @@ def creator_listing_creation_type_c(request):
 
 
 @login_required(login_url='login')
+@user_is_entry_author
 def blogger_listing_update(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
+
+
+    types = [
+        'Review',
+        'Informative',
+        'Discussion',
+        'Tutorial',
+        'Other',
+    ]
+
+    notification_types = [
+
+        'Initial',
+        'Accepted',
+        'Escrow',
+        'Completed'
+
+    ]
+
+
     context = {
-        'listing':listing
+        'listing':listing,
+        'types':types,
+        'notification_types': notification_types
     }
+
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
+            form.save(commit=False).notification_type = request.POST.getlist('notification_types')
+            form.save(commit=False).blog_type = request.POST.getlist('types')
             form.save()
 
         return redirect('home')
     return render(request, 'blog_listing_creation.html', context)
 
 @login_required(login_url='login')
+@user_is_entry_author
 def blogger_listing_delete(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     context = {
