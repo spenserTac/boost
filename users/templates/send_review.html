@@ -39,18 +39,20 @@
 
           <div class="col-lg-7 col-xs-12 align-self-center">
 
-              <form method="POST">
+              <form method="POST" enctype="multipart/form-data">
 
                   {% csrf_token %}
 
                   <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
-                    <h4>NOTE: As of right now, when you submit your PDF file,
-                    the file is not saved. This will be fixed later, but you can still go through
-                    the process.</h4>
+                    <h4>Choose File For Review</h4>
+                    <div class="input-group mb-3">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="review_file">
+                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                      </div>
+                    </div>
 
-                    <br>
-                    <br>
-
+                    <!--
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                     <label for="exampleFormControlTextarea1">Upload a PDF file of the content you created for the sponsor.</label>
                     <div class="input-group">
@@ -59,8 +61,9 @@
                                 Browse&hellip; <input id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').val($(this).val());">
                             </span>
                         </label>
-                        <input type="text" name="review_file" class="form-control" id="upload-file-info" readonly>
+                        <input type="file" name="review_file" class="form-control" id="upload-file-info">
                     </div>
+                  -->
 
                   </div>
 

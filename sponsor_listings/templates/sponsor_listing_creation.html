@@ -120,7 +120,7 @@
         <hr class="my-5">
 
         <div class="d-flex justify-content-center mx-3">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
@@ -189,6 +189,29 @@
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Creator Description</label>
                         <textarea class="form-control" name="creator_description" rows="6" placeholder="Tell us what you're looking for in a creator. 2-3 paragraph min."></textarea>
+                    </div>
+
+                    <label for="exampleFormControlFile1">Upload Listing Image</label>
+                    <br>
+
+                    <div class="input-group mb-3">
+
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                      </div>
+
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img">
+
+                            {% if listing.listing_img %}
+                                <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
+                            {% else %}
+                              <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                            {% endif %}
+
+                          </label>
+                        </div>
+
                     </div>
 
                 </div>

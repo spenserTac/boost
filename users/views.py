@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 
 from .forms import CustomUserCreationForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
@@ -288,7 +289,7 @@ def dashboard_type_s(request):
 
 
 
-
+#@permission_required("users.view_post")
 def dashboard_send_review(request, id=None):
     # 1. This is for the creator to send over the content they made to the sponsor
     #    so they can view it and approve it.
@@ -301,7 +302,7 @@ def dashboard_send_review(request, id=None):
 
     if(request.method == 'POST'):
 
-        form = SponsorReviewForm(request.POST)
+        form = SponsorReviewForm(request.POST, request.FILES)
 
         if form.is_valid():
             file = form.cleaned_data.get('review_file')
@@ -513,13 +514,14 @@ def dashboard_sponsor_order_accept(request, id=None):
 
     if (request.method == 'POST'):
         # add instance field for updating -> , instance=prev_c_order
-        form = CreatorOrderForm(request.POST or None)
+        form = CreatorOrderForm(request.POST or None, request.FILES)
 
         if (form.is_valid()):
             obj = form.save(commit=False)
             obj.payout = form.cleaned_data['payout']
 
             order.status = 'Accepted - In Process'
+            obj.s_content_file = form.cleaned_data['s_content_file']
 
             order.save()
 
@@ -540,6 +542,7 @@ def dashboard_sponsor_order_accept(request, id=None):
                 status='Accepted - In Progress',
                 who_initiated_order = 'creator',
                 payout = obj.payout,
+                s_content_file = obj.s_content_file,
                 )
 
             ac_order.save()

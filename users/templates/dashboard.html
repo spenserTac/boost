@@ -258,6 +258,9 @@
                                                 <div class="col-7  p-2 pl-4">
                                                     <h5>Order Details</h5>
                                                     <p>{{ c_order.service_detailed }}</p>
+                                                    <hr style="width: 50%;">
+                                                    <h5>Sponsor's Media</h5>
+                                                    <a href="{{MEDIA_URL}}{{c_order.s_content_file}}" target="_blank">Sponsor's Media</a>
                                                 </div>
 
                                             </div>
@@ -365,6 +368,10 @@
                                                 <div class="col-7  p-2 pl-4">
                                                     <h5>Order Details</h5>
                                                     <p>{{ c_accepted_order.service_detailed }}</p>
+
+                                                    <hr style="width: 50%;">
+                                                    <h5>Sponsor's Media</h5>
+                                                    <a href="{{MEDIA_URL}}{{c_accepted_order.s_content_file}}" target="_blank">Sponsor's Media</a>
 
                                                     {% if c_accepted_order.edits %}
                                                       <hr style="width: 50%;">
@@ -556,8 +563,9 @@
                                                 <p>{{ c_accepted_order.edits }}</p>
                                               {% endif %}
                                               <hr style="width: 50%;">
-                                              <h5>Creator's Content</h5>
-                                              <p>{{ c_accepted_order.review_file }} The PDF file that the creator sends will appear here.</p>
+                                              <h5>Creator's Content 1</h5>
+                                              <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}}" target="_blank">Content Sent In For Review</a>
+                                              <br>
                                               <br>
 
                                           </div>
@@ -565,7 +573,7 @@
                                       </div>
                                       <div class="d-flex justify-content-end">
                                           <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#approveModal">
-                                              Approve
+                                              Next Step
                                           </button>
 
                                           <!-- Modal -->
@@ -619,7 +627,7 @@
                                           in the DB will need to be updated with whatever they added (This will then show up in the "Accepted Sponsor Orders" section of the dash.)
                                           -->
                                           <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#editModal">
-                                              Edit/Change
+                                              Send Content In For Review
                                           </button>
 
                                           <!-- Modal -->
@@ -633,13 +641,13 @@
                                                       </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                          If you proceed, you'll be displaying what edits you'd like to give to the creator.
-                                                          If the creator accepts them, they'll send over the re-edited content, which you
-                                                          can decide to accept the content or edit the content.
+                                                          If you proceed, you'll be sending in the requested content in for review (the sponsor will review).
+                                                          If the sponsor accepts,an Escrow.com transaction will be initiated and you'll then be shown a "Next Step" button (in the "Orders In Escrow" portion of the dashboard),
+                                                          which will take you to the Escrow.com transaction details page, and further directins will be shown there.
                                                       </div>
                                                       <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                          <a href="{% url 'dashboard_s_edit' id=c_accepted_order.id %}"><button type="button" class="btn btn-primary mx-2">Edit/change</button></a>
+                                                          <a href="{% url 'dashboard_send_review' id=c_accepted_order.id %}"><button type="button" class="btn btn-primary mx-2">Send Content In For Review</button></a>
                                                       </div>
                                               </div>
                                               </div>
@@ -4149,8 +4157,9 @@
                                                       <p>{{ c_accepted_order.edits }}</p>
                                                     {% endif %}
                                                     <hr style="width: 50%;">
-                                                    <h5>Creator's Content</h5>
-                                                    <p>{{ c_accepted_order.review_file }} The PDF file that the creator sends will appear here.</p>
+                                                    <h5>Creator's Content 2</h5>
+                                                    <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}} target="_blank"">Creator's Content For Review</a>
+                                                    <br>
                                                     <br>
 
                                                 </div>
@@ -4317,8 +4326,9 @@
                                                 <p>{{ c_accepted_order.edits }}</p>
                                               {% endif %}
                                               <hr style="width: 50%;">
-                                              <h5>Creator's Content</h5>
-                                              <p>{{ c_accepted_order.review_file }} The PDF file that the creator sends will appear here.</p>
+                                              <h5>Creator's Content 3</h5>
+                                              <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}} target="_blank"">Creator's Content For Review</a>
+                                              <br>
                                               <br>
 
                                           </div>

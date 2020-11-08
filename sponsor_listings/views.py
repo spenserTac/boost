@@ -13,7 +13,7 @@ def sponsor_listing_creation(request):
 
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST or None)
-        print(form.errors, '______________________')
+
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save()
@@ -42,7 +42,7 @@ def sponsor_listing_update(request, id=None):
         'listing':listing
     }
     if request.method == 'POST':
-        form = SponsorListingCreationForm(request.POST, instance=listing)
+        form = SponsorListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
             form.save()
 

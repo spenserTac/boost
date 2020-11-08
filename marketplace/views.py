@@ -154,7 +154,7 @@ def creator_marketplace_listing_order_view(request, id=None):
 
     if (request.method == 'POST'):
         # add instance field for updating -> , instance=prev_c_order
-        form = CreatorOrderForm(request.POST, instance=prev_c_order)
+        form = CreatorOrderForm(request.POST, request.FILES, instance=prev_c_order)
 
         if (form.is_valid()):
             obj = form.save(commit=False)
@@ -163,6 +163,7 @@ def creator_marketplace_listing_order_view(request, id=None):
             obj.creator = creator
             obj.creator_listing = listing
             obj.payout = form.cleaned_data['payout']
+            obj.s_content_file = form.cleaned_data['s_content_file']
 
 
             buyer_listing = form.cleaned_data['buyer_listing']

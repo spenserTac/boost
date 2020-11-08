@@ -30,14 +30,11 @@ def blogger_listing_creation(request):
     }
 
     if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
+        form = BlogListingCreationForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).blog_type = type_query
-
-            if(form.save(commit=False).google_a_scv):
-                csv_file = request.FILES['google_a_csv']
 
             form.save()
 
@@ -55,65 +52,6 @@ def creator_listing_creation_type_c(request):
     profile.save()
 
     return redirect('blog_listing')
-'''
-@login_required(login_url='login')
-def blogger_listing_creation2(request):
-
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-        return redirect('blog_listing3')
-
-    return render(request, 'blog_listing_creation2.html')
-
-@login_required(login_url='login')
-def blogger_listing_creation3(request):
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-        return redirect('blog_listing4')
-
-    return render(request, 'blog_listing_creation3.html')
-
-@login_required(login_url='login')
-def blogger_listing_creation4(request):
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-        return redirect('blog_listing5')
-
-    return render(request, 'blog_listing_creation4.html')
-
-@login_required(login_url='login')
-def blogger_listing_creation5(request):
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-        return redirect('blog_listing6')
-
-    return render(request, 'blog_listing_creation5.html')
-
-@login_required(login_url='login')
-def blogger_listing_creation6(request):
-    if request.method == 'POST':
-        form = BlogListingCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-
-        return redirect('home')
-
-    return render(request, 'blog_listing_creation6.html')
-'''
-
 
 
 @login_required(login_url='login')

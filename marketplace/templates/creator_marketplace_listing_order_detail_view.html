@@ -42,7 +42,7 @@
 
           <div class="col-md-7 col-xs-10 mx-auto">
 
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
@@ -190,6 +190,50 @@
                     <br>
                     <br>
 
+                    <h1 class="font-weight-normal text-center">Extra Content For Creator</h1>
+                    <h1 class="font-weight-normal text-center">(One PDF File)</h1>
+                    <br>
+
+                    <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                      <div class="form-row">
+
+                        <!-- Add ability to add pictures/files and urls -->
+                        <br>
+                        <div class="form-group col-md-12">
+                          <label for="exampleFormControlTextarea1">
+                              <small id="emailHelp" class="form-text text-muted">
+                                  This is where you'll offer the creator some images or other things to better aid them in making content for you.
+                                  <br>
+                                  <br>
+                                  Remember, only one file is submitable, so we advice making it a PDF, containing all media that you'd like to show the creator.
+                              </small>
+
+                          </label>
+
+
+
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="s_content_file">
+
+                                {% if listing.s_content_file %}
+                                    <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
+                                {% else %}
+                                  <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                                {% endif %}
+
+                              </label>
+                            </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <br>
+                    <br>
+
+
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Finish Order</button>
                     </div>
@@ -198,63 +242,7 @@
                     <br>
                     <br>
 
-                    <!--
-                    <hr>
-                    <br>
-                    <h1>The PayPal Payment isn't finished,
-                      but instead of having the button above, this PayPal
-                      Payment will be used.
-                    </h1>
 
-                    <br>
-                    <br>
-
-                    <div>
-
-                      <div id="smart-button-container">
-                        <div style="text-align: center;">
-                          <div id="paypal-button-container"></div>
-                        </div>
-                      </div>
-
-                      <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
-                      <script>
-                        function initPayPalButton() {
-                          paypal.Buttons({
-                            style: {
-                              shape: 'rect',
-                              color: 'gold',
-                              layout: 'vertical',
-                              label: 'paypal',
-
-                            },
-
-                            type: {
-                              method: 'submit'
-                            },
-
-                            createOrder: function(data, actions) {
-                              return actions.order.create({
-                                purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
-                              });
-                            },
-
-                            onApprove: function(data, actions) {
-                              return actions.order.capture().then(function(details) {
-                                alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                              });
-                            },
-
-                            onError: function(err) {
-                              console.log(err);
-                            }
-                          }).render('#paypal-button-container');
-                        }
-                        initPayPalButton();
-                      </script>
-
-                    </div>
-                  -->
             </form>
 
           </div>

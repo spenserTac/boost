@@ -58,6 +58,21 @@ class CreatorOrderModel(models.Model):
 
     payout = models.CharField(max_length=10000, blank=True, null=True, default=0)
 
+
+    def s_content_file_path(instance, filename):
+        # instance is the instance of the model.
+        # if user creates a listing, the try will fail, if they're updating, the try will pass.
+        try:
+            if instance.s_content_file:
+                os.remove('media/orders/initial_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename))
+                return 'orders/initial_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+        except:
+            return 'orders/initial_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+
+    s_content_file = models.FileField(upload_to=s_content_file_path, default=None, null=True, blank=True)
+
+
+
     def __str__(self):
         return ('BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))
 
@@ -101,18 +116,35 @@ class AcceptedCreatorOrderModel(models.Model):
 
     # Accepted, denied, or the default in review
     status = models.CharField(max_length=100, blank=True, null=True)
-
     who_initiated_order = models.CharField(max_length=100, blank=True, null=True)
-
     sponsor_approves = models.BooleanField(default=False, null=False)
-
     turn = models.CharField(default='c', max_length=10, blank=True, null=True)
-
     edits = models.CharField(max_length=10000, blank=True, null=True)
-
-    review_file = models.FileField(upload_to='boost/users/review/', max_length=100, default=None, null=True, blank=True)
-
     payout = models.CharField(max_length=10000,default=0, blank=True, null=True)
+
+    def review_file_path(instance, filename):
+        # instance is the instance of the model.
+        # if user creates a listing, the try will fail, if they're updating, the try will pass.
+        try:
+            if instance.review_file:
+                os.remove('media/orders/escrow_orders/%s/review_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename))
+                return 'orders/escrow_orders/%s/review_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+        except:
+            return 'orders/escrow_orders/%s/review_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+    review_file = models.FileField(upload_to=review_file_path, default=None, null=True, blank=True)
+
+
+    def s_content_file_path(instance, filename):
+        # instance is the instance of the model.
+        # if user creates a listing, the try will fail, if they're updating, the try will pass.
+        try:
+            if instance.s_content_file:
+                os.remove('media/orders/acc_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename))
+                return 'orders/acc_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+        except:
+            return 'orders/acc_orders/%s/s_content_file/%s' % (str(instance.buyer.id)+'--'+str(instance.creator.id), filename)
+
+    s_content_file = models.FileField(upload_to=s_content_file_path, default=None, null=True, blank=True)
 
     def __str__(self):
         return ('STATUS: ' + str(self.status) + ' | BUYER: ' + str(self.buyer) + ' | CREATOR: ' + str(self.creator_listing))

@@ -42,7 +42,7 @@
 
         <div class="col-md-7 col-xs-10 mx-auto">
 
-          <form method="POST">
+          <form method="POST" enctype="multipart/form-data">
 
 
             {% csrf_token %}
@@ -147,7 +147,52 @@
                 </div>
                 </div>
 
+
+
                 <br>
+                <br>
+                <br>
+
+                <h1 class="font-weight-normal text-center">Extra Content For Creator</h1>
+                <h1 class="font-weight-normal text-center">(One PDF File)</h1>
+                <br>
+
+                <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
+                  <div class="form-row">
+
+                    <!-- Add ability to add pictures/files and urls -->
+                    <br>
+                    <div class="form-group col-md-12">
+                      <label for="exampleFormControlTextarea1">
+                          <small id="emailHelp" class="form-text text-muted">
+                              This is where you'll offer the creator some images or other things to better aid them in making content for you.
+                              <br>
+                              <br>
+                              Remember, only one file is submitable, so we advice making it a PDF, containing all media that you'd like to show the creator.
+                          </small>
+
+                      </label>
+
+
+
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="s_content_file">
+
+                            {% if listing.s_content_file %}
+                                <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
+                            {% else %}
+                              <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                            {% endif %}
+
+                          </label>
+                        </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
                 <br>
                 <br>
 

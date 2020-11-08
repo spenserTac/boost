@@ -9,7 +9,6 @@ class SponsorListingCreationModel(models.Model):
     niche = models.CharField(max_length=300, default=None, null=True, blank=True)
     money = models.CharField(max_length=300, default=None, null=True, blank=True)
     monthly_views_min = models.CharField(max_length=300, default=None, null=True, blank=True)
-    sponsor_img = models.FileField(upload_to='uploads/', default=None, null=True, blank=True)
 
     tagline = models.CharField(max_length=120, default=None, null=True, blank=True)
     overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
@@ -17,6 +16,17 @@ class SponsorListingCreationModel(models.Model):
     creator_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
 
     url = models.CharField(max_length=1000, null=True, blank=True)
+
+    def listing_img_path(instance, filename):
+        # instance is the instance of the model.
+        # if user creates a listing, the try will fail, if they're updating, the try will pass.
+        try:
+            if instance.listing_img:
+                os.remove('media/listings/sponsor/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.product, filename))
+                return 'listings/sponsor/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.product, filename)
+        except:
+            return 'listings/sponsor/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.product, filename)
+    listing_img = models.ImageField(upload_to=listing_img_path, height_field=None, width_field=None, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.product
