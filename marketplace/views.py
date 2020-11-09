@@ -20,6 +20,9 @@ def creator_marketplace(request):
 
     # Returns a list of all the names of the input tags that have been checked
     niche_query = request.GET.getlist('niche')
+    search_keywords = request.GET.getlist('search_bar')
+
+
 
     niches = {
         "Business": "",
@@ -43,6 +46,31 @@ def creator_marketplace(request):
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         creator_listings = creator_listings.filter(niche__in=niche_query)
 
+        print('ddddddddddddddd', type(niche))
+        print('ddddddddddddddd', type(niche_query))
+        print('ddddddddddddddd', niche)
+        print('ddddddddddddddd', niche_query)
+
+
+    def search_query_kw(list):
+        keywords = list[0]
+        new_list = keywords.split(" ")
+        return new_list
+
+
+    if search_keywords and search_query_kw(search_keywords)[0] != '':
+        print('===Searched words===', search_query_kw(search_keywords)) #['first', 'second']
+        print('---Searched afttr----', search_keywords) #['first second']
+        print('---target lsting kwds----', BlogListingCreationModel.objects.get(id=29).search_keywords) #['first second']
+
+
+
+        keywords = search_query_kw(search_keywords)
+
+        for keyword in keywords:
+            if search_keywords != "" and search_keywords is not None and len(search_keywords) != 0:
+                creator_listings = creator_listings.filter(search_keywords__in=keywords)
+
     watching = []
 
     if (request.user.is_authenticated):
@@ -56,7 +84,7 @@ def creator_marketplace(request):
     context = {
         'creator_listings': creator_listings,
         'niches': niches,
-        'watching': watching
+        'watching': watching,
         #'c_listing_filter': c_listing_filter,
     }
 

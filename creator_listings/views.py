@@ -46,12 +46,17 @@ def blogger_listing_creation(request):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST, request.FILES)
 
+
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).blog_type = type_query
 
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
             form.save(commit=False).blog_type = request.POST.getlist('types')
+
+            kw = form.cleaned_data['search_keywords']
+            form.save(commit=False).search_keywords = kw.split(", ")
+
 
             form.save()
 
@@ -95,10 +100,22 @@ def blogger_listing_update(request, id=None):
     ]
 
 
+    original_string = listing.search_keywords
+    characters_to_remove = "[]'"
+
+    new_string = original_string
+    for character in characters_to_remove:
+        new_string = new_string.replace(character, "")
+
+    kw = new_string.split()
+    search_kw = " ".join(kw)
+
+
     context = {
         'listing':listing,
         'types':types,
-        'notification_types': notification_types
+        'notification_types': notification_types,
+        'search_kw': search_kw,
     }
 
     if request.method == 'POST':
@@ -106,6 +123,10 @@ def blogger_listing_update(request, id=None):
         if form.is_valid():
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
             form.save(commit=False).blog_type = request.POST.getlist('types')
+
+            kw = form.cleaned_data['search_keywords']
+            form.save(commit=False).search_keywords = kw.split(", ")
+
             form.save()
 
         return redirect('home')

@@ -200,16 +200,7 @@
                         <label>What Type Of Articles Are On Your Blog?</label>
 
                         <ul style="list-style: none;">
-                          <!--
-                            {% for type, id in types.items %}
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck{{ id }}" name="blog_type" value="{{ type }}">
-                                        <label class="custom-control-label" for="customCheck{{ id }}">{{ type }}</label>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                          -->
+
 
                             {% for btype in types %}
                               <div class="form-check">
@@ -225,6 +216,23 @@
                            {% endfor %}
 
                         </ul>
+
+
+
+
+                      <div class="form-group">
+                          <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
+                          <br>
+                          <small class="font-weight-bold">
+                            Input search keywords here (seperated by single space) that are related
+                            <br>
+                            to your listing. This is how sponsors will search for your listings.
+                            <br>
+
+                          </small>
+
+                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: books, reading, words">{{ search_kw }}</textarea>
+                      </div>
 
                     </div>
 
@@ -259,6 +267,7 @@
                             <label for="exampleFormControlTextarea1">Sponsor Description</label>
                             <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell us what you're looking for in a sponsor. 2-3 paragraph min.">{{ listing.sponsor_description }}</textarea>
                         </div>
+
 
                         <br>
 
