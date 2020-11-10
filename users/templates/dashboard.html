@@ -382,7 +382,9 @@
                                                     {% if c_accepted_order.review_file %}
                                                       <hr style="width: 50%;">
                                                       <h5>Content Last Sent</h5>
-                                                      {{ c_accepted_order.file }} The PDF you've sent in for review will appear here.
+                                                      <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}}" target="_blank">File Last Sent</a>
+                                                      <br>
+                                                      <br>
                                                     {% else %}
                                                       <hr style="width: 50%;">
                                                       <h5>Content Last Sent</h5>
@@ -616,7 +618,7 @@
                                                       <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                           <!-- This url will need to be changed to one that changes the "sponsor_change" field in the order, and runs the escrow.com script for the sponsor's side. -->
-                                                          <a href="{% url 'dashboard_s_acc' id=c_accepted_order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
+                                                          <a href="{% url 'dashboard_c_next_step' id=c_accepted_order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
                                                       </div>
                                               </div>
                                               </div>
@@ -3891,6 +3893,8 @@
 {% elif user.profile.type == 'sponsor' %}
 <div class="container-fluid" style="background-color: #f2f3f6;">
 
+  <h1>{{token}}</h1>
+  <h1>{{idd}}</h1>
 
     <br>
     <br>
@@ -4158,7 +4162,7 @@
                                                     {% endif %}
                                                     <hr style="width: 50%;">
                                                     <h5>Creator's Content 2</h5>
-                                                    <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}} target="_blank"">Creator's Content For Review</a>
+                                                    <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}}" target="_blank">Creator's Content For Review</a>
                                                     <br>
                                                     <br>
 
@@ -4327,9 +4331,11 @@
                                               {% endif %}
                                               <hr style="width: 50%;">
                                               <h5>Creator's Content 3</h5>
-                                              <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}} target="_blank"">Creator's Content For Review</a>
+                                              <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}}" target="_blank">Creator's Content For Review</a>
                                               <br>
                                               <br>
+                                              <hr style="width: 50%;">
+                                              <a>Welcome</a>
 
                                           </div>
 

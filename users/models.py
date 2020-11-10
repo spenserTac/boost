@@ -122,6 +122,9 @@ class AcceptedCreatorOrderModel(models.Model):
     edits = models.CharField(max_length=10000, blank=True, null=True)
     payout = models.CharField(max_length=10000,default=0, blank=True, null=True)
 
+    token = models.BinaryField(max_length=1000, blank=True, null=True, editable=True)
+    transaction_id = models.BinaryField(max_length=1000, blank=True, null=True, editable=True)
+
     def review_file_path(instance, filename):
         # instance is the instance of the model.
         # if user creates a listing, the try will fail, if they're updating, the try will pass.

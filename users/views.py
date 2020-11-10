@@ -8,6 +8,8 @@ from .forms import CustomUserCreationForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
 CompletedOrderModel)
 
+from .functions.escrow_functions import *
+
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
@@ -207,6 +209,7 @@ def dashboard(request):
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
     p_s_listing_len = personal_sponsor_listings.count()
 
+
     context = {
 
 
@@ -331,21 +334,18 @@ def dashboard_s_acc(request, id=None):
 
     listing.sponsor_approves = True
     listing.status = 'escrow'
+
+    #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
+    escrow_t = escrow_sponsor_pays(listing.creator.username, listing.buyer.username, listing.payout, listing.creator_listing.blog_name)
+    print(escrow_t)
+    listing.token = encrypt_token(escrow_t["token"])
+    listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
     listing.save()
-
-    #Put both Escrow.com PAY API scripts here (one for if the seller
-    # initiated the deal, and one for if the creator initieated the deal.
-    # The only difference between the two is which side the serverice fee is taken from.)
-
-    # listing.sponsor_link = r.json()['landing_page']
-    # listing.token = r.json()['token']
-    # listing.transaction_id = r.json()['transaction_id']
-    # listing.save()
 
     content = {
         'listing': listing,
     }
-    return redirect('dashboard')
+    return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
 def dashboard_s_edit(request, id=None):
     # 1. There'll be form stuff here, and all this funciton is designed for is
@@ -372,6 +372,16 @@ def dashboard_s_edit(request, id=None):
     }
 
     return render(request, 's_edit.html', content)
+
+
+def dashboard_c_next_step(request, id=None):
+    escrow_order = AcceptedCreatorOrderModel.objects.get(id=id)
+    print('-----------------', type(escrow_order.token))
+    token = cipher_token(escrow_order.token)
+
+    t_id = cipher_id(escrow_order.transaction_id)
+
+    return redirect('https://www.escrow-sandbox.com/agree?tid=%s&token=%s' % (t_id, token), "_blank")
 
 #
 # Watch and unwatch feature on dashboard
@@ -448,6 +458,7 @@ def dashboard_creator_order_accept(request, id=None):
             status=c_order.status,
             who_initiated_order='sponsor',
             payout=c_order.payout,
+            s_content_file=c_order.s_content_file,
             )
 
         ac_order.save()
