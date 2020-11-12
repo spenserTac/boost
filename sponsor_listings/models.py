@@ -10,6 +10,9 @@ class SponsorListingCreationModel(models.Model):
     money = models.CharField(max_length=300, default=None, null=True, blank=True)
     monthly_views_min = models.CharField(max_length=300, default=None, null=True, blank=True)
 
+    email = models.CharField(max_length=300, default=None, null=True, blank=True)
+    number = models.CharField(max_length=300, default=None, null=True, blank=True)
+
     tagline = models.CharField(max_length=120, default=None, null=True, blank=True)
     overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
     audience_description = models.CharField(max_length=50000, default=None, null=True, blank=True)

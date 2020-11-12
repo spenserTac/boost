@@ -153,6 +153,75 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
     return r.json()
 
 
+def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_name):
+    r = requests.post(
+
+        'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
+        auth=('spenserdt@gmail.com', 'Greatdain445'),
+
+
+        json={
+            "parties": [
+                {
+                    "role": "broker",
+                    "customer": "me",
+                    "agreed": True
+                },
+                {
+                    "role": "buyer",
+                    "customer": sponsor_email,
+                    "agreed": True
+                },
+                {
+                    "role": "seller",
+                    "customer": creator_email,
+                    "agreed": True
+                }
+            ],
+            "currency": "usd",
+            "description": "This is desc. 1",
+            "items": [
+                {
+                    "title": "The escrow order of listing ???",
+                    "description": "You'll find the URL in the dashboard.",
+                    "type": "milestone",
+                    "inspection_period": 259200,
+                    "quantity": 1,
+                    "schedule": [
+                        {
+                            "amount": amount,
+                            "payer_customer": sponsor_email,
+                            "beneficiary_customer": creator_email
+                        }
+                    ]
+                },
+                {
+                    "type": "broker_fee",
+                    "schedule": [
+                        {
+                            "amount": "10",
+                            "payer_customer": creator_email,
+                            "beneficiary_customer": "me"
+                        }
+                    ]
+                },
+                {
+                    "type": "broker_fee",
+                    "schedule": [
+                        {
+                            "amount": 0,
+                            "payer_customer": sponsor_email,
+                            "beneficiary_customer": "me"
+                        }
+                    ]
+                }
+            ]
+        },
+    )
+
+    return r.json()
+
+
 '''
 r = requests.post(
 

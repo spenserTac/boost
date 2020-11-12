@@ -336,11 +336,18 @@ def dashboard_s_acc(request, id=None):
     listing.status = 'escrow'
 
     #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
-    escrow_t = escrow_sponsor_pays(listing.creator.username, listing.buyer.username, listing.payout, listing.creator_listing.blog_name)
-    print(escrow_t)
-    listing.token = encrypt_token(escrow_t["token"])
-    listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
-    listing.save()
+    if (listing.who_initiated_order == 'sponsor'):
+        escrow_t = escrow_sponsor_pays(listing.creator_listing.email, listing.buyers_listing_s.email, listing.payout, listing.creator_listing.blog_name)
+        print(escrow_t)
+        listing.token = encrypt_token(escrow_t["token"])
+        listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+        listing.save()
+    elif (listing.who_initiated_order == 'creator'):
+        escrow_t = escrow_creator_pays(listing.creator_listing.email, listing.buyers_listing_s.email, listing.payout, listing.creator_listing.blog_name)
+        print(escrow_t)
+        listing.token = encrypt_token(escrow_t["token"])
+        listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+        listing.save()
 
     content = {
         'listing': listing,
