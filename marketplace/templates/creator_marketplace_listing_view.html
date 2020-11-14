@@ -15,7 +15,15 @@
 
                       <div class="row">
                         <div class="col">
-                          <a class="nav-link pl-0" href="{{ listing.blog_url }}">{{ listing.blog_url }}</a>
+                          <a class="nav-link pl-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+
+                            {% if listing.blog_url.4 == "s" %}
+                              {{ listing.blog_url|slice:"8:" }}
+                            {% elif listing.blog_url.4 == ":" %}
+                              {{ listing.blog_url|slice:"7:" }}
+                            {% endif %}
+
+                          </a>
                           <h3 class="font-weight-normal pb-2" style="color: grey;">{{ listing.blog_name }}</h3>
                           <h4 class="pb-2">{{ listing.tagline }}</h4>
                           <img src="https://static.teamguru.com/data/images/thumb/180_da8e22ef6e.jpg" class="card-img-top">

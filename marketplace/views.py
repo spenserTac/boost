@@ -20,20 +20,35 @@ def creator_marketplace(request):
 
     # Returns a list of all the names of the input tags that have been checked
     niche_query = request.GET.getlist('niche')
-    search_keywords = request.GET.getlist('search_bar')
+    lang_query = request.GET.getlist('language')
+    searchbar_keywords = request.GET.getlist('search_bar')
+    blog_age_val = request.GET.get('blog_age_val')
+    reset_button = request.GET.get('reset_button')
 
+    if reset_button:
+        print('reset')
+        return redirect('creator_marketplace')
 
+    if blog_age_val is None:
+        blog_age_val = 0
+
+    creator_listings = creator_listings.filter(age__gt=blog_age_val)
 
     niches = {
-        "Business": "",
+        "Apparel & Accessories": "",
+        "Arts & Crafts": "",
+        "Autos & Vehicles": "",
+        "Baby & Children Products": "",
+        "Beauty & Personal Care": "",
+        "Business & Industrial": "",
         "Educational": "",
-        "Entertainment": "",
-        "Fashion": "",
         "Food": "",
-        "Health": "",
+        "Home & Garden": "",
         "Lifestyle": "",
-        "Technology": "",
+        "Media & Entertainment": "",
+        "Sports & Fitness": "",
         "Travel": "",
+        "Technology": "",
         "Other": ""
         }
 
@@ -46,10 +61,21 @@ def creator_marketplace(request):
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         creator_listings = creator_listings.filter(niche__in=niche_query)
 
-        print('ddddddddddddddd', type(niche))
-        print('ddddddddddddddd', type(niche_query))
-        print('ddddddddddddddd', niche)
-        print('ddddddddddddddd', niche_query)
+    langs = {
+        "English": "",
+        "Spanish": "",
+        "Chinese": "",
+        "Other": ""
+        }
+
+    for l in lang_query:
+        if l in lang_query:
+            langs[str(l)] = "checked"
+        else:
+            langs[str(l)] = ""
+
+    if lang_query != "" and lang_query is not None and len(lang_query) != 0:
+        creator_listings = creator_listings.filter(language__in=lang_query)
 
 
     def search_query_kw(list):
@@ -58,18 +84,22 @@ def creator_marketplace(request):
         return new_list
 
 
-    if search_keywords and search_query_kw(search_keywords)[0] != '':
-        print('===Searched words===', search_query_kw(search_keywords)) #['first', 'second']
-        print('---Searched afttr----', search_keywords) #['first second']
-        print('---target lsting kwds----', BlogListingCreationModel.objects.get(id=29).search_keywords) #['first second']
+    if searchbar_keywords and search_query_kw(searchbar_keywords)[0] != '':
+        print('===Searched words===', search_query_kw(searchbar_keywords)) #['first', 'second']
+        print('---Searched afttr----', searchbar_keywords) #['first second']
+        print('---target lsting kwds----', BlogListingCreationModel.objects.get(id=37).search_keywords) #['first second']
 
+        keywords = search_query_kw(searchbar_keywords)
 
-
-        keywords = search_query_kw(search_keywords)
+        creator_listing_ids = []
 
         for keyword in keywords:
-            if search_keywords != "" and search_keywords is not None and len(search_keywords) != 0:
-                creator_listings = creator_listings.filter(search_keywords__in=keywords)
+            listings = creator_listings.filter(search_keywords__icontains=keyword)
+            for l in listings:
+                creator_listing_ids.append(l.id)
+
+        creator_listings = creator_listings.filter(id__in=creator_listing_ids)
+
 
     watching = []
 
@@ -81,10 +111,13 @@ def creator_marketplace(request):
             if (listing in profile.creators_watched.all()):
                 watching.append(listing)
 
+
     context = {
         'creator_listings': creator_listings,
         'niches': niches,
+        'langs': langs,
         'watching': watching,
+        'blog_age_val': blog_age_val,
         #'c_listing_filter': c_listing_filter,
     }
 

@@ -55,7 +55,7 @@ def blogger_listing_creation(request):
             form.save(commit=False).blog_type = request.POST.getlist('types')
 
             kw = form.cleaned_data['search_keywords']
-            form.save(commit=False).search_keywords = kw.split(", ")
+            form.save(commit=False).search_keywords = kw #.split(", ")
 
 
             form.save()

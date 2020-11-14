@@ -146,7 +146,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="inputSiteAge">Years Active</label>
-                                <input value="{{ listing.age }}" type="integer" name="age" type="text" class="form-control" id="inputSiteAge" placeholder="3" required>
+                                <input value="{{ listing.age }}" type="number" name="age" class="form-control" id="inputSiteAge" placeholder="3" required>
                             </div>
                         </div>
 
@@ -157,11 +157,7 @@
                                     <option selected>{{ listing.language }}</option>
                                     <option>English</option>
                                     <option>Spanish</option>
-                                    <option>German</option>
                                     <option>Chinese</option>
-                                    <option>Japanese</option>
-                                    <option>Russian</option>
-                                    <option>Italian</option>
                                     <option>Other</option>
                                 </select>
                             </div>
@@ -183,15 +179,20 @@
                                 <label for="Inputniche">Niche</label>
                                 <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
                                     <option selected>{{ listing.niche }}</option>
-                                    <option>Business</option>
+                                    <option>Apparel & Accessories</option>
+                                    <option>Arts & Crafts</option>
+                                    <option>Autos & Vehicles</option>
+                                    <option>Baby & Children Products</option>
+                                    <option>Beauty & Personal Care</option>
+                                    <option>Business & Industrial</option>
                                     <option>Educational</option>
-                                    <option>Entertainment</option>
-                                    <option>Fashion</option>
                                     <option>Food</option>
-                                    <option>Health</option>
+                                    <option>Home & Garden</option>
                                     <option>Lifestyle</option>
-                                    <option>Technology</option>
+                                    <option>Media & Entertainment</option>
+                                    <option>Sports & Fitness</option>
                                     <option>Travel</option>
+                                    <option>Technology</option>
                                     <option>Other</option>
                                 </select>
                             </div>
@@ -204,7 +205,7 @@
 
                             {% for btype in types %}
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{btype}}" name="types"
+                                <input class="form-check-input" type="checkbox" value="{{btype}}" required name="types"
                                     {% if btype in listing.blog_type %}
                                         checked
                                     {% endif %}
@@ -224,14 +225,14 @@
                           <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
                           <br>
                           <small class="font-weight-bold">
-                            Input search keywords here (seperated by single space) that are related
+                            Input search keywords here that are related to your listing.
                             <br>
-                            to your listing. This is how sponsors will search for your listings.
+                            This is how sponsors will search for your listings.
                             <br>
 
                           </small>
 
-                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: books, reading, words">{{ search_kw }}</textarea>
+                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review">{{ search_kw }}</textarea>
                       </div>
 
                     </div>
@@ -250,22 +251,22 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Tagline</label>
-                            <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters.">{{ listing.tagline }}</textarea>
+                            <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters." required>{{ listing.tagline }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs.">{{ listing.overview_description }}</textarea>
+                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs." required>{{ listing.overview_description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Audience Description</label>
-                            <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min.">{{ listing.audience_description }}</textarea>
+                            <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min." required>{{ listing.audience_description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Sponsor Description</label>
-                            <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell us what you're looking for in a sponsor. 2-3 paragraph min.">{{ listing.sponsor_description }}</textarea>
+                            <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell us what you're looking for in a sponsor. 2-3 paragraph min." required>{{ listing.sponsor_description }}</textarea>
                         </div>
 
 
@@ -282,7 +283,7 @@
                           </div>
 
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" required>
 
                                 {% if listing.listing_img %}
                                     <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
@@ -389,18 +390,28 @@
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
-                        <small style="color: red;">These aren't required, but they're highly recommended.</small>
+                        <small style="color: red;">The email field is required. Only becuase it is used for the escrow system.</small>
+                        <br>
+                        <br>
+                        <small style="color: red;">(If you do not want any notifications via email or phone, then do not select any</small>
+                        <br>
+                        <small style="color: red;">notification options)</small>
+                        <br>
+                        <br>
+                        <small style="color: red;">The mobile number is not required, but it is extremely urged.</small>
                         <br>
                         <br>
 
                         <div class="form-group col-md-12">
                             <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
-                            <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email">
+                            <input value="{{ listing.email }}" type="email" name="email" class="form-control" id="InputwebsiteUrl" placeholder="Email" required>
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
-                            <input value="{{ listing.number }}" type="text" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
+                            <br>
+                            <small>Example: 3864567789  (Area code is not required)</small>
+                            <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
                         </div>
 
 

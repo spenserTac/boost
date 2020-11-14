@@ -6,7 +6,7 @@ class BlogListingCreationModel(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
     blog_url = models.CharField(max_length=1000, default=None, null=True, blank=True)
     niche = models.CharField(max_length=300, default=None, null=True, blank=True)
-    age = models.CharField(max_length=300, default=None, null=True, blank=True)
+    age = models.IntegerField(max_length=300, default=None, null=True, blank=True)
     monthly_views = models.CharField(max_length=300, default=None, null=True, blank=True)
 
     tagline = models.CharField(max_length=1000, default=None, null=True, blank=True)
