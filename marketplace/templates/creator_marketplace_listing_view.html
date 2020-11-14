@@ -108,21 +108,20 @@
                     <br>
                     <br>
 
-                    {% if following %}
-                        <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
-                    {% else %}
-                        <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
-                    {% endif %}
+                    <div class="card shadow p-3">
+                      {% if following %}
+                          <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+                      {% else %}
+                          <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+                      {% endif %}
 
-                    <hr class="my-4" style="width: 50%;">
+                      {% if ordered %}
+                          <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+                      {% else %}
 
-                    {% if ordered %}
-                        <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
-                    {% else %}
-
-                        <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
-                    {% endif %}
-
+                          <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+                      {% endif %}
+                    </div>
 
                     <br>
                     <hr>
@@ -165,7 +164,7 @@
                               <div class="card">
                                 <div class="card-header" id="headingOne">
                                   <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
                                       Other Listings By This Creator
                                     </button>
                                   </h2>
@@ -174,7 +173,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                   <div class="card-body">
                                     {% for l in all_users_listings %}
-                                      <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l.blog_name }}</a>
+                                      <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l.blog_name }}</a>
                                       <br>
                                     {% endfor %}
                                   </div>

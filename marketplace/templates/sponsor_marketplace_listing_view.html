@@ -15,7 +15,13 @@
                     <div class="row">
                       <div class="col">
                         {% if listing.url %}
-                          <a class="nav-link pl-0" href="{{ listing.url }}">{{ listing.url }}</a>
+                          <a class="nav-link pl-0" href="{{ listing.url }}" target="_blank" style="color: #007185;">
+                            {% if listing.url.4 == "s" %}
+                              {{ listing.url|slice:"8:" }}
+                            {% elif listing.url.4 == ":" %}
+                              {{ listing.url|slice:"7:" }}
+                            {% endif %}
+                          </a>
                         {% endif %}
                         <h3 class="font-weight-normal pb-2" style="color: grey;">{{ listing.product }}</h3>
                         <h4 class="pb-2">{{ listing.tagline }}</h4>
@@ -116,7 +122,7 @@
                           <div class="card">
                             <div class="card-header" id="headingOne">
                               <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
                                   Other Listings By This Sponsor
                                 </button>
                               </h2>
@@ -125,7 +131,7 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                               <div class="card-body">
                                 {% for l in all_users_listings %}
-                                  <a href="{% url 'sponsor_marketplace_listing_view' id=l.id %}">{{ l.product }}</a>
+                                  <a href="{% url 'sponsor_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l.product }}</a>
                                   <br>
                                 {% endfor %}
                               </div>

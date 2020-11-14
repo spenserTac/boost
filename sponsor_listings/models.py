@@ -17,9 +17,13 @@ class SponsorListingCreationModel(models.Model):
     overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
     audience_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
     creator_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
+
     notification_type = models.CharField(max_length=30000, default=None, null=True, blank=True)
 
+    # URL to their website
     url = models.CharField(max_length=1000, null=True, blank=True)
+
+    search_keywords = models.CharField(max_length=30000, default=None, null=True, blank=True)
 
     def listing_img_path(instance, filename):
         # instance is the instance of the model.

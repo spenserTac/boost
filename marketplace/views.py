@@ -11,6 +11,20 @@ from .filters import CreatorListingFilter, SponsorListingFilter
 
 
 #
+#  Self defined functions
+#
+
+def search_query_kw(list):
+    keywords = list[0]
+    new_list = keywords.split(" ")
+    return new_list
+
+
+
+
+
+
+#
 # Creator Listing Stuff
 #
 
@@ -23,7 +37,9 @@ def creator_marketplace(request):
     lang_query = request.GET.getlist('language')
     searchbar_keywords = request.GET.getlist('search_bar')
     blog_age_val = request.GET.get('blog_age_val')
+    searchb = request.GET.get('search_bar')
     reset_button = request.GET.get('reset_button')
+    searchbar_bool = False
 
     if reset_button:
         print('reset')
@@ -78,16 +94,8 @@ def creator_marketplace(request):
         creator_listings = creator_listings.filter(language__in=lang_query)
 
 
-    def search_query_kw(list):
-        keywords = list[0]
-        new_list = keywords.split(" ")
-        return new_list
-
-
     if searchbar_keywords and search_query_kw(searchbar_keywords)[0] != '':
-        print('===Searched words===', search_query_kw(searchbar_keywords)) #['first', 'second']
-        print('---Searched afttr----', searchbar_keywords) #['first second']
-        print('---target lsting kwds----', BlogListingCreationModel.objects.get(id=37).search_keywords) #['first second']
+        searchbar_bool = True
 
         keywords = search_query_kw(searchbar_keywords)
 
@@ -118,6 +126,8 @@ def creator_marketplace(request):
         'langs': langs,
         'watching': watching,
         'blog_age_val': blog_age_val,
+        'searchb': searchb,
+        'searchbar_bool': searchbar_bool
         #'c_listing_filter': c_listing_filter,
     }
 
@@ -275,17 +285,27 @@ def sponsor_marketplace(request):
     sponsor_listings = SponsorListingCreationModel.objects.all()
 
     niche_query = request.GET.getlist('niche')
+    lang_query = request.GET.getlist('language')
+    searchbar_keywords = request.GET.getlist('search_bar')
+    searchb = request.GET.get('search_bar')
+    reset_button = request.GET.get('reset_button')
+    searchbar_bool = False
 
     niches = {
-        "Business": "",
+        "Apparel & Accessories": "",
+        "Arts & Crafts": "",
+        "Autos & Vehicles": "",
+        "Baby & Children Products": "",
+        "Beauty & Personal Care": "",
+        "Business & Industrial": "",
         "Educational": "",
-        "Entertainment": "",
-        "Fashion": "",
         "Food": "",
-        "Health": "",
+        "Home & Garden": "",
         "Lifestyle": "",
-        "Technology": "",
+        "Media & Entertainment": "",
+        "Sports & Fitness": "",
         "Travel": "",
+        "Technology": "",
         "Other": ""
         }
 
@@ -297,6 +317,36 @@ def sponsor_marketplace(request):
 
     if niche_query != "" and niche_query is not None and len(niche_query) != 0:
         sponsor_listings = sponsor_listings.filter(niche__in=niche_query)
+
+    langs = {
+        "English": "",
+        "Spanish": "",
+        "Chinese": "",
+        "Other": ""
+        }
+
+    for l in lang_query:
+        if l in lang_query:
+            langs[str(l)] = "checked"
+        else:
+            langs[str(l)] = ""
+
+    if lang_query != "" and lang_query is not None and len(lang_query) != 0:
+        sponsor_listings = sponsor_listings.filter(language__in=lang_query)
+
+    if searchbar_keywords and search_query_kw(searchbar_keywords)[0] != '':
+        searchbar_bool = True
+
+        keywords = search_query_kw(searchbar_keywords)
+
+        sponsor_listings_ids = []
+
+        for keyword in keywords:
+            listings = sponsor_listings.filter(search_keywords__icontains=keyword)
+            for l in listings:
+                sponsor_listings_ids.append(l.id)
+
+        sponsor_listings = sponsor_listings.filter(id__in=sponsor_listings_ids)
 
     watching = []
 
@@ -310,7 +360,10 @@ def sponsor_marketplace(request):
     context = {
         'sponsor_listings': sponsor_listings,
         'niches': niches,
-        'watching': watching
+        'watching': watching,
+        'langs': langs,
+        'searchbar_bool': searchbar_bool,
+        'searchb': searchb
     }
 
     return render(request, 'sponsor_marketplace.html', context)
