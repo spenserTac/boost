@@ -125,7 +125,7 @@ class AcceptedCreatorOrderModel(models.Model):
     token = models.BinaryField(max_length=1000, blank=True, null=True, editable=True)
     transaction_id = models.BinaryField(max_length=1000, blank=True, null=True, editable=True)
 
-    escrow_stage =  models.CharField(max_length=1000, blank=True, null=True)
+    stage =  models.CharField(max_length=1000, blank=True, null=True)
 
     def review_file_path(instance, filename):
         # instance is the instance of the model.
