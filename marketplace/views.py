@@ -184,13 +184,14 @@ def creator_marketplace_watch_view(request, id=None):
     return redirect('creator_marketplace')
 '''
 
+@login_required(login_url='login')
 def creator_marketplace_listing_watch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.creators_watched.add(listing)
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
-
+@login_required(login_url='login')
 def creator_marketplace_listing_unwatch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
@@ -412,14 +413,14 @@ def sponsor_marketplace_listing_view(request, id=None):
 
 # The logic for watching and unwatching a listing
 
-
+@login_required(login_url='login')
 def sponsor_marketplace_listing_watch_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.sponsors_watched.add(listing)
     return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
 
-
+@login_required(login_url='login')
 def sponsor_marketplace_listing_unwatch_view(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)

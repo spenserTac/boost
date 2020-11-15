@@ -9,6 +9,7 @@ from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCrea
 CompletedOrderModel)
 
 from .functions.escrow_functions import *
+from . decorators import *
 
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
@@ -292,7 +293,7 @@ def dashboard_type_s(request):
 
 
 
-#@permission_required("users.view_post")
+@dashboard_send_review_decorator
 def dashboard_send_review(request, id=None):
     # 1. This is for the creator to send over the content they made to the sponsor
     #    so they can view it and approve it.
@@ -311,6 +312,7 @@ def dashboard_send_review(request, id=None):
             file = form.cleaned_data.get('review_file')
             listing.review_file = file
             listing.turn = 's'
+            listing.stage = 'review_content_sent'
             listing.save()
 
             return redirect('dashboard')
@@ -323,6 +325,7 @@ def dashboard_send_review(request, id=None):
 
     return render(request, 'send_review.html')
 
+
 def dashboard_s_acc(request, id=None):
     # 1. Make "sponsor_change" = None in the DB for this specific order.
     # 2. Do logic to put this order back in the "Sponsor Accepted Orders" tab,
@@ -334,6 +337,7 @@ def dashboard_s_acc(request, id=None):
 
     listing.sponsor_approves = True
     listing.status = 'escrow'
+    listing.stage = 'just_accepted'
 
     #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
     if (listing.who_initiated_order == 'sponsor'):
@@ -354,6 +358,7 @@ def dashboard_s_acc(request, id=None):
     }
     return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
+
 def dashboard_s_edit(request, id=None):
     # 1. There'll be form stuff here, and all this funciton is designed for is
     #    to add whatever edits the sponsor wants to make to the creators content
@@ -369,6 +374,7 @@ def dashboard_s_edit(request, id=None):
             edit = form.cleaned_data.get('edits')
             listing.edits = edit
             listing.turn = 'c'
+            listing.stage = 'sponsor_edits_sent'
             listing.save()
 
             return redirect('dashboard')
@@ -448,7 +454,7 @@ def dashboard_creator_order_accept(request, id=None):
     try:
         #c_listing = BlogListingCreationModel.objects.get(id=id)
         c_order = CreatorOrderModel.objects.get(id=id)
-        c_order.status = 'Accepted - In Process'
+        c_order.status = 'accepted'
 
         c_order.save()
 
@@ -466,6 +472,7 @@ def dashboard_creator_order_accept(request, id=None):
             who_initiated_order='sponsor',
             payout=c_order.payout,
             s_content_file=c_order.s_content_file,
+            stage='initial_stage'
             )
 
         ac_order.save()
@@ -474,7 +481,7 @@ def dashboard_creator_order_accept(request, id=None):
     except CreatorOrderModel.DoesNotExist:
         #s_listing = SponsorListingCreationModel.objects.get(id=id)
         s_order = SponsorOrderModel.objects.get(id=id)
-        s_order.status = 'Accepted - In Process'
+        s_order.status = 'accepted'
 
         s_order.save()
 
@@ -489,6 +496,7 @@ def dashboard_creator_order_accept(request, id=None):
             services_creator_is_willing_to_provide=s_order.services_creator_is_willing_to_provide,
             services_creator_is_willing_to_provide_detailed=s_order.services_creator_is_willing_to_provide_detailed,
             status=s_order.status
+            #stage='initial_stage'
 
         )
 
@@ -501,13 +509,13 @@ def dashboard_creator_order_accept(request, id=None):
 def dashboard_creator_order_decline(request, id=None):
     try:
         c_order = CreatorOrderModel.objects.get(id=id)
-        c_order.status = 'Declined'
+        c_order.status = 'declined'
 
         c_order.delete()
 
     except CreatorOrderModel.DoesNotExist:
         s_order = SponsorOrderModel.objects.get(id=id)
-        s_order.status = 'Declined'
+        s_order.status = 'declined'
 
         s_order.delete()
 
@@ -538,7 +546,7 @@ def dashboard_sponsor_order_accept(request, id=None):
             obj = form.save(commit=False)
             obj.payout = form.cleaned_data['payout']
 
-            order.status = 'Accepted - In Process'
+            order.status = 'accepted'
             obj.s_content_file = form.cleaned_data['s_content_file']
 
             order.save()
@@ -557,10 +565,11 @@ def dashboard_sponsor_order_accept(request, id=None):
                 service=obj.service,
                 service_detailed=obj.service_detailed,
 
-                status='Accepted - In Progress',
+                status='accepted',
                 who_initiated_order = 'creator',
                 payout = obj.payout,
                 s_content_file = obj.s_content_file,
+                stage='initial_stage'
                 )
 
             ac_order.save()
@@ -578,18 +587,19 @@ def dashboard_sponsor_order_decline(request, id=None):
     try:
         #c_listing = BlogListingCreationModel.objects.get(id=id)
         c_order = CreatorOrderModel.objects.get(id=id)
-        c_order.status = 'Declined'
+        c_order.status = 'declined'
 
         c_order.delete()
 
     except CreatorOrderModel.DoesNotExist:
         #s_listing = SponsorListingCreationModel.objects.get(id=id)
         s_order = SponsorOrderModel.objects.get(id=id)
-        s_order.status = 'Declined'
+        s_order.status = 'declined'
 
         s_order.delete()
 
     return redirect('dashboard')
+
 
 
 def dashboard_creator_order_complete(request, id=None):
@@ -601,7 +611,7 @@ def dashboard_creator_order_complete(request, id=None):
     try:
         #c_listing = BlogListingCreationModel.objects.get(id=id)
         c_order = AcceptedCreatorOrderModel.objects.get(id=id)
-        c_order.status = 'Complete'
+        c_order.status = 'complete'
 
         c_order.save()
 
@@ -617,7 +627,8 @@ def dashboard_creator_order_complete(request, id=None):
             service_detailed=c_order.service_detailed,
             status=c_order.status,
             who_initiated_order=c_order.who_initiated_order,
-            payout=c_order.payout
+            payout=c_order.payout,
+            stage='done'
             )
 
         cc_order.save()
@@ -627,7 +638,7 @@ def dashboard_creator_order_complete(request, id=None):
     except CreatorOrderModel.DoesNotExist:
         #s_listing = SponsorListingCreationModel.objects.get(id=id)
         s_order = SponsorOrderModel.objects.get(id=id)
-        s_order.status = 'Accepted - In Process'
+        s_order.status = 'complete'
 
         s_order.save()
 
@@ -657,6 +668,7 @@ def dashboard_sponsor_order_complete(request, id=None):
     order.save()
 
     return redirect('dashboard')
+
 
 def dashboard_withdraw_order(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
