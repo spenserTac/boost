@@ -85,6 +85,7 @@ print('\n\n\n\n\n')
 
 # returns json response. It will contain: sponsor LANDING PAGE, ID, TOKEN
 def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name):
+    print("\n\nsssssssssssssssssssssssssssupppppppppppppppppppppppppp\n\n")
     r = requests.post(
 
         'https://api.escrow-sandbox.com/integration/pay/2018-03-31',

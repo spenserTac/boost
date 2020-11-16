@@ -68,7 +68,29 @@
 
         <div class="container">
 
-          <h1>{{user}}</h1>
+          {% if messages %}
+            {% for message in messages %}
+
+              {% if 'succussful_support_ticket' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>Support Ticket Sent Successfully</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'succussful_feature_ticket' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>Feature Request Sent Successfully</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+            {% endfor %}
+          {% endif %}
 
             <hr class="my-5">
 

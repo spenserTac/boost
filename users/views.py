@@ -68,14 +68,26 @@ def delete_account(request):
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+
+        if(User.objects.filter(username=request.POST.get('username')).exists()):
+            messages.error(request, "Username already exists", extra_tags="username_exists")
+            return redirect('signup')
+
+        if(request.POST.get('password1') != request.POST.get('password2')):
+            messages.error(request, "Passwords Do Not Match", extra_tags="passwords_dont_match")
+            return redirect('signup')
+
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'User Created For: ' + user)
 
-            return redirect('login')
+            if(form.cleaned_data.get('password1') == form.cleaned_data.get('password2')):
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'User Created For: ' + user)
 
-        messages.info(request, 'Invalid Input For Password')
+                return redirect('login')
+
+        messages.error(request, 'Invalid Input For Password', extra_tags="invalid_password")
+
         context = {
             'form': form,
         }
@@ -89,8 +101,6 @@ def signup(request):
         return render(request, 'signup.html', context)
 
 
-
-
 @login_required(login_url='login')
 def support_contact(request):
     if request.method == 'POST':
@@ -99,6 +109,8 @@ def support_contact(request):
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save()
+
+            messages.success(request, 'Support Ticket Sent Successfully', extra_tags="succussful_support_ticket")
 
             return redirect('home')
 
@@ -114,6 +126,8 @@ def feature_add(request):
 
             form.save(commit=False).creator = request.user
             form.save()
+
+            messages.success(request, 'Feature Request Ticket Sent Successfully', extra_tags="succussful_feature_ticket")
 
             return redirect('home')
 
@@ -315,8 +329,9 @@ def dashboard_send_review(request, id=None):
             listing.stage = 'review_content_sent'
             listing.save()
 
-            return redirect('dashboard')
+            messages.success(request, 'Content has been sent successfully', extra_tags="review_content_sent_successful")
 
+            return redirect('dashboard')
 
     content = {
         'listing': listing,
@@ -325,7 +340,7 @@ def dashboard_send_review(request, id=None):
 
     return render(request, 'send_review.html')
 
-
+@dashboard_s_acc_decorator
 def dashboard_s_acc(request, id=None):
     # 1. Make "sponsor_change" = None in the DB for this specific order.
     # 2. Do logic to put this order back in the "Sponsor Accepted Orders" tab,
@@ -353,12 +368,14 @@ def dashboard_s_acc(request, id=None):
         listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
         listing.save()
 
+    messages.success(request, 'Escrow transaction for %s has been successfully created' % listing.creator_listing.blog_name, extra_tags="escrow_transaction_sponsor_successful")
+
     content = {
         'listing': listing,
     }
     return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
-
+@dashboard_s_edit_decorator
 def dashboard_s_edit(request, id=None):
     # 1. There'll be form stuff here, and all this funciton is designed for is
     #    to add whatever edits the sponsor wants to make to the creators content
@@ -379,14 +396,13 @@ def dashboard_s_edit(request, id=None):
 
             return redirect('dashboard')
 
-
     content = {
         'listing': listing,
     }
 
     return render(request, 's_edit.html', content)
 
-
+@dashboard_c_next_step_decorator
 def dashboard_c_next_step(request, id=None):
     escrow_order = AcceptedCreatorOrderModel.objects.get(id=id)
     print('-----------------', type(escrow_order.token))
@@ -418,6 +434,7 @@ def dashboard_unwatch_s(request, id=None):
 # Unordering creators and sponsors
 #
 
+
 def dashboard_unorder_c(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
     listing = users_profile.creators_u_ordered.get(id=id)
@@ -428,11 +445,11 @@ def dashboard_unorder_c(request, id=None):
 
     return redirect('dashboard')
 
+@dashboard_user_is_buyer
 def dashbord_unorder_accepted_c(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
     order.delete()
     return redirect('dashboard')
-
 
 def dashboard_unorder_s(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
@@ -448,7 +465,7 @@ def dashboard_unorder_s(request, id=None):
 # Accept and decline system on dashboard (for orders)
 #
 # Add functionality: send user an email that their order has been accepted or declined
-
+@dashboard_user_is_creator
 def dashboard_creator_order_accept(request, id=None):
 
     try:
@@ -506,6 +523,7 @@ def dashboard_creator_order_accept(request, id=None):
 
     return redirect('dashboard')
 
+@dashboard_user_is_creator
 def dashboard_creator_order_decline(request, id=None):
     try:
         c_order = CreatorOrderModel.objects.get(id=id)
@@ -521,7 +539,7 @@ def dashboard_creator_order_decline(request, id=None):
 
     return redirect('dashboard')
 
-
+@dashboard_user_is_buyer
 def dashboard_sponsor_order_accept(request, id=None):
 
     order = SponsorOrderModel.objects.get(id=id)
@@ -582,6 +600,7 @@ def dashboard_sponsor_order_accept(request, id=None):
 
     return render(request, 'acceptedcreator.html')
 
+@dashboard_user_is_buyer
 def dashboard_sponsor_order_decline(request, id=None):
 
     try:
@@ -600,8 +619,7 @@ def dashboard_sponsor_order_decline(request, id=None):
 
     return redirect('dashboard')
 
-
-
+@dashboard_user_is_creator
 def dashboard_creator_order_complete(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
     order.status = 'complete'
@@ -661,6 +679,8 @@ def dashboard_creator_order_complete(request, id=None):
 
     return redirect('dashboard')
 
+
+# This view is no longer in use, and should probably be removed
 def dashboard_sponsor_order_complete(request, id=None):
 
     order = AcceptedSponsorOrderModel.objects.get(id=id)

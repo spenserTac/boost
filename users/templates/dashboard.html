@@ -3889,14 +3889,38 @@
 {% elif user.profile.type == 'sponsor' %}
 <div class="container-fluid" style="background-color: #f2f3f6;">
 
-  <h1>{{token}}</h1>
-  <h1>{{idd}}</h1>
+    <br>
 
-    <br>
-    <br>
 
     <!-- Only for large screens and up -->
     <div class="d-none d-lg-block mx-5">
+
+          {% if messages %}
+            {% for message in messages %}
+
+              {% if 'review_content_sent_successful' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>Content has been sent successfully</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'escrow_transaction_sponsor_successful' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>Escrow transaction for {{listing.creator_listing.blog_name}} has been successfully created</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+            {% endfor %}
+          {% endif %}
+
+
+          <br>
 
         <!-- These are the info squares at the top -->
         <div class="row justify-content-center d-flex justify-content-arround">

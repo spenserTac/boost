@@ -25,6 +25,22 @@
 
                     {% csrf_token %}
 
+                    {% if messages %}
+                      {% for message in messages %}
+
+                        {% if 'username_exists' in message.tags  %}
+                          <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                            <strong>Username Already Exists</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                        {% endif %}
+
+                      {% endfor %}
+                    {% endif %}
+                    <br>
+
 
 
                         <div class="form-row">
@@ -64,18 +80,35 @@
                                 <input name="password2" type="password" class="form-control" placeholder="confirm password" required>
                             </div>
 
+                        {% if messages %}
+                          {% for message in messages %}
+
+                            {% if 'invalid_password' in message.tags  %}
+                              <div class="alert alert-danger alert-dismissible fade show text-center mt-2" role="alert">
+                                <strong>Invalid Password</strong>
+                                <p>Password Needs to be at leat 8 characters long and can't be entirely numeric.</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                            {% endif %}
+
+                            {% if 'passwords_dont_match' in message.tags  %}
+                              <div class="alert alert-danger alert-dismissible fade show text-center mt-2" role="alert">
+                                <strong>Passwords Do Not Match</strong>
+                                <p></p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                            {% endif %}
+
+                          {% endfor %}
+                        {% endif %}
 
                             <div class="d-flex justify-content-center mb-2 mt-4">
                                 <span class="form-text text-muted" style="text-align: center;">Boost is protected and the <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a> apply.</span>
                             </div>
-
-                            {% for message in messages %}
-
-                                <br>
-                                <p class="text-center mt-3 mb-2 mx-auto font-weight-bold" style="color: red;">{{ message }}</p>
-                                <p class="text-center mx-auto mb-2 font-weight-bold">Password Needs to be at leat 8 characters long and can't be entirely numeric.</p>
-
-                            {% endfor %}
 
 
                             <button type="submit" class="btn btn-block btn-primary mt-4 mx-1">Create Account</button>
