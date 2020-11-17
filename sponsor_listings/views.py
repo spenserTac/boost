@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .decorators import user_is_entry_author
 
@@ -32,9 +33,20 @@ def sponsor_listing_creation(request):
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
+
+            name = form.cleaned_data['product']
+
             form.save()
 
+            messages.success(request, "%s has been successfully created." % (name), extra_tags="sponsor_listing_creation")
+
             return redirect('home')
+
+        elif form.errors:
+
+            messages.error(request, "There was an error. A common issue is that you need to select an image file for you listing image.", extra_tags="sponsor_listing_creation_error")
+
+            return redirect('sponsor_listing')
 
     return render(request, 'sponsor_listing_creation.html', context)
 
@@ -65,16 +77,27 @@ def sponsor_listing_update(request, id=None):
 
     ]
 
+    update_bool = "True"
+
 
     context = {
         'listing':listing,
         'notification_types': notification_types,
+        'update_bool': update_bool
     }
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
             form.save()
+
+            messages.success(request, "%s has been successfully updated." % (listing.product), extra_tags="sponsor_listing_update")
+
+        elif form.errors:
+
+            messages.error(request, "There was an error. A common issue is that you need to select an image file for you listing image.", extra_tags="sponsor_listing_update_error")
+
+            return redirect(reverse('sponsor_listing_update', kwargs={'id': listing.id}))
 
         return redirect('home')
     return render(request, 'sponsor_listing_creation.html', context)
@@ -83,6 +106,9 @@ def sponsor_listing_update(request, id=None):
 @user_is_entry_author
 def sponsor_listing_delete(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
+
+    messages.success(request, "%s has been successfully deleted." % (listing.product), extra_tags="sponsor_listing_deleted")
+
     context = {
         'listing':listing
     }

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import permission_required
 
 from .forms import CustomUserCreationForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
-CompletedOrderModel)
+CompletedOrderModel, Messages)
 
 from .functions.escrow_functions import *
 from . decorators import *
@@ -133,6 +133,15 @@ def feature_add(request):
 
     return render(request, 'feature.html')
 
+
+@login_required(login_url='login')
+def delete_message(request, id=None):
+    message = Messages.objects.get(id=id)
+    message.delete()
+
+    return redirect('dashboard')
+
+
 @login_required(login_url='login')
 def dashboard(request):
 
@@ -224,9 +233,12 @@ def dashboard(request):
     personal_sponsor_listings = user.sponsorlistingcreationmodel_set.all()
     p_s_listing_len = personal_sponsor_listings.count()
 
+    your_messages = Messages.objects.filter(reciever=user)
+
 
     context = {
 
+        'your_messages': your_messages,
 
         'personal_c_listings': personal_creator_listings,
         'personal_s_listings': personal_sponsor_listings,
@@ -305,8 +317,6 @@ def dashboard_type_s(request):
 
     return redirect('dashboard')
 
-
-
 @dashboard_send_review_decorator
 def dashboard_send_review(request, id=None):
     # 1. This is for the creator to send over the content they made to the sponsor
@@ -329,7 +339,7 @@ def dashboard_send_review(request, id=None):
             listing.stage = 'review_content_sent'
             listing.save()
 
-            messages.success(request, 'Content has been sent successfully', extra_tags="review_content_sent_successful")
+            messages.success(request, '%s' % listing.creator_listing.blog_name, extra_tags="review_content_sent_successful")
 
             return redirect('dashboard')
 
@@ -354,6 +364,8 @@ def dashboard_s_acc(request, id=None):
     listing.status = 'escrow'
     listing.stage = 'just_accepted'
 
+    Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message='Escrow transaction for %s has been successfully created' % listing.creator_listing.blog_name)
+
     #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
     if (listing.who_initiated_order == 'sponsor'):
         escrow_t = escrow_sponsor_pays(listing.creator_listing.email, listing.buyers_listing_s.email, listing.payout, listing.creator_listing.blog_name)
@@ -368,7 +380,8 @@ def dashboard_s_acc(request, id=None):
         listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
         listing.save()
 
-    messages.success(request, 'Escrow transaction for %s has been successfully created' % listing.creator_listing.blog_name, extra_tags="escrow_transaction_sponsor_successful")
+    messages.success(request, 'Escrow transaction for %s has been successfully created' % listing.buyers_listing_s.product, extra_tags="escrow_transaction_sponsor_successful")
+
 
     content = {
         'listing': listing,
@@ -394,6 +407,9 @@ def dashboard_s_edit(request, id=None):
             listing.stage = 'sponsor_edits_sent'
             listing.save()
 
+            messages.success(request, '%s' % listing.creator_listing.blog_name, extra_tags="edits_sponsor_successful")
+            Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message="Sponsor has sent edits for %s" % (listing.buyers_listing_s))
+
             return redirect('dashboard')
 
     content = {
@@ -409,6 +425,8 @@ def dashboard_c_next_step(request, id=None):
     token = cipher_token(escrow_order.token)
 
     t_id = cipher_id(escrow_order.transaction_id)
+
+    messages.success(request, 'Escrow transaction for %s has been successfully joined' % listing.buyers_listing_s.product, extra_tags="escrow_transaction_join_creator_successful")
 
     return redirect('https://www.escrow-sandbox.com/agree?tid=%s&token=%s' % (t_id, token), "_blank")
 
@@ -434,21 +452,35 @@ def dashboard_unwatch_s(request, id=None):
 # Unordering creators and sponsors
 #
 
-
+# When a sponsor unorders a creator -> Alert creator that it's been unordered
 def dashboard_unorder_c(request, id=None):
     users_profile = Profile.objects.get(user=request.user)
     listing = users_profile.creators_u_ordered.get(id=id)
     users_profile.creators_u_ordered.remove(listing)
 
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=listing)
+
+    #request == <WSGIRequest: GET '/account/dashboard/unorder_c/37/'>
+
+    Messages.objects.create(sender=creator_order.buyers_listing_s.creator, reciever=creator_order.creator_listing.creator,
+        message='%s has unordered your creator listing (%s).' % (creator_order.buyers_listing_s.product, creator_order.creator_listing.blog_name))
+
+    messages.success(request, '%s' % (creator_order.creator_listing.blog_name), extra_tags="unorder_creator_for_s_successful") # Message For Sponsor
+
     creator_order.delete()
 
     return redirect('dashboard')
 
+
+# This view has been discontinued. It doesn't make any sense to unorder a creator after you or they accepted (both parties already agreed).
 @dashboard_user_is_buyer
 def dashbord_unorder_accepted_c(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
+
+    messages.success(request, '%s' % order.creator_listing.blog_name, extra_tags="unorder_acc_creator_successful")
+
     order.delete()
+
     return redirect('dashboard')
 
 def dashboard_unorder_s(request, id=None):
@@ -457,7 +489,9 @@ def dashboard_unorder_s(request, id=None):
     users_profile.sponsors_u_ordered.remove(listing)
 
     sponsor_order = SponsorOrderModel.objects.get(buyer=request.user, sponsor_listing=listing)
+
     sponsor_order.delete()
+
 
     return redirect('dashboard')
 
@@ -474,6 +508,9 @@ def dashboard_creator_order_accept(request, id=None):
         c_order.status = 'accepted'
 
         c_order.save()
+
+        messages.success(request, "%s has been successfully accepted." % (c_order.buyers_listing_s.product), extra_tags="creator_order_accept_success")
+        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has accepted your listing %s, and they've started working on it." % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product))
 
         # Accepted creator order (after creator clicks accept)
         ac_order = AcceptedCreatorOrderModel(
@@ -523,22 +560,27 @@ def dashboard_creator_order_accept(request, id=None):
 
     return redirect('dashboard')
 
+# When a creator declines a sponsor | sender = creator, reciever = sponsor
 @dashboard_user_is_creator
 def dashboard_creator_order_decline(request, id=None):
     try:
         c_order = CreatorOrderModel.objects.get(id=id)
         c_order.status = 'declined'
 
+        messages.success(request, "%s has been successfully declined." % (c_order.buyers_listing_s.product), extra_tags="creator_declines_sponsor")
+        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has declined your order (with listing %s)" % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product))
+
         c_order.delete()
 
     except CreatorOrderModel.DoesNotExist:
         s_order = SponsorOrderModel.objects.get(id=id)
         s_order.status = 'declined'
-
         s_order.delete()
 
     return redirect('dashboard')
 
+
+# When a sponsor accepted a creator | sender = sponsor, reciever = creator
 @dashboard_user_is_buyer
 def dashboard_sponsor_order_accept(request, id=None):
 
@@ -566,6 +608,9 @@ def dashboard_sponsor_order_accept(request, id=None):
 
             order.status = 'accepted'
             obj.s_content_file = form.cleaned_data['s_content_file']
+
+            messages.success(request, "%s has been successfully accepted." % (order.buyers_listing_c.blog_name), extra_tags="sponsor_acceptes_creator")
+            Messages.objects.create(sender=order.creator, reciever=order.buyer, message="%s has accepted your order (with listing %s)" % (order.sponsor_listing.product, order.buyers_listing_c.blog_name))
 
             order.save()
 
@@ -600,6 +645,7 @@ def dashboard_sponsor_order_accept(request, id=None):
 
     return render(request, 'acceptedcreator.html')
 
+# When a sponsor declines a creator | sender = sponsor, reciever = creator
 @dashboard_user_is_buyer
 def dashboard_sponsor_order_decline(request, id=None):
 
@@ -614,6 +660,9 @@ def dashboard_sponsor_order_decline(request, id=None):
         #s_listing = SponsorListingCreationModel.objects.get(id=id)
         s_order = SponsorOrderModel.objects.get(id=id)
         s_order.status = 'declined'
+
+        messages.success(request, "%s has been successfully declined." % (s_order.buyers_listing_c.blog_name), extra_tags="sponsor_declined_creator")
+        Messages.objects.create(sender=s_order.creator, reciever=s_order.buyer, message="%s has declined your order (with listing %s)" % (s_order.sponsor_listing.product, s_order.buyers_listing_c.blog_name))
 
         s_order.delete()
 
@@ -692,6 +741,10 @@ def dashboard_sponsor_order_complete(request, id=None):
 
 def dashboard_withdraw_order(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
+
+    messages.success(request, "%s has been successfully withdrawn from" % (order.buyers_listing_s.product))
+    Messages.objects.create(sender=order.creator, reciever=order.buyer, message="%s has withdrawn from order of %s" % (order.creator_listing.blog_name, order.buyers_listing_s.product))
+
     order.delete()
 
     return redirect('dashboard')

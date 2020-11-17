@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
-CompletedOrderModel, SupportTicket, SupportTicket, FeatureTicket)
+CompletedOrderModel, SupportTicket, SupportTicket, FeatureTicket, Messages)
 
 admin.site.register(Profile)
 admin.site.register(CreatorOrderModel)
@@ -10,3 +10,4 @@ admin.site.register(AcceptedSponsorOrderModel)
 admin.site.register(CompletedOrderModel)
 admin.site.register(SupportTicket)
 admin.site.register(FeatureTicket)
+admin.site.register(Messages)

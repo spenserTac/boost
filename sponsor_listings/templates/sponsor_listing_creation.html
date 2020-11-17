@@ -90,9 +90,17 @@
           <div class="row">
             <div class="col-md-12 white-text text-center">
               <div class="col-md-8 p-lg-5 mx-auto my-auto">
+                {% if update_bool %}
+                  <h1 class="font-weight-bold display-3">Update Sponsor Listing</h1>
+                  <br>
+                  <p class="lead font-weight-normal">This is where you'll update your sponsor listing.</p>
+                {% else %}
                   <h1 class="font-weight-bold display-2">Create A Sponsor Listing</h1>
                   <br>
                   <p class="lead font-weight-normal">This is where you'll create your sponsor listing so creators can view your listing.</p>
+                {% endif %}
+
+
               </div>
             </div>
           </div>
@@ -118,6 +126,23 @@
     <div class="container">
 
         <hr class="my-5">
+
+        {% if messages %}
+          {% for message in messages %}
+
+            {% if 'sponsor_listing_update_error' in message.tags  %}
+              <div class="alert alert-danger alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endif %}
+
+            <br>
+
+          {% endfor %}
+        {% endif %}
 
         <div class="d-flex justify-content-center mx-3">
             <form method="POST" enctype="multipart/form-data">
@@ -199,35 +224,33 @@
                 <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Tagline</label>
-                        <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your business/product in less than 120 characters." required></textarea>
+                        <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your business/product in less than 120 characters." required>{{listing.tagline}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Description</label>
-                        <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your business/product in at least 2-3 paragraphs." required></textarea>
+                        <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your business/product in at least 2-3 paragraphs." required>{{listing.overview_description}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Audience Description</label>
-                        <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience/clientell. 2-3 paragraph min." required></textarea>
+                        <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience/clientell. 2-3 paragraph min." required>{{listing.audience_description}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Creator Description</label>
-                        <textarea class="form-control" name="creator_description" rows="6" placeholder="Tell us what you're looking for in a creator. 2-3 paragraph min." required></textarea>
+                        <textarea class="form-control" name="creator_description" rows="6" placeholder="Tell us what you're looking for in a creator. 2-3 paragraph min." required>{{listing.creator_description}}</textarea>
                     </div>
 
                     <label for="exampleFormControlFile1">Upload Listing Image</label>
                     <br>
+                    <small>For best results, make sure your image is 1080p.</small>
+
 
                     <div class="input-group mb-3">
 
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                      </div>
-
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" required>
+                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" accept="image/png, image/jpeg">
 
                             {% if listing.listing_img %}
                                 <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>

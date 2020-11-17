@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
-from users.models import Profile, CreatorOrderModel, SponsorOrderModel
+from users.models import Profile, CreatorOrderModel, SponsorOrderModel, Messages
 from users.forms import CreatorOrderForm, SponsorOrderForm
 from .filters import CreatorListingFilter, SponsorListingFilter
 
@@ -18,10 +19,6 @@ def search_query_kw(list):
     keywords = list[0]
     new_list = keywords.split(" ")
     return new_list
-
-
-
-
 
 
 #
@@ -189,6 +186,7 @@ def creator_marketplace_listing_watch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.creators_watched.add(listing)
+
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
 @login_required(login_url='login')
@@ -196,6 +194,9 @@ def creator_marketplace_listing_unwatch_view(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
     profile.creators_watched.remove(listing)
+
+    messages.success(request, "%s has been removed from watchlist" % (listing.blog_name))
+
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
 ##### ordering #####
@@ -211,6 +212,8 @@ def creator_marketplace_listing_order_view(request, id=None):
     buyer = request.user
     buyer_profile = Profile.objects.get(user=buyer)
     buyers_sponsor_listings = buyer.sponsorlistingcreationmodel_set.all()
+
+    # not neccessary
     buyers_creator_listings = buyer.bloglistingcreationmodel_set.all()
 
     creator = listing.creator
@@ -250,7 +253,9 @@ def creator_marketplace_listing_order_view(request, id=None):
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_s = l
 
-            print('------------', form.cleaned_data)
+            Messages.objects.create(sender=buyer, reciever=listing.creator, message="%s has been ordered by %s" % (listing.blog_name, buyer_listing))
+            messages.success(request, "%s has been successfully ordered" % (listing.blog_name), extra_tags="sponsor_orders_creator_success")
+
             obj.save()
 
         return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
@@ -271,6 +276,9 @@ def creator_marketplace_listing_unorder_view(request, id=None):
     marketplace_c_listing = BlogListingCreationModel.objects.get(id=id)
     current_users_profile = Profile.objects.get(user=request.user)
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=marketplace_c_listing)
+
+    Messages.objects.create(sender=creator_order.buyer, reciever=creator_order.creator, message="%s has been unordered by %s" % (creator_order.creator_listing.blog_name, creator_order.buyers_listing_s.product))
+    messages.success(request, "%s has been successfully unordered" % (creator_order.creator_listing.blog_name), extra_tags="sponsor_unorders_creator_success")
 
     creator_order.delete()
     current_users_profile.creators_u_ordered.remove(marketplace_c_listing)
@@ -476,7 +484,9 @@ def sponsor_marketplace_listing_order_view(request, id=None):
                     obj.buyers_listing_s = l
 
             obj.save()
-            print('---------- order was saved -----------')
+
+            Messages.objects.create(sender=buyer, reciever=listing.creator, message="%s has been ordered by %s" % (listing.product, buyer_listing))
+            messages.success(request, "%s has been successfully ordered" % (listing.product), extra_tags="creator_orders_sponsor_success")
 
         return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
 
@@ -500,4 +510,8 @@ def sponsor_marketplace_listing_unorder_view(request, id=None):
 
     sponsor_order.delete()
     current_users_profile.sponsors_u_ordered.remove(marketplace_s_listing)
+
+    Messages.objects.create(sender=sponsor_order.buyer, reciever=sponsor_order.creator, message="%s has been unordered by %s" % (sponsor_order.sponsor_listing.product, sponsor_order.buyers_listing_c.blog_name))
+    messages.success(request, "%s has been successfully unordered" % (sponsor_order.sponsor_listing.product), extra_tags="creator_unorders_sponsor_success")
+
     return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': marketplace_s_listing.id}))

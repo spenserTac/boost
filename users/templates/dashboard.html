@@ -112,10 +112,77 @@
 
 
     <br>
-    <br>
 
     <!-- Only for large screens and up -->
     <div class="d-none d-lg-block mx-5">
+
+      <!-- Django messages -->
+      {% if messages %}
+        {% for message in messages %}
+
+          {% if 'unorder_creator_c_successful' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'escrow_transaction_join_creator_successful' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'creator_order_accept_success' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'creator_declines_sponsor' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'blog_listing_update' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
+      <!-- Custom messages -->
+      {% for message in your_messages %}
+
+        <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+          <strong>{{message.message}}</strong>
+          <a href="{% url 'delete_message' id=message.id %}">
+            <button class="close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </a>
+        </div>
+
+      {% endfor %}
+
+      <br>
 
         <!-- These are the info squares at the top -->
         <div class="row justify-content-center d-flex justify-content-arround">
@@ -3900,7 +3967,7 @@
 
               {% if 'review_content_sent_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>Content has been sent successfully</strong>
+                  <strong>Content has been sent to {{message}} successfully.</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3909,7 +3976,61 @@
 
               {% if 'escrow_transaction_sponsor_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>Escrow transaction for {{listing.creator_listing.blog_name}} has been successfully created</strong>
+                  <strong>Escrow transaction for {{message}}has been successfully created.</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'edits_sponsor_successful' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>You have successfully sent edits too{{message}}</strong>.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'unorder_acc_creator_successful' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}} has been successfully unordered 1.</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'unorder_creator_for_s_successful' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}} successfully unordered 2.</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'sponsor_declined_creator' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'sponsor_acceptes_creator' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'sponsor_listing_deleted' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3918,6 +4039,19 @@
 
             {% endfor %}
           {% endif %}
+
+          {% for message in your_messages %}
+
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message.message}}</strong>
+              <a href="{% url 'delete_message' id=message.id %}">
+                <button class="close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </a>
+            </div>
+
+          {% endfor %}
 
 
           <br>

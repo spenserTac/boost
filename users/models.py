@@ -10,6 +10,10 @@ from django.contrib.auth.models import User
 
 '''
 
+class Messages(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name='message_sender')
+    reciever = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name='message_reciever')
+    message = models.CharField(max_length=50000, blank=True, null=True)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=True)

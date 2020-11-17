@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .decorators import user_is_entry_author
 
@@ -54,11 +55,15 @@ def blogger_listing_creation(request):
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
             form.save(commit=False).blog_type = request.POST.getlist('types')
 
+            name = form.cleaned_data['blog_name']
+
             kw = form.cleaned_data['search_keywords']
             form.save(commit=False).search_keywords = kw #.split(", ")
 
 
             form.save()
+
+            messages.success(request, "%s has been successfully created." % (name), extra_tags="blog_listing_creation")
 
         return redirect('home')
 
@@ -99,6 +104,8 @@ def blogger_listing_update(request, id=None):
 
     ]
 
+    update_bool = "True"
+
 
     original_string = listing.search_keywords
     characters_to_remove = "[]'"
@@ -116,6 +123,7 @@ def blogger_listing_update(request, id=None):
         'types':types,
         'notification_types': notification_types,
         'search_kw': search_kw,
+        'update_bool': update_bool
     }
 
     if request.method == 'POST':
@@ -129,6 +137,14 @@ def blogger_listing_update(request, id=None):
 
             form.save()
 
+            messages.success(request, "%s has been successfully updated." % (listing.blog_name), extra_tags="blog_listing_update")
+
+        elif form.errors:
+
+            messages.error(request, "There was an error. A common issue is that you need to select an image file for you listing image.", extra_tags="blog_listing_update_error")
+
+            return redirect(reverse('blog_listing_update', kwargs={'id': listing.id}))
+
         return redirect('home')
     return render(request, 'blog_listing_creation.html', context)
 
@@ -136,6 +152,9 @@ def blogger_listing_update(request, id=None):
 @user_is_entry_author
 def blogger_listing_delete(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
+
+    messages.success(request, "%s has been successfully deleted." % (listing.blog_name), extra_tags="blog_listing_update")
+
     context = {
         'listing':listing
     }

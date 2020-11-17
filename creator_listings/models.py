@@ -10,9 +10,9 @@ class BlogListingCreationModel(models.Model):
     monthly_views = models.CharField(max_length=300, default=None, null=True, blank=True)
 
     tagline = models.CharField(max_length=1000, default=None, null=True, blank=True)
-    overview_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
-    audience_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
-    sponsor_description = models.CharField(max_length=500000, default=None, null=True, blank=True)
+    overview_description = models.TextField(max_length=500000, default=None, null=True, blank=True)
+    audience_description = models.TextField(max_length=500000, default=None, null=True, blank=True)
+    sponsor_description = models.TextField(max_length=500000, default=None, null=True, blank=True)
 
     email = models.CharField(max_length=300, default=None, null=True, blank=True)
     number = models.CharField(max_length=300, default=None, null=True, blank=True)
@@ -47,4 +47,4 @@ class BlogListingCreationModel(models.Model):
     listing_img = models.ImageField(upload_to=listing_img_path, height_field=None, width_field=None, default=None, null=True, blank=True)
 
     def __str__(self):
-        return self.blog_url or ""
+        return self.blog_name or ""

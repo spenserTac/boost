@@ -14,9 +14,9 @@ class SponsorListingCreationModel(models.Model):
     number = models.CharField(max_length=300, default=None, null=True, blank=True)
 
     tagline = models.CharField(max_length=120, default=None, null=True, blank=True)
-    overview_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
-    audience_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
-    creator_description = models.CharField(max_length=50000, default=None, null=True, blank=True)
+    overview_description = models.TextField(max_length=50000, default=None, null=True, blank=True)
+    audience_description = models.TextField(max_length=50000, default=None, null=True, blank=True)
+    creator_description = models.TextField(max_length=50000, default=None, null=True, blank=True)
 
     notification_type = models.CharField(max_length=30000, default=None, null=True, blank=True)
 

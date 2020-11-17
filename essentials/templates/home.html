@@ -89,6 +89,42 @@
                 </div>
               {% endif %}
 
+              {% if 'blog_listing_update' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'blog_listing_creation' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'sponsor_listing_creation' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'sponsor_listing_update' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
             {% endfor %}
           {% endif %}
 

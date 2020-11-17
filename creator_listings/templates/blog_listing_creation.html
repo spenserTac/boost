@@ -90,9 +90,17 @@
             <div class="row">
               <div class="col-md-12 white-text text-center">
                 <div class="col-md-8 p-lg-5 mx-auto my-auto">
+
+                  {% if update_bool %}
+                    <h1 class="font-weight-bold display-3">Update Creator Listing</h1>
+                    <br>
+                    <p class="lead font-weight-normal">This is where you'll update your creator listing.</p>
+                  {% else %}
                     <h1 class="font-weight-bold display-1">Create A Blog Listing</h1>
                     <br>
                     <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>
+                  {% endif %}
+
                 </div>
               </div>
             </div>
@@ -117,6 +125,23 @@
     <div class="container">
 
             <hr class="my-5">
+
+            {% if messages %}
+              {% for message in messages %}
+
+                {% if 'blog_listing_update_error' in message.tags  %}
+                  <div class="alert alert-danger alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                    <strong>{{message}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                {% endif %}
+
+                <br>
+
+              {% endfor %}
+            {% endif %}
 
             <div class="d-flex justify-content-center mx-3">
                 <form method="POST" enctype="multipart/form-data">
@@ -205,7 +230,7 @@
 
                             {% for btype in types %}
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{btype}}" required name="types"
+                                <input class="form-check-input" type="checkbox" value="{{btype}}" name="types"
                                     {% if btype in listing.blog_type %}
                                         checked
                                     {% endif %}
@@ -275,15 +300,12 @@
 
                         <label for="exampleFormControlFile1">Upload Listing Image</label>
                         <br>
+                        <small>For best results, make sure your image is 1080p.</small>
 
                         <div class="input-group mb-3">
 
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                          </div>
-
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" required>
+                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" accept="image/png, image/jpeg">
 
                                 {% if listing.listing_img %}
                                     <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
@@ -315,12 +337,8 @@
 
 			                      <div class="input-group mb-3">
 
-				                      <div class="input-group-prepend">
-									              <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-													    </div>
-
 																<div class="custom-file">
-																	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="google_a_csv">
+																	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="google_a_csv" accept=".csv">
 
                                     {% if listing.google_a_csv %}
                                         <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
