@@ -182,4 +182,7 @@ print(Site.objects.get(name='example.com').id)
 
 SITE_ID = 4
 
+EMAIL_HOST = 'http://getboostplatform.com'
+EMAIL_PORT = 80
+
 django_heroku.settings(locals())

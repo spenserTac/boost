@@ -1,6 +1,7 @@
 from users import views
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views # LoginView, LogoutView, PasswordReset, PasswordResetDone
+
 
 urlpatterns = [
     path('', views.account, name='user_account'),
@@ -9,6 +10,12 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+
+    #path('change-password/', views.change_password, name='change_password'),
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), name='password_reset'),
+    path('password-reset/done', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset/confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/delete_message/<int:id>', views.delete_message, name='delete_message'),
     path('deleteaccount/', views.delete_account, name='delete_account'),

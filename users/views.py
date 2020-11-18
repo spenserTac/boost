@@ -80,8 +80,12 @@ def signup(request):
         if form.is_valid():
 
             if(form.cleaned_data.get('password1') == form.cleaned_data.get('password2')):
-                form.save()
+
                 user = form.cleaned_data.get('username')
+
+                form.save(commit=False).email = user
+                form.save()
+
                 messages.success(request, 'User Created For: ' + user)
 
                 return redirect('login')
