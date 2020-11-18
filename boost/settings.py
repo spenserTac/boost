@@ -182,7 +182,12 @@ print(Site.objects.get(name='example.com').id)
 
 SITE_ID = 4
 
-EMAIL_HOST = 'http://getboostplatform.com'
-EMAIL_PORT = 80
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'admin@getboostplatform.com'
+EMAIL_HOST_PASSWORD = 'oxjfphxgksmqdzkz'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Boost <admin@getboostplatform.com>'
 
 django_heroku.settings(locals())
