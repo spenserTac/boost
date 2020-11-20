@@ -4,11 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+import os
+
 from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from users.models import Profile, CreatorOrderModel, SponsorOrderModel, Messages
 from users.forms import CreatorOrderForm, SponsorOrderForm
 from .filters import CreatorListingFilter, SponsorListingFilter
+
+# Custom functions
+from users.functions.csv_parser import csv_parser
 
 
 #
@@ -65,6 +70,7 @@ def creator_marketplace(request):
         "Other": ""
         }
 
+
     for niche in niche_query:
         if niche in niche_query:
             niches[str(niche)] = "checked"
@@ -118,6 +124,7 @@ def creator_marketplace(request):
 
 
     context = {
+
         'creator_listings': creator_listings,
         'niches': niches,
         'langs': langs,
@@ -125,7 +132,7 @@ def creator_marketplace(request):
         'blog_age_val': blog_age_val,
         'searchb': searchb,
         'searchbar_bool': searchbar_bool
-        #'c_listing_filter': c_listing_filter,
+
     }
 
     return render(request, 'creator_marketplace.html', context)
@@ -161,12 +168,54 @@ def creator_marketplace_listing_view(request, id=None):
     else:
         ordered = False
 
+        '''
+        ([[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 4095], [7, 413], [8, 84], [9, 14], [10, 33], [11, 34], [12, 0]],
+        '4,673',
+        2020,
+        ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'oct', 'Nov'])
+        '''
+
     context = {
+
         'listing': listing,
         'following': following,
         'ordered': ordered,
-        'all_users_listings': all_users_listings
+        'all_users_listings': all_users_listings,
+
     }
+
+    if(listing.google_a_csv):
+        google_data = listing.google_a_csv.path
+
+        f = open(google_data)
+
+        is_google_a_data_good = csv_parser(f)
+
+        if(is_google_a_data_good != None):
+            is_google_a_data_good = True
+            context['is_google_a_data_good'] = is_google_a_data_good
+        else:
+            is_google_a_data_good = False
+            context['is_google_a_data_good'] = is_google_a_data_good
+
+        data, total_views, year, months = csv_parser(open(google_data))
+
+        if is_google_a_data_good:
+            avg_views = 0
+            for counter, l in enumerate(data):
+                if counter != 1 or 13:
+                    avg_views = avg_views + l[1]
+
+            avg_views = int(avg_views/12)
+
+            prev_year = (year - 1)
+
+            context['data'] = data
+            context['total_views'] = total_views
+            context['prev_year'] = prev_year
+            context['year'] = year
+            context['months'] = months
+            context['avg_views'] = avg_views
 
     return render(request, 'creator_marketplace_listing_view.html', context)
 

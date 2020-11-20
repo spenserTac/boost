@@ -156,7 +156,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-7 p-2 pl-0">
+                            <div class="col-7 pt-0 pr-2 pb-2 pl-0">
                                 <h5>Overview</h5>
                                 <p>{{ listing.tagline }}</p>
 
@@ -177,6 +177,12 @@
                                   {% else %}
 
                                     <button type="button" class="btn btn-outline-success mx-1 px-5 mt-3">Not Watching</button>
+
+                                  {% endif %}
+
+                                  {% if listing.google_a_csv %}
+
+                                    <img class="mt-4" src="{{MEDIA_URL}}uploads/google_img.jpg" class="card-img" style="max-width: 25%; max-height: 25%;">
 
                                   {% endif %}
 

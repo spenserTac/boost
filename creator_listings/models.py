@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import glob
 
 
 class BlogListingCreationModel(models.Model):
@@ -29,18 +30,33 @@ class BlogListingCreationModel(models.Model):
         # if user creates a listing, the try will fail, if they're updating, the try will pass.
         try:
             if instance.google_a_csv:
-                os.remove('media/listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename))
+                '''files = glob.glob('media/listings/creator/{0}/{1}/google_a'.format(instance.creator.id,instance.blog_name))
+                print('---->   ', files)
+                for f in files:
+                    print('\nREMOVING: ', f)
+                    os.remove(f)'''
+
+                '''for f in os.listdir('media/listings/creator/{0}/{1}/google_a'.format(instance.creator.id,instance.blog_name)):
+                    print('>>>>>>', f)
+                    os.remove(os.path.join('media/listings/creator/{0}/{1}/google_a'.format(instance.creator.id,instance.blog_name)), f)'''
+
                 return 'listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename)
         except:
             return 'listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename)
+
     google_a_csv = models.FileField(upload_to=google_a_csv_upload_path, default=None, null=True, blank=True)
+
+
 
     def listing_img_path(instance, filename):
         # instance is the instance of the model.
         # if user creates a listing, the try will fail, if they're updating, the try will pass.
         try:
             if instance.listing_img:
-                os.remove('media/listings/creator/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.blog_name, filename))
+                '''files = glob.glob('media/listings/creator/{0}/{1}/listing_img'.format(instance.creator.id,instance.blog_name))
+                for f in files:
+                    os.remove(f)'''
+
                 return 'listings/creator/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.blog_name, filename)
         except:
             return 'listings/creator/{0}/{1}/listing_img/{2}'.format(instance.creator.id,instance.blog_name, filename)

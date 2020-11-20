@@ -56,110 +56,197 @@
 
                     </div>
 
-                    <hr class="my-4">
+                    {% if is_google_a_data_good %}
 
-                    <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
-                      <div class="row">
-                        <div class="col" style="height: 500px;">
+                      <hr class="my-4">
 
-                          <h1 class="text-center mb-4">Traffic</h1>
+                      <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                        <div class="row">
+                          <div class="col" style="height: 500px;">
 
-                          {% block header %}
+                            <h1 class="text-center mb-4">Traffic</h1>
 
-                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                            <script type="text/javascript">
+                            {% block header %}
 
-
-                            google.charts.load('current', {
-                              callback: function () {
-                                drawChart();
-                                $(window).resize(drawChart);
-                              },
-                              'packages':['line', 'corechart']
-                            });
-                            google.charts.setOnLoadCallback(drawChart);
+                              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                              <script type="text/javascript">
 
 
+                              google.charts.load('current', {
+                                callback: function () {
+                                  drawChart();
+                                  $(window).resize(drawChart);
+                                },
+                                'packages':['line', 'corechart']
+                              });
+                              google.charts.setOnLoadCallback(drawChart);
 
 
-                              function drawChart() {
 
-                              var button = document.getElementById('change-chart');
-                              var chartDiv = document.getElementById('chart_div');
 
-                              var data = new google.visualization.DataTable();
-                              data.addColumn('string', 'Month');
-                              data.addColumn('number', "Views");
+                                function drawChart() {
 
-                              data.addRows([
-                                ['Jan 2019', 5500],
-                                ['Feb', 8700],
-                                ['Mar', 12000],
-                                ['Apr', 15300],
-                                ['May', 18600],
-                                ['June', 20900],
-                                ['July', 19800],
-                                ['Aug', 16600],
-                                ['Sept', 13300],
-                                ['Oct', 9900],
-                                ['Nov', 6600],
-                                ['Dec', 4500],
-                                ['Jan 2020', 5500],
-                              ]);
+                                var button = document.getElementById('change-chart');
+                                var chartDiv = document.getElementById('chart_div');
 
-                              var materialOptions = {
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Month');
+                                data.addColumn('number', "Views");
 
-                                  chart: {
-                                    title: '',
+                                data.addRows([
+                                  ['{{months.0}} {{prev_year}}', {{data.0.1}}],
+                                  ['{{months.1}}', {{data.1.1}}],
+                                  ['{{months.2}}', {{data.2.1}}],
+                                  ['{{months.3}}', {{data.3.1}}],
+                                  ['{{months.4}}', {{data.4.1}}],
+                                  ['{{months.5}}', {{data.5.1}}],
+                                  ['{{months.6}}', {{data.6.1}}],
+                                  ['{{months.7}}', {{data.7.1}}],
+                                  ['{{months.8}}', {{data.8.1}}],
+                                  ['{{months.9}}', {{data.9.1}}],
+                                  ['{{months.10}}', {{data.10.1}}],
+                                  ['{{months.11}} {{year}}', {{data.11.1}}],
+                                ]);
 
-                                  },
+                                var materialOptions = {
 
-                                  colors: ['#269906'],
-                                  legend: { position: "none" },
+                                    chart: {
+                                      title: '',
 
-                                  series: {
-                                    // Gives each series an axis name that matches the Y-axis below.
-                                    0: {axis: 'Temps'},
-                                    1: {axis: 'Daylight'},
+                                    },
 
-                                  },
-                                  axes: {
-                                    // Adds labels to each axis; they don't have to match the axis names.
-                                    y: {
-                                      Temps: {label: 'Views'},
-                                      Daylight: {label: 'Daylight'}
+                                    colors: ['#28b500'],
+                                    legend: { position: "none" },
+
+                                    series: {
+                                      // Gives each series an axis name that matches the Y-axis below.
+                                      0: {axis: 'Temps'},
+                                      1: {axis: 'Daylight'},
+
+                                    },
+                                    axes: {
+                                      // Adds labels to each axis; they don't have to match the axis names.
+                                      y: {
+                                        Temps: {label: 'Views'},
+                                        Daylight: {label: 'Daylight'}
+                                      }
                                     }
-                                  }
-                                };
+                                  };
 
+                                function drawMaterialChart() {
+                                  var materialChart = new google.charts.Line(chartDiv);
+                                  materialChart.draw(data, materialOptions);
+                                  button.innerText = 'Change to Classic';
+                                  button.onclick = drawClassicChart;
+                                }
 
+                                drawMaterialChart();
 
-                              function drawMaterialChart() {
-                                var materialChart = new google.charts.Line(chartDiv);
-                                materialChart.draw(data, materialOptions);
-                                button.innerText = 'Change to Classic';
-                                button.onclick = drawClassicChart;
                               }
+                              </script>
 
-                              drawMaterialChart();
+                            {% endblock header %}
+
+                            <div id="chart_div" style="height: 90%; width: 100%;"></div>
 
 
-                            }
-
-
-                            </script>
-
-                          {% endblock header %}
-
-                          <div id="chart_div" style="height: 90%; width: 100%;"></div>
-
+                          </div>
 
                         </div>
-                         <small class="p-4 pb-2" style="color: red;">NOTE: This is just a placeholder image. Google analytics data will go here that's provided by the creator
-                           of the listing from a CSV file that can be generated on Google analytics. With that data, graphs, charts, etc. will be automatically generated, and show here.</small>
-                      </div>
 
-                    </div class="my-3 p-3 border rounded" style="background-color: white;">
+                        <h1 style="opacity: 0;">Easter Egg!</h1>
+
+                        <div class="row mt-5">
+
+                          <div class="col pr-0 ml-4 mt-1">
+                            <h2 class="ml-1">Stats</h1>
+                            <h4 class="ml-2" style="color: #4a4a4a;">Total Views:</h4>
+                            <h5 class="ml-3" style="color: #28b500;">{{total_views}}</h5>
+                            <h4 class="ml-2" style="color: #4a4a4a;">Avg. Views:</h4>
+                            <h5 class="ml-3" style="color: #28b500;">{{avg_views}}</h5>
+                          </div>
+                          <div class="col-8 mr-4">
+                            <table class="table table-bordered mx-auto">
+                              <thead>
+
+                                <tr>
+                                  <th scope="col" style="width: 40%;">Month</th>
+                                  <th scope="col">Visits</th>
+                                </tr>
+
+                              </thead>
+
+                              <tbody>
+
+                                <tr>
+                                  <th scope="row">{{months.0}} {{prev_year}}</th>
+                                  <td>{{data.0.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.1}}</th>
+                                  <td>{{data.1.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.2}}</th>
+                                  <td colspan="2">{{data.2.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.3}}</th>
+                                  <td colspan="2">{{data.3.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.4}}</th>
+                                  <td colspan="2">{{data.4.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.5}}</th>
+                                  <td colspan="2">{{data.5.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.6}}</th>
+                                  <td colspan="2">{{data.6.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.7}}</th>
+                                  <td colspan="2">{{data.7.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.8}}</th>
+                                  <td colspan="2">{{data.8.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.9}}</th>
+                                  <td colspan="2">{{data.9.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.10}}</th>
+                                  <td colspan="2">{{data.10.1}}</td>
+                                </tr>
+
+                                <tr>
+                                  <th scope="row">{{months.11}} {{year}}</th>
+                                  <td colspan="2">{{data.11.1}}</td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+
+                          </div>
+
+                    {% endif %}
 
                     <hr class="my-4">
 
@@ -168,7 +255,7 @@
                         <div class="row">
                           <div class="col">
 
-                            <div class="card">
+                            <div class="card mb-2">
                               <div class="card-header">
                                 <h5 class="m-0">Overview Description</h5>
                               </div>
@@ -180,12 +267,12 @@
                           </div>
                         </div>
 
-                        <br>
+                        <hr style="border-top: 6px solid #bbb; border-radius: 5px; width: 30%;">
 
                         <div class="row">
                           <div class="col">
 
-                            <div class="card">
+                            <div class="card my-2">
                               <div class="card-header">
                                 <h5 class="m-0">Audience Description</h5>
                               </div>
@@ -197,12 +284,12 @@
                           </div>
                         </div>
 
-                        <br>
+                        <hr style="border-top: 6px solid #bbb; border-radius: 5px; width: 30%;">
 
                         <div class="row">
                           <div class="col">
 
-                            <div class="card">
+                            <div class="card my-2">
                               <div class="card-header">
                                 <h5 class="m-0">What This Creator Is Looking For In A Sponsor</h5>
                               </div>
@@ -214,6 +301,20 @@
                           </div>
                         </div>
 
+                    </div>
+
+                    <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
+                      <div class="card-header">Watch this listing</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Don't Miss A Thing!</h5>
+
+                        {% if following %}
+                            <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button type="button" class="btn btn-primary btn-lg btn-block mt-3">Watching</button></a>
+                        {% else %}
+                            <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button type="button" class="btn btn-outline-primary btn-lg btn-block mt-3">Watch</button></a>
+                        {% endif %}
+
+                      </div>
                     </div>
 
                 </div>
