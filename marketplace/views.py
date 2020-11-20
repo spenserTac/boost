@@ -194,11 +194,14 @@ def creator_marketplace_listing_view(request, id=None):
         if(is_google_a_data_good != None):
             is_google_a_data_good = True
             context['is_google_a_data_good'] = is_google_a_data_good
+
+            data, total_views, year, months = csv_parser(open(google_data))
+            
         else:
             is_google_a_data_good = False
             context['is_google_a_data_good'] = is_google_a_data_good
 
-        data, total_views, year, months = csv_parser(open(google_data))
+
 
         if is_google_a_data_good:
             avg_views = 0
