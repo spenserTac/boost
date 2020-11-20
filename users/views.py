@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, EditProfileForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
 CompletedOrderModel, Messages)
 
@@ -16,6 +16,60 @@ from sponsor_listings.models import SponsorListingCreationModel
 from django.contrib.auth.models import User
 from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm, SponsorEditForm, SponsorReviewForm
 
+# id = User.id
+def edit_profile(request, id=None):
+    user = User.objects.get(id=id)
+    profile = Profile.objects.get(user=user)
+
+
+    if(request.method == 'POST'):
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        context = {'form': form}
+
+        if(form.is_valid()):
+            form.save()
+
+            updated_user = User.objects.get(id=id)
+            updated_user.email = request.user.username
+            updated_user.save()
+
+
+            return redirect('user_account')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+
+        context = {'form': form}
+
+        return render(request, 'change_username.html', context)
+
+
+
+'''
+
+
+    if(request.method == 'POST'):
+        form = EditProfileForm(request.POST, instance=request.user)
+        print('---------', form.errors)
+        print('ssssssss -- ', form)
+
+        if(form.is_valid()):
+            print('sssssssssssssssssssss')
+
+            new_username = form.cleaned_data['new_email']
+            print('-------------', new_username)
+
+            form.save()
+
+            profile.user = new_username
+            user.email = new_username
+
+            profile.save()
+            return redirect('account')
+
+
+    return render(request, 'change_username.html')'''
 
 def account(request, id=None):
     user = User.objects.get(username=request.user.username)
@@ -105,7 +159,6 @@ def signup(request):
         return render(request, 'signup.html', context)
 
 
-@login_required(login_url='login')
 def support_contact(request):
     if request.method == 'POST':
         form = SupportTicketForm(request.POST)

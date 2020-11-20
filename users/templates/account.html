@@ -44,7 +44,10 @@
     <hr>
     <br>
 
-    <span>Your Username/Email: <b>{{ user.username }}</b></span> <a href="#">Change Password</a>
+    <span>Your First Name: <b>{{ user.first_name }}</b> | Your Last Name: <b>{{ user.first_name }}</b></span> <a href="{% url 'edit_profile' id=user.id %}">Change Personal Info</a>
+    <br>
+
+    <span>Your Username/Email: <b>{{ user.username }}</b></span> <a href="{% url 'edit_profile' id=user.id %}">Change Email</a>
     <br>
     <span>Your Password: ####### </span> <a href="{% url 'password_reset' %}">Change Password</a>
 

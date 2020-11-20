@@ -55,12 +55,13 @@
                             <div class="form-group col-md-12">
                                 <h5>Email</h5>
                                 <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
+                                <a href="{% url 'support_contact' %}">Forgot Email?</a>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <h5>Password</h5>
                                 <input name="password" type="password" class="form-control" placeholder="Password" required>
-                                <a href="#">Forgot Password?</a>
+                                <a href="{% url 'password_reset' %}">Forgot Password?</a>
                             </div>
 
                             <div class="d-flex justify-content-center mb-4 mt-2">

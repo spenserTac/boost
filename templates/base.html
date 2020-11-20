@@ -99,6 +99,11 @@
               </div>
 
             {% else %}
+
+              <li class="nav-item">
+                <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595; white-space: nowrap;" href="{% url 'support_contact' %}">Support</a>
+              </li>
+
               <div class="form-inline my-2 my-lg-0">
                   <a href="{% url 'login' %}" style="color:#959595" class="nav-link active h5 font-weight-normal">Login / </a>
                   <a href="{% url 'signup' %}" style="color:#959595" class="nav-link active h5 font-weight-normal">Signup</a>

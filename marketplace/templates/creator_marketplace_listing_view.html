@@ -5,7 +5,7 @@
   <div class="d-none d-lg-block">
     <div style="background-color: #fbfbfb;">
 
-        <div class="container" style="background-color: #fbfbfb;">
+        <div class="container p-0" style="background-color: #fbfbfb;">
 
           {% if messages %}
             {% for message in messages %}
@@ -60,8 +60,100 @@
 
                     <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
                       <div class="row">
-                        <div class="col">
-                          <img src="https://i.stack.imgur.com/O5pe1.png" style="width: 100%; height: 100%;">
+                        <div class="col" style="height: 500px;">
+
+                          <h1 class="text-center mb-4">Traffic</h1>
+
+                          {% block header %}
+
+                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                            <script type="text/javascript">
+
+
+                            google.charts.load('current', {
+                              callback: function () {
+                                drawChart();
+                                $(window).resize(drawChart);
+                              },
+                              'packages':['line', 'corechart']
+                            });
+                            google.charts.setOnLoadCallback(drawChart);
+
+
+
+
+                              function drawChart() {
+
+                              var button = document.getElementById('change-chart');
+                              var chartDiv = document.getElementById('chart_div');
+
+                              var data = new google.visualization.DataTable();
+                              data.addColumn('string', 'Month');
+                              data.addColumn('number', "Views");
+
+                              data.addRows([
+                                ['Jan 2019', 5500],
+                                ['Feb', 8700],
+                                ['Mar', 12000],
+                                ['Apr', 15300],
+                                ['May', 18600],
+                                ['June', 20900],
+                                ['July', 19800],
+                                ['Aug', 16600],
+                                ['Sept', 13300],
+                                ['Oct', 9900],
+                                ['Nov', 6600],
+                                ['Dec', 4500],
+                                ['Jan 2020', 5500],
+                              ]);
+
+                              var materialOptions = {
+
+                                  chart: {
+                                    title: '',
+
+                                  },
+
+                                  colors: ['#269906'],
+                                  legend: { position: "none" },
+
+                                  series: {
+                                    // Gives each series an axis name that matches the Y-axis below.
+                                    0: {axis: 'Temps'},
+                                    1: {axis: 'Daylight'},
+
+                                  },
+                                  axes: {
+                                    // Adds labels to each axis; they don't have to match the axis names.
+                                    y: {
+                                      Temps: {label: 'Views'},
+                                      Daylight: {label: 'Daylight'}
+                                    }
+                                  }
+                                };
+
+
+
+                              function drawMaterialChart() {
+                                var materialChart = new google.charts.Line(chartDiv);
+                                materialChart.draw(data, materialOptions);
+                                button.innerText = 'Change to Classic';
+                                button.onclick = drawClassicChart;
+                              }
+
+                              drawMaterialChart();
+
+
+                            }
+
+
+                            </script>
+
+                          {% endblock header %}
+
+                          <div id="chart_div" style="height: 90%; width: 100%;"></div>
+
+
                         </div>
                          <small class="p-4 pb-2" style="color: red;">NOTE: This is just a placeholder image. Google analytics data will go here that's provided by the creator
                            of the listing from a CSV file that can be generated on Google analytics. With that data, graphs, charts, etc. will be automatically generated, and show here.</small>

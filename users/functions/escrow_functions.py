@@ -4,7 +4,14 @@ import string
 
 from Crypto.Cipher import AES
 
-# Creators "welcome" URL redirect >>> https://www.escrow-sandbox.com/agree?tid=<tid>&token=<token>
+# Creators URL redirect >>> https://my.escrow.com/myEscrow/Transaction.asp?tid=<transaction_id> (Only after the sponsor has completed the stuff)
+# Sponsor URL redirect >>> "https://www.escrow.com/pay?token=<token>"
+
+# https://my.escrow-sandbox.com/myescrow/Transaction.asp?TID=3564176
+# Buyer transaction page >>>  https://my.escrow-sandbox.com/myescrow/Transaction.asp?tran=3565394
+
+
+# get transaction details (assign it to a variable then print var.json()) >>> requests.get('https://api.escrow-sandbox.com/2017-09-01/transaction/3564176',auth=('spenserdt@gmail.com', 'Greatdain445'))
 
 
 letters = string.ascii_lowercase
@@ -41,47 +48,10 @@ def cipher_id(encrypted_id):
 
     return ciphered_id
 
-
-
-
 #
 #   Encypting and ciphering Token and ID TEST
 #
 
-'''
-
-letters = string.ascii_lowercase
-message = '2d2afb9f-364f-4f9f-82a5-803344d60432'#.join(random.choice(letters) for i in range(36))
-print('\n\n\n\n\n')
-print('MESSAGE: ', message, '\n')
-
-#print(len(message))
-
-m = encrypt_token(message)
-print('ENCRYPTED TOKEN: ', m)
-print('\nCIPHERED TOKEN: ', cipher_token(m))
-print('\n-----------------------')
-print(message)
-print(cipher_token(m))
-print('-----------------------\n')
-
-print('===================================================')
-
-message2 = '3300003'#.join(random.choice(letters) for i in range(36))
-print('MESSAGE: ', message2, '\n')
-
-#print(len(message2))
-
-m2 = encrypt_id(message2)
-print('ENCRYPTED ID: ', m2)
-print('\nCIPHERED ID: ', cipher_id(m2))
-print('\n-----------------------')
-print(message2)
-print(cipher_id(m2))
-print('-----------------------\n')
-print('\n\n\n\n\n')
-
-'''
 
 # returns json response. It will contain: sponsor LANDING PAGE, ID, TOKEN
 def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name):
@@ -221,71 +191,3 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
     )
 
     return r.json()
-
-
-'''
-r = requests.post(
-
-    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('spenserdt@gmail.com', 'Greatdain445'),
-
-
-    json={
-        "parties": [
-            {
-                "role": "broker",
-                "customer": "me",
-                "agreed": True
-            },
-            {
-                "role": "buyer",
-                "customer": "spenserdaintacin@gmail.com",
-                "agreed": True
-            },
-            {
-                "role": "seller",
-                "customer": "getmodernkitchen@gmail.com",
-                "agreed": True
-            }
-        ],
-        "currency": "usd",
-        "description": "This is desc. 1",
-        "items": [
-            {
-                "title": "This is title 1",
-                "description": "This is desc. 2",
-                "type": "milestone",
-                "inspection_period": 259200,
-                "quantity": 1,
-                "schedule": [
-                    {
-                        "amount": 1000.0,
-                        "payer_customer": "spenserdaintacin@gmail.com",
-                        "beneficiary_customer": "getmodernkitchen@gmail.com"
-                    }
-                ]
-            },
-            {
-                "type": "broker_fee",
-                "schedule": [
-                    {
-                        "amount": 100,
-                        "payer_customer": "spenserdaintacin@gmail.com",
-                        "beneficiary_customer": "me"
-                    }
-                ]
-            },
-            {
-                "type": "broker_fee",
-                "schedule": [
-                    {
-                        "amount": 0,
-                        "payer_customer": "getmodernkitchen@gmail.com",
-                        "beneficiary_customer": "me"
-                    }
-                ]
-            }
-        ]
-    },
-)
-'''
