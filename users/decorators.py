@@ -1,5 +1,32 @@
 from django.core.exceptions import PermissionDenied
-from . models import AcceptedCreatorOrderModel, CreatorOrderModel, SponsorOrderModel
+from . models import AcceptedCreatorOrderModel, CreatorOrderModel, SponsorOrderModel, Profile, Messages
+from django.contrib.auth.models import User
+
+
+def dashboard_message_decorator(function):
+    def wrap(request, *args, **kwargs):
+        #id is id of message
+        message = Messages.objects.get(id=kwargs['id'])
+        if request.user == message.reciever:
+            return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+def dashboard_edit_profile_decorator(function):
+    def wrap(request, *args, **kwargs):
+        user = User.objects.get(id=kwargs['id'])
+        profile = Profile.objects.get(user=user)
+        if profile.user == request.user:
+            return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
 
 def dashboard_send_review_decorator(function):
     def wrap(request, *args, **kwargs):

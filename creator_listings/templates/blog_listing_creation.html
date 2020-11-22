@@ -305,19 +305,24 @@
                         <div class="input-group mb-3">
 
                             <div class="custom-file">
+
                               <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="listing_img" accept="image/png, image/jpeg">
+                              {% if listing.listing_img %}
+                                <label class="custom-file-label" for="inputGroupFile01" style="max-width: 100%;">{{img_file_name}}</label>
+                              {% else %}
+                                <label class="custom-file-label" for="inputGroupFile01" style="max-width: 100%;">Choose File</label>
+                              {% endif %}
 
-                                {% if listing.listing_img %}
-                                    <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
-                                {% else %}
-                                  <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                                {% endif %}
+                              <script>
+                              document.getElementById("inputGroupFile01").addEventListener('change',function(e){
+                                var fileName = document.getElementById("inputGroupFile01").files[0].name;
+                                var nextSibling = e.target.nextElementSibling
+                                nextSibling.innerText = fileName
+                                })
+                              </script>
 
-                              </label>
                             </div>
-
                         </div>
-
                     </div>
 
                     <br>
@@ -338,18 +343,25 @@
 			                      <div class="input-group mb-3">
 
 																<div class="custom-file">
-																	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="google_a_csv" accept=".csv">
+																	<input type="file" class="custom-file-input1" id="inputGroupFile02" aria-describedby="inputGroupFileAddon01" name="google_a_csv" accept=".csv">
+                                  {% if listing.google_a_csv %}
+                                    <label class="custom-file-label" for="inputGroupFile02" style="max-width: 100%;">{{ga_file_name}}</label>
+                                  {% else %}
+                                    <label class="custom-file-label" for="inputGroupFile02" style="max-width: 100%;">Choose File</label>
+                                  {% endif %}
 
-                                    {% if listing.google_a_csv %}
-                                        <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
-                                    {% else %}
-                                      <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                                    {% endif %}
+                                  <script>
+                                    document.getElementById("inputGroupFile02").addEventListener('change',function(e){
+                                      var fileName = document.getElementById("inputGroupFile02").files[0].name;
+                                      var nextSibling = e.target.nextElementSibling
+                                      nextSibling.innerText = fileName
+                                      })
+                                  </script>
 
 
 																</div>
-
 														</div>
+
 
                             <a class="text-center" href="#howToUploadGoogleAnalyticsModal" data-toggle="modal">How do I do this?</a>
                             <br>

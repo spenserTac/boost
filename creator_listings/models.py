@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import glob
+import glob, os
 
 
 class BlogListingCreationModel(models.Model):
@@ -45,6 +45,9 @@ class BlogListingCreationModel(models.Model):
             return 'listings/creator/{0}/{1}/google_a/{2}'.format(instance.creator.id,instance.blog_name, filename)
 
     google_a_csv = models.FileField(upload_to=google_a_csv_upload_path, default=None, null=True, blank=True)
+
+    def filename(self):
+        return os.path.basename(self.google_a_csv.name)
 
 
 

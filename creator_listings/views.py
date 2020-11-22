@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from .decorators import user_is_entry_author
 
+import os
+
 from .models import BlogListingCreationModel
 from users.models import Profile
 from .forms import BlogListingCreationForm
@@ -86,6 +88,9 @@ def creator_listing_creation_type_c(request):
 def blogger_listing_update(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
 
+    img_path = os.path.basename(listing.listing_img.path)
+    i = img_path.rfind('_')
+    img_file_name = img_path[:i] + img_path[i+8:]
 
     types = [
         'Review',
@@ -106,25 +111,35 @@ def blogger_listing_update(request, id=None):
 
     update_bool = "True"
 
+    if(listing.search_keywords):
+        original_string = listing.search_keywords
+        characters_to_remove = "[]'"
 
-    original_string = listing.search_keywords
-    characters_to_remove = "[]'"
+        new_string = original_string
+        for character in characters_to_remove:
+            new_string = new_string.replace(character, "")
 
-    new_string = original_string
-    for character in characters_to_remove:
-        new_string = new_string.replace(character, "")
+        kw = new_string.split()
+        search_kw = " ".join(kw)
 
-    kw = new_string.split()
-    search_kw = " ".join(kw)
+        context['search_kw'] = search_kw
 
 
     context = {
         'listing':listing,
         'types':types,
         'notification_types': notification_types,
-        'search_kw': search_kw,
-        'update_bool': update_bool
+        'update_bool': update_bool,
+        'img_file_name': img_file_name,
     }
+
+    if(listing.google_a_csv):
+        ga_file_path = os.path.basename(listing.google_a_csv.name)
+
+        i = ga_file_path.rfind('_')
+        ga_file_name = ga_file_path[:i] + ga_file_path[i+8:]
+
+        context['ga_file_name'] = ga_file_name
 
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST,request.FILES, instance=listing)
@@ -133,7 +148,9 @@ def blogger_listing_update(request, id=None):
             form.save(commit=False).blog_type = request.POST.getlist('types')
 
             kw = form.cleaned_data['search_keywords']
-            form.save(commit=False).search_keywords = kw.split(", ")
+
+            if(kw):
+                form.save(commit=False).search_keywords = kw.split(", ")
 
             form.save()
 

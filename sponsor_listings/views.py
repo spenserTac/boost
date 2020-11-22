@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from .decorators import user_is_entry_author
 
+import os
+
 from .models import SponsorListingCreationModel
 from .forms import SponsorListingCreationForm
 from users.models import Profile
@@ -68,6 +70,11 @@ def sponsor_listing_creation_type_s(request):
 def sponsor_listing_update(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
 
+    img_path = os.path.basename(listing.listing_img.path)
+    i = img_path.rfind('_')
+    img_file_name = img_path[:i] + img_path[i+8:]
+
+
     notification_types = [
 
         'Initial',
@@ -83,7 +90,8 @@ def sponsor_listing_update(request, id=None):
     context = {
         'listing':listing,
         'notification_types': notification_types,
-        'update_bool': update_bool
+        'update_bool': update_bool,
+        'img_file_name': img_file_name,
     }
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST,request.FILES, instance=listing)

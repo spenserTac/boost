@@ -22,7 +22,7 @@
 
     <!-- Nav Bar -->
     <!-- Either #243665 (Dark blue) or 4831d4 (purple) or #262626 (darkish black) -->
-    <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top shadow-sm" style="background-color: #262626;">
+    <nav class="navbar navbar-expand-lg navbar-dark py-0 sticky-top shadow-sm" style="background-color: #262626;">
 
 
       <a class="py-2" href="{% url 'home' %}">
@@ -40,53 +40,53 @@
 
             <li class="nav-item">
               <div class="dropdown">
-                <a class="nav-link dropdown-toggle active h5 mx-4 font-weight-normal" id="dropdownMenuButton" data-toggle="dropdown" style="cursor: pointer; color:#959595">Marketplace</a>
+                <a class="nav-link dropdown-toggle active h5 mx-4 font-weight-normal mt-2" id="dropdownMenuButton" data-toggle="dropdown" style="cursor: pointer; color:#959595">Marketplace</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{% url 'creator_marketplace' %}">Blog Marketplace</a>
-                  <a class="dropdown-item" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
+                  <a class="dropdown-item mt-2" href="{% url 'creator_marketplace' %}">Blog Marketplace</a>
+                  <a class="dropdown-item mt-2" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
                 </div>
               </div>
             </li>
 
             {% if user.profile.type == 'none' %}
             <li class="nav-item">
-              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
+              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
+              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
             </li>
            {% endif %}
 
             {% if user.profile.type == 'creator' %}
             <li class="nav-item">
-              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
+              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
             </li>
            {% endif %}
 
 
            {% if user.profile.type == 'sponsor' %}
             <li class="nav-item">
-              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
+              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
             </li>
            {% endif %}
 
             <li class="nav-item">
-              <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595; white-space: nowrap;" href="{% url 'feature_add' %}">Feature Request</a>
+              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595; white-space: nowrap;" href="{% url 'feature_add' %}">Feature Request</a>
             </li>
 
             {% if user.is_authenticated %}
               <div class="form-inline my-2 my-lg-0">
-                  <a href="{% url 'logout' %}" class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595">Logout</a>
+                  <a href="{% url 'logout' %}" class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595">Logout</a>
               </div>
 
               <div class="form-inline my-2 my-lg-0">
                 <!-- Either #8bd8bd (Turquise) or ccf381 (greenish) or #6e6e6e (light grey) -->
-                <a href="{% url 'dashboard' %}"><button class="btn btn-outline-secondary btn-lg my-2 my-sm-0 mx-4" type="submit">Dashboard</button></a>
+                <a href="{% url 'dashboard' %}"><button class="btn btn-outline-secondary btn-lg my-2 my-sm-0 mx-4 py-1" type="submit">Dashboard</button></a>
               </div>
 
               <div class="dropdown">
-                <button class="btn btn-outline-secondary btn-lg  dropdown-toggle  mx-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-secondary btn-lg dropdown-toggle py-1 mx-4 mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ user|truncatechars:14 }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -101,12 +101,12 @@
             {% else %}
 
               <li class="nav-item">
-                <a class="nav-link active h5 mx-4 font-weight-normal" style="color:#959595; white-space: nowrap;" href="{% url 'support_contact' %}">Support</a>
+                <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595; white-space: nowrap;" href="{% url 'support_contact' %}">Support</a>
               </li>
 
               <div class="form-inline my-2 my-lg-0">
-                  <a href="{% url 'login' %}" style="color:#959595" class="nav-link active h5 font-weight-normal">Login / </a>
-                  <a href="{% url 'signup' %}" style="color:#959595" class="nav-link active h5 font-weight-normal">Signup</a>
+                  <a href="{% url 'login' %}" style="color:#959595" class="nav-link active h5 font-weight-normal mt-2">Login / </a>
+                  <a href="{% url 'signup' %}" style="color:#959595" class="nav-link active h5 font-weight-normal mt-2">Signup</a>
               </div>
 
             {% endif %}
@@ -158,7 +158,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
+    
   </body>
 
   <br>

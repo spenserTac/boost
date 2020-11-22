@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm, SponsorEditForm, SponsorReviewForm
 
 # id = User.id
+@dashboard_edit_profile_decorator
 def edit_profile(request, id=None):
     user = User.objects.get(id=id)
     profile = Profile.objects.get(user=user)
@@ -44,32 +45,6 @@ def edit_profile(request, id=None):
 
         return render(request, 'change_username.html', context)
 
-
-
-'''
-
-
-    if(request.method == 'POST'):
-        form = EditProfileForm(request.POST, instance=request.user)
-        print('---------', form.errors)
-        print('ssssssss -- ', form)
-
-        if(form.is_valid()):
-            print('sssssssssssssssssssss')
-
-            new_username = form.cleaned_data['new_email']
-            print('-------------', new_username)
-
-            form.save()
-
-            profile.user = new_username
-            user.email = new_username
-
-            profile.save()
-            return redirect('account')
-
-
-    return render(request, 'change_username.html')'''
 
 def account(request, id=None):
     user = User.objects.get(username=request.user.username)
@@ -192,6 +167,7 @@ def feature_add(request):
 
 
 @login_required(login_url='login')
+@dashboard_message_decorator
 def delete_message(request, id=None):
     message = Messages.objects.get(id=id)
     message.delete()
@@ -517,8 +493,6 @@ def dashboard_unorder_c(request, id=None):
 
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=listing)
 
-    #request == <WSGIRequest: GET '/account/dashboard/unorder_c/37/'>
-
     Messages.objects.create(sender=creator_order.buyers_listing_s.creator, reciever=creator_order.creator_listing.creator,
         message='%s has unordered your creator listing (%s).' % (creator_order.buyers_listing_s.product, creator_order.creator_listing.blog_name))
 
@@ -624,10 +598,17 @@ def dashboard_creator_order_decline(request, id=None):
         c_order = CreatorOrderModel.objects.get(id=id)
         c_order.status = 'declined'
 
-        messages.success(request, "%s has been successfully declined." % (c_order.buyers_listing_s.product), extra_tags="creator_declines_sponsor")
-        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has declined your order (with listing %s)" % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product))
+        if(request.method == 'POST'):
+            message = request.POST.get("decline_explanation")
 
-        c_order.delete()
+            Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has declined your order (with listing %s). EXPLANATION: %s" % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product, message))
+            messages.success(request, "%s has been successfully declined." % (c_order.buyers_listing_s.product), extra_tags="creator_declines_sponsor")
+
+            c_order.delete()
+
+            return redirect('dashboard')
+
+        return render(request, 'creator_unorder_message.html')
 
     except CreatorOrderModel.DoesNotExist:
         s_order = SponsorOrderModel.objects.get(id=id)
@@ -718,10 +699,19 @@ def dashboard_sponsor_order_decline(request, id=None):
         s_order = SponsorOrderModel.objects.get(id=id)
         s_order.status = 'declined'
 
-        messages.success(request, "%s has been successfully declined." % (s_order.buyers_listing_c.blog_name), extra_tags="sponsor_declined_creator")
-        Messages.objects.create(sender=s_order.creator, reciever=s_order.buyer, message="%s has declined your order (with listing %s)" % (s_order.sponsor_listing.product, s_order.buyers_listing_c.blog_name))
+        if(request.method == 'POST'):
+            message = request.POST.get("decline_explanation")
 
-        s_order.delete()
+            Messages.objects.create(sender=s_order.creator, reciever=s_order.buyer, message="%s has declined your order (with listing %s). EXPLANATION: %s" % (s_order.sponsor_listing.product, s_order.buyers_listing_c.blog_name, message))
+            messages.success(request, "%s has been successfully declined." % (s_order.buyers_listing_c.blog_name), extra_tags="sponsor_declined_creator")
+
+
+
+            s_order.delete()
+
+            return redirect('dashboard')
+
+        return render(request, 'sponsor_unorder_message.html')
 
     return redirect('dashboard')
 

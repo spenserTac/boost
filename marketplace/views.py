@@ -11,6 +11,7 @@ from sponsor_listings.models import SponsorListingCreationModel
 from users.models import Profile, CreatorOrderModel, SponsorOrderModel, Messages
 from users.forms import CreatorOrderForm, SponsorOrderForm
 from .filters import CreatorListingFilter, SponsorListingFilter
+from django.core.paginator import Paginator
 
 # Custom functions
 from users.functions.csv_parser import csv_parser
@@ -33,6 +34,11 @@ def search_query_kw(list):
 # The creator marketplace page
 def creator_marketplace(request):
     creator_listings = BlogListingCreationModel.objects.all()
+
+    paginator = Paginator(creator_listings, 10)
+    page = request.GET.get('page')
+
+
 
     # Returns a list of all the names of the input tags that have been checked
     niche_query = request.GET.getlist('niche')
@@ -122,6 +128,7 @@ def creator_marketplace(request):
             if (listing in profile.creators_watched.all()):
                 watching.append(listing)
 
+    creator_listings = paginator.get_page(page)
 
     context = {
 
@@ -131,7 +138,7 @@ def creator_marketplace(request):
         'watching': watching,
         'blog_age_val': blog_age_val,
         'searchb': searchb,
-        'searchbar_bool': searchbar_bool
+        'searchbar_bool': searchbar_bool,
 
     }
 
@@ -196,7 +203,7 @@ def creator_marketplace_listing_view(request, id=None):
             context['is_google_a_data_good'] = is_google_a_data_good
 
             data, total_views, year, months = csv_parser(open(google_data))
-            
+
         else:
             is_google_a_data_good = False
             context['is_google_a_data_good'] = is_google_a_data_good
@@ -274,6 +281,9 @@ def creator_marketplace_listing_order_view(request, id=None):
 
     try:
         prev_c_order = CreatorOrderModel.objects.get(buyer=buyer, creator_listing=listing)
+
+
+
     except:
         prev_c_order = None
 
@@ -312,6 +322,8 @@ def creator_marketplace_listing_order_view(request, id=None):
 
         return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
+
+
     context = {
         'buyer': buyer,
         'creator': creator,
@@ -319,6 +331,13 @@ def creator_marketplace_listing_order_view(request, id=None):
         'buyers_creator_listings': buyers_creator_listings,
         'prev_c_order': prev_c_order
     }
+
+    if(prev_c_order):
+        file_path = os.path.basename(prev_c_order.s_content_file.path)
+        i = file_path.rfind('_')
+        file_name = file_path[:i] + file_path[i+8:]
+
+        context['file_name'] = file_name
 
     return render(request, 'creator_marketplace_listing_order_detail_view.html', context)
     # return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
@@ -344,6 +363,9 @@ def creator_marketplace_listing_unorder_view(request, id=None):
 # The sponsor marketplace page
 def sponsor_marketplace(request):
     sponsor_listings = SponsorListingCreationModel.objects.all()
+
+    paginator = Paginator(sponsor_listings, 10)
+    page = request.GET.get('page')
 
     niche_query = request.GET.getlist('niche')
     lang_query = request.GET.getlist('language')
@@ -417,6 +439,8 @@ def sponsor_marketplace(request):
         for listing in sponsor_listings:
             if (listing in profile.sponsors_watched.all()):
                 watching.append(listing)
+
+    sponsor_listings = paginator.get_page(page)
 
     context = {
         'sponsor_listings': sponsor_listings,
@@ -541,6 +565,7 @@ def sponsor_marketplace_listing_order_view(request, id=None):
             messages.success(request, "%s has been successfully ordered" % (listing.product), extra_tags="creator_orders_sponsor_success")
 
         return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
+
 
     context = {
         'buyer': buyer,

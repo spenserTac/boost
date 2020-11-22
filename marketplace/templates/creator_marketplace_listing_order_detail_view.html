@@ -126,7 +126,7 @@
                                 </div>
                               </div>
 
-                              <input type="number" name="payout" class="form-control" placeholder="$ (No Dollar Sign)" min="1" required>
+                              <input type="number" name="payout" class="form-control" placeholder="$ (No Dollar Sign)" min="1" {% if prev_c_order %}value={{prev_c_order.payout}}{% endif %} required>
                           </div>
                       </div>
                       </div>
@@ -215,13 +215,22 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="s_content_file">
 
-                                {% if listing.s_content_file %}
-                                    <label class="custom-file-label" for="inputGroupFile01">File Chosen</label>
-                                {% else %}
-                                  <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                                {% endif %}
+                              {% if prev_c_order %}
+                                <label class="custom-file-label" for="inputGroupFile01" style="max-width: 100%;">{{file_name}}</label>
+                              {% else %}
+                                <label class="custom-file-label" for="inputGroupFile01" style="max-width: 100%;">Choose File</label>
+                              {% endif %}
 
-                              </label>
+
+
+                              <script>
+                              document.getElementById("inputGroupFile01").addEventListener('change',function(e){
+                                var fileName = document.getElementById("inputGroupFile01").files[0].name;
+                                var nextSibling = e.target.nextElementSibling
+                                nextSibling.innerText = fileName
+                                })
+                              </script>
+
                             </div>
 
 
