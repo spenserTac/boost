@@ -1,3 +1,4 @@
-import ezgmail, os
+import os, smtplib
 
-os.chdir({{MEDIA_URL}}'\credentials_json_file')
+EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')

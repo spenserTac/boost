@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
+from django.core.mail import send_mail
+
+
 
 from .forms import CustomUserCreationForm, EditProfileForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
@@ -143,6 +146,14 @@ def support_contact(request):
             form.save()
 
             messages.success(request, 'Support Ticket Sent Successfully', extra_tags="succussful_support_ticket")
+
+            send_mail(
+                'Thanks %s, You have sent a support request' % (request.user.first_name),
+                'This is just testing',
+                'admin@getboostplatform.com',
+                ['spenserdt@gmail.com'],
+                fail_silently=False,
+            )
 
             return redirect('home')
 
