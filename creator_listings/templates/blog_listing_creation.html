@@ -440,8 +440,8 @@
                         <div class="form-group col-md-12">
                             <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
                             <br>
-                            <small>Example: 3864567789  (Area code is not required)</small>
-                            <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+                            <small>Example: 13864567789  (Area code is required)</small>
+                            <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number" pattern="[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4}">
                         </div>
 
 

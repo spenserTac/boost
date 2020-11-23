@@ -162,7 +162,7 @@ def support_contact(request):
 
 
 
-            '''try:
+            try:
                 message = twilioCli.messages.create(
                     body="""
 
@@ -174,7 +174,7 @@ def support_contact(request):
                     )
             except:
                 print('Error')
-                pass'''
+                pass
 
 
 
