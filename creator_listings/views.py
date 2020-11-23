@@ -31,10 +31,12 @@ def blogger_listing_creation(request):
 
     notification_types = [
 
-        'Initial',
-        'Accepted',
-        'Escrow',
-        'Completed'
+        'Listing is Ordered',
+        'Listing is Unordered',
+        'Order is Accepted by Sponsor',
+        'Order is Declined by Sponsor',
+        'Sponsor has Sent Edits for Accepted Order',
+        'Sponsor has initiated Escrow Process'
 
     ]
 
@@ -102,14 +104,27 @@ def blogger_listing_update(request, id=None):
 
     notification_types = [
 
-        'Initial',
-        'Accepted',
-        'Escrow',
-        'Completed'
+        'Listing is Ordered',
+        'Listing is Unordered',
+        'Order is Accepted by Sponsor',
+        'Order is Declined by Sponsor',
+        'Sponsor has Sent Edits for Accepted Order',
+        'Sponsor has initiated Escrow Process'
 
     ]
 
     update_bool = "True"
+
+
+
+
+    context = {
+        'listing':listing,
+        'types':types,
+        'notification_types': notification_types,
+        'update_bool': update_bool,
+        'img_file_name': img_file_name,
+    }
 
     if(listing.search_keywords):
         original_string = listing.search_keywords
@@ -124,15 +139,6 @@ def blogger_listing_update(request, id=None):
 
         context['search_kw'] = search_kw
 
-
-    context = {
-        'listing':listing,
-        'types':types,
-        'notification_types': notification_types,
-        'update_bool': update_bool,
-        'img_file_name': img_file_name,
-    }
-
     if(listing.google_a_csv):
         ga_file_path = os.path.basename(listing.google_a_csv.name)
 
@@ -144,7 +150,8 @@ def blogger_listing_update(request, id=None):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
-            form.save(commit=False).notification_type = request.POST.getlist('notification_types')
+            form.save(commit=False).notification_type_email = request.POST.getlist('notification_type_email')
+            form.save(commit=False).notification_type_phone = request.POST.getlist('notification_type_phone')
             form.save(commit=False).blog_type = request.POST.getlist('types')
 
             kw = form.cleaned_data['search_keywords']

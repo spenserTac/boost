@@ -20,7 +20,8 @@ class BlogListingCreationModel(models.Model):
     language = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_type = models.CharField(max_length=300, default=None, null=True, blank=True)
     blog_name = models.CharField(max_length=300, default=None, null=True, blank=True)
-    notification_type = models.CharField(max_length=30000, default=None, null=True, blank=True)
+    notification_type_email = models.CharField(max_length=30000, default=None, null=True, blank=True)
+    notification_type_phone = models.CharField(max_length=30000, default=None, null=True, blank=True)
     search_keywords = models.CharField(max_length=30000, default=None, null=True, blank=True)
 
 

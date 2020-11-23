@@ -10,3 +10,4 @@ django-filter==2.3.0
 pillow==7.0.0
 pycrypto==2.6.1
 ezgmail
+twilio

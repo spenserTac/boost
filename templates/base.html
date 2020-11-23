@@ -82,11 +82,11 @@
 
               <div class="form-inline my-2 my-lg-0">
                 <!-- Either #8bd8bd (Turquise) or ccf381 (greenish) or #6e6e6e (light grey) -->
-                <a href="{% url 'dashboard' %}"><button class="btn btn-outline-secondary btn-lg my-2 my-sm-0 mx-4 py-1" type="submit">Dashboard</button></a>
+                <a href="{% url 'dashboard' %}"><button class="btn btn-outline-secondary btn-lg my-2 my-sm-0 mx-4 py-0" type="submit">Dashboard</button></a>
               </div>
 
               <div class="dropdown">
-                <button class="btn btn-outline-secondary btn-lg dropdown-toggle py-1 mx-4 mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-secondary btn-lg dropdown-toggle py-0 mx-4" style="margin-top: 12px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ user|truncatechars:14 }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -158,7 +158,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    
+
   </body>
 
   <br>

@@ -18,10 +18,12 @@ def sponsor_listing_creation(request):
 
     notification_types = [
 
-        'Initial',
-        'Accepted',
-        'Escrow',
-        'Completed'
+        'Listing is Ordered',
+        'Listing is Unordered',
+        'Order is Accepted by Creator',
+        'Order is Declined by Creator',
+        'Creator has Sent Content for Review',
+        'Creator has Withdrawn from Accepted Order'
 
     ]
 
@@ -77,10 +79,12 @@ def sponsor_listing_update(request, id=None):
 
     notification_types = [
 
-        'Initial',
-        'Accepted',
-        'Escrow',
-        'Completed'
+        'Listing is Ordered',
+        'Listing is Unordered',
+        'Order is Accepted by Sponsor',
+        'Order is Declined by Sponsor',
+        'Sponsor has Sent Edits for Accepted Order',
+        'Sponsor has initiated Escrow Process'
 
     ]
 
@@ -93,10 +97,25 @@ def sponsor_listing_update(request, id=None):
         'update_bool': update_bool,
         'img_file_name': img_file_name,
     }
+
+    if(listing.search_keywords):
+        original_string = listing.search_keywords
+        characters_to_remove = "[]'"
+
+        new_string = original_string
+        for character in characters_to_remove:
+            new_string = new_string.replace(character, "")
+
+        kw = new_string.split()
+        search_kw = " ".join(kw)
+
+        context['search_kw'] = search_kw
+
     if request.method == 'POST':
         form = SponsorListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
-            form.save(commit=False).notification_type = request.POST.getlist('notification_types')
+            form.save(commit=False).notification_type_email = request.POST.getlist('notification_type_email')
+            form.save(commit=False).notification_type_phone = request.POST.getlist('notification_type_phone')
             form.save()
 
             messages.success(request, "%s has been successfully updated." % (listing.product), extra_tags="sponsor_listing_update")
