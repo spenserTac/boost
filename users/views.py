@@ -166,13 +166,14 @@ def support_contact(request):
                 message = twilioCli.messages.create(
                     body="""
 
-    -------------- Boost --------------
+                    --- FROM: Boost ---
 
-    The creator has sent over some content for your review for Listing %s. Check it out https://getboostplatform.com/account/dashboard/.""" % ('SUM LISTING'),
+    you Have Been Hacked. Do Not Be Alarmed ... Well, On Second Thought, You Should be Alarmed. Boost - https://getboostplatform.com/account/dashboard/.""",
                     from_=myTwilioNumber,
                     to=str(13862995508)
                     )
             except:
+                print('Error')
                 pass'''
 
 
@@ -430,7 +431,7 @@ def dashboard_send_review(request, id=None):
                     message = twilioCli.messages.create(
                         body="""
 
-        -------------- Boost --------------
+                            --- FROM: Boost ---
 
         The Creator Has Sent Over Some Content For Your Review For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.buyers_listing_s.product),
                         from_=myTwilioNumber,
@@ -493,7 +494,7 @@ def dashboard_s_acc(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 The Sponsor Has Started The Escrow Process For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.creator_listing.blog_name),
                 from_=myTwilioNumber,
@@ -543,7 +544,7 @@ def dashboard_s_edit(request, id=None):
                     message = twilioCli.messages.create(
                         body="""
 
-        -------------- Boost --------------
+                            --- FROM: Boost ---
 
         The Sponsor Has Sent Some Edits For Your Content For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.creator_listing.blog_name),
                         from_=myTwilioNumber,
@@ -622,7 +623,7 @@ def dashboard_unorder_c(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 The Sponsor Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.creator_listing.blog_name),
                 from_=myTwilioNumber,
@@ -669,7 +670,7 @@ def dashboard_unorder_s(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 The Creator Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.sponsor_listing.product),
                 from_=myTwilioNumber,
@@ -715,7 +716,7 @@ def dashboard_creator_order_accept(request, id=None):
                 message = twilioCli.messages.create(
                     body="""
 
-    -------------- Boost --------------
+                        --- FROM: Boost ---
 
     The Creator Has Accepted The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.sponsor_listing.product),
                     from_=myTwilioNumber,
@@ -810,7 +811,7 @@ def dashboard_creator_order_decline(request, id=None):
                 message = twilioCli.messages.create(
                     body="""
 
-    -------------- Boost --------------
+                        --- FROM: Boost ---
 
     The Creator Has Declined The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.sponsor_listing.product),
                     from_=myTwilioNumber,
@@ -872,7 +873,7 @@ def dashboard_sponsor_order_accept(request, id=None):
                     message = twilioCli.messages.create(
                         body="""
 
-        -------------- Boost --------------
+                            --- FROM: Boost ---
 
         The Sponsor Has Accepted Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.blog_name),
                         from_=myTwilioNumber,
@@ -951,7 +952,7 @@ def dashboard_sponsor_order_decline(request, id=None):
                     message = twilioCli.messages.create(
                         body="""
 
-        -------------- Boost --------------
+                            --- FROM: Boost ---
 
         The Sponsor Has Declined Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.creator_listing.blog_name),
                         from_=myTwilioNumber,
@@ -1060,7 +1061,7 @@ def dashboard_withdraw_order(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 The Creator Has Withdrawn From The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
                 from_=myTwilioNumber,

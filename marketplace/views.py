@@ -331,7 +331,7 @@ def creator_marketplace_listing_order_view(request, id=None):
                     message = twilioCli.messages.create(
                         body="""
 
-        -------------- Boost --------------
+                            --- FROM: Boost ---
 
         Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.blog_name),
                         from_=myTwilioNumber,
@@ -384,7 +384,7 @@ def creator_marketplace_listing_unorder_view(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.""" % (marketplace_c_listing.blog_name),
                 from_=myTwilioNumber,
@@ -668,7 +668,7 @@ def sponsor_marketplace_listing_unorder_view(request, id=None):
             message = twilioCli.messages.create(
                 body="""
 
--------------- Boost --------------
+                    --- FROM: Boost ---
 
 Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
                 from_=myTwilioNumber,
