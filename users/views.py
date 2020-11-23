@@ -152,29 +152,31 @@ def signup(request):
 def support_contact(request):
     if request.method == 'POST':
         form = SupportTicketForm(request.POST)
-        users_email = request.user.username
+        users_email = request.POST.get('email')
+        problem = request.POST.get('problem')
 
         if form.is_valid():
-            form.save(commit=False).creator = request.user
+            form.save(commit=False).email = users_email
+            form.save(commit=False).problem = problem
             form.save()
 
             messages.success(request, 'Support Ticket Sent Successfully', extra_tags="succussful_support_ticket")
 
 
 
-            try:
+            '''try:
                 message = twilioCli.messages.create(
                     body="""
 
                     --- FROM: Boost ---
 
-    you Have Been Hacked. Do Not Be Alarmed ... Well, On Second Thought, You Should be Alarmed. Boost - https://getboostplatform.com/account/dashboard/.""",
+    (1) - You Have Been Hacked. Do Not Be Alarmed ... Well, On Second Thought, You Should be Alarmed. Boost - https://getboostplatform.com/account/dashboard/.""",
                     from_=myTwilioNumber,
                     to=str(13862995508)
                     )
             except:
                 print('Error')
-                pass
+                pass'''
 
 
 
