@@ -35,8 +35,7 @@ def search_query_kw(list):
 def creator_marketplace(request):
     creator_listings = BlogListingCreationModel.objects.all()
 
-    paginator = Paginator(creator_listings, 10)
-    page = request.GET.get('page')
+
 
 
 
@@ -45,18 +44,29 @@ def creator_marketplace(request):
     lang_query = request.GET.getlist('language')
     searchbar_keywords = request.GET.getlist('search_bar')
     blog_age_val = request.GET.get('blog_age_val')
+    monthly_views = request.GET.get('monthly_views')
     searchb = request.GET.get('search_bar')
     reset_button = request.GET.get('reset_button')
     searchbar_bool = False
 
     if reset_button:
-        print('reset')
         return redirect('creator_marketplace')
 
     if blog_age_val is None:
         blog_age_val = 0
+    else:
+        blog_age_val = int(blog_age_val)
+        creator_listings = creator_listings.filter(age__gt=blog_age_val)
 
-    creator_listings = creator_listings.filter(age__gt=blog_age_val)
+
+    if(monthly_views):
+        monthly_views = int(monthly_views)
+
+        if(monthly_views > 0):
+            creator_listings = creator_listings.filter(monthly_views__gt=monthly_views).exclude(google_a_csv=None, monthly_views=None)
+            print("viewing monthly views")
+
+
 
     niches = {
         "Apparel & Accessories": "",
@@ -128,6 +138,11 @@ def creator_marketplace(request):
             if (listing in profile.creators_watched.all()):
                 watching.append(listing)
 
+
+    # ALWAYS KEEP THIS AT THE BOTTOM OF THE FUNCTION
+    paginator = Paginator(creator_listings, 10)
+    page = request.GET.get('page')
+
     creator_listings = paginator.get_page(page)
 
     context = {
@@ -137,6 +152,7 @@ def creator_marketplace(request):
         'langs': langs,
         'watching': watching,
         'blog_age_val': blog_age_val,
+        'monthly_views': monthly_views,
         'searchb': searchb,
         'searchbar_bool': searchbar_bool,
 
@@ -318,9 +334,9 @@ def creator_marketplace_listing_order_view(request, id=None):
             Messages.objects.create(sender=buyer, reciever=listing.creator, message="%s has been ordered by %s" % (listing.blog_name, buyer_listing))
             messages.success(request, "%s has been successfully ordered" % (listing.blog_name), extra_tags="sponsor_orders_creator_success")
 
-            if('Listing is Ordered' in listing.creator_listing.notification_type_email):
+            if('Listing is Ordered' in listing.notification_type_email):
                 send_mail(
-                    'Order For %s' % (listing.creator_listing.blog_name),
+                    'Order For %s' % (listing.blog_name),
                     'Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.blog_name),
                     'admin@getboostplatform.com',
                     [str(listing.email)],

@@ -11,6 +11,8 @@ from .models import BlogListingCreationModel
 from users.models import Profile
 from .forms import BlogListingCreationForm
 
+from users.functions.csv_parser import csv_parser
+
 @login_required(login_url='login')
 def blogger_listing_creation(request):
     type_query = request.POST.getlist('blog_type')
@@ -64,8 +66,32 @@ def blogger_listing_creation(request):
             kw = form.cleaned_data['search_keywords']
             form.save(commit=False).search_keywords = kw #.split(", ")
 
+            csv_file = form.cleaned_data['google_a_csv']
 
-            form.save()
+            if(csv_file is not None):
+                f = open(csv_file.path)
+
+                is_google_a_data_good = csv_parser(f)
+
+                if(is_google_a_data_good != None):
+                    is_google_a_data_good = True
+
+                    data, total_views, year, months = csv_parser(open(csv_file.path))
+
+                else:
+                    is_google_a_data_good = False
+
+                if is_google_a_data_good:
+                    avg_views = 0
+                    for counter, l in enumerate(data):
+                        if counter != 1 or 13:
+                            avg_views = avg_views + l[1]
+
+                    avg_views = int(avg_views/12)
+
+                    form.save(commit=False).monthly_views = avg_views
+
+                form.save()
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="blog_listing_creation")
 
@@ -158,6 +184,31 @@ def blogger_listing_update(request, id=None):
 
             if(kw):
                 form.save(commit=False).search_keywords = kw.split(", ")
+
+            csv_file = form.cleaned_data['google_a_csv']
+
+            if(csv_file is not None):
+                f = open(csv_file.path)
+
+                is_google_a_data_good = csv_parser(f)
+
+                if(is_google_a_data_good != None):
+                    is_google_a_data_good = True
+
+                    data, total_views, year, months = csv_parser(open(csv_file.path))
+
+                else:
+                    is_google_a_data_good = False
+
+                if is_google_a_data_good:
+                    avg_views = 0
+                    for counter, l in enumerate(data):
+                        if counter != 1 or 13:
+                            avg_views = avg_views + l[1]
+
+                    avg_views = int(avg_views/12)
+
+                    form.save(commit=False).monthly_views = avg_views
 
             form.save()
 

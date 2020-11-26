@@ -61,6 +61,25 @@
                                 <div>
 
                                         <div>
+                                            <h6 class="font-weight-bold">Minimum Monthly Views</h6>
+                                        </div>
+
+                                        <small style="color: grey;">(At Least)</small>
+                                        
+                                        <div class="input-group input-group-sm mb-3">
+
+                                          <input name="monthly_views" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if monthly_views %} value="{{monthly_views}}" {% endif %}>
+                                        </div>
+
+
+                                </div>
+
+
+                                <hr>
+
+                                <div>
+
+                                        <div>
                                             <h6 class="font-weight-bold">Years Active</h6>
                                         </div>
 
@@ -151,7 +170,7 @@
 
                                         <!--<img src="https://static.teamguru.com/data/images/thumb/180_da8e22ef6e.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">-->
 
-                                        <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
+                                      <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
 
                                     </div>
                                 </div>

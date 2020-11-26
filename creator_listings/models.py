@@ -8,7 +8,7 @@ class BlogListingCreationModel(models.Model):
     blog_url = models.CharField(max_length=1000, default=None, null=True, blank=True)
     niche = models.CharField(max_length=300, default=None, null=True, blank=True)
     age = models.IntegerField(max_length=300, default=None, null=True, blank=True)
-    monthly_views = models.CharField(max_length=300, default=None, null=True, blank=True)
+    monthly_views = models.IntegerField(default=None, null=True, blank=True)
 
     tagline = models.CharField(max_length=1000, default=None, null=True, blank=True)
     overview_description = models.TextField(max_length=500000, default=None, null=True, blank=True)
@@ -23,6 +23,7 @@ class BlogListingCreationModel(models.Model):
     notification_type_email = models.CharField(max_length=30000, default=None, null=True, blank=True)
     notification_type_phone = models.CharField(max_length=30000, default=None, null=True, blank=True)
     search_keywords = models.CharField(max_length=30000, default=None, null=True, blank=True)
+    domain_authority = models.IntegerField(max_length=50, default=None, null=True, blank=True)
 
 
 

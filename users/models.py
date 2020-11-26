@@ -221,3 +221,8 @@ class FeatureTicket(models.Model):
 
     def __str__(self):
         return('CREATOR: ' + str(self.creator) + ' - EMAIL: ' + str(self.email))
+
+
+
+class Metrics(models.Model):
+    pass
