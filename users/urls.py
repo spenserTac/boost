@@ -48,9 +48,10 @@ urlpatterns = [
     path('dashboard/sdecline/<int:id>/', views.dashboard_sponsor_order_decline, name='dashboard_sponsor_order_decline'),
 
     path('dashboard/nextstep/<int:id>/', views.dashboard_c_next_step, name='dashboard_c_next_step'),
+    path('dashboard/invalidurl/<int:id>/', views.dashboard_s_cant_find_url, name='dashboard_s_cant_find_url'),
 
     path('dashboard/ccomplete/<int:id>/', views.dashboard_creator_order_complete, name='dashboard_creator_order_complete'),
-    path('dashboard/scomplete/<int:id>/', views.dashboard_sponsor_order_complete, name='dashboard_sponsor_order_complete'),
+    # discontinued -> path('dashboard/scomplete/<int:id>/', views.dashboard_sponsor_order_complete, name='dashboard_sponsor_order_complete'),
 
     path('dashboard/withdraw/<int:id>/<int:a_id', views.dashboard_withdraw_order, name='dashboard_withdraw_order'),
 ]

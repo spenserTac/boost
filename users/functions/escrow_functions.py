@@ -10,6 +10,7 @@ from Crypto.Cipher import AES
 # https://my.escrow-sandbox.com/myescrow/Transaction.asp?TID=3564176
 # Buyer transaction page >>>  https://my.escrow-sandbox.com/myescrow/Transaction.asp?tran=3565394
 
+# https://my.escrow-sandbox.com/myescrow/Transaction.asp?TID=<transaction_id>
 
 # get transaction details (assign it to a variable then print var.json()) >>> requests.get('https://api.escrow-sandbox.com/2017-09-01/transaction/3564176',auth=('spenserdt@gmail.com', 'Greatdain445'))
 
@@ -54,140 +55,179 @@ def cipher_id(encrypted_id):
 
 
 # returns json response. It will contain: sponsor LANDING PAGE, ID, TOKEN
-def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name):
-    print("\n\nsssssssssssssssssssssssssssupppppppppppppppppppppppppp\n\n")
+def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name, sponsor_listing_name):
+
+    fee = str(0.10 * float(amount))
+
     r = requests.post(
 
-        'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-        auth=('spenserdt@gmail.com', 'Greatdain445'),
+    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
+    auth=('spenserdt@gmail.com', 'Greatdain445'),
 
 
-        json={
-            "parties": [
-                {
-                    "role": "broker",
-                    "customer": "me",
-                    "agreed": True
-                },
-                {
-                    "role": "buyer",
-                    "customer": sponsor_email,
-                    "agreed": True
-                },
-                {
-                    "role": "seller",
-                    "customer": creator_email,
-                    "agreed": True
+    json={
+        "parties": [
+            {
+                "role": "broker",
+                "customer": "me",
+                "agreed": True
+            },
+            {
+                "role": "buyer",
+                "customer": "sponsor@gmail.com",
+                "agreed": True,
+
+            },
+            {
+                "role": "seller",
+                "customer": creator_email,
+                "agreed": True,
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
                 }
-            ],
-            "currency": "usd",
-            "description": "This is desc. 1",
-            "items": [
-                {
-                    "title": "The escrow order of listing ???",
-                    "description": "You'll find the URL in the dashboard.",
-                    "type": "milestone",
-                    "inspection_period": 259200,
-                    "quantity": 1,
-                    "schedule": [
-                        {
-                            "amount": amount,
-                            "payer_customer": sponsor_email,
-                            "beneficiary_customer": creator_email
-                        }
-                    ]
-                },
-                {
-                    "type": "broker_fee",
-                    "schedule": [
-                        {
-                            "amount": "10",
-                            "payer_customer": sponsor_email,
-                            "beneficiary_customer": "me"
-                        }
-                    ]
-                },
-                {
-                    "type": "broker_fee",
-                    "schedule": [
-                        {
-                            "amount": 0,
-                            "payer_customer": creator_email,
-                            "beneficiary_customer": "me"
-                        }
-                    ]
+            }
+        ],
+        "currency": "usd",
+        # This is actially the title (only seen on the description page at the bottom, not that important)
+        #  Make it somthing like SPONSOR LISTING: <sponsor_listing> | CREATOR LISTING <creator_listing>
+        "description": "This is desc. 1",
+        "items": [
+            {
+                # The title and description are shown in the card payemnt and with the total (at the top of detail page)
+                # Title should be solid yet short description of transaction.
+                # desciption should give instructions for URL stuff.
+                "title": "Boost Sponsored Escrow Order",
+                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform (in escrow section).",
+                "type": "milestone",
+                "inspection_period": 259200,
+                "quantity": 1,
+                "schedule": [
+                    {
+                        "amount": amount,
+                        "payer_customer": "sponsor@gmail.com",
+                        "beneficiary_customer": creator_email
+                    }
+                ]
+            },
+            {
+                "type": "broker_fee",
+                "schedule": [
+                    {
+                        "amount": 0,
+                        "payer_customer": creator_email,
+                        "beneficiary_customer": "me"
+
+                    }
+                ],
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
                 }
-            ]
-        },
+            },
+            {
+                "type": "broker_fee",
+                "schedule": [
+                    {
+                        "amount": fee,
+                        "payer_customer": "sponsor@gmail.com",
+                        "beneficiary_customer": "me"
+
+                    }
+                ],
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
+                }
+            }
+        ]
+    },
     )
 
     return r.json()
 
 
-def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_name):
+def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_name, sponsor_listing_name):
+
+    fee = str(0.10 * float(amount))
+
     r = requests.post(
 
-        'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-        auth=('spenserdt@gmail.com', 'Greatdain445'),
+    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
+    auth=('spenserdt@gmail.com', 'Greatdain445'),
 
 
-        json={
-            "parties": [
-                {
-                    "role": "broker",
-                    "customer": "me",
-                    "agreed": True
-                },
-                {
-                    "role": "buyer",
-                    "customer": sponsor_email,
-                    "agreed": True
-                },
-                {
-                    "role": "seller",
-                    "customer": creator_email,
-                    "agreed": True
+    json={
+        "parties": [
+            {
+                "role": "broker",
+                "customer": "me",
+                "agreed": True
+            },
+            {
+                "role": "buyer",
+                "customer": "sponsor@gmail.com",
+                "agreed": True,
+
+            },
+            {
+                "role": "seller",
+                "customer": creator_email,
+                "agreed": True,
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
                 }
-            ],
-            "currency": "usd",
-            "description": "This is desc. 1",
-            "items": [
-                {
-                    "title": "The escrow order of listing ???",
-                    "description": "You'll find the URL in the dashboard.",
-                    "type": "milestone",
-                    "inspection_period": 259200,
-                    "quantity": 1,
-                    "schedule": [
-                        {
-                            "amount": amount,
-                            "payer_customer": sponsor_email,
-                            "beneficiary_customer": creator_email
-                        }
-                    ]
-                },
-                {
-                    "type": "broker_fee",
-                    "schedule": [
-                        {
-                            "amount": "10",
-                            "payer_customer": creator_email,
-                            "beneficiary_customer": "me"
-                        }
-                    ]
-                },
-                {
-                    "type": "broker_fee",
-                    "schedule": [
-                        {
-                            "amount": 0,
-                            "payer_customer": sponsor_email,
-                            "beneficiary_customer": "me"
-                        }
-                    ]
+            }
+        ],
+        "currency": "usd",
+        # This is actially the title (only seen on the description page at the bottom, not that important)
+        #  Make it somthing like SPONSOR LISTING: <sponsor_listing> | CREATOR LISTING <creator_listing>
+        "description": "This is desc. 1",
+        "items": [
+            {
+                # The title and description are shown in the card payemnt and with the total (at the top of detail page)
+                # Title should be solid yet short description of transaction.
+                # desciption should give instructions for URL stuff.
+                "title": "Boost Sponsored Escrow Order",
+                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform (in escrow section).",
+                "type": "milestone",
+                "inspection_period": 259200,
+                "quantity": 1,
+                "schedule": [
+                    {
+                        "amount": amount,
+                        "payer_customer": "sponsor@gmail.com",
+                        "beneficiary_customer": creator_email
+                    }
+                ]
+            },
+            {
+                "type": "broker_fee",
+                "schedule": [
+                    {
+                        "amount": fee,
+                        "payer_customer": creator_email,
+                        "beneficiary_customer": "me"
+
+                    }
+                ],
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
                 }
-            ]
-        },
+            },
+            {
+                "type": "broker_fee",
+                "schedule": [
+                    {
+                        "amount": 0,
+                        "payer_customer": "sponsor@gmail.com",
+                        "beneficiary_customer": "me"
+
+                    }
+                ],
+                "visibility": {
+                    "hidden_from": ["sponsor@gmail.com"]
+                }
+            }
+        ]
+    },
     )
 
     return r.json()

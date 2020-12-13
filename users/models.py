@@ -130,6 +130,7 @@ class AcceptedCreatorOrderModel(models.Model):
     transaction_id = models.BinaryField(max_length=1000, blank=True, null=True, editable=True)
 
     stage =  models.CharField(max_length=1000, blank=True, null=True)
+    content_url =  models.CharField(max_length=1000, blank=True, null=True)
 
     def review_file_path(instance, filename):
         # instance is the instance of the model.

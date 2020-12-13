@@ -122,7 +122,7 @@
 
     <div class="container">
 
-        <hr class="my-5">
+
 
         {% if messages %}
           {% for message in messages %}
@@ -145,6 +145,41 @@
             <form method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-block my-5 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                  Need Help?
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12 embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
 
                 <h1 class="font-weight-normal text-center">Your Business's Info</h1>
                 <br>
@@ -191,13 +226,28 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="Inputlanguage">Language</label>
+                            <br>
+                            <small>What's the primary language that you business uses?</small>
+                            <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" placeholder="EX: English" required>
+                                <option selected>{{ listing.language }}</option>
+                                <option>English</option>
+                                <option>Spanish</option>
+                                <option>Chinese</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
                         <br>
                         <small class="font-weight-bold">
                           Input search keywords here that are related to your listing.
-                          <br>
+
                           This is how sponsors will search for your listings.
                           <br>
 
@@ -284,9 +334,7 @@
                   <small style="color: red;">The email field is required. Only becuase it is used for the escrow system.</small>
                   <br>
                   <br>
-                  <small style="color: red;">(If you do not want any notifications via email or phone, then do not select any</small>
-                  <br>
-                  <small style="color: red;">notification options)</small>
+                  <small style="color: red;">(If you do not want any notifications via email or phone, then do not select any notification options)</small>
                   <br>
                   <br>
                   <small style="color: red;">The mobile number is not required, but it is extremely urged.</small>
@@ -302,15 +350,16 @@
                       <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
                       <br>
                       <small>Example: 13864567789  (Area code is required)</small>
-                      <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number" pattern="[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4}">
+                      <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
                   </div>
 
+                  <br>
 
                     <div class="form-group col-md-12">
                       <label>Choose Which Notifications You'd Like To Recieve</label>
                       <br>
                       <small class="text-center">It's recommended that you choose all of them, so you'll be
-                        <br>
+
                         notified about everything that happens to your listings.</small>
 
                       <br>

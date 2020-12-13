@@ -23,7 +23,8 @@ def sponsor_listing_creation(request):
         'Order is Accepted by Creator',
         'Order is Declined by Creator',
         'Creator has Sent Content for Review',
-        'Creator has Withdrawn from Accepted Order'
+        'Creator has Withdrawn from Accepted Order',
+        'Creator Sends Content URL'
 
     ]
 
@@ -122,7 +123,8 @@ def sponsor_listing_update(request, id=None):
 
         elif form.errors:
 
-            messages.error(request, "There was an error. A common issue is that you need to select an image file for you listing image.", extra_tags="sponsor_listing_update_error")
+            messages.error(request, "There was an error - %s." % (str(form.errors)), extra_tags="sponsor_listing_update_error")
+            print('------', form.errors)
 
             return redirect(reverse('sponsor_listing_update', kwargs={'id': listing.id}))
 

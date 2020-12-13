@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Only shows up for LG and bigger - Top Background Thing (computers) -->
+<div class="view d-none d-lg-block" style=" height: 300px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light align-items-center">
+      <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-md-12 mb-4 white-text text-center">
+
+
+            <div class="col-md-8 p-lg-2 mx-auto mt-5">
+                <h1 class="font-weight-bold display-1">About Us</h1>
+                <p class="lead font-weight-normal">Get to know Boost a little better.</p>
+
+
+            </div>
+
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Content -->
+    </div>
+    <!-- Mask & flexbox options-->
+</div>
+  <!-- Full Page Intro -->
+
+  <div class="view d-lg-none" style=" height: 180px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="container d-flex align-items-center justify-content-center">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12 white-text text-center">
+            <br>
+
+            <h1 class="font-weight-bold pt-3 m-0">About Us</h1>
+            <p class="lead font-weight-normal">Get to know Boost a little better.</p>
+
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+
+<div class="container mt-4 mb-5">
+
+  <br>
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-lg-5">
+
+          <img class="img-fluid rounded z-depth-2" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/new/img(21).jpg" alt="sample">
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-lg-7">
+
+          <p class="mt-4 mt-lg-0">Write some stuff.</p>
+
+          <p>Write some more stuff.</p>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+
+{% endblock content %}

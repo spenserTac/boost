@@ -31,6 +31,7 @@ def blogger_listing_creation(request):
         'Other',
     ]
 
+
     notification_types = [
 
         'Listing is Ordered',
@@ -38,9 +39,12 @@ def blogger_listing_creation(request):
         'Order is Accepted by Sponsor',
         'Order is Declined by Sponsor',
         'Sponsor has Sent Edits for Accepted Order',
-        'Sponsor has initiated Escrow Process'
+        'Sponsor has initiated Escrow Process',
+        'Sponsor Claims Content URL is Invalid',
+        'Sponsor Has Marked Order as Complete'
 
     ]
+
 
     context = {
         'types': types,
@@ -69,7 +73,7 @@ def blogger_listing_creation(request):
             csv_file = form.cleaned_data['google_a_csv']
 
             if(csv_file is not None):
-                f = open(csv_file.path)
+                f = csv_file
 
                 is_google_a_data_good = csv_parser(f)
 
@@ -187,8 +191,10 @@ def blogger_listing_update(request, id=None):
 
             csv_file = form.cleaned_data['google_a_csv']
 
+            print('======', type(csv_file))
+
             if(csv_file is not None):
-                f = open(csv_file.path)
+                f = csv_file
 
                 is_google_a_data_good = csv_parser(f)
 
@@ -216,7 +222,7 @@ def blogger_listing_update(request, id=None):
 
         elif form.errors:
 
-            messages.error(request, "There was an error. A common issue is that you need to select an image file for you listing image.", extra_tags="blog_listing_update_error")
+            messages.error(request, "There was an error - %s." % (str(form.errors)), extra_tags="blog_listing_update_error")
 
             return redirect(reverse('blog_listing_update', kwargs={'id': listing.id}))
 

@@ -4,13 +4,14 @@
   <div class="d-none d-lg-block">
     <div style="background-color: #fbfbfb;">
 
-        <div class="container" style="background-color: #fbfbfb;">
+        <div class="px-5 mx-auto" style="width: 80%;">
 
           {% if messages %}
+            <br>
             {% for message in messages %}
 
               {% if 'creator_orders_sponsor_success' in message.tags  %}
-                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
                   <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -19,7 +20,7 @@
               {% endif %}
 
               {% if 'creator_unorders_sponsor_success' in message.tags  %}
-                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
                   <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -39,7 +40,7 @@
                     <div class="row">
                       <div class="col">
                         {% if listing.url %}
-                          <a class="nav-link pl-0" href="{{ listing.url }}" target="_blank" style="color: #007185;">
+                          <a class="nav-link pl-0 pt-0" href="{{ listing.url }}" target="_blank" style="color: #007185;">
                             {% if listing.url.4 == "s" %}
                               {{ listing.url|slice:"8:" }}
                             {% elif listing.url.4 == ":" %}
@@ -113,6 +114,20 @@
 
                   </div>
 
+                  <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
+                    <div class="card-header">Watch this listing</div>
+                    <div class="card-body">
+                      <h5 class="card-title">Don't Miss A Thing!</h5>
+
+                      {% if following %}
+                          <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button type="button" class="btn btn-primary btn-lg btn-block mt-3">Watching</button></a>
+                      {% else %}
+                          <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button type="button" class="btn btn-outline-primary btn-lg btn-block mt-3">Watch</button></a>
+                      {% endif %}
+
+                    </div>
+                  </div>
+
               </div>
 
                 <div class="col-4 my-3">
@@ -120,24 +135,57 @@
                     <br>
                     <br>
 
-                    {% if following %}
-                        <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
-                    {% else %}
-                        <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
-                    {% endif %}
+                    <div class="card shadow p-3">
 
-                    <hr class="my-4" style="width: 50%;">
+                      {% if following %}
+                          <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+                      {% else %}
+                          <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+                      {% endif %}
 
-                    {% if ordered %}
-                        <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
-                    {% else %}
+                      {% if ordered %}
+                          <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+                      {% else %}
 
-                        <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
-                    {% endif %}
+                          <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+                      {% endif %}
+
+                    </div>
 
                     <br>
                     <hr>
-                    <br>
+
+                    <button type="button" class="btn btn-primary btn-block my-4 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                      Need Help?
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-12 embed-responsive embed-responsive-16by9">
+                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
 
                     <div class="card shadow">
                       <h5 class="card-header text-center">About The Sponsor</h5>
@@ -181,46 +229,111 @@
     </div>
   </div>
 
+
+
   <div class="d-lg-none">
     <div class="container" style="background-color: #fbfbfb;">
 
+      {% if messages %}
+        <br>
+        {% for message in messages %}
+
+          {% if 'creator_orders_sponsor_success' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'creator_unorders_sponsor_success' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
         <div class="row">
 
-            <div class="col-12 my-3">
+            <div class="col-12 mb-3">
 
                 <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
                   <div class="row">
                     <div class="col">
-                      <h5 class="font-weight-normal pb-2" style="color: grey;">{{ listing.product }}</h5>
-                      <h4 class="pb-2">{{ listing.tagline }}</h4>
-                      <img src="https://gualapackgroup.com/wp-content/uploads/2017/03/business-background.jpg" class="card-img-top">
+                      <a class="nav-link pl-0 pt-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+
+                        {% if listing.url.4 == "s" %}
+                          {{ listing.url|slice:"8:" }}
+                        {% elif listing.url.4 == ":" %}
+                          {{ listing.url|slice:"7:" }}
+                        {% endif %}
+
+                      </a>
+                      <h5 class="font-weight-normal" style="color: grey;">{{ listing.product }}</h5>
+                      <h5 class="pb-2">{{ listing.tagline }}</h5>
+                      <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
                     </div>
                   </div>
 
                 </div>
 
-                <div class="row mb-2">
-                  <h4 class="font-weight-normal mt-2 ml-2">USD</h4>
+                <div class="card shadow p-3">
+
+                  {% if following %}
+                      <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
+                  {% else %}
+                      <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
+                  {% endif %}
+
+
+                  {% if ordered %}
+                      <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
+                  {% else %}
+
+                      <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
+
+                  {% endif %}
                 </div>
 
-                {% if following %}
-                    <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
-                {% else %}
-                    <a href="{% url 'sponsor_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
-                {% endif %}
-
-                <hr class="my-4" style="width: 50%;">
-
-                {% if ordered %}
-                    <a href="{% url 'sponsor_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
-                {% else %}
-
-                    <a href="{% url 'sponsor_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
-
-                {% endif %}
-
                 <hr class="my-4">
+
+                <button type="button" class="btn btn-primary btn-block my-3 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                  Need Help?
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12 embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
 
                 <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
@@ -232,7 +345,7 @@
                             <h5 class="m-0">Overview Description</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.overview_description }}</p>
+                            <p class="card-text">{{ listing.overview_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -249,7 +362,7 @@
                             <h5 class="m-0">Audience Description</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.audience_description }}</p>
+                            <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -266,7 +379,7 @@
                             <h5 class="m-0">What This Sponsor Is Looking For In A Creator</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.creator_description }}</p>
+                            <p class="card-text">{{ listing.creator_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -291,7 +404,7 @@
                           <div class="card">
                             <div class="card-header" id="headingOne">
                               <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
                                   Other Listings By This Creator
                                 </button>
                               </h2>
@@ -300,7 +413,7 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                               <div class="card-body">
                                 {% for l in all_users_listings %}
-                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l }}</a>
+                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
                                   <br>
                                 {% endfor %}
                               </div>

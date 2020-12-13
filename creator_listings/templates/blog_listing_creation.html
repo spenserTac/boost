@@ -124,8 +124,6 @@
 
     <div class="container">
 
-            <hr class="my-5">
-
             {% if messages %}
               {% for message in messages %}
 
@@ -148,6 +146,36 @@
 
                     {% csrf_token %}
 
+                    <button type="button" class="btn btn-primary btn-block my-5 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                      Need Help?
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-12 embed-responsive embed-responsive-16by9">
+                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <h1 class="font-weight-normal text-center">Your Blog's Info</h1>
                     <br>
 
@@ -156,7 +184,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="InputwebsiteUrl">Blog's Name</label>
-                                <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="John Doe's Blog" required>
+                                <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="Your Blogs Name" required>
                             </div>
 
                         </div>
@@ -178,6 +206,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="Inputlanguage">Language</label>
+                                <br>
+                                <small>What's the primary language that you blog is written in?</small>
                                 <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" placeholder="EX: English" required>
                                     <option selected>{{ listing.language }}</option>
                                     <option>English</option>
@@ -202,6 +232,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="Inputniche">Niche</label>
+                                <br>
+                                <small>What niche is your blog?</small>
                                 <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
                                     <option selected>{{ listing.niche }}</option>
                                     <option>Apparel & Accessories</option>
@@ -251,7 +283,7 @@
                           <br>
                           <small class="font-weight-bold">
                             Input search keywords here that are related to your listing.
-                            <br>
+
                             This is how sponsors will search for your listings.
                             <br>
 
@@ -415,22 +447,21 @@
                     <br>
                     <br>
 
-                    <h2 class="font-weight-normal text-center">Notifications Via Text and Email</h2>
+                    <h2 class="font-weight-normal text-center">Notifications</h2>
                     <br>
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
-                        <small style="color: red;">The email field is required. Only becuase it is used for the escrow system.</small>
-                        <br>
-                        <br>
-                        <small style="color: red;">(If you do not want any notifications via email or phone, then do not select any</small>
-                        <br>
-                        <small style="color: red;">notification options)</small>
-                        <br>
-                        <br>
-                        <small style="color: red;">The mobile number is not required, but it is extremely urged.</small>
-                        <br>
-                        <br>
+                      <small style="color: red;">The email field is required. Only becuase it is used for the escrow system.</small>
+                      <br>
+                      <br>
+                      <small style="color: red;">(If you do not want any notifications via email or phone, then do not select any notification options)</small>
+                      <br>
+                      <br>
+                      <small style="color: red;">The mobile number is not required, but it is extremely urged.</small>
+                      <br>
+                      <br>
+
 
                         <div class="form-group col-md-12">
                             <label for="InputwebsiteUrl">Email You'd Like To Be Notified By</label>
@@ -438,32 +469,52 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="InputwebsiteUrl">Phone Number You'd Like To Be Notified By</label>
+                            <label>Phone Number You'd Like To Be Notified By</label>
                             <br>
                             <small>Example: 13864567789  (Area code is required)</small>
-                            <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number" pattern="[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4}">
+                            <input value="{% if listing.number is not None %}{{ listing.number }}{% endif %}" type="tel" name="number" class="form-control" id="InputwebsiteUrl" placeholder="Phone Number">
                         </div>
 
-
+                        <br>
 
 
                         <div class="form-group col-md-12">
                           <label>Choose Which Notifications You'd Like To Recieve</label>
                           <br>
-                          <small class="text-center">It's recommended that you choose all of them, so you'll be
-                            <br>
+                          <small class="text-center" style="">It's recommended that you choose all of them, so you'll be
+
                             notified about everything that happens to your listings.</small>
 
                           <br>
                           <br>
 
-                          <div class="row border rounded p-3" style="background-color: #f5f5f5;">
+                          <div class="d-none d-lg-block">
+                            <div class="row border rounded p-3" style="background-color: #f5f5f5;">
 
-                            <div class="col-6 border-right">
-                              <h5 class="text-center font-weight-normal mb-3">Email</h5>
+                              <div class="col-6 border-right">
+                                <h5 class="text-center font-weight-normal mb-3">Email</h5>
+                              {% for notification in notification_types %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_email"
+                                  {% if notification in listing.notification_type %}
+                                      checked
+                                  {% endif %}
+                                  >
+                                  <label class="form-check-label" for="defaultCheck1">
+                                    {{notification}}
+                                  </label>
+                                </div>
+                             {% endfor %}
+                            </div>
+
+                            <div class="col-6">
+
+                              <h5 class="text-center font-weight-normal mb-3">Mobile</h5>
+                              <p class="text-center" style="color: red;">If you'd like to recieve<br>mobile notifications, please contact support.<br>(For a simple verification process.)</p>
+
                             {% for notification in notification_types %}
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_email"
+                                <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_phone"
                                 {% if notification in listing.notification_type %}
                                     checked
                                 {% endif %}
@@ -475,31 +526,55 @@
                            {% endfor %}
                           </div>
 
-                          <div class="col-6">
-
-                            <h5 class="text-center font-weight-normal mb-3">Mobile</h5>
-
-                            <p class="text-center" style="color: red;">If you'd like to recieve<br>mobile notifications, please contact support.<br>(For a simple verification process.)</p>
+                           </div>
+                      </div>
 
 
-                          {% for notification in notification_types %}
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_phone"
-                              {% if notification in listing.notification_type %}
-                                  checked
-                              {% endif %}
-                              >
-                              <label class="form-check-label" for="defaultCheck1">
-                                {{notification}}
-                              </label>
-                            </div>
-                         {% endfor %}
+                            <div class="d-lg-none">
+                              <div class="row border rounded py-2 px-1" style="background-color: #f5f5f5;">
+
+                                <div class="col-6 px-1 border-right">
+                                  <h5 class="text-center font-weight-normal mb-3">Email</h5>
+                                {% for notification in notification_types %}
+                                  <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_email"
+                                    {% if notification in listing.notification_type %}
+                                        checked
+                                    {% endif %}
+                                    >
+                                    <label class="form-check-label" for="defaultCheck1">
+                                      {{notification}}
+                                    </label>
+                                  </div>
+                               {% endfor %}
+                              </div>
+
+                            <div class="col-6 px-1">
+
+                              <h5 class="text-center font-weight-normal mb-3">Mobile</h5>
+
+                                {% for notification in notification_types %}
+                                  <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_phone"
+                                    {% if notification in listing.notification_type %}
+                                        checked
+                                    {% endif %}
+                                    >
+                                    <label class="form-check-label" for="defaultCheck1">
+                                      {{notification}}
+                                    </label>
+                                  </div>
+                               {% endfor %}
+                          </div>
+
+                           </div>
+
+
                         </div>
 
-                         </div>
 
 
-                      </div>
+                    </div>
 
 
 

@@ -17,12 +17,12 @@
                 <div class="col-md-8 p-lg-2 mx-auto mt-5">
                     <h1 class="font-weight-bold display-1">Boost</h1>
                     <br>
-                    <p class="lead font-weight-normal">An Open and Free Marketplace For Creators and Sponsors To Connect. There's a deal for everyone.</p>
+                    <p class="lead font-weight-normal">A Streamlined Open Platform For Creators and Sponsors To Connect.<br>There's a deal for everyone.</p>
 
                     <br>
 
-                    <a class="btn btn-light btn-lg px-3 mr-2" href="{% url 'creator_marketplace' %}">Creator Marketplace</a>
-                    <a class="btn btn-light btn-lg px-3 ml-2" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
+                    <a class="btn btn-light btn-lg px-3 mr-2" style="border: 1px solid #dadada;" href="{% url 'creator_marketplace' %}">Creator Marketplace</a>
+                    <a class="btn btn-light btn-lg px-3 ml-2" style="border: 1px solid #dadada;" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
 
                 </div>
 
@@ -39,7 +39,7 @@
 
 
       <!-- Only shows up for MD and smaller - Top Background Thing (everything else) -->
-      <div class="view d-lg-none" style=" height: 400px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="view d-lg-none" style=" height: 450px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light align-items-center">
           <!-- Content -->
@@ -51,10 +51,10 @@
                 <br>
                 <h1 class="font-weight-bold display-2">Boost</h1>
                 <br>
-                <p class="lead font-weight-normal">An Open and Free Marketplace For Creators and Sponsors To Connect</p>
+                <p class="lead font-weight-normal">A Streamlined Open Platform For Creators and Sponsors To Connect.<br>There's a deal for everyone.</p>
                 <br>
-                <a class="btn btn-light px-3 py-2 m-2" href="{% url 'creator_marketplace' %}">Creator Marketplace</a>
-                <a class="btn btn-light px-3 py-2 m-2" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
+                <a class="btn btn-light px-3 py-2 m-2" style="border: 1px solid #dadada;" href="{% url 'creator_marketplace' %}">Creator Marketplace</a>
+                <a class="btn btn-light px-3 py-2 m-2" style="border: 1px solid #dadada;" href="{% url 'sponsor_marketplace' %}">Sponsor Marketplace</a>
               </div>
               <!--Grid column-->
             </div>
@@ -66,7 +66,7 @@
       </div>
 
 
-        <div class="container">
+    <div class="container">
 
           {% if messages %}
             {% for message in messages %}
@@ -128,13 +128,15 @@
             {% endfor %}
           {% endif %}
 
-
-            <h1 class="display-3 font-weight-bold text-center mt-5">Choose Your Path</h1>
-            <hr style="width: 30%;">
             <br>
+            <h1 class="display-4 font-weight-bold text-center mt-5" style="color: #1d1d1f">Choose Your Path</h1>
+
             <br>
 
 
+
+            <!-- Choose your side -->
+          <!--
             <div class="row">
 
                 <div class="col">
@@ -195,216 +197,729 @@
                 </div>
 
             </div>
+          -->
+            <!-- END Choose your side -->
 
-            <br>
-            <br>
-            <br>
+            <section class="dark-grey-text text-center">
 
-            <div class="row" style="visibility: visible; animation-name: fadeIn;">
+              <!-- <h3 class="font-weight-bold pt-4 mb-4">Choose Your Path</h3> -->
 
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 px-4">
+              <!--<h5 class="font-weight-bold font-italic mb-5">At vero eos et accusamus et iusto odio dignissimos qui cupiditate non provident.</h5>-->
 
-                  <!--First row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-code fa-2x indigo-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Open and Free Marketplace</h4>
-                      <p class="grey-text">The Boost platform is an open and free marketplace for sponsors and creators to connect.</p>
-                    </div>
+              <div class="row mx-2 mx-lg-0 p-3 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+                <div class="col mr-lg-3">
+
+                  <div class="view">
+                    <h2 class="m-0 text-center">Creator</h2>
+                    <small class="mb-0 text-muted">Those who create content</small>
+
+                    <img src="{{MEDIA_URL}}/pics/creator_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
+
                   </div>
-                  <!--/First row-->
 
-                  <div style="height:30px"></div>
+                  <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
 
-                  <!--Second row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-book fa-2x blue-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Listings</h4>
-                      <p class="grey-text">Out platform operates through listings. This way, both creators and sponsors, can show off their creative outlet or busienss.
+                  <h4 class="font-weight-bold mt-3">Create a Listing and Get Sponsored</h4>
+                  <p class="grey-text px-3 mx-3">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+
+                  <br>
+
+                  <h4 class="font-weight-bold">Get Offers</h4>
+                  <p class="grey-text px-3 mx-3">When a sponsor likes your listing, they can make an offer for you to create and publish some sponsored content, which you can accept or decline.</p>
+
+                  <br>
+
+                  <h4 class="font-weight-bold">Get Paid</h4>
+                  <p class="grey-text px-3 mx-3">After escrow transaction is complete, get paid through Escrow.com.</p>
+
+                </div>
+
+                  <br>
+
+                  {% if user.profile.type == 'sponsor'%}
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg disabled" href="{% url 'blog_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Creator Listing</a>
+                    </p>
+
+                  {% else %}
+
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="{% url 'blog_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Creator Listing</a>
+                    </p>
+
+                  {% endif %}
+
+                  <div class="d-lg-none">
+                    <hr class="my-3" style="opacity: 0%;">
+                    <br>
+                    <hr class="my-3" style="width: 80%;">
+                    <br>
+                  </div>
+
+               	</div>
+
+
+
+               	<div class="col m-0 ml-lg-3">
+
+                  <div class="view m-0">
+                    <h2 class="m-0 text-center">Sponsor</h2>
+                    <small class="mb-0 text-muted">Those who seek advertisment</small>
+                    <img src="{{MEDIA_URL}}/pics/sponsor_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
+                  </div>
+
+                  <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
+
+                  <h4 class="font-weight-bold mt-3">Create a Listing and Attract Creators</h4>
+                  <p class="grey-text px-3 mx-3">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
+
+                  <br>
+
+
+
+                    <h4 class="font-weight-bold">Get Offers</h4>
+                    <p class="grey-text px-3 mx-3">When a creator likes your listing, they can make an offer to create sponsored content for you, which you can accept or decline.</p>
+
+                    <br>
+
+                    <h4 class="font-weight-bold">Grow Your Business</h4>
+                    <p class="grey-text px-3 mx-3">After your approval, the creator will publish your content for the world to see.</p>
+
+                 </div>
+
+                  <br>
+
+                    {% if user.profile.type == 'creator'%}
+
+                      <p class="lead">
+                        <a class="btn btn-primary btn-lg disabled" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
                       </p>
-                    </div>
-                  </div>
-                  <!--/Second row-->
 
-                  <div style="height:30px"></div>
+                  {% else %}
 
-                  <!--Third row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-graduation-cap fa-2x cyan-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Free and Open to all</h4>
-                      <p class="grey-text">Our platform is free and open to everyone, you just have to make an account. We take a small percentage of payment (depending on which party initiates the order).</p>
-                    </div>
-                  </div>
-                  <!--/Third row-->
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
+                    </p>
+
+                  {% endif %}
+
+
 
                 </div>
-                <!--/Grid column-->
+              </div>
 
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12">
+            </section>
 
-                  <h4 class="font-weight-bold text-center mb-4">Watch our "5 min Quick Start" tutorial</h4>
-                  <p class="h5 text-center mb-4">(This is just a placeholder video.)</p>
-                  <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen=""></iframe>
-                  </div>
-                </div>
-                <!--/Grid column-->
+
+            <br>
+            <br>
+            <br>
+            <div class="d-lg-none">
+
+              <hr class="my-0" style="width: 80%;">
 
             </div>
-
             <br>
             <br>
             <br>
 
-            <div class="row" style="visibility: visible; animation-name: fadeIn;">
 
-              <!--Grid column-->
-              <div class="col-lg-6 col-md-12">
+            <!-- What is boost -->
 
-                <h4 class="font-weight-bold text-center mb-4">Watch our "5 min Quick Start" tutorial</h4>
-                <p class="h5 text-center mb-4">(This is just a placeholder video.)</p>
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen=""></iframe>
+            <section class="dark-grey-text p-4 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+
+              <h1 class="display-4 font-weight-bold text-center mb-4 pb-2" style="color: #1d1d1f">What is Boost?</h1>
+              <p class="text-center lead grey-text mx-auto mb-5">Boost is a streamlined open platform for creators and sponsors to connect.</p>
+
+              <div class="row">
+
+                <div class="col-lg-6 text-center text-lg-left my-lg-auto">
+                  <div class="embed-responsive embed-responsive-16by9  ml-0 ml-lg-4">
+                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/uNshCyUQRjY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-6 mt-5 mt-lg-0">
+
+                  <div class="row mb-3">
+
+                    <div class="col-1">
+                      <i class="fas fa-share fa-lg indigo-text"></i>
+                    </div>
+
+                    <div class="col-xl-10 col-md-11 col-10">
+                      <h5 class="font-weight-bold mb-3">Connect Effortlessly</h5>
+                      <p class="grey-text">Gone are the times of cold calls and agencies. Boost allows you to connect with little effort and great reward.</p>
+                    </div>
+
+                  </div>
+
+                  <div class="row mb-3">
+
+                    <div class="col-1">
+                      <i class="fas fa-share fa-lg indigo-text"></i>
+                    </div>
+
+                    <div class="col-xl-10 col-md-11 col-10">
+                      <h5 class="font-weight-bold mb-3">Find Your Match</h5>
+                      <p class="grey-text">With our open marketplace, finding the perfect match has never been easier.</p>
+                    </div>
+
+                  </div>
+
+                  <div class="row mb-3">
+
+                    <div class="col-1">
+                      <i class="fas fa-share fa-lg indigo-text"></i>
+                    </div>
+
+                    <div class="col-xl-10 col-md-11 col-10">
+                      <h5 class="font-weight-bold mb-3">Escrow</h5>
+                      <p class="grey-text">
+                        We want both parties to be happy with the transaction, so Boost works with Escrow.com to utilize escrow transaction,
+                        this way both parties can be sure that the deal is exactly how they want.
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-1">
+                      <i class="fas fa-share fa-lg indigo-text"></i>
+                    </div>
+
+                    <div class="col-xl-10 col-md-11 col-10">
+                      <h5 class="font-weight-bold mb-3">Streamlined Process</h5>
+                      <p class="grey-text mb-2 mb-lg-3">
+                        Our streamlined process guides you through your transaction in a matter of minutes.
+                      </p>
+                    </div>
+
+                  </div>
+
                 </div>
 
               </div>
 
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 px-4">
+            </section>
 
-                  <!--First row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-code fa-2x indigo-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Open and Free Marketplace</h4>
-                      <p class="grey-text">The Boost platform is an open and free marketplace for sponsors and creators to connect.</p>
-                    </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+
+            <!-- 3 easy steps -->
+              <section class="dark-grey-text p-3 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+                <style>
+                  .fa-play:before {
+                    margin-left: .3rem;
+                  }
+
+                  /* Steps */
+                  .step {
+                    list-style: none;
+                    margin: 0;
+                  }
+
+                  .step-element {
+                    display: flex;
+                    padding: 1rem 0;
+                  }
+
+                  .step-number {
+                    position: relative;
+                    width: 7rem;
+                    flex-shrink: 0;
+                    text-align: center;
+                  }
+
+                  .step-number .number {
+                    color: #bfc5ca;
+                    background-color: #eaeff4;
+                    font-size: 1.5rem;
+                  }
+
+                  .step-number .number {
+                    width: 48px;
+                    height: 48px;
+                    line-height: 48px;
+                  }
+
+                  .number {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 38px;
+                    border-radius: 10rem;
+                  }
+
+                  .step-number::before {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    top: 48px;
+                    bottom: -2rem;
+                    margin-left: -1px;
+                    border-left: 2px dashed #eaeff4;
+                  }
+
+                  .step .step-element:last-child .step-number::before {
+                    bottom: 1rem;
+                  }
+                </style>
+
+
+                <h1 class="display-4 font-weight-bold text-center mb-4 pb-2">Three Easy Steps</h1>
+                <p class="text-center lead grey-text mx-auto mb-3">Boost is pretty good.</p>
+
+
+                <div class="row align-items-center">
+
+                  <div class="col-lg-12 mb-4">
+
+                    <ol class="step pl-0">
+                      <li class="step-element pb-0">
+                        <div class="step-number">
+                          <span class="number">1</span>
+                        </div>
+                        <div class="step-excerpt">
+                          <h5 class="font-weight-bold mb-3">Find Your Match</h5>
+                          <p class="grey-text">By utilizing Boost's open marketplace, find someone you'd like to work with.</p>
+                        </div>
+                      </li>
+                      <li class="step-element pb-0">
+                        <div class="step-number">
+                          <span class="number">2</span>
+                        </div>
+                        <div class="step-excerpt">
+                          <h5 class="font-weight-bold mb-3">Back And Forth</h5>
+                          <p class="grey-text">Our streamlined back and forth stuff will make it good.</p>
+                        </div>
+                      </li>
+                      <li class="step-element pb-0">
+                        <div class="step-number">
+                          <span class="number">3</span>
+                        </div>
+                        <div class="step-excerpt">
+                          <h5 class="font-weight-bold mb-3">Escrow Transaction</h5>
+                          <p class="grey-text">After everyone is good, the sponsor initiates the escrow transaction, and it's a breeze from there.</p>
+                        </div>
+                      </li>
+                    </ol>
+
                   </div>
-                  <!--/First row-->
 
-                  <div style="height:30px"></div>
 
-                  <!--Second row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-book fa-2x blue-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Listings</h4>
-                      <p class="grey-text">Out platform operates through listings. This way, both creators and sponsors, can show off their creative outlet or busienss.
-                      </p>
-                    </div>
-                  </div>
-                  <!--/Second row-->
 
-                  <div style="height:30px"></div>
 
-                  <!--Third row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-graduation-cap fa-2x cyan-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Free and Open to all</h4>
-                      <p class="grey-text">Our platform is free and open to everyone, you just have to make an account. We take a small percentage of payment (depending on which party initiates the order).</p>
-                    </div>
-                  </div>
-                  <!--/Third row-->
 
                 </div>
-                <!--/Grid column-->
-                <!--/Grid column-->
 
+              </section>
+
+              <br>
+
+
+            <!-- large screen only - features -->
+            <div class="d-none d-lg-block">
+
+
+              <!-- open marketplace feature -->
+
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+
+              <div class="row pt-3 px-3 pb-0 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+                <div class="col-6 d-flex align-items-center">
+                  <div>
+
+                    <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-bag-check mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"></path>
+                      <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path>
+                    </svg>
+
+                    <h3 class="font-weight-bold mb-4">Open Marketplace</h3>
+
+                  	<p>Browse with ease, with our open marketplace, and find your perfect match.</p>
+                    <a href="{% url 'creator_marketplace' %}" style="color: #007185;"><p>Learn More</p></a>
+
+                  </div>
+                </div>
+
+                <div class="col-6 mb-4">
+
+                  <div class="view">
+                    <img src="{{MEDIA_URL}}/pics/feature4.png" class="img-fluid" alt="smaple image">
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+
+              <!-- open to all feature -->
+              <div class="row pt-3 px-3 pb-0 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+                <div class="col-6 mb-4">
+
+                  <div class="view m-0">
+                    <img src="{{MEDIA_URL}}pics/feature_people.png" class="img-fluid" alt="smaple image">
+                  </div>
+
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                  <div>
+
+                    <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-people mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                    </svg>
+
+                    <h3 class="font-weight-bold mb-4">Open to All</h3>
+
+                  	<p class="mb-3">Join our open network and enjoy the benefits of Boost, hassle free.</p>
+                    <small class="text-muted">(Our 10% service fee acrues only on completed orders by the initiator.)</small>
+                    <a href="{% url 'home' %}" style="color: #007185;"><p class="mt-3">Learn More</p></a>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+
+
+
+              <!-- escrow feature -->
+              <div class="row pt-3 px-3 pb-0 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+                <div class="col-6 d-flex align-items-center">
+                  <div>
+
+                    <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-shield-check mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z"/>
+                      <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+
+                    <h3 class="font-weight-bold mb-3">Escrow</h3>
+
+                  	<p>All transactions are handled with Escrow.com for your peace of mind and convience.</p>
+                    <small class="text-muted">(Escrow.com has a small service fee, paid by sponsor.)</small>
+                    <a href="https://escrow.com" target="_blank" style="color: #007185;"><p class="mt-3">Learn More</p></a>
+
+                  </div>
+                </div>
+
+                <div class="col-6 mb-4">
+
+                  <div class="view">
+                    <img src="{{MEDIA_URL}}pics/escrow_home.png" class="img-fluid" alt="smaple image">
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+
+              <!-- "make sure deal is good" feature (back and forth stuff) -->
+              <div class="row pt-3 px-3 pb-0 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+                <div class="col-6 mb-3">
+
+                  <div class="view">
+                    <img src="{{MEDIA_URL}}pics/features_4.png" class="img-fluid" alt="smaple image">
+                  </div>
+
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                  <div>
+
+                    <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-check2-circle mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z"/>
+                    </svg>
+
+                    <h3 class="font-weight-bold mb-4">Satisfaction Guaranteed</h3>
+
+                  	<p>Our platform makes it easy to communicate media, edits and approvals throughtout the transaction process.</p>
+                    <a href="#" style="color: #007185;"><p>Learn More</p></a>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <br>
+              <br>
+              <br>
+
+
+              <!-- lisitng feature -->
+              <div class="row pt-3 px-3 pb-0 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+                <div class="col-6 d-flex align-items-center">
+                  <div>
+
+                    <svg width="15%" height="15%" viewBox="0 0 16 16" class="bi bi-card-checklist mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                      <path fill-rule="evenodd" d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+
+                    <h3 class="font-weight-bold mb-4">Detailed Listings</h3>
+
+                  	<p>Show off your work on our marketplace through enticing yet streamlined listings to perspective clients.</p>
+                    <a href="#" style="color: #007185;"><p>Learn More</p></a>
+
+                  </div>
+                </div>
+
+                <div class="col-6 mb-3">
+
+                  <div class="text-center">
+                    <img src="{{MEDIA_URL}}pics/feature_5.png" class="mx-auto" alt="smaple image">
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+
+              <br>
+              <br>
+              <br>
+              <br>
+
+              <!-- Business Model Display -->
+              <div class="col-4 mx-auto mt-5 p-4 shadow" style="border: 3px solid #00a82d; border-radius: 15px;">
+                <div class="row mx-auto">
+                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-bookmark-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                    <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                  <h5>Universal</h5>
+                </div>
+                <h1 class="mt-2">FREE</h1>
+                <h5 class="mt-0 mb-3">10% Service Fee Acrues Apon Completed Orders By The Initiator.</h5>
+
+                <ul class="pl-2" style="list-style-type: none;">
+
+                  <li style="display: inline;">
+                    <div class="row">
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                      <p class="ml-2">Open Marketplace</p>
+                    </div>
+                  </li>
+
+                  <li style="display: inline;">
+                    <div class="row">
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                      <p class="ml-2">Open to All</p>
+                    </div>
+                  </li>
+
+                  <li style="display: inline;">
+                    <div class="row">
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                      <p class="ml-2">Escrow</p>
+                    </div>
+                  </li>
+
+                  <li style="display: inline;">
+                    <div class="row">
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                      <p class="ml-2">Satisfaction Guaranteed</p>
+                    </div>
+                  </li>
+
+                  <li style="display: inline;">
+                    <div class="row">
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                      <p class="ml-2">Detailed Listings</p>
+                    </div>
+                  </li>
+
+                </ul>
+
+                <a href="{% url 'home' %}" class="btn btn-outline-primary btn-block" style="color: #00a82d; border-color: #00a82d">Join Now</a>
+
+              </div>
             </div>
 
+
+
+
+
+
+
             <br>
-            <br>
-            <br>
 
-            <div class="row" style="visibility: visible; animation-name: fadeIn;">
 
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 px-4">
 
-                  <!--First row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-code fa-2x indigo-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Open and Free Marketplace</h4>
-                      <p class="grey-text">The Boost platform is an open and free marketplace for sponsors and creators to connect.</p>
-                    </div>
-                  </div>
-                  <!--/First row-->
 
-                  <div style="height:30px"></div>
+            <div class="d-lg-none">
 
-                  <!--Second row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-book fa-2x blue-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Listings</h4>
-                      <p class="grey-text">Out platform operates through listings. This way, both creators and sponsors, can show off their creative outlet or busienss.
-                      </p>
-                    </div>
-                  </div>
-                  <!--/Second row-->
-
-                  <div style="height:30px"></div>
-
-                  <!--Third row-->
-                  <div class="row">
-                    <div class="col-1 mr-3">
-                      <i class="fas fa-graduation-cap fa-2x cyan-text"></i>
-                    </div>
-                    <div class="col-10">
-                      <h4 class="font-weight-bold">Free and Open to all</h4>
-                      <p class="grey-text">Our platform is free and open to everyone, you just have to make an account. We take a small percentage of payment (depending on which party initiates the order).</p>
-                    </div>
-                  </div>
-                  <!--/Third row-->
-
-                </div>
-                <!--/Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12">
-
-                  <h4 class="font-weight-bold text-center mb-4">Watch our "5 min Quick Start" tutorial</h4>
-                  <p class="h5 text-center mb-4">(This is just a placeholder video.)</p>
-                  <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen=""></iframe>
-                  </div>
-                </div>
-                <!--/Grid column-->
+              <hr class="my-0" style="width: 80%;">
 
             </div>
-
             <br>
             <br>
             <br>
-            <br>
 
-            <p class="h5 text-center mb-4">More stuff will be added to this page.</p>
+        <!-- small screen only - features -->
+        <div class="d-lg-none">
+
+
+          <div class="row mx-2 p-3 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+
+            <div class="col-12 pt-3">
+              <img class="px-2 mb-2" src="{{MEDIA_URL}}/pics/feature4.png" style="max-width: 100%; max-height: 100%;">
+              <h2 class="px-2 mt-4">Open Marketplace</h2>
+              <p class="px-2 mt-3 mb-4">Browse with ease, with our open marketplace, and find your perfect match.</p>
+              <a href="{% url 'creator_marketplace' %}" style="color: #007185;"><p class="mx-2 mb-4">Learn More</p></a>
+            </div>
+
+            <div class="col-12">
+              <img class="px-2 mb-4 mt-4" src="{{MEDIA_URL}}pics/feature_people.png" style="max-width: 100%; max-height: 100%;">
+              <h2 class="px-2 mt-4">Open to All</h2>
+              <p class="px-2 mt-3 mb-1">Join our open network and enjoy the benefits of Boost, hassle free.</p>
+              <small class="text-center mb-4 text-muted">(Our 10% service fee acrues only on completed orders by the initiator.)</small>
+              <a href="{% url 'home' %}" style="color: #007185;"><p class="mx-2 my-4">Learn More</p></a>
+            </div>
+
+            <div class="col-12">
+              <img class="px-2 mb-4 mt-5" src="{{MEDIA_URL}}pics/escrow_home.png" style="max-width: 100%; max-height: 100%;">
+              <h2 class="px-2 mt-4">Escrow</h2>
+              <p class="px-2 mt-3 mb-1">All transactions are handled with Escrow.com for your peace of mind and convience.</p>
+              <small class="text-center mb-4 text-muted">(Escrow.com has a small service fee, paid by sponsor.)</small>
+              <a href="https://escrow.com" target="_blank" style="color: #007185;"><p class="mx-2 my-4">Learn More</p></a>
+            </div>
+
+            <div class="col-12">
+              <img class="px-2 mb-4 mt-5" src="{{MEDIA_URL}}pics/features_4.png" style="max-width: 100%; max-height: 100%;">
+              <h2 class="px-2 mt-4">Satisfaction Guaranteed</h2>
+              <p class="px-2 mt-3 mb-4">Our platform makes it easy to communicate media, edits and approvals throughtout the transaction process.</p>
+              <a href="#" style="color: #007185;"><p class="mx-2 my-4">Learn More</p></a>
+            </div>
+
+            <div class="col-12">
+              <img class="px-2 mb-4 mt-4" src="{{MEDIA_URL}}pics/feature_5.png" style="max-width: 100%; max-height: 100%;">
+              <h2 class="px-2 mt-4">Detailed Listings</h2>
+              <p class="px-2 mt-3 mb-4">Show off your work on our marketplace through enticing yet streamlined listings to perspective clients.</p>
+              <a href="#" style="color: #007185;"><p class="mx-2 mb-4">Learn More</p></a>
+            </div>
 
 
 
+            <div class="col-12 mx-auto mt-5 p-4" style="border: 3px solid #00a82d; border-radius: 15px;">
+              <div class="row mx-auto">
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-bookmark-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                  <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                <h5>Universal</h5>
+              </div>
+              <h1 class="mt-2">FREE</h1>
+              <h5 class="mt-0 mb-3">10% Service Fee Acrues Apon Completed Orders By The Initiator.</h5>
+
+              <ul class="pl-2" style="list-style-type: none;">
+
+                <li style="display: inline;">
+                  <div class="row">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <p class="ml-2">Open Marketplace</p>
+                  </div>
+                </li>
+
+                <li style="display: inline;">
+                  <div class="row">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <p class="ml-2">Open to All</p>
+                  </div>
+                </li>
+
+                <li style="display: inline;">
+                  <div class="row">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <p class="ml-2">Escrow</p>
+                  </div>
+                </li>
+
+                <li style="display: inline;">
+                  <div class="row">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <p class="ml-2">Satisfaction Guaranteed</p>
+                  </div>
+                </li>
+
+                <li style="display: inline;">
+                  <div class="row">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <p class="ml-2">Detailed Listings</p>
+                  </div>
+                </li>
+
+              </ul>
+
+              <a href="{% url 'home' %}" class="btn btn-outline-primary btn-block" style="color: #00a82d; border-color: #00a82d">Join Now</a>
+
+            </div>
+          </div>
+
+          </div>
         </div>
+      </div>
+
+
+
+
 </div>
 
 {% endblock content %}

@@ -198,12 +198,24 @@ def creator_marketplace_listing_view(request, id=None):
         ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'oct', 'Nov'])
         '''
 
+    blog_typ = listing.blog_type.split(',')
+    blog_types = ""
+
+    for i in blog_typ:
+        blog_types += i
+        print(i)
+
+    blog_types = blog_types.replace('[', '')
+    blog_types = blog_types.replace(']', '')
+    blog_types = blog_types.replace('\'', '')
+
     context = {
 
         'listing': listing,
         'following': following,
         'ordered': ordered,
         'all_users_listings': all_users_listings,
+        'blog_types': blog_types,
 
     }
 
@@ -334,27 +346,30 @@ def creator_marketplace_listing_order_view(request, id=None):
             Messages.objects.create(sender=buyer, reciever=listing.creator, message="%s has been ordered by %s" % (listing.blog_name, buyer_listing))
             messages.success(request, "%s has been successfully ordered" % (listing.blog_name), extra_tags="sponsor_orders_creator_success")
 
-            if('Listing is Ordered' in listing.notification_type_email):
-                send_mail(
-                    'Order For %s' % (listing.blog_name),
-                    'Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.blog_name),
-                    'admin@getboostplatform.com',
-                    [str(listing.email)],
-                    fail_silently=False,
-                )
+            if(listing.notification_type_email is not None):
+                if('Listing is Ordered' in listing.notification_type_email):
+                    send_mail(
+                        'Order For %s' % (listing.blog_name),
+                        'Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.blog_name),
+                        'admin@getboostplatform.com',
+                        [str(listing.email)],
+                        fail_silently=False,
+                    )
 
-                try:
-                    message = twilioCli.messages.create(
-                        body="""
+            if(listing.notification_type_phone is not None):
+                if('Listing is Ordered' in listing.notification_type_phone):
+                    try:
+                        message = twilioCli.messages.create(
+                            body="""
 
-                            --- FROM: Boost ---
+                                --- FROM: Boost ---
 
-        Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.blog_name),
-                        from_=myTwilioNumber,
-                        to=str(listing.number)
-                        )
-                except:
-                    pass
+            Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.blog_name),
+                            from_=myTwilioNumber,
+                            to=str(listing.number)
+                            )
+                    except:
+                        pass
 
             obj.save()
 
@@ -387,27 +402,29 @@ def creator_marketplace_listing_unorder_view(request, id=None):
     Messages.objects.create(sender=creator_order.buyer, reciever=creator_order.creator, message="%s has been unordered by %s" % (creator_order.creator_listing.blog_name, creator_order.buyers_listing_s.product))
     messages.success(request, "%s has been successfully unordered" % (creator_order.creator_listing.blog_name), extra_tags="sponsor_unorders_creator_success")
 
-    if('Listing is Unordered' in listing.creator_listing.notification_type_email):
-        send_mail(
-            'Order for %s - Has Been Unordered' % (listing.creator_listing.blog_name),
-            'Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.' % (marketplace_c_listing.blog_name),
-            'admin@getboostplatform.com',
-            [str(marketplace_c_listing.email)],
-            fail_silently=False,
-        )
+    if(marketplace_c_listing.notification_type_email is not None):
+        if('Listing is Unordered' in marketplace_c_listing.notification_type_email):
+            send_mail(
+                'Order for %s - Has Been Unordered' % (marketplace_c_listing.blog_name),
+                'Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.' % (marketplace_c_listing.blog_name),
+                'admin@getboostplatform.com',
+                [str(marketplace_c_listing.email)],
+                fail_silently=False,
+            )
+    if(marketplace_c_listing.notification_type_phone is not None):
+        if('Listing is Unordered' in marketplace_c_listing.notification_type_phone):
+            try:
+                message = twilioCli.messages.create(
+                    body="""
 
-        try:
-            message = twilioCli.messages.create(
-                body="""
+                        --- FROM: Boost ---
 
-                    --- FROM: Boost ---
-
-Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.""" % (marketplace_c_listing.blog_name),
-                from_=myTwilioNumber,
-                to=str(marketplace_c_listing.number)
-                )
-        except:
-            pass
+    Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.""" % (marketplace_c_listing.blog_name),
+                    from_=myTwilioNumber,
+                    to=str(marketplace_c_listing.number)
+                    )
+            except:
+                pass
 
 
 
@@ -424,8 +441,7 @@ Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account
 def sponsor_marketplace(request):
     sponsor_listings = SponsorListingCreationModel.objects.all()
 
-    paginator = Paginator(sponsor_listings, 10)
-    page = request.GET.get('page')
+
 
     niche_query = request.GET.getlist('niche')
     lang_query = request.GET.getlist('language')
@@ -433,6 +449,9 @@ def sponsor_marketplace(request):
     searchb = request.GET.get('search_bar')
     reset_button = request.GET.get('reset_button')
     searchbar_bool = False
+
+    if reset_button:
+        return redirect('sponsor_marketplace')
 
     niches = {
         "Apparel & Accessories": "",
@@ -499,6 +518,12 @@ def sponsor_marketplace(request):
         for listing in sponsor_listings:
             if (listing in profile.sponsors_watched.all()):
                 watching.append(listing)
+
+
+
+    # ALWAYS KEEP THIS AT THE BOTTOM OF THE FUNCTION
+    paginator = Paginator(sponsor_listings, 10)
+    page = request.GET.get('page')
 
     sponsor_listings = paginator.get_page(page)
 
@@ -624,29 +649,31 @@ def sponsor_marketplace_listing_order_view(request, id=None):
             Messages.objects.create(sender=buyer, reciever=listing.creator, message="%s has been ordered by %s" % (listing.product, buyer_listing))
             messages.success(request, "%s has been successfully ordered" % (listing.product), extra_tags="creator_orders_sponsor_success")
 
-            listing = sponsor_order.sponsor_listing
 
-            if('Listing is Ordered' in listing.sponsor_listing.notification_type_email):
-                send_mail(
-                    'Order for %s - has been Ordered' % (listing.sponsor_listing.product),
-                    'Listing %s has been Ordered! Check it out https://getboostplatform.com/account/dashboard/.' % (listing.product),
-                    'admin@getboostplatform.com',
-                    [str(listing.email)],
-                    fail_silently=False,
-                )
+            if(listing.notification_type_email is not None):
+                if('Listing is Ordered' in listing.notification_type_email):
+                    send_mail(
+                        'Order for %s - has been Ordered' % (listing.sponsor_listing.product),
+                        'Listing %s has been Ordered! Check it out https://getboostplatform.com/account/dashboard/.' % (listing.product),
+                        'admin@getboostplatform.com',
+                        [str(listing.email)],
+                        fail_silently=False,
+                    )
+            if(listing.notification_type_phone is not None):
+                if('Listing is Ordered' in listing.notification_type_phone):
 
-                try:
-                    message = twilioCli.messages.create(
-                        body="""
+                    try:
+                        message = twilioCli.messages.create(
+                            body="""
 
-        -------------- Boost --------------
+            -------------- Boost --------------
 
-        Listing %s has been Ordered! Check it out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
-                        from_=myTwilioNumber,
-                        to=str(listing.number)
-                        )
-                except:
-                    pass
+            Listing %s has been Ordered! Check it out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
+                            from_=myTwilioNumber,
+                            to=str(listing.number)
+                            )
+                    except:
+                        pass
 
         return redirect(reverse('sponsor_marketplace_listing_view', kwargs={'id': listing.id}))
 
@@ -669,29 +696,32 @@ def sponsor_marketplace_listing_unorder_view(request, id=None):
     current_users_profile = Profile.objects.get(user=request.user)
     sponsor_order = SponsorOrderModel.objects.get(buyer=request.user, sponsor_listing=marketplace_s_listing)
 
-    listing = sponsor_order.sponsor_listing
+    listing = marketplace_s_listing
 
-    if('Listing is Unordered' in listing.sponsor_listing.notification_type_email):
-        send_mail(
-            'Order For %s - Has Been Unordered' % (listing.sponsor_listing.product),
-            'Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.product),
-            'admin@getboostplatform.com',
-            [str(listing.email)],
-            fail_silently=False,
-        )
+    if(listing.notification_type_email is not None):
+        if('Listing is Unordered' in listing.notification_type_email):
+            send_mail(
+                'Order For %s - Has Been Unordered' % (listing.sponsor_listing.product),
+                'Listing %s Has Been Unordered. Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.product),
+                'admin@getboostplatform.com',
+                [str(listing.email)],
+                fail_silently=False,
+            )
 
-        try:
-            message = twilioCli.messages.create(
-                body="""
+    if(listing.notification_type_phone is not None):
+        if('Listing is Unordered' in listing.notification_type_phone):
+            try:
+                message = twilioCli.messages.create(
+                    body="""
 
-                    --- FROM: Boost ---
+                        --- FROM: Boost ---
 
-Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
-                from_=myTwilioNumber,
-                to=str(listing.number)
-                )
-        except:
-            pass
+        Listing %s Has Been Ordered! Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.product),
+                    from_=myTwilioNumber,
+                    to=str(listing.number)
+                    )
+            except:
+                pass
 
     sponsor_order.delete()
     current_users_profile.sponsors_u_ordered.remove(marketplace_s_listing)

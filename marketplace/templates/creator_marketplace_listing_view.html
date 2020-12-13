@@ -1,17 +1,105 @@
 {% extends 'base.html' %}
 
+{% block header %}
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+
+  google.charts.load('current', {
+    callback: function () {
+      drawChart();
+      $(window).resize(drawChart);
+    },
+    'packages':['line', 'corechart']
+  });
+  google.charts.setOnLoadCallback(drawChart);
+
+
+
+
+    function drawChart() {
+
+    var button = document.getElementById('change-chart');
+    var chartDiv = document.getElementById('chart_div');
+    var chartDiv2 = document.getElementById('chart_div2');
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', "Views");
+
+    data.addRows([
+      ['{{months.0}} {{prev_year}}', {{data.0.1}}],
+      ['{{months.1}}', {{data.1.1}}],
+      ['{{months.2}}', {{data.2.1}}],
+      ['{{months.3}}', {{data.3.1}}],
+      ['{{months.4}}', {{data.4.1}}],
+      ['{{months.5}}', {{data.5.1}}],
+      ['{{months.6}}', {{data.6.1}}],
+      ['{{months.7}}', {{data.7.1}}],
+      ['{{months.8}}', {{data.8.1}}],
+      ['{{months.9}}', {{data.9.1}}],
+      ['{{months.10}}', {{data.10.1}}],
+      ['{{months.11}} {{year}}', {{data.11.1}}],
+    ]);
+
+    var materialOptions = {
+
+        chart: {
+          title: '',
+
+        },
+
+        colors: ['#28b500'],
+        legend: { position: "none" },
+
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'Temps'},
+          1: {axis: 'Daylight'},
+
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+            Temps: {label: 'Views'},
+            Daylight: {label: 'Daylight'}
+          }
+        }
+      };
+
+    function drawMaterialChart() {
+      var materialChart = new google.charts.Line(chartDiv);
+      materialChart.draw(data, materialOptions);
+
+      var materialChart2 = new google.charts.Line(chartDiv2);
+      materialChart2.draw(data, materialOptions);
+
+      button.innerText = 'Change to Classic';
+      button.onclick = drawClassicChart;
+    }
+
+    drawMaterialChart();
+    drawMaterialChart2();
+
+  }
+  </script>
+
+{% endblock header %}
+
 {% block content %}
 
   <div class="d-none d-lg-block">
     <div style="background-color: #fbfbfb;">
 
-        <div class="container p-0" style="background-color: #fbfbfb;">
+        <div class="px-5 mx-auto" style="width: 80%; background-color: #fbfbfb;">
 
           {% if messages %}
+          <br>
             {% for message in messages %}
 
               {% if 'sponsor_orders_creator_success' in message.tags  %}
-                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
                   <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -20,7 +108,7 @@
               {% endif %}
 
               {% if 'sponsor_unorders_creator_success' in message.tags  %}
-                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
                   <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -39,7 +127,7 @@
 
                       <div class="row">
                         <div class="col">
-                          <a class="nav-link pl-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+                          <a class="nav-link pl-0 pt-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
 
                             {% if listing.blog_url.4 == "s" %}
                               {{ listing.blog_url|slice:"8:" }}
@@ -66,86 +154,7 @@
 
                             <h1 class="text-center mb-4">Traffic</h1>
 
-                            {% block header %}
 
-                              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                              <script type="text/javascript">
-
-
-                              google.charts.load('current', {
-                                callback: function () {
-                                  drawChart();
-                                  $(window).resize(drawChart);
-                                },
-                                'packages':['line', 'corechart']
-                              });
-                              google.charts.setOnLoadCallback(drawChart);
-
-
-
-
-                                function drawChart() {
-
-                                var button = document.getElementById('change-chart');
-                                var chartDiv = document.getElementById('chart_div');
-
-                                var data = new google.visualization.DataTable();
-                                data.addColumn('string', 'Month');
-                                data.addColumn('number', "Views");
-
-                                data.addRows([
-                                  ['{{months.0}} {{prev_year}}', {{data.0.1}}],
-                                  ['{{months.1}}', {{data.1.1}}],
-                                  ['{{months.2}}', {{data.2.1}}],
-                                  ['{{months.3}}', {{data.3.1}}],
-                                  ['{{months.4}}', {{data.4.1}}],
-                                  ['{{months.5}}', {{data.5.1}}],
-                                  ['{{months.6}}', {{data.6.1}}],
-                                  ['{{months.7}}', {{data.7.1}}],
-                                  ['{{months.8}}', {{data.8.1}}],
-                                  ['{{months.9}}', {{data.9.1}}],
-                                  ['{{months.10}}', {{data.10.1}}],
-                                  ['{{months.11}} {{year}}', {{data.11.1}}],
-                                ]);
-
-                                var materialOptions = {
-
-                                    chart: {
-                                      title: '',
-
-                                    },
-
-                                    colors: ['#28b500'],
-                                    legend: { position: "none" },
-
-                                    series: {
-                                      // Gives each series an axis name that matches the Y-axis below.
-                                      0: {axis: 'Temps'},
-                                      1: {axis: 'Daylight'},
-
-                                    },
-                                    axes: {
-                                      // Adds labels to each axis; they don't have to match the axis names.
-                                      y: {
-                                        Temps: {label: 'Views'},
-                                        Daylight: {label: 'Daylight'}
-                                      }
-                                    }
-                                  };
-
-                                function drawMaterialChart() {
-                                  var materialChart = new google.charts.Line(chartDiv);
-                                  materialChart.draw(data, materialOptions);
-                                  button.innerText = 'Change to Classic';
-                                  button.onclick = drawClassicChart;
-                                }
-
-                                drawMaterialChart();
-
-                              }
-                              </script>
-
-                            {% endblock header %}
 
                             <div id="chart_div" style="height: 90%; width: 100%;"></div>
 
@@ -171,7 +180,7 @@
 
                                 <tr>
                                   <th scope="col" style="width: 40%;">Month</th>
-                                  <th scope="col">Visits</th>
+                                  <th scope="col">Views</th>
                                 </tr>
 
                               </thead>
@@ -342,7 +351,38 @@
 
                     <br>
                     <hr>
-                    <br>
+
+
+                    <button type="button" class="btn btn-primary btn-block my-4 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                      Need Help?
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-12 embed-responsive embed-responsive-16by9">
+                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
 
                     <div class="card shadow">
                       <h5 class="card-header text-center">Info</h5>
@@ -351,7 +391,7 @@
                         <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank">Check it Out Here</a></p>
                         <br>
                         <h5 class="card-title">Blog Type</h5>
-                        <p class="card-text">{{ listing.blog_type }}</p>
+                        <p class="card-text">{{ blog_types }}</p>
                         <br>
                         <h5 class="card-title">Years Active</h5>
                         <p class="card-text">{{ listing.age }}</p>
@@ -418,21 +458,58 @@
   <div class="d-lg-none">
     <div class="container" style="background-color: #fbfbfb;">
 
+      {% if messages %}
+      <br>
+        {% for message in messages %}
+
+          {% if 'sponsor_orders_creator_success' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'sponsor_unorders_creator_success' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+        {% endfor %}
+        <br>
+      {% endif %}
+
         <div class="row">
 
-            <div class="col-12 my-3">
+            <div class="col-12 mb-3">
 
                 <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
                   <div class="row">
                     <div class="col">
-                      <h5 class="font-weight-normal pb-2" style="color: grey;">{{ listing.blog_name }}</h5>
-                      <h4 class="pb-2">{{ listing.tagline }}</h4>
-                      <img src="https://static.teamguru.com/data/images/thumb/180_da8e22ef6e.jpg" class="card-img-top">
+                      <a class="nav-link pl-0 pt-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+
+                        {% if listing.blog_url.4 == "s" %}
+                          {{ listing.blog_url|slice:"8:" }}
+                        {% elif listing.blog_url.4 == ":" %}
+                          {{ listing.blog_url|slice:"7:" }}
+                        {% endif %}
+
+                      </a>
+                      <h5 class="font-weight-normal" style="color: grey;">{{ listing.blog_name }}</h5>
+                      <h5 class="pb-2">{{ listing.tagline }}</h5>
+                      <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
                     </div>
                   </div>
 
                 </div>
+
+                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
 
                 {% if following %}
                     <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
@@ -440,7 +517,7 @@
                     <a href="{% url 'creator_marketplace_listing_watch_view' id=listing.id %}"><button class="btn btn-outline-primary p-2 btn-block">Watch</button></a>
                 {% endif %}
 
-                <hr class="my-4" style="width: 50%;">
+
 
                 {% if ordered %}
                     <a href="{% url 'creator_marketplace_listing_unorder_view' id=listing.id %}"><button type="button" class="btn btn-success mt-3 p-2 btn-block">Unorder</button></a>
@@ -448,23 +525,181 @@
 
                     <a href="{% url 'creator_marketplace_listing_order_view' id=listing.id %}"><button type="button" class="btn btn-outline-success mt-3 p-2 btn-block" data-toggle="modal" data-target="#staticBackdrop">Order</button></a>
                 {% endif %}
+              </div>
 
                 <hr class="my-4">
+
+                <button type="button" class="btn btn-primary btn-block my-3 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                  Need Help?
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12 embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/m42_gT8jnmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
                   <div class="row">
-                    <div class="col">
-                      <img src="https://i.stack.imgur.com/O5pe1.png" style="width: 100%; height: 100%;">
+                    <div class="col" style="height: 300px;">
+
+                      <h1 class="text-center mb-4">Traffic</h1>
+
+                      <div class="text-center" id="chart_div2" style="height: 90%; width: 100%;"></div>
+
                     </div>
-                     <small class="p-4 pb-2">NOTE: This is just a placeholder image. Google analytics data will go here that's provided by the creator
-                       of the listing (graphs, charts, etc.) from a CSV file that can be generated on Google analytics.</small>
+
                   </div>
+
+                  <h1 style="opacity: 0;">Easter Egg!</h1>
+
+                  <h2 class="ml-1 mt-4 text-center">Stats</h1>
+
+                  <div class="row mt-1">
+
+                    <div class="col">
+                      <h4 class="ml-2" style="color: #4a4a4a;">Total Views</h4>
+                      <h5 class="ml-3" style="color: #28b500;">{{total_views}}</h5>
+                    </div>
+
+                    <div class="col mb-4">
+                      <h4 class="ml-2" style="color: #4a4a4a;">Avg. Views</h4>
+                      <h5 class="ml-3" style="color: #28b500;">{{avg_views}}</h5>
+                    </div>
+
+
+                    <div class="col-12">
+                      <table class="table table-bordered mx-auto">
+                        <thead>
+
+                          <tr>
+                            <th scope="col" style="width: 40%;">Month</th>
+                            <th scope="col">Views</th>
+                          </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                          <tr>
+                            <th scope="row">{{months.0}} {{prev_year}}</th>
+                            <td>{{data.0.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.1}}</th>
+                            <td>{{data.1.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.2}}</th>
+                            <td colspan="2">{{data.2.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.3}}</th>
+                            <td colspan="2">{{data.3.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.4}}</th>
+                            <td colspan="2">{{data.4.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.5}}</th>
+                            <td colspan="2">{{data.5.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.6}}</th>
+                            <td colspan="2">{{data.6.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.7}}</th>
+                            <td colspan="2">{{data.7.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.8}}</th>
+                            <td colspan="2">{{data.8.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.9}}</th>
+                            <td colspan="2">{{data.9.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.10}}</th>
+                            <td colspan="2">{{data.10.1}}</td>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">{{months.11}} {{year}}</th>
+                            <td colspan="2">{{data.11.1}}</td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+
+                    </div>
+
+
+                    <hr class="my-4">
+
+                        <div class="card shadow">
+                          <h5 class="card-header text-center">Info</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Domain Authority</h5>
+                            <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank">Check it Out Here</a></p>
+                            <br>
+                            <h5 class="card-title">Blog Type</h5>
+                            <p class="card-text">{{ blog_types }}</p>
+                            <br>
+                            <h5 class="card-title">Years Active</h5>
+                            <p class="card-text">{{ listing.age }}</p>
+                            <br>
+                            <h5 class="card-title">Blog Niche</h5>
+                            <p class="card-text">{{ listing.niche }}</p>
+                            <br>
+                            <h5 class="card-title">Blog Language</h5>
+                            <p class="card-text">{{ listing.language }}</p>
+                          </div>
+                        </div>
 
                 </div class="my-3 p-3 border rounded" style="background-color: white;">
 
+
+
+
                 <hr class="my-4">
 
-                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                <div class="my-3 p-3 mx-3 border rounded shadow" style="background-color: white;">
 
                     <div class="row">
                       <div class="col">
@@ -474,7 +709,7 @@
                             <h5 class="m-0">Overview Description</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.overview_description }}</p>
+                            <p class="card-text">{{ listing.overview_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -491,7 +726,7 @@
                             <h5 class="m-0">Audience Description</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.audience_description }}</p>
+                            <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -508,7 +743,7 @@
                             <h5 class="m-0">What This Blogger Would Like From A Sponsor</h5>
                           </div>
                           <div class="card-body">
-                            <p class="card-text">{{ listing.audience_description }}</p>
+                            <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
                           </div>
                         </div>
 
@@ -522,7 +757,7 @@
                 <hr>
                 <br>
 
-                    <div class="card shadow">
+                    <div class="card shadow mx-3">
                       <h5 class="card-header text-center">About The Creator</h5>
                       <div class="card-body">
                         <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
@@ -533,7 +768,7 @@
                           <div class="card">
                             <div class="card-header" id="headingOne">
                               <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
                                   Other Listings By This Creator
                                 </button>
                               </h2>
@@ -542,7 +777,7 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                               <div class="card-body">
                                 {% for l in all_users_listings %}
-                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}">{{ l }}</a>
+                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
                                   <br>
                                 {% endfor %}
                               </div>

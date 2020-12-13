@@ -2,7 +2,112 @@
 
 {% block content %}
 
-<div class="container">
+<div class="d-none d-lg-block px-5 mx-auto" style="width: 80%;">
+
+  <br>
+  <br>
+
+  <div class="row">
+
+    <div class="col-3 rounded m-1 p-3 shadow text-center mb-5" style="background-color: white; border: 1px solid #cccccc;">
+      <div class="my-4">
+
+        <h1 class="m-0">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+        <br>
+        <h2 class="m-0 font-weight-normal">{{ type|title }}</h2>
+
+      </div>
+    </div>
+
+    <div class="col-8 rounded m-1 p-4 shadow" style="background-color: white; border: 1px solid #cccccc;">
+
+
+      <div class="row">
+
+          <div class="col-4 text-left">
+            <h5>Your Username/Email</h5>
+          </div>
+
+          <div class="col-8 text-left form-inline">
+            <h5 class="font-weight-normal">{{ request.user }}</h5>
+            <a class="ml-3 mt-1" href="{% url 'edit_profile' id=user.id %}"><h6 class="font-weight-normal">Change Email</h6></a>
+          </div>
+
+      </div>
+
+      <hr style="color: grey;">
+
+      <div class="row">
+
+          <div class="col-4 text-left">
+            <h5>Password</h5>
+          </div>
+
+          <div class="col-8 text-left form-inline">
+            <h5 class="font-weight-normal">###########</h5>
+            <a class="ml-3 mt-1" href="{% url 'password_reset' %}"><h6 class="font-weight-normal">Change Password</h6></a>
+          </div>
+
+      </div>
+
+      <hr style="color: grey;">
+
+      {% if request.user.first_name %}
+
+        <div class="row">
+
+            <div class="col-4 text-left">
+              <h5>Full Name</h5>
+            </div>
+
+            <div class="col-8 text-left form-inline">
+              <h5 class="font-weight-normal">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+              <a class="ml-3 mt-1" href="{% url 'edit_profile' id=user.id %}"><h6 class="font-weight-normal">Change Personal Info</h6></a>
+            </div>
+
+        </div>
+
+
+    {% endif %}
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModal">
+          Delete Account
+        </button>
+      </div>
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Are You Sure You Want To Delete Your Account?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              This is perminent, and you can not get any of your data back once you delete your account. Take a look at all of our policies
+              if you have any questions or contact support.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a class="btn btn-danger" href="{% url 'delete_account' %}" style="color: white;">Delete Account</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!--
     <br>
     <br>
     <h1>Account Settings | {{ user }}</h1>
@@ -64,5 +169,91 @@
     <a href="{% url 'delete_account' %}" style="color: red;">Delete Account</a>
 
 </div>
+-->
+</div>
+
+
+
+
+
+
+
+<div class="d-lg-none">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col rounded mx-5 mt-4 mb-3 p-4 shadow text-center" style="background-color: white; border: 1px solid #cccccc;">
+
+        <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+
+        <h2 class="font-weight-normal">{{ type|title }}</h2>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col rounded mx-5 mt-2 mb-5 p-4 shadow text-center" style="background-color: white; border: 1px solid #cccccc;">
+
+        <h5>Your Username/Email</h5>
+        <h5 class="font-weight-normal">{{ request.user }}</h5>
+        <a class="" href="{% url 'edit_profile' id=user.id %}"><h6 class="font-weight-normal">Change Email</h6></a>
+
+        <hr class="my-4">
+
+        <h5>Password</h5>
+        <h5 class="font-weight-normal">###########</h5>
+        <a class="" href="{% url 'password_reset' %}"><h6 class="font-weight-normal">Change Password</h6></a>
+
+        <hr class="my-4">
+
+        <h5>Full Name</h5>
+        <h5 class="font-weight-normal">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+        <a class="" href="{% url 'edit_profile' id=user.id %}"><h6 class="font-weight-normal">Change Personal Info</h6></a>
+
+        <br>
+        <br>
+
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModalMobile">
+            Delete Account
+          </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteAccountModalMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Are You Sure You Want To Delete Your Account?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                This is perminent, and you can not get any of your data back once you delete your account. Take a look at all of our policies
+                if you have any questions or contact support.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="{% url 'delete_account' %}" style="color: white;">Delete Account</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+
+  </div>
+</div>
+
 
 {% endblock content %}

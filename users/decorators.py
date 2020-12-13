@@ -44,7 +44,7 @@ def dashboard_send_review_decorator(function):
 def dashboard_s_acc_decorator(function):
     def wrap(request, *args, **kwargs):
         order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
-        if order.buyer  == request.user:
+        if order.buyer == request.user:
             if order.stage == 'review_content_sent':
                 return function(request, *args, **kwargs)
         else:
@@ -57,7 +57,8 @@ def dashboard_s_acc_decorator(function):
 def dashboard_s_edit_decorator(function):
     def wrap(request, *args, **kwargs):
         order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
-        if order.buyer  == request.user:
+        if order.buyer == request.user:
+            print(order.stage)
             if order.stage == 'review_content_sent':
                 return function(request, *args, **kwargs)
         else:
@@ -71,7 +72,7 @@ def dashboard_c_next_step_decorator(function):
     def wrap(request, *args, **kwargs):
         order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
         if order.creator  == request.user:
-            if order.stage == 'just_accepted':
+            if order.stage == 'just_accepted' or order.stage == 'send_url_again':
                 return function(request, *args, **kwargs)
         else:
             raise PermissionDenied
@@ -105,6 +106,32 @@ def dashboard_user_is_creator(function):
 
         if order.creator == request.user or order2.creator == request.user:
             return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+def dashboard_s_cant_find_url_decorator(function):
+    def wrap(request, *args, **kwargs):
+        escrow_order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
+
+        if escrow_order.buyer == request.user:
+            if escrow_order.stage == 'upload_url':
+                return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+def dashboard_sponsor_complete_order(function):
+    def wrap(request, *args, **kwargs):
+        order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
+
+        if order.buyer == request.user:
+            if(order.status == 'escrow' and order.stage == 'upload_url'):
+                return function(request, *args, **kwargs)
         else:
             raise PermissionDenied
     wrap.__doc__ = function.__doc__
