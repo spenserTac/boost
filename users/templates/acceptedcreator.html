@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Only shows up for LG and bigger (computers) -->
-<div class="view d-none d-lg-block" style=" height: 400px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<div class="view d-none d-lg-block" style=" height: 400px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
   <div class="container d-flex h-100 align-items-center justify-content-center">
     <div class="row">
       <div class="col-md-12 white-text text-center">
@@ -18,7 +18,7 @@
 </div>
 
 <!-- Only shows up for MD and smaller (everything else) -->
-<div class="view d-lg-none" style=" height: 280px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<div class="view d-lg-none" style=" height: 280px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
   <div class="container d-flex align-items-center justify-content-center">
     <div class="row">
       <div class="col-sm-12 col-xs-12 white-text text-center">

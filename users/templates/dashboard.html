@@ -6,7 +6,7 @@
 
 
 
-    <div class="view d-none d-lg-block" style=" height: 300px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="view d-none d-lg-block" style=" height: 300px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
       <div class="container d-flex h-100 align-items-center justify-content-center">
         <div class="row">
           <div class="col-md-12 white-text text-center">
@@ -22,7 +22,7 @@
     </div>
 
   <!-- Only shows up for MD and smaller (everything else) -->
-  <div class="view d-lg-none" style=" height: 180px; background-image: url('https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <div class="view d-lg-none" style=" height: 180px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
       <div class="container d-flex align-items-center justify-content-center">
         <div class="row">
           <div class="col-sm-12 col-xs-12 white-text text-center">
@@ -120,7 +120,16 @@
       {% if messages %}
         {% for message in messages %}
 
-          {% if 'unorder_creator_c_successful' in message.tags  %}
+          {% if 'unorder_creator_for_s_successful' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'creator_order_accept_success' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
               <strong>{{message}}</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1585,7 +1594,7 @@
                 <br>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" data-target="#exampleModalCenter">
+                <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" style="border: 1px solid #025e17" data-target="#exampleModalCenter">
                   <h5 class="m-0">Dashboard Help</h5>
                 </button>
 
@@ -1721,7 +1730,7 @@
                         <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len }}</h5></li>
                         <li class="list-group-item"><h5 class="m-0">Orders in Escrow: {{ c_accepted_orders_escrow_len }}</h5></li>
 
-                        <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
+                        <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}" style="border: 1px solid #0058b5"><h5 class="font-weight-bold m-1">Account</h5></a>
 
                     </ul>
                 </div>
@@ -1749,7 +1758,7 @@
       {% if messages %}
         {% for message in messages %}
 
-          {% if 'unorder_creator_c_successful' in message.tags  %}
+          {% if 'unorder_creator_for_s_successful' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center  mt-0 mb-2" role="alert">
               <strong>{{message}}</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -3147,6 +3156,131 @@
 
                     <br>
 
+                    <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" style="border: 1px solid #025e17" data-target="#dashboardCHelpModal">
+                      <h5 class="m-0">Dashboard Help</h5>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="dashboardCHelpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Dashboard Help</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Creators Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all orders for your creator listings will be.
+                                When a sponsors views and orders your listing in the open creator marketplace,
+                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
+                                  and the order will then be placed in Accepted Sponsor Orders (more on that below), or
+                                  you can decline the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Sponsor Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all orders for your sponsor listings will be.
+                                When a creator views and orders your listing in the open sponsor marketplace,
+                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
+                                  the order, and you'll then give the creator some details on what you'd like, or
+                                  you can decline the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Accepted Sponsor Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all the orders that you've accepted will appear. When you send
+                                  you content over for the sponsor to review, they can add some edits to the content (which you'll be able to see).
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can send
+                                  the content you've created for the sponsor to review (PDF file), or you can withdraw from the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Creators To Review</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where you'll review the creators content that they've sent over.
+                                  When a creator has accepted your order, they'll create what you've orderd, and then they'll send it
+                                  over for your review. You'll be able to view the PDF file here.
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can approve
+                                  of the order (then you'll be sent to escrow.com to complete the process.), or you can add some edits
+                                  to the creators content (which they'll be able to see), and then the process will happen all over again.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Order History</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view
+                                  current and past orders that you've been a part of. You'll be able to see all info on them in case you'd
+                                  like to make another order with that creator/sponsor.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+
                     <div class="card shadow">
                         <h2 class="card-header text-center">Stats</h2>
 
@@ -3157,7 +3291,7 @@
                             <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len }}</h5></li>
                             <li class="list-group-item"><h5 class="m-0">Orders in Escrow: {{ c_accepted_orders_escrow_len }}</h5></li>
 
-                            <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
+                            <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}" style="border: 1px solid #0058b5"><h5 class="font-weight-bold m-1">Account</h5></a>
 
                         </ul>
                     </div>
@@ -3424,7 +3558,7 @@
                 </div>
               {% endif %}
 
-              {% if 'unorder_creator_for_s_successful' in message.tags  %}
+              {% if 'unorder_s_for_c_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
                   <strong>{{message}} successfully unordered 2.</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -4748,7 +4882,7 @@
                 <br>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" data-target="#exampleModalCenter">
+                <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" style="border: 1px solid #025e17" data-target="#exampleModalCenter">
                   <h5 class="m-0">Dashboard Help</h5>
                 </button>
 
@@ -4885,7 +5019,7 @@
                         <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len_s }}</h5></li>
                         <li class="list-group-item"><h5 class="m-0">Orders in Escrow: {{ c_accepted_orders_escrow_len_s }}</h5></li>
 
-                        <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
+                        <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}" style="border: 1px solid #0058b5"><h5 class="font-weight-bold m-1">Account</h5></a>
 
                     </ul>
                 </div>
@@ -4949,7 +5083,7 @@
             </div>
           {% endif %}
 
-          {% if 'unorder_creator_for_s_successful' in message.tags  %}
+          {% if 'unorder_s_for_c_successful' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-0 mb-2" role="alert">
               <strong>{{message}} successfully unordered 2.</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -6107,9 +6241,7 @@
                             </h5>
                             </div>
 
-
-
-                                <div class="accordion" id="accordionExample">
+                              <div class="accordion" id="accordionExample">
 
 
                                     <div class="card text-center" style="border-color: white;">
@@ -6167,7 +6299,6 @@
                                     </div>
 
                                 </div>
-
 
 
                         </div>
@@ -6266,6 +6397,132 @@
 
                     <br>
 
+                    <button type="button" class="btn btn-block btn-success my-2 py-3 shadow" data-toggle="modal" style="border: 1px solid #025e17" data-target="#dashboardSHelpModalMobile">
+                      <h5 class="m-0">Dashboard Help</h5>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="dashboardSHelpModalMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Dashboard Help</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Creators Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all orders for your creator listings will be.
+                                When a sponsors views and orders your listing in the open creator marketplace,
+                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
+                                  and the order will then be placed in Accepted Sponsor Orders (more on that below), or
+                                  you can decline the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Sponsor Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all orders for your sponsor listings will be.
+                                When a creator views and orders your listing in the open sponsor marketplace,
+                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
+                                  the order, and you'll then give the creator some details on what you'd like, or
+                                  you can decline the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Accepted Sponsor Orders</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where all the orders that you've accepted will appear. When you send
+                                  you content over for the sponsor to review, they can add some edits to the content (which you'll be able to see).
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can send
+                                  the content you've created for the sponsor to review (PDF file), or you can withdraw from the order.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Creators To Review</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where you'll review the creators content that they've sent over.
+                                  When a creator has accepted your order, they'll create what you've orderd, and then they'll send it
+                                  over for your review. You'll be able to view the PDF file here.
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can approve
+                                  of the order (then you'll be sent to escrow.com to complete the process.), or you can add some edits
+                                  to the creators content (which they'll be able to see), and then the process will happen all over again.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+                            <hr style="width: 50%; background-color: black;">
+
+                            <div class="card mx-auto">
+                              <div class="card-body">
+                                <h5 class="card-title">Order History</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                                <h5 class="text-center">Overview</h5>
+                                <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
+                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view
+                                  current and past orders that you've been a part of. You'll be able to see all info on them in case you'd
+                                  like to make another order with that creator/sponsor.
+                                </p>
+                                <br>
+                                <div class="text-center">
+                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                                </div>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <br>
+
                     <div class="card shadow">
                         <h2 class="card-header text-center">Stats</h2>
 
@@ -6277,7 +6534,7 @@
                             <li class="list-group-item"><h5 class="m-0">Sponsor Orders: {{ s_orders_len }}</h5></li>
                             <li class="list-group-item"><h5 class="m-0">Accepted Orders: {{ c_accepted_orders_len }}</h5></li>
 
-                            <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}"><h5 class="font-weight-bold m-1">Account</h5></a>
+                            <a class="btn btn-primary align-items-center" href="{% url 'user_account' %}" style="border: 1px solid #0058b5"><h5 class="font-weight-bold m-1">Account</h5></a>
 
                         </ul>
                     </div>

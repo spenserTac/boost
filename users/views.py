@@ -230,7 +230,7 @@ def dashboard(request):
     # Basic Info
     #
 
-    user = User.objects.get(username=request.user.username) # current logged in user
+    user = User.objects.get(username=request.user) # current logged in user
     profile = Profile.objects.get(user=user) # current logged in users Profile
 
     c_watching = profile.creators_watched.all()
@@ -303,7 +303,6 @@ def dashboard(request):
 
     c_accepted_orders_escrow_s_next = AcceptedCreatorOrderModel.objects.filter(buyer=user, status='escrow', stage='upload_url')
 
-#####################################################################
 
     s_accepted_orders = AcceptedSponsorOrderModel.objects.filter(creator=user)
     s_accepted_orders_len = s_accepted_orders.count()
@@ -442,12 +441,12 @@ def dashboard_send_review(request, id=None):
             listing.save()
 
             messages.success(request, 'You have successfully sent reviewable content', extra_tags="review_content_sent_successful")
-            Messages.objects.create(sender=listing.creator, reciever=listing.buyer, message='Reviewable content has been sent for %s' % listing.creator_listing.blog_name)
+            Messages.objects.create(sender=listing.creator, reciever=listing.buyer, message='Hooray! Your Content For %s is Ready For Your Review.' % listing.creator_listing.blog_name)
 
             if(listing.buyers_listing_s.notification_type_email is not None):
                 if('Creator has Sent Content for Review' in listing.buyers_listing_s.notification_type_email):
                     send_mail(
-                        'Order For %s - Creator Has Sent Content For Review' % (listing.sponsor_listing.product),
+                        'Hooray! Your Content For %s is Ready For Your Review.' % (listing.sponsor_listing.product),
                         'The Creator Has Sent Over Some Content For Your Review For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.buyers_listing_s.product),
                         'admin@getboostplatform.com',
                         [str(listing.buyers_listing_s.email)],
@@ -462,7 +461,7 @@ def dashboard_send_review(request, id=None):
 
                                 --- FROM: Boost ---
 
-            The Creator Has Sent Over Some Content For Your Review For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+            Hooray! Your Content For %s is Ready For Your Review.. Check it Out https://getboostplatform.com/account/dashboard/.
 
             Thank You For Using Boost!
             """ % (listing.buyers_listing_s.product),
@@ -495,7 +494,7 @@ def dashboard_s_acc(request, id=None):
     listing.status = 'escrow'
     listing.stage = 'just_accepted'
 
-    Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message='Escrow transaction for %s has been successfully created' % listing.creator_listing.blog_name)
+    Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message='Congrats! Your Content Has Been Approved By %s.' % listing.buyers_listing_s.product)
 
     #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
     if (listing.who_initiated_order == 'sponsor'):
@@ -517,8 +516,8 @@ def dashboard_s_acc(request, id=None):
     if(listing.creator_listing.notification_type_email is not None):
         if('Sponsor has initiated Escrow Process' in listing.creator_listing.notification_type_email):
             send_mail(
-                'Order For %s - Sponsor Has Initiated Escrow' % (listing.creator_listing.blog_name),
-                'The Sponsor Has Started The Escrow Process For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.creator_listing.blog_name),
+                'Congrats! Your Content Has Been Approved By %s.' % (listing.buyers_listing_s.product),
+                '%s Has Started The Escrow Process For Your Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.buyers_listing_s.product, listing.creator_listing.blog_name),
                 'admin@getboostplatform.com',
                 [str(listing.creator_listing.email)],
                 fail_silently=False,
@@ -532,10 +531,10 @@ def dashboard_s_acc(request, id=None):
 
                         --- FROM: Boost ---
 
-    The Sponsor Has Started The Escrow Process For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+    Congrats! Your Content Has Been Approved By %s.. Check it Out https://getboostplatform.com/account/dashboard/.
 
     Thank You For Using Boost!
-    """ % (listing.creator_listing.blog_name),
+    """ % (listing.buyers_listing_s.product),
                     from_=myTwilioNumber,
                     to=str(listing.creator_listing.number)
                     )
@@ -568,13 +567,13 @@ def dashboard_s_edit(request, id=None):
             listing.save()
 
             messages.success(request, '%s' % listing.creator_listing.blog_name, extra_tags="edits_sponsor_successful")
-            Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message="Sponsor has sent edits for %s" % (listing.buyers_listing_s))
+            Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message="Alert! Alert! %s Has Requested Some Edits For Your Listing %s" % (listing.buyers_listing_s, listing.creator_listing.blog_name))
 
             if(listing.creator_listing.notification_type_email is not None):
                 if('Sponsor has Sent Edits for Accepted Order' in listing.creator_listing.notification_type_email):
                     send_mail(
-                        'Order For %s - Sponsor Has Sent Edits' % (listing.creator_listing.blog_name),
-                        'The Sponsor Has Sent Some Edits For Your Content For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.creator_listing.blog_name),
+                        'Alert! Alert! %s Has Requested Some Edits For Your Listing %s' % (listing.buyers_listing_s.product, listing.creator_listing.blog_name),
+                        '%s has requested some edits for your content for listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.buyers_listing_s.product, listing.creator_listing.blog_name),
                         'admin@getboostplatform.com',
                         [str(listing.creator_listing.email)],
                         fail_silently=False,
@@ -587,10 +586,10 @@ def dashboard_s_edit(request, id=None):
 
                                 --- FROM: Boost ---
 
-            The Sponsor Has Sent Some Edits For Your Content For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+            Alert! Alert! %s Has Requested Some Edits For Your Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
 
             Thank You For Using Boost!
-            """ % (listing.creator_listing.blog_name),
+            """ % (listing.buyers_listing_s.product, listing.creator_listing.blog_name),
                             from_=myTwilioNumber,
                             to=str(listing.creator_listing.number)
                             )
@@ -625,13 +624,13 @@ def dashboard_c_next_step(request, id=None):
         escrow_order.save()
 
         messages.success(request, 'URL successfully sent to sponsor.', extra_tags="escrow_transaction_url_send_successful")
-        Messages.objects.create(sender=escrow_order.creator, reciever=escrow_order.buyer, message='URL for %s: %s' % (escrow_order.creator_listing.blog_name, escrow_order.content_url))
+        Messages.objects.create(sender=escrow_order.creator, reciever=escrow_order.buyer, message='It\'s Go Time! %s Has Uploaded Your Content. The URL: %s' % (escrow_order.creator_listing.blog_name, escrow_order.content_url))
 
         if(escrow_order.creator_listing.notification_type_email is not None):
             if('Creator Sends Content URL' in escrow_order.creator_listing.notification_type_email):
                 send_mail(
-                    'Creator Has Sent Content URL For %s' % (escrow_order.buyers_listing_s.product),
-                    'The Creator Has Sent Content URL For %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (escrow_order.buyers_listing_s.product),
+                    'It\'s Go Time! %s Has Uploaded Your Content. The URL is Available.' % (escrow_order.creator_listing.blog_name),
+                    'Check it out here: %s. Go To Your Dashboard https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (escrow_order.content_url),
                     'admin@getboostplatform.com',
                     [str(escrow_order.buyers_listing_s.email)],
                     fail_silently=False,
@@ -644,10 +643,10 @@ def dashboard_c_next_step(request, id=None):
 
                             --- FROM: Boost ---
 
-        The Creator Has Sent The Content URL For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+        It\'s Go Time! %s Has Uploaded Your Content. The URL: %s. Go To Your Dashboard https://getboostplatform.com/account/dashboard/.
 
         Thank You For Using Boost!
-        """ % (escrow_order.buyers_listing_s.product),
+        """ % (escrow_order.creator_listing.blog_name, escrow_order.content_url),
                         from_=myTwilioNumber,
                         to=str(escrow_order.buyers_listing_s.number)
                         )
@@ -672,13 +671,13 @@ def dashboard_s_cant_find_url(request, id=None):
     escrow_order.save()
 
     messages.success(request, 'Creator has been successfully notified.', extra_tags="escrow_transaction_url_send_c_notification")
-    Messages.objects.create(sender=escrow_order.buyer, reciever=escrow_order.creator, message='Sponsor claims that that the URL for order %s, is invalid. Send a valid URL.' % (escrow_order.creator_listing.blog_name))
+    Messages.objects.create(sender=escrow_order.buyer, reciever=escrow_order.creator, message='Oops! There\'s a Problem With The URL Sent To %s. Please Resend Valid URL.' % (escrow_order.buyers_listing_s.product))
 
     if(escrow_order.creator_listing.notification_type_email is not None):
         if('Sponsor Claims Content URL is Invalid' in escrow_order.creator_listing.notification_type_email):
             send_mail(
-                'Sponsor Claims Content URL For %s is Invalid' % (escrow_order.creator_listing.blog_name),
-                'The Sponsor Claims That The Content URL For %s is Invalid. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (escrow_order.creators_listing.blog_name),
+                'Oops! There\'s a Problem With The URL Sent To %s' % (escrow_order.buyers_listing_s.product),
+                'Please resend valid URL to %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (escrow_order.buyers_listing_s.product),
                 'admin@getboostplatform.com',
                 [str(escrow_order.creator_listing.email)],
                 fail_silently=False,
@@ -691,10 +690,10 @@ def dashboard_s_cant_find_url(request, id=None):
 
                         --- FROM: Boost ---
 
-    The Sponsor Claims That The Content URL For %s is Invalid. Check it Out https://getboostplatform.com/account/dashboard/.
+    Oops! There\'s a Problem With The URL Sent To %s. Please Resend Valid URL. Go To Your Dashboard https://getboostplatform.com/account/dashboard/.
 
     Thank You For Using Boost!
-    """ % (escrow_order.creator_listing.blog_name),
+    """ % (escrow_order.buyers_listing_s.product),
                     from_=myTwilioNumber,
                     to=str(escrow_order.creator_listing.number)
                     )
@@ -736,15 +735,15 @@ def dashboard_unorder_c(request, id=None):
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=listing)
 
     Messages.objects.create(sender=creator_order.buyers_listing_s.creator, reciever=creator_order.creator_listing.creator,
-        message='%s has unordered your creator listing (%s).' % (creator_order.buyers_listing_s.product, creator_order.creator_listing.blog_name))
+        message='%s Has Canceled Their Order' % (creator_order.buyers_listing_s.product))
 
-    messages.success(request, '%s' % (creator_order.creator_listing.blog_name), extra_tags="unorder_creator_for_s_successful") # Message For Sponsor
+    messages.success(request, 'You\'ve Successfully Canceled Your Order.', extra_tags="unorder_s_for_c_successful") # Message For creator
 
     if(creator_order.creator_listing.notification_type_email is not None):
         if('Listing is Unordered' in creator_order.creator_listing.notification_type_email):
             send_mail(
-                'Order For %s - Sponsor Has Unordered' % (creator_order.creator_listing.blog_name),
-                'The Sponsor Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.creator_listing.blog_name),
+                '%s Has Canceled Their Order' % (creator_order.buyers_listing_s.product),
+                '%s has changed their mind, and canceled their order. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (creator_order.buyers_listing_s.product),
                 'admin@getboostplatform.com',
                 [str(creator_order.creator_listing.email)],
                 fail_silently=False,
@@ -758,10 +757,10 @@ def dashboard_unorder_c(request, id=None):
 
                         --- FROM: Boost ---
 
-    The Sponsor Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+    %s Has Canceled Their Order. Check it Out https://getboostplatform.com/account/dashboard/.
 
     Thank You For Using Boost!
-    """ % (creator_order.creator_listing.blog_name),
+    """ % (creator_order.buyers_listing_s.product),
                     from_=myTwilioNumber,
                     to=str(creator_order.creator_listing.number)
                     )
@@ -793,11 +792,16 @@ def dashboard_unorder_s(request, id=None):
 
     listing = sponsor_order
 
+    Messages.objects.create(sender=creator_order.creator_listing.creator, reciever=creator_order.buyers_listing_s.creator,
+        message='%s Has Canceled Their Order' % (creator_order.creator_listing.blog_name))
+
+    messages.success(request, 'You\'ve Successfully Canceled Your Order.', extra_tags="unorder_creator_for_s_successful")
+
     if(listing.notification_type_email is not None):
         if('Listing is Unordered' in listing.creator_listing.notification_type_email):
             send_mail(
-                'Order For %s - Creator Has Unordered' % (listing.creator_listing.blog_name),
-                'The Creator Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.sponsor_listing.product),
+                '%s Has Canceled Their Order' % (listing.creator_listing.blog_name),
+                '%s has changed their mind, and canceled their order. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.creator_listing.blog_name),
                 'admin@getboostplatform.com',
                 [str(listing.sponsor_listing.email)],
                 fail_silently=False,
@@ -810,10 +814,10 @@ def dashboard_unorder_s(request, id=None):
 
                         --- FROM: Boost ---
 
-    The Creator Has Unordered Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+    %s Has Canceled Their Order. Check it Out https://getboostplatform.com/account/dashboard/.
 
     Thank You For Using Boost!
-    """ % (listing.sponsor_listing.product),
+    """ % (listing.creator_listing.blog_name),
                     from_=myTwilioNumber,
                     to=str(listing.sponsor_listing.number)
                     )
@@ -839,16 +843,16 @@ def dashboard_creator_order_accept(request, id=None):
 
         c_order.save()
 
-        messages.success(request, "%s has been successfully accepted." % (c_order.buyers_listing_s.product), extra_tags="creator_order_accept_success")
-        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has accepted your listing %s, and they've started working on it." % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product))
+        messages.success(request, "Order Has Been Successfully Accepted." % (c_order.buyers_listing_s.product), extra_tags="creator_order_accept_success")
+        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Congrats! Your Order Has Been Accepted By %s." % (c_order.creator_listing.blog_name))
 
         listing = c_order.buyers_listing_s
 
         if(listing.notification_type_email is not None):
             if('Order is Accepted by Creator' in listing.notification_type_email):
                 send_mail(
-                    'Order For %s - Creator Has Accepted' % (listing.sponsor_listing.product),
-                    'The Creator Has Accepted The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.product),
+                    'Congrats! Your Order Has Been Accepted By %s' % (c_order.creator_listing.blog_name),
+                    '%s has accepted your order for listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (c_order.creator_listing.blog_name, listing.product),
                     'admin@getboostplatform.com',
                     [str(listing.email)],
                     fail_silently=False,
@@ -862,10 +866,10 @@ def dashboard_creator_order_accept(request, id=None):
 
                             --- FROM: Boost ---
 
-        The Creator Has Accepted The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+        Congrats! Your Order Has Been Accepted By %s. Check it Out https://getboostplatform.com/account/dashboard/.
 
         Thank You For Using Boost!
-        """ % (listing.product),
+        """ % (c_order.creator_listing.blog_name),
                         from_=myTwilioNumber,
                         to=str(listing.number)
                         )
@@ -930,8 +934,38 @@ def dashboard_creator_order_decline(request, id=None):
         if(request.method == 'POST'):
             message = request.POST.get("decline_explanation")
 
-            Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="%s has declined your order (with listing %s). EXPLANATION: %s" % (c_order.creator_listing.blog_name, c_order.buyers_listing_s.product, message))
+            Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Uh Oh. %s Declined Your Order. Explanation: %s" % (c_order.creator_listing.blog_name, message))
             messages.success(request, "%s has been successfully declined." % (c_order.buyers_listing_s.product), extra_tags="creator_declines_sponsor")
+
+            listing = c_order
+
+            if(listing.notification_type_email is not None):
+                if('Order is Declined by Creator' in listing.sponsor_listing.notification_type_email):
+                    send_mail(
+                        'Uh Oh. %s Declined Your Order.' % (listing.creator_listing.blog_name),
+                        '%s has declined the order because %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.creator_listing.blog_name, message),
+                        'admin@getboostplatform.com',
+                        [str(listing.sponsor_listing.email)],
+                        fail_silently=False,
+                    )
+
+            if(listing.notification_type_phone is not None):
+                if('Order is Declined by Creator' in listing.sponsor_listing.notification_type_phone):
+                    try:
+                        message = twilioCli.messages.create(
+                            body="""
+
+                                --- FROM: Boost ---
+
+            Uh Oh. %s Declined Your Order. Explanation: %s Check it Out https://getboostplatform.com/account/dashboard/.
+
+            Thank You For Using Boost!
+            """ % (listing.creator_listing.blog_name, message),
+                            from_=myTwilioNumber,
+                            to=str(listing.sponsor_listing.number)
+                            )
+                    except:
+                        pass
 
             c_order.delete()
 
@@ -943,35 +977,7 @@ def dashboard_creator_order_decline(request, id=None):
         s_order = SponsorOrderModel.objects.get(id=id)
         s_order.status = 'declined'
 
-        listing = s_order
 
-        if(listing.notification_type_email is not None):
-            if('Order is Declined by Creator' in listing.sponsor_listing.notification_type_email):
-                send_mail(
-                    'Order For %s - Creator Has Declined' % (listing.sponsor_listing.product),
-                    'The Creator Has Declined The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.sponsor_listing.product),
-                    'admin@getboostplatform.com',
-                    [str(listing.sponsor_listing.email)],
-                    fail_silently=False,
-                )
-
-        if(listing.notification_type_phone is not None):
-            if('Order is Declined by Creator' in listing.sponsor_listing.notification_type_phone):
-                try:
-                    message = twilioCli.messages.create(
-                        body="""
-
-                            --- FROM: Boost ---
-
-        The Creator Has Declined The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
-
-        Thank You For Using Boost!
-        """ % (listing.sponsor_listing.product),
-                        from_=myTwilioNumber,
-                        to=str(listing.sponsor_listing.number)
-                        )
-                except:
-                    pass
 
         s_order.delete()
 
@@ -1152,14 +1158,14 @@ def dashboard_creator_order_complete(request, id=None):
 
         listing = c_order.creator_listing
 
-        Messages.objects.create(sender=c_order.buyer, reciever=c_order.creator, message="Order for %s Was Successfully Marked as Complete. Congragulations!" % (listing.blog_name))
-        messages.success(request, "Order for %s Was Successfully Marked as Complete. Congragulations!" % (listing.blog_name), extra_tags="sponsor_completed_order")
+        Messages.objects.create(sender=c_order.buyer, reciever=c_order.creator, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.buyers_listing_s.product))
+        messages.success(request, "Order is Successfully Finalized. Congragulations!", extra_tags="sponsor_completed_order")
 
         if(listing.notification_type_email is not None):
             if('Sponsor Has Marked Order as Complete' in listing.notification_type_email):
                 send_mail(
-                    'Sponsor Has Marked %s Order as Complete' % (listing.blog_name),
-                    'Sponsor Has Marked %s Order as Complete. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.blog_name),
+                    'Alright Alright Alright, Order For %s is Finalized.' % (c_order.buyers_listing_s.product),
+                    'Congragulations! %s\'s order is now complete. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (c_order.buyers_listing_s.product),
                     'admin@getboostplatform.com',
                     [str(listing.email)],
                     fail_silently=False,
@@ -1174,10 +1180,10 @@ def dashboard_creator_order_complete(request, id=None):
 
                             --- FROM: Boost ---
 
-        Sponsor Has Marked %s Order as Complete. Check it Out https://getboostplatform.com/account/dashboard/.
+        Alright Alright Alright, Order For %s is Finalized. Check it Out https://getboostplatform.com/account/dashboard/.
 
         Thank You For Using Boost!
-        """ % (listing.blog_name),
+        """ % (c_order.buyers_listing_s.product),
                         from_=myTwilioNumber,
                         to=str(listing.number)
                         )
@@ -1243,40 +1249,44 @@ def dashboard_sponsor_order_complete(request, id=None):
 def dashboard_withdraw_order(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
 
-    messages.success(request, "%s has been successfully withdrawn from" % (order.buyers_listing_s.product))
-    Messages.objects.create(sender=order.creator, reciever=order.buyer, message="%s has withdrawn from order of %s" % (order.creator_listing.blog_name, order.buyers_listing_s.product))
+    if(reqest.method == 'POST'):
+        message = request.POST.get("withdraw_explanation")
 
-    listing = order.buyers_listing_s
+        messages.success(request, "You've Successfully Withdrawn From %s\'s Order." % (order.buyers_listing_s.product))
+        Messages.objects.create(sender=order.creator, reciever=order.buyer, message="Somthing Has Gone Wrong. %s Has Withdrawn From The Order. Reason: %s" % (order.creator_listing.blog_name, message))
+
+        listing = order.buyers_listing_s
 
 
 
-    if(listing.notification_type_email is not None):
-        if('Creator has Withdrawn from Accepted Order' in listing.notification_type_email):
-            send_mail(
-                'Order For %s - Creator Has Withdrawn' % (listing.product),
-                'The Creator Has Withdrawn From The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (listing.product),
-                'admin@getboostplatform.com',
-                [str(listing.email)],
-                fail_silently=False,
-            )
-    if(listing.notification_type_phone is not None):
-        if('Creator has Withdrawn from Accepted Order' in listing.notification_type_phone):
-            try:
-                message = twilioCli.messages.create(
-                    body="""
+        if(listing.notification_type_email is not None):
+            if('Creator has Withdrawn from Accepted Order' in listing.notification_type_email):
+                send_mail(
+                    'Somthing Has Gone Wrong. %s Has Withdrawn From The Order.' % (listing.product),
+                    'Here\'s why: %s. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (message),
+                    'admin@getboostplatform.com',
+                    [str(listing.email)],
+                    fail_silently=False,
+                )
+        if(listing.notification_type_phone is not None):
+            if('Creator has Withdrawn from Accepted Order' in listing.notification_type_phone):
+                try:
+                    message = twilioCli.messages.create(
+                        body="""
 
-                        --- FROM: Boost ---
+                            --- FROM: Boost ---
 
-    The Creator Has Withdrawn From The Order For Listing %s. Check it Out https://getboostplatform.com/account/dashboard/.
+        Somthing Has Gone Wrong. %s Has Withdrawn From The Order. Reason: %s Check it Out https://getboostplatform.com/account/dashboard/.
 
-    Thank You For Using Boost!
-    """ % (listing.product),
-                    from_=myTwilioNumber,
-                    to=str(listing.number)
-                    )
-            except:
-                pass
+        Thank You For Using Boost!
+        """ % (listing.product, message),
+                        from_=myTwilioNumber,
+                        to=str(listing.number)
+                        )
+                except:
+                    pass
 
-    order.delete()
+        order.delete()
 
-    return redirect('dashboard')
+        return redirect('dashboard')
+    return render(request, 'creator_withdraw_message.html')

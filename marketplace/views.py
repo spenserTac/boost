@@ -282,8 +282,6 @@ def creator_marketplace_listing_unwatch_view(request, id=None):
     profile = Profile.objects.get(user=request.user)
     profile.creators_watched.remove(listing)
 
-    messages.success(request, "%s has been removed from watchlist" % (listing.blog_name))
-
     return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
 ##### ordering #####
