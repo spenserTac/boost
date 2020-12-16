@@ -22,9 +22,9 @@ def sponsor_listing_creation(request):
         'Listing is Unordered',
         'Order is Accepted by Creator',
         'Order is Declined by Creator',
-        'Creator has Sent Content for Review',
-        'Creator has Withdrawn from Accepted Order',
-        'Creator Sends Content URL'
+        'Creator Has Sent Content For Review',
+        'Creator Has Withdrawn From Accepted Order',
+        'Creator Has Sent Content URL'
 
     ]
 
@@ -82,12 +82,18 @@ def sponsor_listing_update(request, id=None):
 
         'Listing is Ordered',
         'Listing is Unordered',
-        'Order is Accepted by Sponsor',
-        'Order is Declined by Sponsor',
-        'Sponsor has Sent Edits for Accepted Order',
-        'Sponsor has initiated Escrow Process'
+        'Order is Accepted by Creator',
+        'Order is Declined by Creator',
+        'Creator Has Sent Content For Review',
+        'Creator Has Withdrawn From Accepted Order',
+        'Creator Has Sent Content URL'
 
     ]
+
+    n_types_e = listing.notification_type_email.strip('][').replace('\'', '').split(', ')
+
+
+    n_types_m = listing.notification_type_phone.strip('][').replace('\'', '').split(', ')
 
     update_bool = "True"
 
@@ -97,6 +103,8 @@ def sponsor_listing_update(request, id=None):
         'notification_types': notification_types,
         'update_bool': update_bool,
         'img_file_name': img_file_name,
+        'n_types_e': n_types_e,
+        'n_types_m': n_types_m
     }
 
     if(listing.search_keywords):

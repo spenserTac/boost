@@ -60,12 +60,12 @@
                   <br>
 
                   <h4 class="font-weight-bold">Get Offers</h4>
-                  <p class="grey-text">When a sponsor likes your listing, they can make an offer, which you can accept or decline.</p>
+                  <p class="grey-text">When a sponsor likes your listing, they can make an offer for you to create and publish some sponsored content, which you can accept or decline.</p>
 
                   <br>
 
                   <h4 class="font-weight-bold">Get Paid</h4>
-                  <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
+                  <p class="grey-text">After escrow transaction is complete, get paid through Escrow.com.</p>
 
                   <br>
                   <p class="lead">
@@ -108,14 +108,22 @@
     </div>
 
       <!-- Only shows up for MD and smaller (everything else) -->
-      <div class="view d-lg-none" style=" height: 280px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="view d-lg-none" style=" height: 250px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
           <div class="container d-flex align-items-center justify-content-center">
             <div class="row">
               <div class="col-sm-12 col-xs-12 white-text text-center">
                 <br>
-                <h1 class="font-weight-bold display-4">Create A Blog Listing</h1>
-                <br>
-                <p class="lead font-weight-normal">Here you can create your blog listing so sponsors can view your website.</p>
+
+
+                {% if update_bool %}
+                  <h1 class="font-weight-bold display-5">Update Creator Listing</h1>
+                  <br>
+                  <p class="lead font-weight-normal">This is where you'll update your creator listing.</p>
+                {% else %}
+                  <h1 class="font-weight-bold display-5">Create A Blog Listing</h1>
+                  <br>
+                  <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>
+                {% endif %}
               </div>
             </div>
         </div>
@@ -496,7 +504,7 @@
                               {% for notification in notification_types %}
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_email"
-                                  {% if notification in listing.notification_type %}
+                                  {% if notification in n_types_e %}
                                       checked
                                   {% endif %}
                                   >
@@ -515,7 +523,7 @@
                             {% for notification in notification_types %}
                               <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_phone"
-                                {% if notification in listing.notification_type %}
+                                {% if notification in n_types_m %}
                                     checked
                                 {% endif %}
                                 >

@@ -57,12 +57,12 @@
                 <br>
 
                 <h4 class="font-weight-bold">Get Offers</h4>
-                <p class="grey-text">When a creator likes your listing, they can make an offer, which you can accept or decline.</p>
+                <p class="grey-text">When a creator likes your listing, they can make an offer to create sponsored content for you, which you can accept or decline.</p>
 
                 <br>
 
                 <h4 class="font-weight-bold">Get Paid</h4>
-                <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
+                <p class="grey-text">After your approval, the creator will publish your content for the world to see.</p>
 
                 <br>
                 <p class="lead">
@@ -111,9 +111,15 @@
             <div class="col-sm-12 col-xs-12 white-text text-center">
               <br>
               <br>
-              <h1 class="font-weight-bold">Create A Sponsor Listing</h1>
-              <br>
-              <p class="lead font-weight-normal">Here you can create your blog listing so sponsors can view your website.</p>
+              {% if update_bool %}
+                <h1 class="font-weight-bold">Update Sponsor Listing</h1>
+                <br>
+                <p class="lead font-weight-normal">This is where you'll update your sponsor listing.</p>
+              {% else %}
+                <h1 class="font-weight-bold">Create A Sponsor Listing</h1>
+                <br>
+                <p class="lead font-weight-normal">This is where you'll create your sponsor listing so creators can view your listing.</p>
+              {% endif %}
             </div>
           </div>
       </div>
@@ -373,7 +379,7 @@
                         {% for notification in notification_types %}
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_email"
-                            {% if notification in listing.notification_type %}
+                            {% if notification in n_types_e %}
                                 checked
                             {% endif %}
                             >
@@ -390,7 +396,7 @@
                       {% for notification in notification_types %}
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="{{notification}}" name="notification_type_phone"
-                          {% if notification in listing.notification_type %}
+                          {% if notification in n_types_m %}
                               checked
                           {% endif %}
                           >

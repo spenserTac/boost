@@ -1,0 +1,27 @@
+--- users.views ---
+X 422 - creator sends review content
+X 484 - sponsor accepts order (escrow initiated)
+V X 551 - sponsor sends some edits for creators content
+X 609 - creator sends URL to sponsor (status lvl: 3)
+X 664 - sponsor says URL (above is no good, creator gets opt to send agn)
+X 730 - sponsor unorders c (sponsor ordered creator, creator hasnt responsoded yet, s decided to unorder)
+X 786 - creator unorders s (creator ordered sponsor, sponsor hasnt responded yet, c decided to unorder)
+V X 837 - creator accepts sponsor order (s orders c, c accepts)
+V X 928 - creator declines sponsors order (s orders c, c declines)
+X 989 - sponsor accepts creators order (c orders s, s accepts)
+X 1079 - sponsor declines creators order (c orders s, s declines)
+X 1145 - order is complete (during (or after) escrow trans., sponsor clicks order complete, order gets marked as comp.)
+X 1249 - creator withdraws from accepted order
+--- marketplace.views ---
+V X 292 - sponsor orders a creator
+X 395 - sponsor unorders a creator
+X 602 - creator orders a sponsor
+X 692 - creator unorders a sponsor
+
+
+
+
+
+
+
+

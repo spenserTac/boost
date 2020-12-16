@@ -147,15 +147,6 @@
             </div>
           {% endif %}
 
-          {% if 'creator_order_accept_success' in message.tags  %}
-            <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-              <strong>{{message}}</strong>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          {% endif %}
-
           {% if 'creator_declines_sponsor' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
               <strong>{{message}}</strong>
@@ -184,6 +175,15 @@
           {% endif %}
 
           {% if 'escrow_transaction_url_send_successful' in message.tags  %}
+            <div class="alert alert-success alert-dismissible fade show text-center mt-2 mb-0" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+          {% if 'creator_withdraw' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-2 mb-0" role="alert">
               <strong>{{message}}</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1465,14 +1465,18 @@
 
                                             <div class="row">
 
+                                              <div class="col-7 mt-2 pl-4 text-left">
                                                 <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}" style="color: #007185;">{{ personal_c_listing }}</a>
-                                                <a href="{% url 'blog_listing_update' id=personal_c_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
+                                              </div>
 
+                                              <div class="col-5">
+                                                <a href="{% url 'blog_listing_update' id=personal_c_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
 
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                     Delete
                                                 </button>
+                                              </div>
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1542,8 +1546,13 @@
 
                                             <div class="row">
 
+                                              <div class="col-7 mt-2 pl-4 text-left">
                                                 <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=creator_l.id %}" style="color: #007185;">{{ creator_l }}</a>
+                                              </div>
+
+                                              <div class="col-5">
                                                 <a href="{% url 'dashboard_unwatch_c' id=creator_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
+                                              </div>
 
                                             </div>
 
@@ -1572,8 +1581,13 @@
 
                                             <div class="row">
 
+                                              <div class="col-7 mt-2 pl-4 text-left">
                                                 <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=sponsor_l.id %}" style="color: #007185;">{{ sponsor_l }}</a>
+                                              </div>
+
+                                              <div class="col-5">
                                                 <a href="{% url 'dashboard_unwatch_s' id=sponsor_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
+                                              </div>
 
                                             </div>
 
@@ -3017,12 +3031,12 @@
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}" style="color: #007185;">{{ personal_c_listing }}</a>
                                                   </div>
 
-                                                  <div class="col-6">
-                                                    <a href="{% url 'blog_listing_update' id=personal_c_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
+                                                  <div class="col-6 px-0">
+                                                    <a href="{% url 'blog_listing_update' id=personal_c_listing.id %}"><button class="ml-1 my-1 btn btn-primary btn-sm">Edit</button></a>
 
 
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
+                                                    <button type="button" class="mr-1 my-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                         Delete
                                                     </button>
                                                   </div>
@@ -3088,17 +3102,17 @@
 
                                     <div id="collapseCreatorWatching" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 
-                                        <div class="card-body">
+                                        <div class="card-body mx-2">
 
                                             {% for creator_l in c_watching %}
 
                                                 <div class="row">
 
-                                                  <div class="col-6 mt-2 pl-2 text-left">
+                                                  <div class="col-7 mt-2 pl-2 mx-1 text-left">
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=creator_l.id %}" style="color: #007185;">{{ creator_l }}</a>
                                                   </div>
 
-                                                  <div class="col-6">
+                                                  <div class="col-3">
                                                     <a href="{% url 'dashboard_unwatch_c' id=creator_l.id %}"><button class="m-1 btn btn-warning btn-sm">Unwatch</button></a>
                                                   </div>
 
@@ -3533,7 +3547,7 @@
 
               {% if 'escrow_transaction_sponsor_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>Escrow transaction for {{message}}has been successfully created.</strong>
+                  <strong>Escrow transaction for {{message}} has been successfully created.</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3542,7 +3556,7 @@
 
               {% if 'edits_sponsor_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>You have successfully sent edits too{{message}}</strong>.
+                  <strong>You have successfully sent edits for {{message}}</strong>.
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3551,7 +3565,7 @@
 
               {% if 'unorder_acc_creator_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>{{message}} has been successfully unordered 1.</strong>
+                  <strong>{{message}} has been successfully unordered</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3560,7 +3574,7 @@
 
               {% if 'unorder_s_for_c_successful' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
-                  <strong>{{message}} successfully unordered 2.</strong>
+                  <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -3604,6 +3618,15 @@
               {% endif %}
 
               {% if 'sponsor_completed_order' in message.tags  %}
+                <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              {% if 'creator_withdraw' in message.tags  %}
                 <div class="alert alert-success alert-dismissible fade show text-center mt-4 mb-0" role="alert">
                   <strong>{{message}}</strong>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -5058,7 +5081,7 @@
 
           {% if 'escrow_transaction_sponsor_successful' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-0 mb-2" role="alert">
-              <strong>Escrow transaction for {{message}}has been successfully created.</strong>
+              <strong>Escrow transaction for {{message}} has been successfully created.</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -5067,7 +5090,7 @@
 
           {% if 'edits_sponsor_successful' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-0 mb-2" role="alert">
-              <strong>You have successfully sent edits too{{message}}</strong>.
+              <strong>You have successfully sent edits for {{message}}</strong>.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -5085,7 +5108,7 @@
 
           {% if 'unorder_s_for_c_successful' in message.tags  %}
             <div class="alert alert-success alert-dismissible fade show text-center mt-0 mb-2" role="alert">
-              <strong>{{message}} successfully unordered 2.</strong>
+              <strong>{{message}}</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -6259,7 +6282,7 @@
                                                   </div>
 
                                                   <div class="col-6">
-                                                    <button class="m-1 btn btn-primary btn-sm">Edit</button>
+                                                    <a href="{% url 'sponsor_listing_update' id=personal_s_listing.id %}"><button class="m-1 btn btn-primary btn-sm">Edit</button></a>
 
 
                                                     <!-- Button trigger modal -->
