@@ -38,71 +38,101 @@
 
   <div class="container">
 
-      <hr class="my-5">
-
-      <br>
       <br>
 
-      <div class="row">
 
-          <div class="col">
+      <section class="dark-grey-text text-center">
 
-              <div class="jumbotron text-center border shadow-lg">
-                  <h1 class="display-4 font-weight-bold">Creator</h1>
-                  <p class="lead">Those who create content.</p>
-                  <hr class="my-4">
+        <!-- <h3 class="font-weight-bold pt-4 mb-4">Choose Your Path</h3> -->
 
-                  <h4 class="font-weight-bold">Create a Listing and Get Sponsored</h4>
-                  <p class="grey-text">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+        <!--<h5 class="font-weight-bold font-italic mb-5">At vero eos et accusamus et iusto odio dignissimos qui cupiditate non provident.</h5>-->
 
-                  <br>
+        <div class="row mx-2 mx-lg-0 p-3 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
+          <div class="col mr-lg-3">
 
-                  <h4 class="font-weight-bold">Get Offers</h4>
-                  <p class="grey-text">When a sponsor likes your listing, they can make an offer, which you can accept or decline.</p>
+            <div class="view">
+              <h2 class="m-0 text-center">Creator</h2>
+              <small class="mb-0 text-muted">Those who create content</small>
 
-                  <br>
+              <img src="{{MEDIA_URL}}/pics/creator_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
 
-                  <h4 class="font-weight-bold">Get Paid</h4>
-                  <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
+            </div>
 
-                  <br>
-                  <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_c' %}" role="button">I'm a Creator</a>
-                  </p>
+            <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
 
-                </div>
+            <h4 class="font-weight-bold mt-3">Create a Listing and Get Sponsored</h4>
+            <p class="grey-text px-3 mx-3">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+
+            <br>
+
+            <h4 class="font-weight-bold">Get Offers</h4>
+            <p class="grey-text px-3 mx-3">When a sponsor likes your listing, they can make an offer for you to create and publish some sponsored content, which you can accept or decline.</p>
+
+            <br>
+
+            <h4 class="font-weight-bold">Get Paid</h4>
+            <p class="grey-text px-3 mx-3">After escrow transaction is complete, get paid through Escrow.com.</p>
 
           </div>
 
-          <div class="col">
+            <br>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_c' %}" role="button">I'm a Creator</a>
+            </p>
 
-              <div class="jumbotron text-center border shadow-lg">
-                  <h1 class="display-4 font-weight-bold">Sponsor</h1>
-                  <p class="lead">Those who seek advertisement.</p>
-                  <hr class="my-4">
 
-                  <h4 class="font-weight-bold">Create a Listing and Attract Creators</h4>
-                  <p class="grey-text">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
-
-                  <br>
-
-                  <h4 class="font-weight-bold">Get Offers</h4>
-                  <p class="grey-text">When a creator likes your listing, they can make an offer, which you can accept or decline.</p>
-
-                  <br>
-
-                  <h4 class="font-weight-bold">Get Paid</h4>
-                  <p class="grey-text">After completing the offer, you can then select "completed" in the dashboard and you will get paid.</p>
-
-                  <br>
-                  <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_s' %}" role="button">I'm a Sponsor</a>
-                  </p>
-                </div>
+            <div class="d-lg-none">
+              <hr class="my-3" style="opacity: 0%;">
+              <br>
+              <hr class="my-3" style="width: 80%;">
+              <br>
+            </div>
 
           </div>
 
-      </div>
+
+
+          <div class="col m-0 ml-lg-3">
+
+            <div class="view m-0">
+              <h2 class="m-0 text-center">Sponsor</h2>
+              <small class="mb-0 text-muted">Those who seek advertisment</small>
+              <img src="{{MEDIA_URL}}/pics/sponsor_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
+            </div>
+
+            <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
+
+            <h4 class="font-weight-bold mt-3">Create a Listing and Attract Creators</h4>
+            <p class="grey-text px-3 mx-3">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
+
+            <br>
+
+
+
+              <h4 class="font-weight-bold">Get Offers</h4>
+              <p class="grey-text px-3 mx-3">When a creator likes your listing, they can make an offer to create sponsored content for you, which you can accept or decline.</p>
+
+              <br>
+
+              <h4 class="font-weight-bold">Grow Your Business</h4>
+              <p class="grey-text px-3 mx-3">After your approval, the creator will publish your content for the world to see.</p>
+
+           </div>
+
+            <br>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_s' %}" role="button">I'm a Sponsor</a>
+            </p>
+
+
+
+          </div>
+        </div>
+
+      </section>
+
+
+
   </div>
 
 
@@ -351,6 +381,9 @@
                                                 <div class="col-7 p-2 pl-4">
                                                     <h5>Order Details</h5>
                                                     <p>{{ c_order.service_detailed }}</p>
+                                                    <hr style="width: 50%;">
+                                                    <h5>Sponsor's Media</h5>
+                                                    <a href="{{MEDIA_URL}}{{c_order.s_content_file}}" target="_blank" style="color: #007185;">Sponsor's Media</a>
                                                 </div>
 
                                             </div>
@@ -370,7 +403,15 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            If you accept thi order, that means you'll work on it.
+                                                            Upon acceptance of the order, you are agreeing to complete the work, however you do have the option to withdraw
+                                                            (no fees apply here, so don't worry about that).
+                                                            <br>
+                                                            <br>
+
+                                                            After completing the sponsor's requested content and it has been sent in for review and approved, the escrow process will be initiated. At that time,
+                                                            you'll be prompted to provide the URL of the content on the dashboard.
+
+
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -487,48 +528,14 @@
                                             </div>
                                             <div class="d-flex justify-content-end">
 
-                                                {% if c_accepted_order.sponsor_approves %}
-                                                <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
-                                                    Completed
-                                                </button>
 
-                                                {% else %}
+
                                                   <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#reviewModal">Send in for review</button>
 
                                                   <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
                                                       Withdraw
                                                   </button>
 
-                                                {% endif %}
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title text-center" id="exampleModalLongTitle">Completed Sponsor Order</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                              As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                              the order will be marked as completed.<br><br>What's supposed to happen when proceed,
-                                                              is you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                              filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                              The sponsor will already be in the escrow, you're just "joining". The sponsor will then have 48 hrs to verify
-                                                              that you posted your content. Both parties (you and the sponsor) will then verify that everything looks good.
-                                                              Then all the funds will be dispersed and you'll be paid.<br><br>The whole point for this is to make sure that you post the content (if you don't
-                                                              within the 48 hrs, the sponsor will get a full refund), and to make sure that you're payed once the content is posted. Again, if there's somthing
-                                                              wrong, the whole order will be terminated and the sponsor will recive a full refund.
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
-                                                            </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -541,7 +548,8 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                You're sending your content in for the sponsor to review.
+                                                                You're sending your content in for the sponsor to review. The sponsor will be able to view this content and provide any requests for edits,
+                                                                or they'll say it looks good and then they'll initiate the escrow process.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -564,7 +572,7 @@
                                                             <div class="modal-body">
                                                                 If you withdraw from this order, you are stating that
                                                                 you are unable to complete this sponsors order. The sponsor
-                                                                will be refunded and you will not be paid.
+                                                                will be notified and you will not be paid (no fees apply).
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -677,7 +685,7 @@
                                           </button>
 
                                           <!-- Modal -->
-                                          <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                               <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
@@ -688,30 +696,11 @@
                                                       </div>
                                                       <div class="modal-body">
                                                         <p>
-                                                          As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                          the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                          you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                          filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                          When the creator sees that you approved, they will also be apart of the
-                                                          escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                          and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                          be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                          you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                          wrong, the whole order will be terminated and you'll recive a full refund.
+                                                          You'll be sending the sponsor the URL of the content you've uploaded. They'll be able to view this URL
+                                                          and they'll either ask you to resend it (it may have been invalid due to typo or somthing like that), or
+                                                          they'll say everything looks good, and you'll be paid, and this order will be archived.
                                                         </p>
-                                                        <!--
-                                                          When This is clicked,
-                                                          1. In the DB, "sponsor_approves" will be checked (TRUE), and "sponsor_change" will need to be blank.
-                                                          2. Then the escrow.com script(s) will be run for the sponsor (sponsor will need to make an account withdraw
-                                                             escrow.com, then an order/deal or whatever escrow.com calls it will be made, then I think the sponsor
-                                                             and the creator (their script is the next step) need to go in and approve of everything (I'm not totally
-                                                             sure on all the details yet), then all the payments will be made and the money will be dispersed)(Some fields
-                                                             will need to added in the "Accepted Creator Order" model for the escrow.com thing, fields like id, email, etc.).
-                                                          3. This order will still be in accepted_creator_orders, and will still pop up in "Accepted Sponsor Orders", and
-                                                             there, there'll be a button (for the creator to click) that says "order complete" or somthing like that,
-                                                             and when this is clicked, it signifies that the order is completely done. A modal will pop up with info, and
-                                                             the order will be marked as complete and the escrow.com script will run for the creator.
-                                                           -->
+
                                                       </div>
                                                       <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -750,16 +739,9 @@
                                                       </div>
                                                       <div class="modal-body">
                                                         <p>
-                                                          As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                          the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                          you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                          filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                          When the creator sees that you approved, they will also be apart of the
-                                                          escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                          and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                          be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                          you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                          wrong, the whole order will be terminated and you'll recive a full refund.
+                                                          You'll be sending the sponsor the URL of the content you've uploaded. They'll be able to view this URL
+                                                          and they'll either ask you to resend it (it may have been invalid due to typo or somthing like that), or
+                                                          they'll say everything looks good, and you'll be paid, and this order will be archived.
                                                         </p>
                                                         <!--
                                                           When This is clicked,
@@ -865,18 +847,14 @@
                                                                         <div class="col-5 border-right">
                                                                             <div class="row">
                                                                                 <div class="col-6">
-                                                                                    <h5 class="my-4">Ordered Sponsor Listing:</h5>
-                                                                                    <h5 class="my-4">Your (Creator) Listing:</h5>
+                                                                                    <h5 class="my-4">Sponsor's Listing:</h5>
+                                                                                    <h5 class="my-4">Your Listing:</h5>
                                                                                     <h5 class="my-4">Service:</h5>
-                                                                                    <h5 class="my-4">Payout:</h5>
-                                                                                    <h5 class="my-4">Status:</h5>
                                                                                 </div>
                                                                                 <div class="col-6">
                                                                                     <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.sponsor_listing.id %}" style="color: #007185;">{{ order.sponsor_listing }}</a></p>
                                                                                     <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.buyers_listing_c.id %}" style="color: #007185;">{{ order.buyers_listing_c }}</a></p>
                                                                                     <p class="my-4"> {{ order.services_creator_is_willing_to_provide }}</p>
-                                                                                    <p class="my-4"> ${{ order.payout }}</p>
-                                                                                    <p class="my-4"> {{ order.status }}</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -918,13 +896,12 @@
 
                                             </div>
 
-                                            <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                            <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_accepted_orders_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu" id="SubMenu2">
 
                                                     {% for order in accepted_c_orders %}
 
-                                                        {% if order.who_initiated_order == 'creator' %}
 
                                                             <div class="row">
 
@@ -952,18 +929,16 @@
                                                                                 <div class="col-5 border-right">
                                                                                     <div class="row">
                                                                                         <div class="col-6">
-                                                                                            <h5 class="my-4">Ordered Sponsor Listing:</h5>
-                                                                                            <h5 class="my-4">Your (Creator) Listing:</h5>
+                                                                                            <h5 class="my-4">Sponsor's Listing:</h5>
+                                                                                            <h5 class="my-4">Your Listing:</h5>
                                                                                             <h5 class="my-4">Service:</h5>
                                                                                             <h5 class="my-4">Payout:</h5>
-                                                                                            <h5 class="my-4">Status:</h5>
                                                                                         </div>
                                                                                         <div class="col-6">
                                                                                             <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.buyers_listing_s }}</a></p>
                                                                                             <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.buyers_listing_c }}</a></p>
                                                                                             <p class="my-4"> {{ order.service }}</p>
                                                                                             <p class="my-4"> ${{ order.payout }}</p>
-                                                                                            <p class="my-4"> {{ order.status }}</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -976,49 +951,13 @@
                                                                             <div class="d-flex justify-content-end">
 
                                                                                 <div class="d-flex justify-content-end">
-                                                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#completeModal">
-                                                                                        Complete
-                                                                                    </button>
 
-                                                                                    <!-- Modal -->
-                                                                                    <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-header">
-                                                                                                <h5 class="modal-title text-center" id="exampleModalLongTitle">Completed Sponsor Order</h5>
-                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                                </button>
-                                                                                                </div>
-                                                                                                <div class="modal-body">
-                                                                                                  <p>
-                                                                                                    If you proceed, you will be redirected to escrow.com to initiate a very simple escrow process.
-                                                                                                    Once initieated, you should then post the content that the sponsor approved.<br><br>
-                                                                                                    As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                                                                    the order will be marked as completed.<br><br>What's supposed to happen is when you proceed,
-                                                                                                    you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                                                                    filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                                                                    The sponsor will already be in the escrow, you're just "joining". The sponsor will then have 48 hrs to verify
-                                                                                                    that you posted your content. Both parties (you and the sponsor) will then verify that everything looks good.
-                                                                                                    Then all the funds will be dispersed and you'll be paid.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't
-                                                                                                    you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                                                                    wrong, the whole order will be terminated and you'll recive a full refund.
-                                                                                                  </p>
-                                                                                                </div>
-                                                                                                <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                                    <a href="{% url 'dashboard_creator_order_complete' id=order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#declineModal">
+                                                                                    <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#withdrawModal">
                                                                                         Withdraw
                                                                                     </button>
 
                                                                                     <!-- Modal -->
-                                                                                    <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                    <div class="modal fade" id="withdrawModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header">
@@ -1050,7 +989,6 @@
 
                                                             </div>
 
-                                                        {% endif %}
 
                                                     {% endfor %}
                                                 </div>
@@ -1165,14 +1103,12 @@
                                                                                                     <h5 class="my-4">Your Listing:</h5>
                                                                                                     <h5 class="my-4">Service:</h5>
                                                                                                     <h5 class="my-4">Payout:</h5>
-                                                                                                    <h5 class="my-4">Status:</h5>
                                                                                                 </div>
                                                                                                 <div class="col-6">
                                                                                                     <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.buyers_listing_s }}</a></p>
                                                                                                     <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.buyers_listing_c }}</a></p>
                                                                                                     <p class="my-4"> {{ order.service }}</p>
                                                                                                     <p class="my-4"> ${{ order.payout }}</p>
-                                                                                                    <p class="my-4"> {{ order.status }}</p>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1489,8 +1425,8 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                If you proceed, you will perminatley delete this listing. There
-                                                                is no way to get it back if you delete it. This action is perminate.
+                                                                If you proceed, you will permanentely delete this listing. There
+                                                                is no way to get it back if you delete it. This action is permanente.
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1624,6 +1560,15 @@
                       </div>
                       <div class="modal-body">
 
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12 embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/5NZ8Qtu87gQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                          </div>
+                        </div>
+
+                        <br>
 
                         <div class="card mx-auto">
                           <div class="card-body">
@@ -1634,26 +1579,6 @@
                             When a sponsors views and orders your listing in the open creator marketplace,
                               specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
                               and the order will then be placed in Accepted Sponsor Orders (more on that below), or
-                              you can decline the order.
-                            </p>
-                            <br>
-                            <div class="text-center">
-                              <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr style="width: 50%; background-color: black;">
-
-                        <div class="card mx-auto">
-                          <div class="card-body">
-                            <h5 class="card-title">Sponsor Orders</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
-                            <h5 class="text-center">Overview</h5>
-                            <p class="card-text mb-0"><br>This is where all orders for your sponsor listings will be.
-                            When a creator views and orders your listing in the open sponsor marketplace,
-                              specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
-                              the order, and you'll then give the creator some details on what you'd like, or
                               you can decline the order.
                             </p>
                             <br>
@@ -1686,29 +1611,8 @@
 
                         <div class="card mx-auto">
                           <div class="card-body">
-                            <h5 class="card-title">Creators To Review</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
-                            <h5 class="text-center">Overview</h5>
-                            <p class="card-text mb-0"><br>This is where you'll review the creators content that they've sent over.
-                              When a creator has accepted your order, they'll create what you've orderd, and then they'll send it
-                              over for your review. You'll be able to view the PDF file here.
-                              <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can approve
-                              of the order (then you'll be sent to escrow.com to complete the process.), or you can add some edits
-                              to the creators content (which they'll be able to see), and then the process will happen all over again.
-                            </p>
-                            <br>
-                            <div class="text-center">
-                              <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr style="width: 50%; background-color: black;">
-
-                        <div class="card mx-auto">
-                          <div class="card-body">
                             <h5 class="card-title">Order History</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">For Creators</h6>
                             <h5 class="text-center">Overview</h5>
                             <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
                               <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view
@@ -1925,7 +1829,7 @@
                                             <div class="card-body">
                                                 <div class="row">
 
-                                                      <div class="col">
+                                                      <div class="col" style="word-break:break-all;">
                                                         <h5>Ordered Listing</h5>
                                                         <a href="{% url 'creator_marketplace_listing_view' id=c_order.creator_listing.id%}" style="color: #007185;"><p>{{ c_order.creator_listing }}</p></a>
 
@@ -1983,7 +1887,13 @@
                                                                 </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                If you accept thi order, that means you'll work on it.
+                                                                  Upon acceptance of the order, you are agreeing to complete the work, however you do have the option to withdraw
+                                                                  (no fees apply here, so don't worry about that).
+                                                                  <br>
+                                                                  <br>
+
+                                                                  After completing the sponsor's requested content and it has been sent in for review and approved, the escrow process will be initiated. At that time,
+                                                                  you'll be prompted to provide the URL of the content on the dashboard.
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2104,48 +2014,14 @@
 
                                                         <div class="d-flex justify-content-center">
 
-                                                            {% if c_accepted_order.sponsor_approves %}
-                                                            <button type="button" class="btn btn-block btn-primary mx-2" data-toggle="modal" data-target="#completeModalmobile">
-                                                                Completed
-                                                            </button>
 
-                                                            {% else %}
                                                               <button type="button" class="btn btn-block btn-primary mx-2" data-toggle="modal" data-target="#reviewModalmobile">Send in for review</button>
 
                                                               <button type="button" class="btn btn-block btn-primary mx-2 mt-0" data-toggle="modal" data-target="#declineModalmobile">
                                                                   Withdraw
                                                               </button>
 
-                                                            {% endif %}
 
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="completeModalmobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-center" id="exampleModalLongTitle">Completed Sponsor Order</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                          As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                                          the order will be marked as completed.<br><br>What's supposed to happen when proceed,
-                                                                          is you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                                          filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                                          The sponsor will already be in the escrow, you're just "joining". The sponsor will then have 48 hrs to verify
-                                                                          that you posted your content. Both parties (you and the sponsor) will then verify that everything looks good.
-                                                                          Then all the funds will be dispersed and you'll be paid.<br><br>The whole point for this is to make sure that you post the content (if you don't
-                                                                          within the 48 hrs, the sponsor will get a full refund), and to make sure that you're payed once the content is posted. Again, if there's somthing
-                                                                          wrong, the whole order will be terminated and the sponsor will recive a full refund.
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button class="btn btn-primary">Yes, I'm Sure</button></a>
-                                                                        </div>
-                                                                </div>
-                                                                </div>
-                                                            </div>
 
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="reviewModalmobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -2158,7 +2034,8 @@
                                                                         </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            You're sending your content in for the sponsor to review.
+                                                                          You're sending your content in for the sponsor to review. The sponsor will be able to view this content and provide any requests for edits,
+                                                                          or they'll say it looks good and then they'll initiate the escrow process.
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2179,9 +2056,9 @@
                                                                         </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            If you withdraw from this order, you are stating that
-                                                                            you are unable to complete this sponsors order. The sponsor
-                                                                            will be refunded and you will not be paid.
+                                                                          If you withdraw from this order, you are stating that
+                                                                          you are unable to complete this sponsors order. The sponsor
+                                                                          will be notified and you will not be paid (no fees apply).
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2343,16 +2220,9 @@
                                                           </div>
                                                           <div class="modal-body">
                                                             <p>
-                                                              As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                              the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                              you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                              filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                              When the creator sees that you approved, they will also be apart of the
-                                                              escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                              and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                              be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                              you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                              wrong, the whole order will be terminated and you'll recive a full refund.
+                                                              You'll be sending the sponsor the URL of the content you've uploaded. They'll be able to view this URL
+                                                              and they'll either ask you to resend it (it may have been invalid due to typo or somthing like that), or
+                                                              they'll say everything looks good, and you'll be paid, and this order will be archived.
                                                             </p>
                                                             <!--
                                                               When This is clicked,
@@ -2405,16 +2275,9 @@
                                                           </div>
                                                           <div class="modal-body">
                                                             <p>
-                                                              As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                              the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                              you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                              filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                              When the creator sees that you approved, they will also be apart of the
-                                                              escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                              and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                              be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                              you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                              wrong, the whole order will be terminated and you'll recive a full refund.
+                                                              You'll be sending the sponsor the URL of the content you've uploaded. They'll be able to view this URL
+                                                              and they'll either ask you to resend it (it may have been invalid due to typo or somthing like that), or
+                                                              they'll say everything looks good, and you'll be paid, and this order will be archived.
                                                             </p>
                                                             <!--
                                                               When This is clicked,
@@ -2507,17 +2370,14 @@
                                                                         <div class="row">
 
                                                                                   <div class="col">
-                                                                                    <h5>Ordered Sponsor Listing</h5>
+                                                                                    <h5>Sponsor's Listing</h5>
                                                                                     <a href="{% url 'sponsor_marketplace_listing_view' id=order.sponsor_listing.id %}" style="color: #007185;"><p>{{ order.sponsor_listing }}</p></a>
 
-                                                                                    <h5 class="">Your (Creator) Listing:</h5>
+                                                                                    <h5 class="">Your Listing:</h5>
                                                                                     <p class=""> <a href="{% url 'creator_marketplace_listing_view' id=order.buyers_listing_c.id %}" style="color: #007185;">{{ order.buyers_listing_c }}</a></p>
 
-                                                                                    <h5 class="">Requested Service</h5>
-                                                                                    <p class=""> {{ c_order.service }}</p>
-
-                                                                                    <h5 class="">Status</h5>
-                                                                                    <p class="m-0"> {{ order.status }}</p>
+                                                                                    <h5 class="">Service</h5>
+                                                                                    <p class=""> {{ order.services_creator_is_willing_to_provide }}</p>
 
                                                                                   </div>
 
@@ -2527,8 +2387,6 @@
                                                                                     <h5>Order Details</h5>
                                                                                     <p>{{ order.services_creator_is_willing_to_provide_detailed }}</p>
 
-                                                                                    <h5>Sponsor's Media</h5>
-                                                                                    <a href="{{MEDIA_URL}}{{order.s_content_file}}" target="_blank" style="color: #007185;">Sponsor's Media</a>
                                                                                   </div>
 
                                                                         </div>
@@ -2552,7 +2410,7 @@
 
 
 
-                                                <a href="#SubMenu2" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                                <a href="#SubMenu2" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_accepted_orders_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
 
                                                     <div class="collapse list-group-submenu ml-3" id="SubMenu2">
 
@@ -2610,6 +2468,32 @@
                                                                     </div>
                                                                     <div class="d-flex justify-content-center">
 
+                                                                      <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#withdrawModalMobile2">
+                                                                          Withdraw
+                                                                      </button>
+
+                                                                      <!-- Modal -->
+                                                                      <div class="modal fade" id="withdrawModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                          <div class="modal-content">
+                                                                              <div class="modal-header">
+                                                                                  <h5 class="modal-title text-center" id="exampleModalLongTitle">Withdraw From Sponsor Order</h5>
+                                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                      <span aria-hidden="true">&times;</span>
+                                                                                  </button>
+                                                                                  </div>
+                                                                                  <div class="modal-body">
+                                                                                      If you withdraw from this order, you are stating that
+                                                                                      you are unable to complete this sponsors order. The sponsor
+                                                                                      will be refunded and you will not be paid.
+                                                                                  </div>
+                                                                                  <div class="modal-footer">
+                                                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                      <a href="{% url 'dashboard_withdraw_order' id=order.id %}"><button class="btn btn-primary mx-2">Withdraw</button></a>
+                                                                                  </div>
+                                                                          </div>
+                                                                          </div>
+                                                                      </div>
 
                                                                     </div>
                                                                 </div>
@@ -3186,6 +3070,16 @@
                           </div>
                           <div class="modal-body">
 
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-12 embed-responsive embed-responsive-16by9">
+                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/5NZ8Qtu87gQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                              </div>
+                            </div>
+
+                            <br>
+
 
                             <div class="card mx-auto">
                               <div class="card-body">
@@ -3196,26 +3090,6 @@
                                 When a sponsors views and orders your listing in the open creator marketplace,
                                   specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
                                   and the order will then be placed in Accepted Sponsor Orders (more on that below), or
-                                  you can decline the order.
-                                </p>
-                                <br>
-                                <div class="text-center">
-                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                                </div>
-                              </div>
-                            </div>
-
-                            <hr style="width: 50%; background-color: black;">
-
-                            <div class="card mx-auto">
-                              <div class="card-body">
-                                <h5 class="card-title">Sponsor Orders</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
-                                <h5 class="text-center">Overview</h5>
-                                <p class="card-text mb-0"><br>This is where all orders for your sponsor listings will be.
-                                When a creator views and orders your listing in the open sponsor marketplace,
-                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
-                                  the order, and you'll then give the creator some details on what you'd like, or
                                   you can decline the order.
                                 </p>
                                 <br>
@@ -3248,29 +3122,8 @@
 
                             <div class="card mx-auto">
                               <div class="card-body">
-                                <h5 class="card-title">Creators To Review</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Sponsors</h6>
-                                <h5 class="text-center">Overview</h5>
-                                <p class="card-text mb-0"><br>This is where you'll review the creators content that they've sent over.
-                                  When a creator has accepted your order, they'll create what you've orderd, and then they'll send it
-                                  over for your review. You'll be able to view the PDF file here.
-                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can approve
-                                  of the order (then you'll be sent to escrow.com to complete the process.), or you can add some edits
-                                  to the creators content (which they'll be able to see), and then the process will happen all over again.
-                                </p>
-                                <br>
-                                <div class="text-center">
-                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                                </div>
-                              </div>
-                            </div>
-
-                            <hr style="width: 50%; background-color: black;">
-
-                            <div class="card mx-auto">
-                              <div class="card-body">
                                 <h5 class="card-title">Order History</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">For Creators</h6>
                                 <h5 class="text-center">Overview</h5>
                                 <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
                                   <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view
@@ -3815,9 +3668,13 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                If you accept this order,
-                                                                that means you'll be allowing the creator to create content for you,
-                                                                in which you'll later pay them for, once they have designated it as complete.
+
+
+
+                                                                By accepting this order you are agreeing to have this custom content created. Once you've approved the work, you'll
+                                                                initiate the escrow process, and then recieve the URL of the content for verification.
+
+
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -3938,16 +3795,15 @@
                                                             </div>
                                                             <div class="modal-body">
                                                               <p>
-                                                                As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                                the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                                you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                                filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                                When the creator sees that you approved, they will also be apart of the
-                                                                escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                                and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                                be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                                you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                                wrong, the whole order will be terminated and you'll recive a full refund.
+
+                                                                By accepting, you approve of the content, and are ready to initiate the escrow process.
+                                                                <br>
+                                                                <br>
+                                                                You'll then be redirected to Escrow.com to proceed with the escrow transaction. Once the creator has
+                                                                joined the transaction, you'll recieve the URL of the content for verification.
+
+
+
                                                               </p>
                                                               <!--
                                                                 When This is clicked,
@@ -3991,9 +3847,10 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                If you proceed, you'll be displaying what edits you'd like to give to the creator.
-                                                                If the creator accepts them, they'll send over the re-edited content, which you
-                                                                can decide to accept the content or edit the content.
+
+                                                              By proceeding, you'll be requesting edits for the content to be implemented by the creator.
+
+
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -4114,14 +3971,15 @@
                                               <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
-                                                      <h5 class="modal-title text-center" id="exampleModalLongTitle">Approval of Creators Content</h5>
+                                                      <h5 class="modal-title text-center" id="exampleModalLongTitle">Complete Order</h5>
                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                           <span aria-hidden="true">&times;</span>
                                                       </button>
                                                       </div>
                                                       <div class="modal-body">
                                                         <p>
-
+                                                          You'll be marking this order as complete, it'll be archived, and you can view it in the order history section
+                                                          of the dashboard below.
                                                         </p>
 
                                                       </div>
@@ -4153,7 +4011,11 @@
                                                       </button>
                                                       </div>
                                                       <div class="modal-body">
+                                                        <p>
 
+                                                          By proceeding, the creator will be notified of the invalid URL, and they'll resend it.
+
+                                                        </p>
                                                       </div>
                                                       <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -4248,11 +4110,14 @@
                                                                                     <h5 class="my-4">Your Listing:</h5>
                                                                                     <h5 class="my-4">Creator's Listing:</h5>
                                                                                     <h5 class="my-4">Service:</h5>
+                                                                                    <h5 class="my-4">Niche: </h5>
+                                                                                    <h5 class="my-4">Payout: </h5>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.sponsor_listing }}</a></p>
-                                                                                    <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.buyers_listing_c }}</a></p>
+                                                                                    <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.buyers_listing_s }}</a></p>
+                                                                                    <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.creator_listing }}</a></p>
                                                                                     <p class="my-4"> {{ order.service }}</p>
+                                                                                    <p class="my-4"> {{ order.creator_listing.niche }}</p>
                                                                                     <p class="my-4"> ${{ order.payout }}</p>
                                                                                 </div>
                                                                             </div>
@@ -4260,6 +4125,10 @@
                                                                         <div class="col-7  p-2 pl-4">
                                                                             <h5>Order Details</h5>
                                                                             <p>{{ order.service_detailed }}</p>
+                                                                            <br>
+                                                                            <hr style="width: 50%;">
+                                                                            <h5>Sent Media</h5>
+                                                                            <a href="{{MEDIA_URL}}{{order.s_content_file}}" target="_blank" style="color: #007185;">Media</a>
                                                                         </div>
 
                                                                     </div>
@@ -4316,16 +4185,18 @@
                                                                                 <div class="col-5 border-right">
                                                                                     <div class="row">
                                                                                         <div class="col-6">
-                                                                                            <h5 class="my-4">Your (Sponsor) Listing:</h5>
-                                                                                            <h5 class="my-4">Ordered (Creator) Listing:</h5>
+                                                                                            <h5 class="my-4">Your Listing:</h5>
+                                                                                            <h5 class="my-4">Creator's Listing:</h5>
                                                                                             <h5 class="my-4">Service:</h5>
-                                                                                            <h5 class="my-4">Status:</h5>
+                                                                                            <h5 class="my-4">Niche:</h5>
+                                                                                            <h5 class="my-4">Payout:</h5>
                                                                                         </div>
                                                                                         <div class="col-6">
                                                                                             <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}">{{ order.buyers_listing_s }}</a></p>
                                                                                             <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}">{{ order.creator_listing }}</a></p>
                                                                                             <p class="my-4"> {{ order.service }}</p>
-                                                                                            <p class="my-4"> {{ order.status }}</p>
+                                                                                            <p class="my-4"> {{ order.creator_listing.niche }}</p>
+                                                                                            <p class="my-4"> ${{ order.payout }}</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -4392,11 +4263,13 @@
                                                                                                 <h5 class="my-4">Your Listing:</h5>
                                                                                                 <h5 class="my-4">Creator's Listing:</h5>
                                                                                                 <h5 class="my-4">Service:</h5>
+                                                                                                <h5 class="my-4">Payout:</h5>
                                                                                             </div>
                                                                                             <div class="col-6">
                                                                                                 <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.buyers_listing_s }}</a></p>
                                                                                                 <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.creator_listing }}</a></p>
                                                                                                 <p class="my-4"> {{ order.service }}</p>
+                                                                                                <p class="my-4"> ${{ order.payout }}</p>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -4459,11 +4332,13 @@
                                                                                                 <h5 class="my-4">Your Listing:</h5>
                                                                                                 <h5 class="my-4">Creator's Listing:</h5>
                                                                                                 <h5 class="my-4">Service:</h5>
+                                                                                                <h5 class="my-4">Payout:</h5>
                                                                                             </div>
                                                                                             <div class="col-6">
                                                                                                 <p class="my-4"> <a href="{% url 'sponsor_marketplace_listing_view' id=order.buyers_listing_s.id %}" style="color: #007185;">{{ order.buyers_listing_s }}</a></p>
                                                                                                 <p class="my-4"> <a href="{% url 'creator_marketplace_listing_view' id=order.creator_listing.id %}" style="color: #007185;">{{ order.creator_listing }}</a></p>
                                                                                                 <p class="my-4"> {{ order.service }}</p>
+                                                                                                <p class="my-4"> ${{ order.payout }}</p>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -4921,26 +4796,15 @@
                       </div>
                       <div class="modal-body">
 
-
-                        <div class="card mx-auto">
-                          <div class="card-body">
-                            <h5 class="card-title">Creators Orders</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
-                            <h5 class="text-center">Overview</h5>
-                            <p class="card-text mb-0"><br>This is where all orders for your creator listings will be.
-                            When a sponsors views and orders your listing in the open creator marketplace,
-                              specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
-                              and the order will then be placed in Accepted Sponsor Orders (more on that below), or
-                              you can decline the order.
-                            </p>
-                            <br>
-                            <div class="text-center">
-                              <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12 embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/q-iEVZjOosA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                           </div>
                         </div>
 
-                        <hr style="width: 50%; background-color: black;">
+                        <br>
 
                         <div class="card mx-auto">
                           <div class="card-body">
@@ -4952,25 +4816,6 @@
                               specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
                               the order, and you'll then give the creator some details on what you'd like, or
                               you can decline the order.
-                            </p>
-                            <br>
-                            <div class="text-center">
-                              <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr style="width: 50%; background-color: black;">
-
-                        <div class="card mx-auto">
-                          <div class="card-body">
-                            <h5 class="card-title">Accepted Sponsor Orders</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
-                            <h5 class="text-center">Overview</h5>
-                            <p class="card-text mb-0"><br>This is where all the orders that you've accepted will appear. When you send
-                              you content over for the sponsor to review, they can add some edits to the content (which you'll be able to see).
-                              <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can send
-                              the content you've created for the sponsor to review (PDF file), or you can withdraw from the order.
                             </p>
                             <br>
                             <div class="text-center">
@@ -5005,7 +4850,7 @@
                         <div class="card mx-auto">
                           <div class="card-body">
                             <h5 class="card-title">Order History</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">For Sponsors</h6>
                             <h5 class="text-center">Overview</h5>
                             <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
                               <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view
@@ -5282,9 +5127,8 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                If you accept this order,
-                                                                that means you'll be allowing the creator to create content for you,
-                                                                in which you'll later pay them for, once they have designated it as complete.
+                                                              By accepting this order you are agreeing to have this custom content created. Once you've approved the work, you'll
+                                                              initiate the escrow process, and then recieve the URL of the content for verification.
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -5399,16 +5243,11 @@
                                                             </div>
                                                             <div class="modal-body">
                                                               <p>
-                                                                As of right now, there's no functionality when you proceed, the only thing that happens is that
-                                                                the creator will see that you approved of the content.<br><br>What's supposed to happen when you proceed is,
-                                                                you'll be redirected to escrow.com to initiate a very simple escrow process (everything will be
-                                                                filled out automatically. All you need to do is go through their 3 steps to "setup" the escrow. It's very simple).
-                                                                When the creator sees that you approved, they will also be apart of the
-                                                                escrow process. You'll have 48 hrs to inspect the content that the creator uploaded (on their blog),
-                                                                and both parties (you and the creator) will have to verify everything's good, and then all the funds will
-                                                                be dispersed.<br><br>The whole point for this is to make sure that the creator posts the content (if they don't,
-                                                                you'll get a full refund), and to make sure that the creator is payed once the content is posted. Again, if there's somthing
-                                                                wrong, the whole order will be terminated and you'll recive a full refund.
+                                                                By accepting, you approve of the content, and are ready to initiate the escrow process.
+                                                                <br>
+                                                                <br>
+                                                                You'll then be redirected to Escrow.com to proceed with the escrow transaction. Once the creator has
+                                                                joined the transaction, you'll recieve the URL of the content for verification.
                                                               </p>
                                                               <!--
                                                                 When This is clicked,
@@ -5452,9 +5291,7 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                If you proceed, you'll be displaying what edits you'd like to give to the creator.
-                                                                If the creator accepts them, they'll send over the re-edited content, which you
-                                                                can decide to accept the content or edit the content.
+                                                                By proceeding, you'll be requesting edits for the content to be implemented by the creator.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -5584,7 +5421,8 @@
                                                           </div>
                                                           <div class="modal-body">
                                                             <p>
-
+                                                              You'll be marking this order as complete, it'll be archived, and you can view it in the order history section
+                                                              of the dashboard below.
                                                             </p>
 
                                                           </div>
@@ -5616,6 +5454,10 @@
                                                           </button>
                                                           </div>
                                                           <div class="modal-body">
+
+                                                            <p>
+                                                              By proceeding, the creator will be notified of the invalid URL, and they'll resend it.
+                                                            </p>
 
                                                           </div>
                                                           <div class="modal-footer">
@@ -5704,7 +5546,8 @@
                                                                               <h5 class="">Niche:</h5>
                                                                               <p class=""> {{ order.creator_listing.niche }}</p>
 
-
+                                                                              <h5 class="">Payout:</h5>
+                                                                              <p class=""> ${{ order.payout }}</p>
 
                                                                             </div>
 
@@ -5714,8 +5557,8 @@
                                                                                 <h5>Order Details</h5>
                                                                                 <p>{{ order.service_detailed }}</p>
 
-                                                                                <h5>Sponsor's Media</h5>
-                                                                                <a href="{{MEDIA_URL}}{{order.s_content_file}}" target="_blank" style="color: #007185;">Sponsor's Media</a>
+                                                                                <h5>Sent Media</h5>
+                                                                                <a href="{{MEDIA_URL}}{{order.s_content_file}}" target="_blank" style="color: #007185;">Media</a>
                                                                             </div>
 
                                                                         </div>
@@ -5783,6 +5626,9 @@
                                                                                                 <h5 class="">Niche:</h5>
                                                                                                 <p class=""> {{ order.creator_listing.niche }}</p>
 
+                                                                                                <h5 class="">Payout:</h5>
+                                                                                                <p class=""> ${{ order.payout }}</p>
+
 
 
                                                                                     </div>
@@ -5831,7 +5677,7 @@
 
 
 
-                                                                  <div class="card text-center ml-3 mr-2">
+                                                                  <div class="card text-center ml-3 mr-2 mb-2">
 
                                                                     <div class="card-header">
                                                                         <ul class="nav nav-tabs card-header-tabs">
@@ -5889,7 +5735,7 @@
                                                                 {% for order in completed_s_orders_not_initiated %}
 
 
-                                                                <div class="card text-center ml-3 mr-2">
+                                                                <div class="card text-center ml-3 mr-2 mb-2">
 
                                                                   <div class="card-header">
                                                                       <ul class="nav nav-tabs card-header-tabs">
@@ -6302,8 +6148,8 @@
                                                                 </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    If you proceed, you will perminatley delete this listing. There
-                                                                    is no way to get it back if you delete it. This action is perminate.
+                                                                  If you proceed, you will perminatley delete this listing. There
+                                                                  is no way to get it back if you delete it. This action is perminate.
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -6436,26 +6282,15 @@
                           </div>
                           <div class="modal-body">
 
-
-                            <div class="card mx-auto">
-                              <div class="card-body">
-                                <h5 class="card-title">Creators Orders</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
-                                <h5 class="text-center">Overview</h5>
-                                <p class="card-text mb-0"><br>This is where all orders for your creator listings will be.
-                                When a sponsors views and orders your listing in the open creator marketplace,
-                                  specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept the order,
-                                  and the order will then be placed in Accepted Sponsor Orders (more on that below), or
-                                  you can decline the order.
-                                </p>
-                                <br>
-                                <div class="text-center">
-                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-12 embed-responsive embed-responsive-16by9">
+                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/q-iEVZjOosA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                               </div>
                             </div>
 
-                            <hr style="width: 50%; background-color: black;">
+                            <br>
 
                             <div class="card mx-auto">
                               <div class="card-body">
@@ -6467,25 +6302,6 @@
                                   specifications for their order will appear here.<br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can accept
                                   the order, and you'll then give the creator some details on what you'd like, or
                                   you can decline the order.
-                                </p>
-                                <br>
-                                <div class="text-center">
-                                  <a href="{% url 'support_contact' %}" class="card-link"><button class="btn btn-block btn-success">Need More Help? Chat with our team.</button></a>
-                                </div>
-                              </div>
-                            </div>
-
-                            <hr style="width: 50%; background-color: black;">
-
-                            <div class="card mx-auto">
-                              <div class="card-body">
-                                <h5 class="card-title">Accepted Sponsor Orders</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">ONLY For Creators</h6>
-                                <h5 class="text-center">Overview</h5>
-                                <p class="card-text mb-0"><br>This is where all the orders that you've accepted will appear. When you send
-                                  you content over for the sponsor to review, they can add some edits to the content (which you'll be able to see).
-                                  <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can send
-                                  the content you've created for the sponsor to review (PDF file), or you can withdraw from the order.
                                 </p>
                                 <br>
                                 <div class="text-center">
@@ -6520,7 +6336,7 @@
                             <div class="card mx-auto">
                               <div class="card-body">
                                 <h5 class="card-title">Order History</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">For BOTH Creators and Sponsors</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">For Sponsors</h6>
                                 <h5 class="text-center">Overview</h5>
                                 <p class="card-text mb-0"><br>This is where you'll be able to view all current and past orders.
                                   <br><hr class="my-4" style="width: 75%;"><h5 class="text-center">Options</h5><br>From here you can view

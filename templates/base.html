@@ -89,18 +89,18 @@
 
             {% if user.profile.type == 'none' %}
             <li class="nav-item m-0">
-              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
+              <a class="nav-link active h5 ml-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
             </li>
 
             <li class="nav-item m-0">
-              <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
+              <a class="nav-link active h5 ml-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
             </li>
            {% endif %}
 
             {% if user.profile.type == 'creator' %}
             <div class="d-none d-lg-block">
               <li class="nav-item m-0">
-                <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
+                <a class="nav-link active h5 ml-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'blog_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Creator</a>
               </li>
             </div>
 
@@ -115,7 +115,7 @@
            {% if user.profile.type == 'sponsor' %}
            <div class="d-none d-lg-block">
               <li class="nav-item m-0">
-                <a class="nav-link active h5 mx-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
+                <a class="nav-link active h5 ml-4 font-weight-normal mt-2" style="color:#959595" href="{% url 'sponsor_listing' %}" data-toggle="tooltip" data-placement="bottom" title="Create a Creator Listing">Sponsor</a>
               </li>
            </div>
 
@@ -129,7 +129,7 @@
             <div class="d-none d-lg-block">
 
               <li class="nav-item m-0">
-                <a class="nav-link active h5 font-weight-normal mx-0 mt-2" style="color:#959595; white-space: nowrap;" href="{% url 'feature_add' %}">Feature Request</a>
+                <a class="nav-link active h5 font-weight-normal ml-4 mt-2" style="color:#959595; white-space: nowrap;" href="{% url 'feature_add' %}">Feature Request</a>
               </li>
 
            </div>
@@ -310,7 +310,6 @@
 
 
 
-        <small class="d-block mb-3 text-muted">©2020</small>
       </div>
       <div class="col-6 col-md">
         <h5>Features</h5>

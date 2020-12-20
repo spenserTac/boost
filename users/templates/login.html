@@ -55,21 +55,21 @@
                             <div class="form-group col-md-12">
                                 <h5>Email</h5>
                                 <input type="email" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Email Address" required>
-                                <a href="{% url 'support_contact' %}">Forgot Email?</a>
+                                <a href="{% url 'support_contact' %}" style="color: #007185;">Forgot Email?</a>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <h5>Password</h5>
                                 <input name="password" type="password" class="form-control" placeholder="Password" required>
-                                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                                <a href="{% url 'password_reset' %}" style="color: #007185;">Forgot Password?</a>
                             </div>
 
                             <div class="d-flex justify-content-center mb-4 mt-2">
-                                <span class="form-text text-muted" style="text-align: center;">Boost is protected and the <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a> apply.</span>
+                                <span class="form-text text-muted" style="text-align: center;">Boost is protected and the <a href="{% url 'terms_and_conditions' %}" style="color: #007185;">Terms and Conditions</a>, <a href="{% url 'privacy_policy' %}" style="color: #007185;">Privacy Policy</a> and all other policies mentioned in the footer apply.</span>
                             </div>
 
                             <button type="submit" class="btn btn-block btn-primary my-2 mx-1">Login</button>
-                            <p class="ml-1">New To Boost? </p><a class="ml-1" href="{% url 'signup' %}">Create A Boost Account.</a>
+                            <p class="ml-1">New To Boost? </p><a class="ml-1" href="{% url 'signup' %}" style="color: #007185;">Create A Boost Account.</a>
 
 
                         </div>
@@ -82,15 +82,15 @@
                         <div class="text-center">
 
 
-                            <a href="{% provider_login_url "google" %}"><img src="https://ghnewshub.com/media/icons/social/large/google-signin-button.png" style="width: 60%; height: 60%;"></a>
+                            <a href="{% provider_login_url "google" %}"><img src="{{MEDIA_URL}}/google_login.png" style="width: 70%; height: 70%;"></a>
 
                         </div>
 
                         <br>
                         <br>
 
-                        <div class="d-flex justify-content-center mb-4 mt-2">
-                            <span class="form-text text-muted" style="text-align: center;">By signing in I agree to the <a href="#">Terms and Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies and Tracking Policy</a></span>
+                        <div class="d-flex justify-content-center mb-4 mt-1">
+                            <span class="form-text text-muted" style="text-align: center;">By signing in I agree to the <a href="{% url 'terms_and_conditions' %}" style="color: #007185;">Terms and Conditions</a>, <a href="{% url 'privacy_policy' %}" style="color: #007185;">Privacy Policy</a> and all other policies mentioned in the footer.</a></span>
                         </div>
 
 

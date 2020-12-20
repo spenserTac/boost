@@ -59,6 +59,8 @@ def creator_marketplace(request):
     searchb = request.GET.get('search_bar')
     reset_button = request.GET.get('reset_button')
     searchbar_bool = False
+    ga_check = request.GET.get('ga')
+
 
     if reset_button:
         return redirect('creator_marketplace')
@@ -75,9 +77,10 @@ def creator_marketplace(request):
 
         if(monthly_views > 0):
             creator_listings = creator_listings.filter(monthly_views__gt=monthly_views).exclude(google_a_csv=None, monthly_views=None)
-            print("viewing monthly views")
 
 
+    if ga_check == "true":
+        creator_listings = creator_listings.filter(monthly_views__gt=1).exclude(google_a_csv=None)
 
     niches = {
         "Apparel & Accessories": "",
@@ -168,6 +171,9 @@ def creator_marketplace(request):
         'searchbar_bool': searchbar_bool,
 
     }
+
+    if ga_check:
+        context['ga_c'] = True
 
     return render(request, 'creator_marketplace.html', context)
 
@@ -392,7 +398,7 @@ def creator_marketplace_listing_order_view(request, id=None):
         'prev_c_order': prev_c_order
     }
 
-    if(prev_c_order):
+    if(prev_c_order and prev_c_order.s_content_file):
         file_path = os.path.basename(prev_c_order.s_content_file.path)
         i = file_path.rfind('_')
         file_name = file_path[:i] + file_path[i+8:]

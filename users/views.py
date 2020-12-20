@@ -311,11 +311,11 @@ def dashboard(request):
 
 
     # The COMPLETED creator and sponsor ORDERS the logged in user has made
-    completed_c_orders_not_initiated = CompletedOrderModel.objects.filter(creator=user, who_initiated_order='s')
-    completed_c_orders_initiated = CompletedOrderModel.objects.filter(creator=user, who_initiated_order='c')
+    completed_c_orders_not_initiated = CompletedOrderModel.objects.filter(creator=user, who_initiated_order='sponsor')
+    completed_c_orders_initiated = CompletedOrderModel.objects.filter(creator=user, who_initiated_order='creator')
 
-    completed_s_orders_not_initiated = CompletedOrderModel.objects.filter(buyer=user, who_initiated_order='c')
-    completed_s_orders_initiated = CompletedOrderModel.objects.filter(buyer=user, who_initiated_order='s')
+    completed_s_orders_not_initiated = CompletedOrderModel.objects.filter(buyer=user, who_initiated_order='creator')
+    completed_s_orders_initiated = CompletedOrderModel.objects.filter(buyer=user, who_initiated_order='sponsor')
 
 
 

@@ -61,8 +61,10 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
 
     r = requests.post(
 
+    #Greatdain445
+
     'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('spenserdt@gmail.com', 'Greatdain445'),
+    auth=('admin@getboostplatform.com', '14433_t3RxICpzztJ6fOrQJmWs0Guc4Y3EyFmlSF0b8BbWUzTppwgvt97Ke39RFfq9xUns'),
 
 
     json={
@@ -151,7 +153,7 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
     r = requests.post(
 
     'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('spenserdt@gmail.com', 'Greatdain445'),
+    auth=('admin@getboostplatform.com', '14433_t3RxICpzztJ6fOrQJmWs0Guc4Y3EyFmlSF0b8BbWUzTppwgvt97Ke39RFfq9xUns'),
 
 
     json={
