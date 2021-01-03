@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from .forms import CustomUserCreationForm, EditProfileForm
 from .models import (Profile, CreatorOrderModel, SponsorOrderModel, AcceptedCreatorOrderModel, AcceptedSponsorOrderModel,
 CompletedOrderModel, Messages)
+from metrics.models import *
 
 from .functions.escrow_functions import *
 from . decorators import *
@@ -21,6 +22,8 @@ from .forms import CreatorOrderForm, SupportTicketForm, FeatureTicketForm, Spons
 
 from twilio.rest import Client
 
+import threading
+
 
 
 accountSID = 'AC1af4a638ba64727a7fc59d63836fe78d'
@@ -28,6 +31,34 @@ authToken  = '84207d244c6aa2868cfdc5df45df008d'
 twilioCli = Client(accountSID, authToken)
 myTwilioNumber = '+13253996328' #(325) 399-6328
 myCellPhone = '13862995508'
+
+
+
+
+
+# Function that will mark orders complete
+def order_complete():
+    threading.Timer(5.0, order_complete).start() # called every minute
+
+    orders = AcceptedCreatorOrderModel.objects.filter(status='escrow')
+
+    for order in orders:
+        transaction_id = order.transaction_id
+
+        r = requests.get(
+            'https://api.escrow-sandbox.com/2017-09-01/transaction/3688607',   #{transaction_id}'.format(transaction_id=transaction_id),
+              auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
+            )
+
+        status = r.json()['items'][0]['status'].get('accepted')
+
+        print(r.json()['items'][0]['status'].get('accepted'))
+
+order_complete()
+
+
+
+
 
 
 
@@ -499,16 +530,26 @@ def dashboard_s_acc(request, id=None):
     #escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name()
     if (listing.who_initiated_order == 'sponsor'):
         escrow_t = escrow_sponsor_pays(listing.creator_listing.email, listing.buyers_listing_s.email, listing.payout, listing.creator_listing.blog_name, listing.buyers_listing_s.product)
-        print('=====', escrow_t)
-        listing.token = encrypt_token(escrow_t["token"])
-        listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+
+
+        #listing.token = encrypt_token(escrow_t["token"])
+        listing.token = escrow_t["token"]
+        #listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+        listing.transaction_id = escrow_t["transaction_id"]
+
+
         listing.save()
 
     elif (listing.who_initiated_order == 'creator'):
         escrow_t = escrow_creator_pays(listing.creator_listing.email, listing.buyers_listing_s.email, listing.payout, listing.creator_listing.blog_name, listing.buyers_listing_s.product)
-        print(escrow_t)
-        listing.token = encrypt_token(escrow_t["token"])
-        listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+
+
+        #listing.token = encrypt_token(escrow_t["token"])
+        listing.token = escrow_t["token"]
+        #listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
+        listing.transaction_id = escrow_t["transaction_id"]
+
+
         listing.save()
 
     messages.success(request, 'Escrow transaction for %s has been successfully created' % listing.buyers_listing_s.product, extra_tags="escrow_transaction_sponsor_successful")
@@ -1147,6 +1188,8 @@ def dashboard_sponsor_order_decline(request, id=None):
 
     return redirect('dashboard')
 
+'''
+
 @dashboard_sponsor_complete_order
 def dashboard_creator_order_complete(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
@@ -1240,7 +1283,7 @@ def dashboard_creator_order_complete(request, id=None):
 
     return redirect('dashboard')
 
-
+'''
 # This view is no longer in use, and should probably be removed
 def dashboard_sponsor_order_complete(request, id=None):
 
@@ -1250,7 +1293,7 @@ def dashboard_sponsor_order_complete(request, id=None):
 
     return redirect('dashboard')
 
-
+@dashboard_withdraw_decorator
 def dashboard_withdraw_order(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
 

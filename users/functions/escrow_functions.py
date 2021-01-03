@@ -2,7 +2,7 @@ import requests
 import random
 import string
 
-from Crypto.Cipher import AES
+#from Crypto.Cipher import AES
 
 # Creators URL redirect >>> https://my.escrow.com/myEscrow/Transaction.asp?tid=<transaction_id> (Only after the sponsor has completed the stuff)
 # Sponsor URL redirect >>> "https://www.escrow.com/pay?token=<token>"
@@ -13,6 +13,9 @@ from Crypto.Cipher import AES
 # https://my.escrow-sandbox.com/myescrow/Transaction.asp?TID=<transaction_id>
 
 # get transaction details (assign it to a variable then print var.json()) >>> requests.get('https://api.escrow-sandbox.com/2017-09-01/transaction/3564176',auth=('spenserdt@gmail.com', 'Greatdain445'))
+
+
+'''
 
 
 letters = string.ascii_lowercase
@@ -49,6 +52,9 @@ def cipher_id(encrypted_id):
 
     return ciphered_id
 
+
+'''
+
 #
 #   Encypting and ciphering Token and ID TEST
 #
@@ -64,7 +70,7 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
     #Greatdain445
 
     'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '14433_t3RxICpzztJ6fOrQJmWs0Guc4Y3EyFmlSF0b8BbWUzTppwgvt97Ke39RFfq9xUns'),
+    auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
 
 
     json={
@@ -153,7 +159,7 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
     r = requests.post(
 
     'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '14433_t3RxICpzztJ6fOrQJmWs0Guc4Y3EyFmlSF0b8BbWUzTppwgvt97Ke39RFfq9xUns'),
+    auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
 
 
     json={

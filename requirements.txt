@@ -10,3 +10,5 @@ django-filter==2.3.0
 pillow==7.0.0
 pycrypto==2.6.1
 twilio
+
+#pycryptodome==3.9.9  (replaces pycrypto I guess? It's pycrypto with a whole bunch of extra stuff.)

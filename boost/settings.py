@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'marketplace',
     'essentials',
     'users.apps.UsersConfig',
+    'metrics',
 ]
 
 MIDDLEWARE = [

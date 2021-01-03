@@ -41,6 +41,19 @@ def dashboard_send_review_decorator(function):
     return wrap
 
 
+def dashboard_withdraw_decorator(function):
+    def wrap(request, *args, **kwargs):
+        order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
+        if order.creator == request.user:
+            if order.stage == 'initial_stage' or order.stage == 'sponsor_edits_sent':
+                return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
+
+
 def dashboard_s_acc_decorator(function):
     def wrap(request, *args, **kwargs):
         order = AcceptedCreatorOrderModel.objects.get(id=kwargs['id'])
