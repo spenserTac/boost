@@ -38,7 +38,7 @@ myCellPhone = '13862995508'
 
 # Function that will mark orders complete
 def order_complete():
-    threading.Timer(5.0, order_complete).start() # called every minute
+    threading.Timer(600.0, order_complete).start() # called every minute
 
     orders = AcceptedCreatorOrderModel.objects.filter(status='escrow')
 
@@ -46,13 +46,80 @@ def order_complete():
         transaction_id = order.transaction_id
 
         r = requests.get(
-            'https://api.escrow-sandbox.com/2017-09-01/transaction/3688607',   #{transaction_id}'.format(transaction_id=transaction_id),
+            'https://api.escrow-sandbox.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
               auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
             )
 
         status = r.json()['items'][0]['status'].get('accepted')
+        print(status)
 
-        print(r.json()['items'][0]['status'].get('accepted'))
+        #print(r.json()['items'][0]['status'].get('accepted'))
+
+
+        #c_listing = BlogListingCreationModel.objects.get(id=id)
+        c_order = AcceptedCreatorOrderModel.objects.get(id=order.id)
+
+        listing = c_order.creator_listing
+
+        Messages.objects.create(sender=c_order.buyer, reciever=c_order.creator, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.buyers_listing_s.product))
+        #messages.success(request, "Order is Successfully Finalized. Congradulations!", extra_tags="sponsor_completed_order")
+        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.creator_listing.blog_name))
+
+        if(listing.notification_type_email is not None):
+            if('Sponsor Has Marked Order as Complete' in listing.notification_type_email):
+                send_mail(
+                    'Alright Alright Alright, Order For %s is Finalized.' % (c_order.buyers_listing_s.product),
+                    'Congradulations! %s\'s order is now complete. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (c_order.buyers_listing_s.product),
+                    'admin@getboostplatform.com',
+                    [str(listing.email)],
+                    fail_silently=False,
+                )
+
+        if(listing.notification_type_phone is not None):
+            if('Sponsor Has Marked Order as Complete' in listing.notification_type_phone):
+
+                try:
+                    message = twilioCli.messages.create(
+                        body="""
+
+                            --- FROM: Boost ---
+
+        Alright Alright Alright, Order For %s is Finalized. Check it Out https://getboostplatform.com/account/dashboard/.
+
+        Thank You For Using Boost!
+        """ % (c_order.buyers_listing_s.product),
+                        from_=myTwilioNumber,
+                        to=str(listing.number)
+                        )
+                except:
+                    pass
+
+        # Accepted creator order (after creator clicks accept)
+        cc_order = CompletedOrderModel(
+            buyer=c_order.buyer,
+            creator=c_order.creator,
+            creator_listing=c_order.creator_listing,
+            buyer_listing=c_order.buyer_listing,
+            buyers_listing_s=c_order.buyers_listing_s,
+            buyers_listing_c=c_order.buyers_listing_c,
+            service=c_order.service,
+            service_detailed=c_order.service_detailed,
+            status=c_order.status,
+            who_initiated_order=c_order.who_initiated_order,
+             payout=c_order.payout,
+            )
+
+
+
+        cc_order.save()
+
+        CompleteOrderMetricModel.objects.create(
+            order_id=cc_order.id
+        )
+
+        c_order.delete()
+
+
 
 order_complete()
 
@@ -471,6 +538,8 @@ def dashboard_send_review(request, id=None):
             listing.stage = 'review_content_sent'
             listing.save()
 
+            CreatorSendsContentMetricModel.objects.create(order_id=listing.id)
+
             messages.success(request, 'You have successfully sent reviewable content', extra_tags="review_content_sent_successful")
             Messages.objects.create(sender=listing.creator, reciever=listing.buyer, message='Hooray! Your Content For %s is Ready For Your Review.' % listing.creator_listing.blog_name)
 
@@ -524,6 +593,8 @@ def dashboard_s_acc(request, id=None):
     listing.sponsor_approves = True
     listing.status = 'escrow'
     listing.stage = 'just_accepted'
+
+    SponsorInitiatesEscrowMetricModel.objects.create(order_id=listing.id)
 
     Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message='Congrats! Your Content Has Been Approved By %s. Escrow.com should has emailed you a link to the transaction (you may have to check your spam folder).' % listing.buyers_listing_s.product)
 
@@ -607,6 +678,8 @@ def dashboard_s_edit(request, id=None):
             listing.stage = 'sponsor_edits_sent'
             listing.save()
 
+            SponsorSendsEditsMetricModel.objects.create(order_id=listing.id)
+
             messages.success(request, '%s' % listing.creator_listing.blog_name, extra_tags="edits_sponsor_successful")
             Messages.objects.create(sender=listing.buyer, reciever=listing.creator, message="Alert! Alert! %s Has Requested Some Edits For Your Listing %s" % (listing.buyers_listing_s, listing.creator_listing.blog_name))
 
@@ -664,6 +737,8 @@ def dashboard_c_next_step(request, id=None):
 
         escrow_order.save()
 
+        CreatorSendsUrlMetricModel.objects.create(order_id=escrow_order.id)
+
         messages.success(request, 'URL successfully sent to sponsor.', extra_tags="escrow_transaction_url_send_successful")
         Messages.objects.create(sender=escrow_order.creator, reciever=escrow_order.buyer, message='It\'s Go Time! %s Has Uploaded Your Content. The URL: %s' % (escrow_order.creator_listing.blog_name, escrow_order.content_url))
 
@@ -710,6 +785,8 @@ def dashboard_s_cant_find_url(request, id=None):
     escrow_order.stage = 'send_url_again'
 
     escrow_order.save()
+
+    SponsorCantFindUrlMetricModel.objects.create(order_id=escrow_order.id)
 
     messages.success(request, 'Creator has been successfully notified.', extra_tags="escrow_transaction_url_send_c_notification")
     Messages.objects.create(sender=escrow_order.buyer, reciever=escrow_order.creator, message='Oops! There\'s a Problem With The URL Sent To %s. Please Resend a Valid URL.' % (escrow_order.buyers_listing_s.product))
@@ -876,7 +953,8 @@ def dashboard_unorder_s(request, id=None):
 #
 # Accept and decline system on dashboard (for orders)
 #
-# Add functionality: send user an email that their order has been accepted or declined
+
+#creator accepts sponsor's order
 @dashboard_user_is_creator
 def dashboard_creator_order_accept(request, id=None):
 
@@ -886,6 +964,8 @@ def dashboard_creator_order_accept(request, id=None):
         c_order.status = 'accepted'
 
         c_order.save()
+
+        CreatorAccSponsorMetricModel.objects.create(order_id=c_order.id)
 
         messages.success(request, "Order Has Been Successfully Accepted.", extra_tags="creator_order_accept_success")
         Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Congrats! Your Order Has Been Accepted By %s." % (c_order.creator_listing.blog_name))
@@ -1030,7 +1110,7 @@ def dashboard_creator_order_decline(request, id=None):
     return redirect('dashboard')
 
 
-# When a sponsor accepted a creator | sender = sponsor, reciever = creator
+# When a sponsor accepts a creator | sender = sponsor, reciever = creator
 @dashboard_user_is_buyer
 def dashboard_sponsor_order_accept(request, id=None):
 
@@ -1054,6 +1134,8 @@ def dashboard_sponsor_order_accept(request, id=None):
         form = CreatorOrderForm(request.POST or None, request.FILES)
 
         if (form.is_valid()):
+            SponsorAccCreatorMetricModel.objects.create(order_id=order.id)
+
             obj = form.save(commit=False)
             obj.payout = form.cleaned_data['payout']
 
@@ -1285,19 +1367,21 @@ def dashboard_creator_order_complete(request, id=None):
 
 '''
 # This view is no longer in use, and should probably be removed
-def dashboard_sponsor_order_complete(request, id=None):
+'''def dashboard_sponsor_order_complete(request, id=None):
 
     order = AcceptedSponsorOrderModel.objects.get(id=id)
     order.status = 'complete'
     order.save()
 
-    return redirect('dashboard')
+    return redirect('dashboard')'''
 
 @dashboard_withdraw_decorator
 def dashboard_withdraw_order(request, id=None):
     order = AcceptedCreatorOrderModel.objects.get(id=id)
 
     if(request.method == 'POST'):
+        CreatorWithdrawsMetricModel.objects.create(order_id=order.id)
+
         message = request.POST.get("withdraw_explanation")
 
         messages.success(request, "You've Successfully Withdrawn From %s\'s Order." % (order.buyers_listing_s.product), extra_tags="creator_withdraw")

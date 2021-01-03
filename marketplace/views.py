@@ -350,6 +350,8 @@ def creator_marketplace_listing_order_view(request, id=None):
             creator_l = BlogListingCreationModel.objects.all()
             sponsor_l = SponsorListingCreationModel.objects.all()
 
+            SponsorOrdersCreatorMetricModel.objects.create(order_id=obj.id)
+
             for l in creator_l:
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_c = l
@@ -646,6 +648,7 @@ def sponsor_marketplace_listing_order_view(request, id=None):
             obj.creator = creator
             obj.sponsor_listing = listing
 
+            CreatorOrdersSponsorMetricModel.objects.create(order_id=obj.id)
 
             buyer_listing = form.cleaned_data['buyer_listing']
             creator_l = BlogListingCreationModel.objects.all()

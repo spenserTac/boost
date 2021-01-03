@@ -25,11 +25,9 @@ class SignUpMetricModel(models.Model):
 
 
 class CreatorListingMadeMetricModel(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=True)
+    listing_id = models.IntegerField(default=-1)
 
-    niche = models.CharField(max_length=500, blank=True, null=True)
     ga_bool = models.CharField(max_length=500, blank=True, null=True)
-    type = models.CharField(max_length=500, blank=True, null=True)
 
     date = models.DateField(default=timezone.now)
 
@@ -40,9 +38,7 @@ class CreatorListingMadeMetricModel(models.Model):
 
 
 class SponsorListingMadeMetricModel(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=True)
-
-    niche = models.CharField(max_length=500, blank=True, null=True)
+    listing_id = models.IntegerField(default=-1)
 
     date = models.DateField(default=timezone.now)
 

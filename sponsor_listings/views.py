@@ -45,6 +45,8 @@ def sponsor_listing_creation(request):
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="sponsor_listing_creation")
 
+            SponsorListingMadeMetricModel.objects.create(listing_id=form.id)
+
             return redirect('home')
 
         elif form.errors:
