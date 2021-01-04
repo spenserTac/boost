@@ -10,6 +10,7 @@ import os
 from .models import BlogListingCreationModel
 from users.models import Profile
 from .forms import BlogListingCreationForm
+from metrics.models import CreatorListingMadeMetricModel
 
 from users.functions.csv_parser import csv_parser
 
@@ -82,8 +83,7 @@ def blogger_listing_creation(request):
 
                 else:
                     is_google_a_data_good = False
-                    obj = form.save(commit=False)
-                    CreatorListingMadeMetricModel.objects.create(listing_id = obj.id, ga_bool=False)
+
 
                 if is_google_a_data_good:
                     avg_views = 0
@@ -91,18 +91,23 @@ def blogger_listing_creation(request):
                         if counter != 1 or 13:
                             avg_views = avg_views + l[1]
 
-                            obj = form.save(commit=False)
-                            CreatorListingMadeMetricModel.objects.create(listing_id = obj.id, ga_bool=True)
+
 
                     avg_views = int(avg_views/12)
 
                     form.save(commit=False).monthly_views = avg_views
 
-                form.save()
+                    obj = form.save(commit=False)
+
+                    CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
+
+                print('------> ', obj.id)
+
+            obj = form.save(commit=False)
+            form.save()
 
             if(csv_file is None):
-                obj = form.save(commit=False)
-                CreatorListingMadeMetricModel.objects.create(listing_id = obj.id, ga_bool=False)
+                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='False')
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="blog_listing_creation")
 

@@ -27,12 +27,12 @@ class SignUpMetricModel(models.Model):
 class CreatorListingMadeMetricModel(models.Model):
     listing_id = models.IntegerField(default=-1)
 
-    ga_bool = models.CharField(max_length=500, blank=True, null=True)
+    ga_bool = models.CharField(max_length=50, blank=True, null=True)
 
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return (str(self.user) + ' - creator listing metric')
+        return (str(self.listing_id) + ' - creator listing metric')
 
 
 
@@ -43,7 +43,7 @@ class SponsorListingMadeMetricModel(models.Model):
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return (str(self.user) + ' - sponsor listing metric')
+        return (str(self.listing_id) + ' - sponsor listing metric')
 
 
 

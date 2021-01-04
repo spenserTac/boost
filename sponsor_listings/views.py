@@ -10,6 +10,7 @@ import os
 from .models import SponsorListingCreationModel
 from .forms import SponsorListingCreationForm
 from users.models import Profile
+from metrics.models import SponsorListingMadeMetricModel
 
 @login_required(login_url='login')
 def sponsor_listing_creation(request):
@@ -41,11 +42,12 @@ def sponsor_listing_creation(request):
 
             name = form.cleaned_data['product']
 
+            obj = form.save(commit=False)
             form.save()
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="sponsor_listing_creation")
 
-            SponsorListingMadeMetricModel.objects.create(listing_id=form.id)
+            SponsorListingMadeMetricModel.objects.create(listing_id=obj.id)
 
             return redirect('home')
 

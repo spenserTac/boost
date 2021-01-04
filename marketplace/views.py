@@ -15,6 +15,8 @@ from creator_listings.models import BlogListingCreationModel
 from sponsor_listings.models import SponsorListingCreationModel
 from users.models import Profile, CreatorOrderModel, SponsorOrderModel, Messages
 from users.forms import CreatorOrderForm, SponsorOrderForm
+from metrics.models import (SponsorOrdersCreatorMetricModel, CreatorOrdersSponsorMetricModel)
+
 from .filters import CreatorListingFilter, SponsorListingFilter
 from django.core.paginator import Paginator
 
