@@ -40,7 +40,6 @@
 
   <div class="container">
 
-      <hr class="my-5">
 
       <br>
       <br>
@@ -72,7 +71,7 @@
                     <a class="btn btn-primary btn-lg" href="{% url 'creator_listing_creation_type_c' %}" role="button">Yes, I'm a Creator</a>
                   </p>
                   <br>
-                  <a href="{% url 'sponsor_listing' %}">I'm actually a sponsor.</a>
+                  <a href="{% url 'sponsor_listing' %}">I'm Actually a Sponsor</a>
                 </div>
 
           </div>
@@ -314,6 +313,11 @@
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
+                        <div class="form-group mb-5">
+                            <label for="exampleFormControlTextarea1">Pricing Model (•)</label>
+                            <textarea class="form-control" name="pricing_description" rows="2" placeholder="Give us a detailed description of your pricing model for your blog. Use bullet points (•) if you'd like, this may be easier for a sponsor to read." required>{{ listing.pricing_description }}</textarea>
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Tagline</label>
                             <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters." required>{{ listing.tagline }}</textarea>
@@ -321,17 +325,22 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog in at least 2-3 paragraphs." required>{{ listing.overview_description }}</textarea>
+                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog. 2-3 paragraphs recommended." required>{{ listing.overview_description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Audience Description</label>
-                            <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph min." required>{{ listing.audience_description }}</textarea>
+                            <textarea class="form-control" name="audience_description" rows="6" placeholder="Tell us about your audience. 2-3 paragraph recommended." required>{{ listing.audience_description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Sponsor Description</label>
-                            <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell us what you're looking for in a sponsor. 2-3 paragraph min." required>{{ listing.sponsor_description }}</textarea>
+                            <textarea class="form-control" name="sponsor_description" rows="6" placeholder="Tell us what you're looking for in a sponsor. 2-3 paragraph recommended." required>{{ listing.sponsor_description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Have You Had Sponsorships Before?</label>
+                            <textarea class="form-control" name="exp_description" rows="6" placeholder="Tell us if you've had experience with sponsorships before. 2-3 paragraph recommended." required>{{ listing.exp_description }}</textarea>
                         </div>
 
 

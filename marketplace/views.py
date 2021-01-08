@@ -352,7 +352,7 @@ def creator_marketplace_listing_order_view(request, id=None):
             creator_l = BlogListingCreationModel.objects.all()
             sponsor_l = SponsorListingCreationModel.objects.all()
 
-            SponsorOrdersCreatorMetricModel.objects.create(order_id=obj.id)
+
 
             for l in creator_l:
                 if (str(l) == str(buyer_listing)):
@@ -391,7 +391,8 @@ def creator_marketplace_listing_order_view(request, id=None):
                         pass
 
             obj.save()
-
+            SponsorOrdersCreatorMetricModel.objects.create(order_id=obj.id)
+            
             return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
     context = {
@@ -650,8 +651,6 @@ def sponsor_marketplace_listing_order_view(request, id=None):
             obj.creator = creator
             obj.sponsor_listing = listing
 
-            CreatorOrdersSponsorMetricModel.objects.create(order_id=obj.id)
-
             buyer_listing = form.cleaned_data['buyer_listing']
             creator_l = BlogListingCreationModel.objects.all()
             sponsor_l = SponsorListingCreationModel.objects.all()
@@ -664,7 +663,9 @@ def sponsor_marketplace_listing_order_view(request, id=None):
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_s = l
 
+
             obj.save()
+            CreatorOrdersSponsorMetricModel.objects.create(order_id=obj.id)
 
             Messages.objects.create(sender=buyer, reciever=listing.creator, message="Hooray! %s Has Been Ordered." % (listing.product))
             messages.success(request, "%s has been successfully ordered" % (listing.product), extra_tags="creator_orders_sponsor_success")

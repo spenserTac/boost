@@ -101,8 +101,6 @@ def blogger_listing_creation(request):
 
                     CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
 
-                print('------> ', obj.id)
-
             obj = form.save(commit=False)
             form.save()
 
@@ -157,11 +155,6 @@ def blogger_listing_update(request, id=None):
 
     ]
 
-    n_types_e = listing.notification_type_email.strip('][').replace('\'', '').split(', ')
-
-
-    n_types_m = listing.notification_type_phone.strip('][').replace('\'', '').split(', ')
-
 
     update_bool = "True"
 
@@ -172,9 +165,15 @@ def blogger_listing_update(request, id=None):
         'notification_types': notification_types,
         'update_bool': update_bool,
         'img_file_name': img_file_name,
-        'n_types_e': n_types_e,
-        'n_types_m': n_types_m
     }
+
+    if(listing.notification_type_email):
+        n_types_e = listing.notification_type_email.strip('][').replace('\'', '').split(', ')
+        context['n_types_e'] = n_types_e
+
+    if(listing.notification_type_phone):
+        n_types_m = listing.notification_type_phone.strip('][').replace('\'', '').split(', ')
+        context['n_types_m'] = n_types_m
 
     if(listing.search_keywords):
         original_string = listing.search_keywords

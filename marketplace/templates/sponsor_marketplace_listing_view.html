@@ -112,6 +112,23 @@
                         </div>
                       </div>
 
+                      <br>
+
+                      <div class="row">
+                        <div class="col">
+
+                          <div class="card">
+                            <div class="card-header">
+                              <h5 class="m-0">Experience Description</h5>
+                            </div>
+                            <div class="card-body">
+                              <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
                   </div>
 
                   <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
@@ -182,6 +199,16 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           </div>
                         </div>
+                      </div>
+                    </div>
+
+
+                    <div class="card shadow mb-3">
+                      <h5 class="card-header text-center">Budget</h5>
+                      <div class="card-body">
+
+                        <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
+
                       </div>
                     </div>
 
@@ -386,6 +413,23 @@
                       </div>
                     </div>
 
+                    <br>
+
+                    <div class="row">
+                      <div class="col">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="m-0">Experience Description</h5>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
                 </div>
 
 
@@ -393,37 +437,46 @@
                 <hr>
                 <br>
 
-                    <div class="card shadow">
-                      <h5 class="card-header text-center">About The Sponsor</h5>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
-                        <p class="card-text">Listing Info: {{ listing.tagline }}</p>
+                <div class="card shadow mb-3">
+                  <h5 class="card-header text-center">Budget</h5>
+                  <div class="card-body">
+
+                    <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
+
+                  </div>
+                </div>
+
+                <div class="card shadow">
+                  <h5 class="card-header text-center">About The Sponsor</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
+                    <p class="card-text">Listing Info: {{ listing.tagline }}</p>
 
 
-                        <div class="accordion" id="accordionExample">
-                          <div class="card">
-                            <div class="card-header" id="headingOne">
-                              <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
-                                  Other Listings By This Creator
-                                </button>
-                              </h2>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                              <div class="card-body">
-                                {% for l in all_users_listings %}
-                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
-                                  <br>
-                                {% endfor %}
-                              </div>
-                            </div>
-                          </div>
+                    <div class="accordion" id="accordionExample">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
+                              Other Listings By This Creator
+                            </button>
+                          </h2>
                         </div>
 
-
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                          <div class="card-body">
+                            {% for l in all_users_listings %}
+                              <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
+                              <br>
+                            {% endfor %}
+                          </div>
+                        </div>
                       </div>
                     </div>
+
+
+                  </div>
+                </div>
 
             </div>
 

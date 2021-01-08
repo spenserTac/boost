@@ -310,6 +310,23 @@
                           </div>
                         </div>
 
+                        <hr style="border-top: 6px solid #bbb; border-radius: 5px; width: 30%;">
+
+                        <div class="row">
+                          <div class="col">
+
+                            <div class="card my-2">
+                              <div class="card-header">
+                                <h5 class="m-0">Experience Description</h5>
+                              </div>
+                              <div class="card-body">
+                                <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
                     </div>
 
                     <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
@@ -384,11 +401,22 @@
                     </div>
 
 
+                    <div class="card shadow mb-3">
+                      <h5 class="card-header text-center">Pricing Model</h5>
+                      <div class="card-body">
+
+                        <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
+
+                      </div>
+                    </div>
+
+
+
                     <div class="card shadow">
                       <h5 class="card-header text-center">Info</h5>
                       <div class="card-body">
                         <h5 class="card-title">Domain Authority</h5>
-                        <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank">Check it Out Here</a></p>
+                        <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank" style="color: #007185;">Check it Out Here</a></p>
                         <br>
                         <h5 class="card-title">Blog Type</h5>
                         <p class="card-text">{{ blog_types }}</p>
@@ -559,6 +587,8 @@
                   </div>
                 </div>
 
+                {% if is_google_a_data_good %}
+
                 <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
                   <div class="row">
                     <div class="col" style="height: 300px;">
@@ -669,14 +699,24 @@
 
                     </div>
 
+                {% endif %}
 
                     <hr class="my-4">
+
+                    <div class="card shadow mb-3">
+                      <h5 class="card-header text-center">Pricing Model</h5>
+                      <div class="card-body">
+
+                        <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
+
+                      </div>
+                    </div>
 
                         <div class="card shadow">
                           <h5 class="card-header text-center">Info</h5>
                           <div class="card-body">
                             <h5 class="card-title">Domain Authority</h5>
-                            <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank">Check it Out Here</a></p>
+                            <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank" style="color: #007185;">Check it Out Here</a></p>
                             <br>
                             <h5 class="card-title">Blog Type</h5>
                             <p class="card-text">{{ blog_types }}</p>
@@ -744,6 +784,23 @@
                           </div>
                           <div class="card-body">
                             <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                      <div class="col">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="m-0">Experience Description</h5>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
                           </div>
                         </div>
 

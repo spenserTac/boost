@@ -38,7 +38,7 @@ myCellPhone = '13862995508'
 
 # Function that will mark orders complete
 def order_complete():
-    threading.Timer(600.0, order_complete).start() # called every minute
+    threading.Timer(5.0, order_complete).start() # called every minute
 
     orders = AcceptedCreatorOrderModel.objects.filter(status='escrow')
 
@@ -113,9 +113,7 @@ def order_complete():
 
         cc_order.save()
 
-        CompleteOrderMetricModel.objects.create(
-            order_id=cc_order.id
-        )
+        CompleteOrderMetricModel.objects.create(acc_order_id=c_order.id, completed_order_id=cc_order.id)
 
         c_order.delete()
 
@@ -315,10 +313,15 @@ def feature_add(request):
 @login_required(login_url='login')
 @dashboard_message_decorator
 def delete_message(request, id=None):
-    message = Messages.objects.get(id=id)
-    message.delete()
+    try:
+        message = Messages.objects.get(id=id)
+        message.delete()
 
-    return redirect('dashboard')
+        return redirect('dashboard')
+
+    except:
+        return redirect('dashboard')
+
 
 
 @login_required(login_url='login')
@@ -965,7 +968,6 @@ def dashboard_creator_order_accept(request, id=None):
 
         c_order.save()
 
-        CreatorAccSponsorMetricModel.objects.create(order_id=c_order.id)
 
         messages.success(request, "Order Has Been Successfully Accepted.", extra_tags="creator_order_accept_success")
         Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Congrats! Your Order Has Been Accepted By %s." % (c_order.creator_listing.blog_name))
@@ -1020,6 +1022,8 @@ def dashboard_creator_order_accept(request, id=None):
             )
 
         ac_order.save()
+        CreatorAccSponsorMetricModel.objects.create(c_order_id=c_order.id, acc_order_id=ac_order.id)
+
         c_order.delete()
 
     except CreatorOrderModel.DoesNotExist:
@@ -1134,7 +1138,6 @@ def dashboard_sponsor_order_accept(request, id=None):
         form = CreatorOrderForm(request.POST or None, request.FILES)
 
         if (form.is_valid()):
-            SponsorAccCreatorMetricModel.objects.create(order_id=order.id)
 
             obj = form.save(commit=False)
             obj.payout = form.cleaned_data['payout']
@@ -1200,6 +1203,8 @@ def dashboard_sponsor_order_accept(request, id=None):
                 )
 
             ac_order.save()
+            SponsorAccCreatorMetricModel.objects.create(s_order_id=order.id, acc_order_id=ac_order.id)
+
             order.delete()
 
             #obj.save()

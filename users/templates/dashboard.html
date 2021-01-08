@@ -58,7 +58,7 @@
 
             </div>
 
-            <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
+            <div class="p-2" style="border: 2px solid #c8c8c8; border-radius: 15px;">
 
             <h4 class="font-weight-bold mt-3">Create a Listing and Get Sponsored</h4>
             <p class="grey-text px-3 mx-3">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
@@ -100,7 +100,7 @@
               <img src="{{MEDIA_URL}}/pics/sponsor_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
             </div>
 
-            <div class="p-2" style="border: 2px solid grey; border-radius: 15px;">
+            <div class="p-2" style="border: 2px solid #c8c8c8; border-radius: 15px;">
 
             <h4 class="font-weight-bold mt-3">Create a Listing and Attract Creators</h4>
             <p class="grey-text px-3 mx-3">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
@@ -685,7 +685,7 @@
                                           </button>
 
                                           <!-- Modal -->
-                                          <div class="" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                               <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
@@ -887,10 +887,8 @@
                                                     -->
                                                     <!--
                                                     <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
-
                                                         <a href="#" class="list-group-item" data-parent="#SubSubMenu1">after the __> Sub sub item 1</a>
                                                         <a href="#" class="list-group-item" data-parent="#SubSubMenu1">after the __> Sub sub item 2</a>
-
                                                     </div>
                                                     -->
 
@@ -1147,15 +1145,8 @@
 
 
                                 <!-- Previous order history design
-
-
-
-
-
                                 <div class="accordion" id="accordionExample">
-
                                     <div class="card text-center" style="border-color: white;">
-
                                       <div class="card-header" id="headingOne" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
@@ -1163,43 +1154,22 @@
                                           </button>
                                         </h2>
                                       </div>
-
-
-
-
-
                                       <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
-
-
-
-
-
                                         <div class="card-body">
-
                                             <div class="card-header" id="headingOne" style="background-color: white;">
                                                 <h2 class="mb-0">
-
                                                   <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Current Sponsor Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <div class="card-body">
                                                             {% for personal_c_listing in personal_c_listings %}
-
                                                                 <div class="row">
-
                                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                                         Delete
                                                                     </button>
-
-
                                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
@@ -1220,58 +1190,35 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                             {% endfor %}
                                                         </div>
                                                     </div>
-
                                                   <br>
-
                                                   <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentAcceptedSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Current Accepted Sponsor Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <h1>2</h1>
                                                     </div>
-
                                                   <br>
-
                                                   <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Completed Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCompletedOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <h1>3</h1>
                                                     </div>
-
                                                 </h2>
                                               </div>
-
-
                                               <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
                                               </div>
-
-
-
-
                                             {% for personal_c_listing in personal_c_listings %}
-
                                                 <div class="row">
-
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                         Delete
                                                     </button>
-
-
                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -1292,22 +1239,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             {% endfor %}
                                         </div>
-
-
-
-
-
                                       </div>
-
                                     </div>
-
                                     <div class="card text-center" style="border-color: white;">
-
                                       <div class="card-header" id="headingTwo" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
@@ -1315,24 +1252,15 @@
                                           </button>
                                         </h2>
                                       </div>
-
                                       <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-
                                         <div class="card-body">
                                             {% for personal_s_listing in personal_s_listings %}
-
                                                 <div class="row">
-
                                                     <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                         Delete
                                                     </button>
-
-
                                                     <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -1353,17 +1281,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             {% endfor %}
                                         </div>
                                       </div>
-
                                     </div>
-
                                 </div>
-
                             -->
 
 
@@ -2076,7 +1999,6 @@
 
                                           <hr style="width: 25%;">
 
-                                      </div>
 
 
                                      {% endif %}
@@ -2142,7 +2064,6 @@
                                               <div class="col-7  p-2 pl-4">
                                                   <h5>Order Details</h5>
                                                   <p>{{ c_accepted_order.service_detailed }}</p>
-
                                                   {% if c_accepted_order.edits %}
                                                     <hr style="width: 50%;">
                                                     <h5>Latest Edits</h5>
@@ -2153,7 +2074,6 @@
                                                   <a href="{{MEDIA_URL}}{{c_accepted_order.review_file}}" target="_blank">Content Sent In For Review</a>
                                                   <br>
                                                   <br>
-
                                               </div>
                                             -->
 
@@ -2653,15 +2573,8 @@
                                       </div>
 
                                     <!-- Previous order history design
-
-
-
-
-
                                     <div class="accordion" id="accordionExample">
-
                                         <div class="card text-center" style="border-color: white;">
-
                                           <div class="card-header" id="headingOne" style="background-color: white;">
                                             <h2 class="mb-0">
                                               <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
@@ -2669,43 +2582,22 @@
                                               </button>
                                             </h2>
                                           </div>
-
-
-
-
-
                                           <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
-
-
-
-
-
                                             <div class="card-body">
-
                                                 <div class="card-header" id="headingOne" style="background-color: white;">
                                                     <h2 class="mb-0">
-
                                                       <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                         <h5>Current Sponsor Orders</h5>
                                                       </button>
-
                                                         <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                             <div class="card-body">
                                                                 {% for personal_c_listing in personal_c_listings %}
-
                                                                     <div class="row">
-
                                                                         <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                                             Delete
                                                                         </button>
-
-
                                                                         <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog modal-dialog-centered">
                                                                                 <div class="modal-content">
@@ -2726,58 +2618,35 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
-
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
-
                                                       <br>
-
                                                       <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentAcceptedSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                         <h5>Current Accepted Sponsor Orders</h5>
                                                       </button>
-
                                                         <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                             <h1>2</h1>
                                                         </div>
-
                                                       <br>
-
                                                       <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
                                                         <h5>Completed Orders</h5>
                                                       </button>
-
                                                         <div id="collapseCreatorCompletedOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                             <h1>3</h1>
                                                         </div>
-
                                                     </h2>
                                                   </div>
-
-
                                                   <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
                                                   </div>
-
-
-
-
                                                 {% for personal_c_listing in personal_c_listings %}
-
                                                     <div class="row">
-
                                                         <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                             Delete
                                                         </button>
-
-
                                                         <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -2798,22 +2667,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
-
                                                 {% endfor %}
                                             </div>
-
-
-
-
-
                                           </div>
-
                                         </div>
-
                                         <div class="card text-center" style="border-color: white;">
-
                                           <div class="card-header" id="headingTwo" style="background-color: white;">
                                             <h2 class="mb-0">
                                               <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
@@ -2821,24 +2680,15 @@
                                               </button>
                                             </h2>
                                           </div>
-
                                           <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-
                                             <div class="card-body">
                                                 {% for personal_s_listing in personal_s_listings %}
-
                                                     <div class="row">
-
                                                         <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                         <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                         <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                             Delete
                                                         </button>
-
-
                                                         <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -2859,17 +2709,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
-
                                                 {% endfor %}
                                             </div>
                                           </div>
-
                                         </div>
-
                                     </div>
-
                                 -->
 
 
@@ -3341,9 +3186,7 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}">
-                                                    <button type="button" class="btn btn-primary">You're Sure</button>
-                                                </a>
+
                                             </div>
                                         </div>
                                         </div>
@@ -3357,7 +3200,6 @@
                             <div class="collapse" id="collapseAcceptedCreatorOrders">
                                 <div class="card card-body">
                                     <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.buyers_listing_c.id %}">{{ c_accepted_order }}</a></h1>
-                                    <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
                                     <button>Withdraw</button>
                                 </div>
                             </div>
@@ -4351,15 +4193,8 @@
 
 
                                 <!-- Previous order history design
-
-
-
-
-
                                 <div class="accordion" id="accordionExample">
-
                                     <div class="card text-center" style="border-color: white;">
-
                                       <div class="card-header" id="headingOne" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorHistory" aria-expanded="true" aria-controls="collapseOne">
@@ -4367,43 +4202,22 @@
                                           </button>
                                         </h2>
                                       </div>
-
-
-
-
-
                                       <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
-
-
-
-
-
                                         <div class="card-body">
-
                                             <div class="card-header" id="headingOne" style="background-color: white;">
                                                 <h2 class="mb-0">
-
                                                   <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Current Sponsor Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCurrentSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <div class="card-body">
                                                             {% for personal_c_listing in personal_c_listings %}
-
                                                                 <div class="row">
-
                                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                                         Delete
                                                                     </button>
-
-
                                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
@@ -4424,58 +4238,35 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                             {% endfor %}
                                                         </div>
                                                     </div>
-
                                                   <br>
-
                                                   <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCurrentAcceptedSponsorOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Current Accepted Sponsor Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCurrentAcceptedSponsorOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <h1>2</h1>
                                                     </div>
-
                                                   <br>
-
                                                   <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseCreatorCompletedOrders" aria-expanded="true" aria-controls="collapseOne">
                                                     <h5>Completed Orders</h5>
                                                   </button>
-
                                                     <div id="collapseCreatorCompletedOrders" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <h1>3</h1>
                                                     </div>
-
                                                 </h2>
                                               </div>
-
-
                                               <div id="collapseCreatorHistory" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
                                               </div>
-
-
-
-
                                             {% for personal_c_listing in personal_c_listings %}
-
                                                 <div class="row">
-
                                                     <a class="m-1 ml-4" href="{% url 'creator_marketplace_listing_view' id=personal_c_listing.id %}">{{ personal_c_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModal">
                                                         Delete
                                                     </button>
-
-
                                                     <div class="modal fade" id="listingDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -4496,22 +4287,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             {% endfor %}
                                         </div>
-
-
-
-
-
                                       </div>
-
                                     </div>
-
                                     <div class="card text-center" style="border-color: white;">
-
                                       <div class="card-header" id="headingTwo" style="background-color: white;">
                                         <h2 class="mb-0">
                                           <button class="btn dropdown-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapseSponsorHistory" aria-expanded="false" aria-controls="collapseTwo">
@@ -4519,24 +4300,15 @@
                                           </button>
                                         </h2>
                                       </div>
-
                                       <div id="collapseSponsorHistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-
                                         <div class="card-body">
                                             {% for personal_s_listing in personal_s_listings %}
-
                                                 <div class="row">
-
                                                     <a class="m-1 ml-4" href="{% url 'sponsor_marketplace_listing_view' id=personal_s_listing.id %}">{{ personal_s_listing }}</a>
                                                     <button class="m-1 btn btn-primary btn-sm">Edit</button>
-
-
-
                                                     <button type="button" class="m-1 btn btn-danger btn-sm" data-toggle="modal" data-target="#listingDeleteModalSponsor">
                                                         Delete
                                                     </button>
-
-
                                                     <div class="modal fade" id="listingDeleteModalSponsor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -4557,17 +4329,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             {% endfor %}
                                         </div>
                                       </div>
-
                                     </div>
-
                                 </div>
-
                             -->
 
 
@@ -5376,14 +5143,14 @@
 
 
                                           {% if c_accepted_order.stage == 'upload_url' %}
-                                            <div class="d-flex justify-content-end">
-                                              
+                                            <div class="d-flex justify-content-center">
+
 
                                               <!--
                                               This url will need to be changed to one that takes the sponsor to a new url where they can add text for the edits they want. The "sponsor_change" field
                                               in the DB will need to be updated with whatever they added (This will then show up in the "Accepted Sponsor Orders" section of the dash.)
                                               -->
-                                              <button type="button" class="btn btn-primary mr-auto ml-1" data-toggle="modal" data-target="#urlInvalidModalMobile">
+                                              <button type="button" class="btn btn-primary mt-3 ml-1" data-toggle="modal" data-target="#urlInvalidModalMobile">
                                                   Couldn't Find URL
                                               </button>
 
@@ -6504,9 +6271,7 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}">
-                                                    <button type="button" class="btn btn-primary">You're Sure</button>
-                                                </a>
+
                                             </div>
                                         </div>
                                         </div>
@@ -6520,7 +6285,6 @@
                             <div class="collapse" id="collapseAcceptedCreatorOrders">
                                 <div class="card card-body">
                                     <h1>c Buyers Listing: <a href="{% url 'creator_marketplace_listing_view' id=c_accepted_order.buyers_listing_c.id %}">{{ c_accepted_order }}</a></h1>
-                                    <a href="{% url 'dashboard_creator_order_complete' id=c_accepted_order.id %}"><button>Mark As Completed</button></a>
                                     <button>Withdraw</button>
                                 </div>
                             </div>

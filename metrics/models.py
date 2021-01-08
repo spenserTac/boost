@@ -73,20 +73,22 @@ class SponsorOrdersCreatorMetricModel(models.Model):
 
 
 class CreatorAccSponsorMetricModel(models.Model):
-    order_id = models.IntegerField(default=-1)
+    c_order_id = models.IntegerField(default=-1)
+    acc_order_id = models.IntegerField(default=-1)
 
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return (str(self.order_id) + ' - creator acc sponsor metric')
+        return ('c-' + str(self.c_order_id) + ' acc-' + str(self.acc_order_id) + ' - sponsor acc creator metric')
 
 class SponsorAccCreatorMetricModel(models.Model):
-    order_id = models.IntegerField(default=-1)
+    s_order_id = models.IntegerField(default=-1)
+    acc_order_id = models.IntegerField(default=-1)
 
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return (str(self.order_id) + ' - sponsor acc creator metric')
+        return ('c-' + str(self.s_order_id) + ' acc-' + str(self.acc_order_id) + ' - sponsor acc creator metric')
 
 
 
@@ -134,12 +136,14 @@ class SponsorCantFindUrlMetricModel(models.Model):
         return (str(self.order_id) + ' - cant find url metric')
 
 class CompleteOrderMetricModel(models.Model):
-    order_id = models.IntegerField(default=-1)
+    #order_id = models.IntegerField(default=-1)
+    acc_order_id = models.IntegerField(default=-1)
+    completed_order_id = models.IntegerField(default=-1)
 
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return (str(self.order_id) + ' - complete order metric')
+        return (str(self.acc_order_id) + '-acc ' + str(self.completed_order_id) + '-comp ' + ' - complete order metric')
 
 
 
