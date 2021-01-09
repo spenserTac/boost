@@ -130,10 +130,6 @@ def creator_listing_creation_type_c(request):
 def blogger_listing_update(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
 
-    img_path = os.path.basename(listing.listing_img.path)
-    i = img_path.rfind('_')
-    img_file_name = img_path[:i] + img_path[i+8:]
-
     types = [
         'Review',
         'Informative',
@@ -164,8 +160,13 @@ def blogger_listing_update(request, id=None):
         'types':types,
         'notification_types': notification_types,
         'update_bool': update_bool,
-        'img_file_name': img_file_name,
     }
+
+    if(listing.listing_img):
+        img_path = os.path.basename(listing.listing_img.path)
+        i = img_path.rfind('_')
+        img_file_name = img_path[:i] + img_path[i+8:]
+        context['img_file_name'] = img_file_name
 
     if(listing.notification_type_email):
         n_types_e = listing.notification_type_email.strip('][').replace('\'', '').split(', ')

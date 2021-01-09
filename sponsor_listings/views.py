@@ -34,7 +34,7 @@ def sponsor_listing_creation(request):
     }
 
     if request.method == 'POST':
-        form = SponsorListingCreationForm(request.POST or None)
+        form = SponsorListingCreationForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save(commit=False).creator = request.user
@@ -48,6 +48,8 @@ def sponsor_listing_creation(request):
             messages.success(request, "%s has been successfully created." % (name), extra_tags="sponsor_listing_creation")
 
             SponsorListingMadeMetricModel.objects.create(listing_id=obj.id)
+
+            print('----------', form.errors)
 
             return redirect('home')
 
@@ -77,11 +79,6 @@ def sponsor_listing_creation_type_s(request):
 def sponsor_listing_update(request, id=None):
     listing = SponsorListingCreationModel.objects.get(id=id)
 
-    img_path = os.path.basename(listing.listing_img.path)
-    i = img_path.rfind('_')
-    img_file_name = img_path[:i] + img_path[i+8:]
-
-
     notification_types = [
 
         'Listing is Ordered',
@@ -101,8 +98,13 @@ def sponsor_listing_update(request, id=None):
         'listing':listing,
         'notification_types': notification_types,
         'update_bool': update_bool,
-        'img_file_name': img_file_name,
     }
+
+    if(listing.listing_img):
+        img_path = os.path.basename(listing.listing_img.path)
+        i = img_path.rfind('_')
+        img_file_name = img_path[:i] + img_path[i+8:]
+        context['img_file_name'] = img_file_name
 
     if(listing.notification_type_email):
         n_types_e = listing.notification_type_email.strip('][').replace('\'', '').split(', ')
@@ -126,7 +128,7 @@ def sponsor_listing_update(request, id=None):
         context['search_kw'] = search_kw
 
     if request.method == 'POST':
-        form = SponsorListingCreationForm(request.POST,request.FILES, instance=listing)
+        form = SponsorListingCreationForm(request.POST, request.FILES, instance=listing)
         if form.is_valid():
             form.save(commit=False).notification_type_email = request.POST.getlist('notification_type_email')
             form.save(commit=False).notification_type_phone = request.POST.getlist('notification_type_phone')

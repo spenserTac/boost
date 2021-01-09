@@ -36,7 +36,10 @@ myCellPhone = '13862995508'
 
 def search_query_kw(list):
     keywords = list[0]
-    new_list = keywords.split(" ")
+    kw_list = keywords.split(" ")
+
+    new_list = [kw.lower() for kw in kw_list]
+
     return new_list
 
 
@@ -392,7 +395,7 @@ def creator_marketplace_listing_order_view(request, id=None):
 
             obj.save()
             SponsorOrdersCreatorMetricModel.objects.create(order_id=obj.id)
-            
+
             return redirect(reverse('creator_marketplace_listing_view', kwargs={'id': listing.id}))
 
     context = {

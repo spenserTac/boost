@@ -289,14 +289,17 @@
                           <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
                           <br>
                           <small class="font-weight-bold">
-                            Input search keywords here that are related to your listing.
-
-                            This is how sponsors will search for your listings.
-                            <br>
-
+                            Input lowercse search keywords here that are related to your listing.
+                            This is how sponsors will search for your listings
                           </small>
 
-                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review">{{ search_kw }}</textarea>
+                          <br>
+
+                          <small class="font-weight-bold mt-3">
+                            Make sure all words are lowercase.
+                          </small>
+
+                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review... Make sure all words are lowercase and seperated by a space.">{{ search_kw }}</textarea>
                       </div>
 
                     </div>
