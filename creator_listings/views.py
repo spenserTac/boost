@@ -20,10 +20,6 @@ def blogger_listing_creation(request):
     user = request.user
     profile = Profile.objects.get(user=user)
 
-    #if(profile.type == 'none'):
-        #return redirect('dashboard')
-
-
     types = [
         'Review',
         'Informative',
@@ -56,7 +52,6 @@ def blogger_listing_creation(request):
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST, request.FILES)
 
-
         if form.is_valid():
             form.save(commit=False).creator = request.user
             form.save(commit=False).blog_type = type_query
@@ -79,6 +74,8 @@ def blogger_listing_creation(request):
                 if(is_google_a_data_good != None):
                     is_google_a_data_good = True
 
+
+
                     data, total_views, year, months = csv_parser(open(csv_file.path))
 
                 else:
@@ -97,15 +94,25 @@ def blogger_listing_creation(request):
 
                     form.save(commit=False).monthly_views = avg_views
 
-                    obj = form.save(commit=False)
 
-                    CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
+
+
+            #obj = form.save(commit=False)
+            #form.save()
+
+            if(csv_file is None):
+                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='False')
+
+            #if(metric_ga):
+                #CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
 
             obj = form.save(commit=False)
             form.save()
 
-            if(csv_file is None):
-                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='False')
+            just_created_listing = BlogListingCreationModel.objects.get(id=obj.id)
+
+            if(just_created_listing.google_a_csv):
+                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="blog_listing_creation")
 

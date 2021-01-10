@@ -380,7 +380,7 @@
                                                 </div>
                                                 <div class="col-7 p-2 pl-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ c_order.service_detailed }}</p>
+                                                    <p>{{ c_order.service_detailed|linebreaks }}</p>
                                                     <hr style="width: 50%;">
                                                     <h5>Sponsor's Media</h5>
                                                     <a href="{{MEDIA_URL}}{{c_order.s_content_file}}" target="_blank" style="color: #007185;">Sponsor's Media</a>
@@ -498,7 +498,7 @@
                                                 </div>
                                                 <div class="col-7  p-2 pl-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ c_accepted_order.service_detailed }}</p>
+                                                    <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                                     <hr style="width: 50%;">
                                                     <h5>Sponsor's Media</h5>
@@ -507,7 +507,7 @@
                                                     {% if c_accepted_order.edits %}
                                                       <hr style="width: 50%;">
                                                       <h5>Sponsor's Edits</h5>
-                                                      {{ c_accepted_order.edits }}
+                                                      {{ c_accepted_order.edits|linebreaks }}
                                                     {% endif %}
 
                                                     {% if c_accepted_order.review_file %}
@@ -550,6 +550,10 @@
                                                             <div class="modal-body">
                                                                 You're sending your content in for the sponsor to review. The sponsor will be able to view this content and provide any requests for edits,
                                                                 or they'll say it looks good and then they'll initiate the escrow process.
+                                                                <br>
+                                                                <br>
+                                                                Once they initiate the escrow process, you'll need to send over the URL of the content you posted on your blog
+                                                                 (once their payment is verified on escrow.com). You'll find this option in the "Orders In Escrow" dropdown of the Boost dashboard.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -660,12 +664,12 @@
                                           </div>
                                           <div class="col-7  p-2 pl-4">
                                               <h5>Order Details</h5>
-                                              <p>{{ c_accepted_order.service_detailed }}</p>
+                                              <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                               {% if c_accepted_order.edits %}
                                                 <hr style="width: 50%;">
                                                 <h5>Latest Edits</h5>
-                                                <p>{{ c_accepted_order.edits }}</p>
+                                                <p>{{ c_accepted_order.edits|linebreaks }}</p>
                                               {% endif %}
                                               <hr style="width: 50%;">
                                               <h5>Creator's Content</h5>
@@ -815,7 +819,7 @@
 
                                         <div class="list-group">
 
-                                            <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                            <a href="#SubMenu1" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors </h5> <i class="fa fa-caret-down"></i></a>
 
                                             <div class="collapse list-group-submenu" id="SubMenu1">
 
@@ -894,7 +898,7 @@
 
                                             </div>
 
-                                            <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_accepted_orders_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                            <a href="#SubMenu2" class="list-group-item ml-3" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered Sponsors That Accepted </h5> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu" id="SubMenu2">
 
@@ -1786,7 +1790,7 @@
 
                                                       <div class="col mb-4">
                                                         <h5>Order Details</h5>
-                                                        <p>{{ c_order.service_detailed }}</p>
+                                                        <p>{{ c_order.service_detailed|linebreaks }}</p>
 
                                                         <h5>Sponsor's Media</h5>
                                                         <a href="{{MEDIA_URL}}{{c_order.s_content_file}}" target="_blank" style="color: #007185;">Sponsor's Media</a>
@@ -1906,7 +1910,7 @@
 
                                                               <div class="col mb-4">
                                                                 <h5>Order Details</h5>
-                                                                <p>{{ c_accepted_order.service_detailed }}</p>
+                                                                <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                                                 <hr style="width: 50%;">
                                                                 <h5>Sponsor's Media</h5>
@@ -1915,7 +1919,7 @@
                                                                 {% if c_accepted_order.edits %}
                                                                   <hr style="width: 50%;">
                                                                   <h5>Sponsor's Edits</h5>
-                                                                  {{ c_accepted_order.edits }}
+                                                                  {{ c_accepted_order.edits|linebreaks }}
                                                                 {% endif %}
 
                                                                 {% if c_accepted_order.review_file %}
@@ -1959,6 +1963,10 @@
                                                                         <div class="modal-body">
                                                                           You're sending your content in for the sponsor to review. The sponsor will be able to view this content and provide any requests for edits,
                                                                           or they'll say it looks good and then they'll initiate the escrow process.
+                                                                          <br>
+                                                                          <br>
+                                                                          Once they initiate the escrow process, you'll need to send over the URL of the content you posted on your blog
+                                                                           (once their payment is verified on escrow.com). You'll find this option in the "Orders In Escrow" dropdown of the Boost dashboard.
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -2103,12 +2111,12 @@
 
                                             <div class="col mb-4">
                                               <h5>Order Details</h5>
-                                              <p>{{ c_accepted_order.service_detailed }}</p>
+                                              <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                               {% if c_accepted_order.edits %}
                                                 <hr style="width: 50%;">
                                                 <h5>Latest Edits</h5>
-                                                {{ c_accepted_order.edits }}
+                                                {{ c_accepted_order.edits|linebreaks }}
                                               {% endif %}
 
                                               <hr style="width: 50%;">
@@ -2270,7 +2278,7 @@
 
                                               <div class="collapse" id="demo3">
 
-                                                <a href="#SubMenu1" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently<br>Ordered Sponsors <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ s_ordered_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                                <a href="#SubMenu1" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently<br>Ordered Sponsors </h5> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu mx-2" id="SubMenu1">
 
@@ -2330,7 +2338,7 @@
 
 
 
-                                                <a href="#SubMenu2" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Sponsors That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_accepted_orders_len }}</span> </h5> <i class="fa fa-caret-down"></i></a>
+                                                <a href="#SubMenu2" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h5 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Sponsors That Accepted </h5> <i class="fa fa-caret-down"></i></a>
 
                                                     <div class="collapse list-group-submenu ml-3" id="SubMenu2">
 
@@ -3490,7 +3498,7 @@
                                                 </div>
                                                 <div class="col-7  p-2 pl-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed }}</p>
+                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed|linebreaks }}</p>
                                                 </div>
 
                                             </div>
@@ -3604,12 +3612,12 @@
                                                 </div>
                                                 <div class="col-7  p-2 pl-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ c_accepted_order.service_detailed }}</p>
+                                                    <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                                     {% if c_accepted_order.edits %}
                                                       <hr style="width: 50%;">
                                                       <h5>Latest Edits</h5>
-                                                      <p>{{ c_accepted_order.edits }}</p>
+                                                      <p>{{ c_accepted_order.edits|linebreaks }}</p>
                                                     {% endif %}
                                                     <hr style="width: 50%;">
                                                     <h5>Creator's Content</h5>
@@ -3642,7 +3650,8 @@
                                                                 <br>
                                                                 <br>
                                                                 You'll then be redirected to Escrow.com to proceed with the escrow transaction. Once the creator has
-                                                                joined the transaction, you'll recieve the URL of the content for verification.
+                                                                joined the transaction, you'll recieve the URL of the content for verification, or you can manually go to
+                                                                their blog to check out your content (just in case they don't send URL for whatever reason).
 
 
 
@@ -3778,12 +3787,12 @@
                                           </div>
                                           <div class="col-7  p-2 pl-4">
                                               <h5>Order Details</h5>
-                                              <p>{{ c_accepted_order.service_detailed }}</p>
+                                              <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                               {% if c_accepted_order.edits %}
                                                 <hr style="width: 50%;">
                                                 <h5>Latest Edits</h5>
-                                                <p>{{ c_accepted_order.edits }}</p>
+                                                <p>{{ c_accepted_order.edits|linebreaks }}</p>
                                               {% endif %}
 
                                               <hr style="width: 50%;">
@@ -4845,7 +4854,7 @@
 
                                                   <div class="col mb-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed }}</p>
+                                                    <p>{{ s_order.services_creator_is_willing_to_provide_detailed|linebreaks }}</p>
                                                   </div>
 
 
@@ -4950,12 +4959,12 @@
 
                                                   <div class="col mb-4">
                                                     <h5>Order Details</h5>
-                                                    <p>{{ c_accepted_order.service_detailed }}</p>
+                                                    <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                                     {% if c_accepted_order.edits %}
 
                                                       <h5>Latest Edits</h5>
-                                                      <p>{{ c_accepted_order.edits }}</p>
+                                                      <p>{{ c_accepted_order.edits|linebreaks }}</p>
                                                     {% endif %}
 
                                                     <h5>Creator's Content</h5>
@@ -4986,7 +4995,9 @@
                                                                 <br>
                                                                 <br>
                                                                 You'll then be redirected to Escrow.com to proceed with the escrow transaction. Once the creator has
-                                                                joined the transaction, you'll recieve the URL of the content for verification.
+                                                                joined the transaction, you'll recieve the URL of the content for verification, or you can manually go to
+                                                                their blog to check out your content (just in case they don't send URL for whatever reason).
+.
                                                               </p>
                                                               <!--
                                                                 When This is clicked,
@@ -5118,12 +5129,12 @@
 
                                             <div class="col mb-4">
                                               <h5>Order Details</h5>
-                                              <p>{{ c_accepted_order.service_detailed }}</p>
+                                              <p>{{ c_accepted_order.service_detailed|linebreaks }}</p>
 
                                               {% if c_accepted_order.edits %}
                                                 <hr style="width: 50%;">
                                                 <h5>Latest Edits</h5>
-                                                {{ c_accepted_order.edits }}
+                                                {{ c_accepted_order.edits|linebreaks }}
                                               {% endif %}
 
                                               <hr style="width: 50%;">
@@ -5221,7 +5232,7 @@
 
                                             <div class="collapse" id="collapseHistS">
 
-                                                <a href="#SubMenu4" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered Creators <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_ordered_len }}</span> </h6> <i class="fa fa-caret-down"></i></a>
+                                                <a href="#SubMenu4" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered Creators</h6> <i class="fa fa-caret-down"></i></a>
 
                                                 <div class="collapse list-group-submenu" id="SubMenu4">
 
@@ -5295,7 +5306,7 @@
 
 
 
-                                                <a href="#SubMenu5" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Creators That Accepted <span class="badge badge-pill badge-secondary" style="background-color: #f6c240;">{{ c_accepted_orders_len }}</span> </h6><i class="fa fa-caret-down"></i></a>
+                                                <a href="#SubMenu5" class="list-group-item ml-3 mr-2" style="border-color: white; color: black" data-toggle="collapse" data-parent="#SubMenu1"><h6 class="dropdown-toggle font-weight-normal">Currently Ordered<br>Creators That Accepted </h6><i class="fa fa-caret-down"></i></a>
 
                                                     <div class="collapse list-group-submenu" id="SubMenu5">
 

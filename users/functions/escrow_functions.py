@@ -67,10 +67,8 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
 
     r = requests.post(
 
-    #Greatdain445
-
-    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
+    'https://api.escrow.com/integration/pay/2018-03-31',
+    auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
 
 
     json={
@@ -98,16 +96,16 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
         "currency": "usd",
         # This is actially the title (only seen on the description page at the bottom, not that important)
         #  Make it somthing like SPONSOR LISTING: <sponsor_listing> | CREATOR LISTING <creator_listing>
-        "description": "This is desc. 1",
+        "description": "SPONSOR LISTING: {sponsor_listing} | CREATOR LISTING {creator_listing}".format(sponsor_listing=sponsor_listing_name, creator_listing=creator_listing_name),
         "items": [
             {
                 # The title and description are shown in the card payemnt and with the total (at the top of detail page)
                 # Title should be solid yet short description of transaction.
                 # desciption should give instructions for URL stuff.
                 "title": "Boost Sponsored Escrow Order",
-                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform (in escrow section).",
+                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform.",
                 "type": "milestone",
-                "inspection_period": 259200,
+                "inspection_period": 86400,
                 "quantity": 1,
                 "schedule": [
                     {
@@ -158,8 +156,8 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
 
     r = requests.post(
 
-    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
+    'https://api.escrow.com/integration/pay/2018-03-31',
+    auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
 
 
     json={
@@ -187,16 +185,16 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
         "currency": "usd",
         # This is actially the title (only seen on the description page at the bottom, not that important)
         #  Make it somthing like SPONSOR LISTING: <sponsor_listing> | CREATOR LISTING <creator_listing>
-        "description": "This is desc. 1",
+        "description": "SPONSOR LISTING: {sponsor_listing} | CREATOR LISTING {creator_listing}".format(sponsor_listing=sponsor_listing_name, creator_listing=creator_listing_name),
         "items": [
             {
                 # The title and description are shown in the card payemnt and with the total (at the top of detail page)
                 # Title should be solid yet short description of transaction.
                 # desciption should give instructions for URL stuff.
                 "title": "Boost Sponsored Escrow Order",
-                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform (in escrow section).",
+                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform.",
                 "type": "milestone",
-                "inspection_period": 259200,
+                "inspection_period": 86400,
                 "quantity": 1,
                 "schedule": [
                     {

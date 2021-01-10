@@ -38,7 +38,7 @@ myCellPhone = '13862995508'
 
 # Function that will mark orders complete
 def order_complete():
-    threading.Timer(5.0, order_complete).start() # called every minute
+    threading.Timer(3600, order_complete).start() # called every minute
 
     orders = AcceptedCreatorOrderModel.objects.filter(status='escrow')
 
@@ -46,80 +46,81 @@ def order_complete():
         transaction_id = order.transaction_id
 
         r = requests.get(
-            'https://api.escrow-sandbox.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
-              auth=('admin@getboostplatform.com', '1879_DPJdrsn584BxSiEfOjPD67W9L7acG7JhYmeP3pwv43qmUk31fZtbXz2FAgss0GRY'),
+            'https://api.escrow.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
+              auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
             )
 
         status = r.json()['items'][0]['status'].get('accepted')
-        print(status)
+        print('\n---> status: ', status)
+        print('\n\n r.json(): \n\n', r.json())
 
-        #print(r.json()['items'][0]['status'].get('accepted'))
+        if(status == True):
 
+            print('moving order to completed.')
 
-        #c_listing = BlogListingCreationModel.objects.get(id=id)
-        c_order = AcceptedCreatorOrderModel.objects.get(id=order.id)
+            #c_listing = BlogListingCreationModel.objects.get(id=id)
+            c_order = AcceptedCreatorOrderModel.objects.get(id=order.id)
 
-        listing = c_order.creator_listing
+            listing = c_order.creator_listing
 
-        Messages.objects.create(sender=c_order.buyer, reciever=c_order.creator, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.buyers_listing_s.product))
-        #messages.success(request, "Order is Successfully Finalized. Congradulations!", extra_tags="sponsor_completed_order")
-        Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.creator_listing.blog_name))
+            Messages.objects.create(sender=c_order.buyer, reciever=c_order.creator, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.buyers_listing_s.product))
+            #messages.success(request, "Order is Successfully Finalized. Congradulations!", extra_tags="sponsor_completed_order")
+            Messages.objects.create(sender=c_order.creator, reciever=c_order.buyer, message="Alright Alright Alright, Order For %s is Finalized." % (c_order.creator_listing.blog_name))
 
-        if(listing.notification_type_email is not None):
-            if('Sponsor Has Marked Order as Complete' in listing.notification_type_email):
-                send_mail(
-                    'Alright Alright Alright, Order For %s is Finalized.' % (c_order.buyers_listing_s.product),
-                    'Congradulations! %s\'s order is now complete. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (c_order.buyers_listing_s.product),
-                    'admin@getboostplatform.com',
-                    [str(listing.email)],
-                    fail_silently=False,
+            if(listing.notification_type_email is not None):
+                if('Sponsor Has Marked Order as Complete' in listing.notification_type_email):
+                    send_mail(
+                        'Alright Alright Alright, Order For %s is Finalized.' % (c_order.buyers_listing_s.product),
+                        'Congradulations! %s\'s order is now complete. Check it Out https://getboostplatform.com/account/dashboard/.\n\nThank You For Using Boost!' % (c_order.buyers_listing_s.product),
+                        'admin@getboostplatform.com',
+                        [str(listing.email)],
+                        fail_silently=False,
+                    )
+
+            if(listing.notification_type_phone is not None):
+                if('Sponsor Has Marked Order as Complete' in listing.notification_type_phone):
+
+                    try:
+                        message = twilioCli.messages.create(
+                            body="""
+
+                                --- FROM: Boost ---
+
+            Alright Alright Alright, Order For %s is Finalized. Check it Out https://getboostplatform.com/account/dashboard/.
+
+            Thank You For Using Boost!
+            """ % (c_order.buyers_listing_s.product),
+                            from_=myTwilioNumber,
+                            to=str(listing.number)
+                            )
+                    except:
+                        pass
+
+            # Accepted creator order (after creator clicks accept)
+            cc_order = CompletedOrderModel(
+                buyer=c_order.buyer,
+                creator=c_order.creator,
+                creator_listing=c_order.creator_listing,
+                buyer_listing=c_order.buyer_listing,
+                buyers_listing_s=c_order.buyers_listing_s,
+                buyers_listing_c=c_order.buyers_listing_c,
+                service=c_order.service,
+                service_detailed=c_order.service_detailed,
+                status=c_order.status,
+                who_initiated_order=c_order.who_initiated_order,
+                 payout=c_order.payout,
                 )
 
-        if(listing.notification_type_phone is not None):
-            if('Sponsor Has Marked Order as Complete' in listing.notification_type_phone):
+            print('running code for comp metrics.')
 
-                try:
-                    message = twilioCli.messages.create(
-                        body="""
+            cc_order.save()
 
-                            --- FROM: Boost ---
+            CompleteOrderMetricModel.objects.create(acc_order_id=c_order.id, completed_order_id=cc_order.id)
 
-        Alright Alright Alright, Order For %s is Finalized. Check it Out https://getboostplatform.com/account/dashboard/.
-
-        Thank You For Using Boost!
-        """ % (c_order.buyers_listing_s.product),
-                        from_=myTwilioNumber,
-                        to=str(listing.number)
-                        )
-                except:
-                    pass
-
-        # Accepted creator order (after creator clicks accept)
-        cc_order = CompletedOrderModel(
-            buyer=c_order.buyer,
-            creator=c_order.creator,
-            creator_listing=c_order.creator_listing,
-            buyer_listing=c_order.buyer_listing,
-            buyers_listing_s=c_order.buyers_listing_s,
-            buyers_listing_c=c_order.buyers_listing_c,
-            service=c_order.service,
-            service_detailed=c_order.service_detailed,
-            status=c_order.status,
-            who_initiated_order=c_order.who_initiated_order,
-             payout=c_order.payout,
-            )
+            c_order.delete()
 
 
-
-        cc_order.save()
-
-        CompleteOrderMetricModel.objects.create(acc_order_id=c_order.id, completed_order_id=cc_order.id)
-
-        c_order.delete()
-
-
-
-#order_complete()
+order_complete()
 
 
 
@@ -611,6 +612,8 @@ def dashboard_s_acc(request, id=None):
         #listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
         listing.transaction_id = escrow_t["transaction_id"]
 
+        print('\n\n---------> ', escrow_t)
+
 
         listing.save()
 
@@ -660,7 +663,9 @@ def dashboard_s_acc(request, id=None):
     content = {
         'listing': listing,
     }
-    return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
+
+
+    return redirect('https://www.escrow.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
 @dashboard_s_edit_decorator
 def dashboard_s_edit(request, id=None):
