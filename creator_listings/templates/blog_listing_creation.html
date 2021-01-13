@@ -54,7 +54,7 @@
                   <hr class="my-4">
 
                   <h4 class="font-weight-bold">Create a Listing and Get Sponsored</h4>
-                  <p class="grey-text">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+                  <p class="grey-text">Create a listing for your Instagram and it will be placed on the open marketplace so sponsors can view it.</p>
 
                   <br>
 
@@ -95,9 +95,9 @@
                     <br>
                     <p class="lead font-weight-normal">This is where you'll update your creator listing.</p>
                   {% else %}
-                    <h1 class="font-weight-bold display-1">Create A Blog Listing</h1>
+                    <h1 class="font-weight-bold display-2">Create A Creator Listing</h1>
                     <br>
-                    <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>
+                    <p class="lead font-weight-normal">This is where you'll create your listing so sponsors can view your Instagram.</p>
                   {% endif %}
 
                 </div>
@@ -119,9 +119,9 @@
                   <br>
                   <p class="lead font-weight-normal">This is where you'll update your creator listing.</p>
                 {% else %}
-                  <h1 class="font-weight-bold display-5">Create A Blog Listing</h1>
+                  <h1 class="font-weight-bold display-5">Create A Creator Listing</h1>
                   <br>
-                  <p class="lead font-weight-normal">This is where you'll create your blog listing so sponsors can view your website.</p>
+                  <p class="lead font-weight-normal">This is where you'll create your listing so sponsors can view your website.</p>
                 {% endif %}
               </div>
             </div>
@@ -183,18 +183,20 @@
                       </div>
                     </div>
 
-                    <h1 class="font-weight-normal text-center">Your Blog's Info</h1>
+                    <h1 class="font-weight-normal text-center">Your Instagram's Info</h1>
                     <br>
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="InputwebsiteUrl">Blog's Name</label>
-                                <input value="{{ listing.blog_name }}" type="text" name="blog_name" class="form-control" id="InputwebsiteUrl" placeholder="Your Blogs Name" required>
+                                <label for="InputwebsiteUrl">Instagram's Username</label>
+                                <input value="{{ listing.ig_name }}" type="text" name="ig_name" class="form-control" id="InputwebsiteUrl" placeholder="Your Instagram's Username" required>
                             </div>
 
                         </div>
+
+                        <!--
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -202,6 +204,8 @@
                                 <input value="{{ listing.blog_url }}" type="url" name="blog_url" class="form-control" id="InputwebsiteUrl" placeholder="http(s)://" required>
                             </div>
                         </div>
+
+                        -->
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -214,7 +218,7 @@
                             <div class="form-group col-md-12">
                                 <label for="Inputlanguage">Language</label>
                                 <br>
-                                <small>What's the primary language that you blog is written in?</small>
+                                <small>What's the primary language of your Instagram?</small>
                                 <select value="{{ listing.language }}" type="text" name="language" id="Inputlanguage" class="form-control" placeholder="EX: English" required>
                                     <option selected>{{ listing.language }}</option>
                                     <option>English</option>
@@ -232,7 +236,7 @@
                     <br>
                     <br>
 
-                    <h2 class="font-weight-normal text-center">Lets Get To Know Your Blog</h2>
+                    <h2 class="font-weight-normal text-center">Lets Get To Know You</h2>
                     <br>
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
@@ -240,7 +244,7 @@
                             <div class="form-group col-md-12">
                                 <label for="Inputniche">Niche</label>
                                 <br>
-                                <small>What niche is your blog?</small>
+                                <small>What niche is your Instagram?</small>
                                 <select value="{{ listing.niche }}" type="text" name="niche" id="Inputniche" class="form-control" required>
                                     <option selected>{{ listing.niche }}</option>
                                     <option>Apparel & Accessories</option>
@@ -262,6 +266,8 @@
                             </div>
                         </div>
 
+                        <!--
+
                         <label>What Type Of Articles Are On Your Blog?</label>
 
                         <ul style="list-style: none;">
@@ -282,25 +288,27 @@
 
                         </ul>
 
-
-
+                        -->
 
                       <div class="form-group">
                           <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
                           <br>
-                          <small class="font-weight-bold">
+
+                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review... Make sure all words are lowercase and seperated by a space.">{{ search_kw }}</textarea>
+
+
+                          <small class="font-weight-bold text-break">
                             Input lowercse search keywords here that are related to your listing.
-                            This is how sponsors will search for your listings
+                            This is how sponsors will search for your listings.
                           </small>
-
                           <br>
-
+                          <br>
                           <small class="font-weight-bold mt-3">
                             Make sure all words are lowercase.
                           </small>
 
-                          <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review... Make sure all words are lowercase and seperated by a space.">{{ search_kw }}</textarea>
-                      </div>
+
+                    </div>
 
                     </div>
 
@@ -310,7 +318,7 @@
                     <br>
                     <br>
 
-                    <h1 class="font-weight-normal text-center">Describe Your Blog To Us</h1>
+                    <h1 class="font-weight-normal text-center">Describe Your Instagram To Us</h1>
 
                     <br>
 
@@ -318,17 +326,17 @@
 
                         <div class="form-group mb-5">
                             <label for="exampleFormControlTextarea1">Pricing Model (•)</label>
-                            <textarea class="form-control" name="pricing_description" rows="2" placeholder="Give us a detailed description of your pricing model for your blog. Use bullet points (•) if you'd like, this may be easier for a sponsor to read." required>{{ listing.pricing_description }}</textarea>
+                            <textarea class="form-control" name="pricing_description" rows="6" placeholder="Give us a detailed description of your pricing model. Use bullet points (•) if you'd like, this may be easier for a sponsor to read." required>{{ listing.pricing_description }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Tagline</label>
-                            <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your blog in less than 120 characters." required>{{ listing.tagline }}</textarea>
+                            <textarea class="form-control" name="tagline" rows="2" placeholder="Give us very brief description of your Instagram in less than 120 characters." required>{{ listing.tagline }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your blog. 2-3 paragraphs recommended." required>{{ listing.overview_description }}</textarea>
+                            <textarea class="form-control" name="overview_description" rows="6" placeholder="Tell us about your Instagram. 2-3 paragraphs recommended." required>{{ listing.overview_description }}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -377,6 +385,8 @@
                         </div>
                     </div>
 
+                    <!--
+
                     <br>
                     <br>
                     <hr>
@@ -419,7 +429,7 @@
                             <br>
                             <a class="text-center" href="#whatIsThisForGAModal" data-toggle="modal">What is this For?</a>
 
-                            <!-- Modal - How do I do this -->
+
                             <div class="modal fade" id="howToUploadGoogleAnalyticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -446,7 +456,7 @@
                             </div>
 
 
-                            <!-- Modal - What is this For?-->
+
                             <div class="modal fade" id="whatIsThisForGAModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -472,6 +482,8 @@
                         </div>
                     </div>
 
+                  -->
+
                     <br>
                     <br>
                     <hr>
@@ -483,6 +495,8 @@
 
                     <div class="border p-3" style="border-color: #f3f3f3; background-color: #f9f9f9; color: black;">
 
+                      <!--
+
                       <small style="color: red;">The email field is required. Only becuase it is used for the escrow system.</small>
                       <br>
                       <br>
@@ -492,6 +506,24 @@
                       <small style="color: red;">The mobile number is not required, but it is extremely urged.</small>
                       <br>
                       <br>
+
+                      -->
+
+                      <small class="text-break" style="color: red;">
+
+                        The email field is required. Only becuase it is used for the escrow system.
+                        <br>
+                        <br>
+                        (If you do not want any notifications via email or phone, then do not select any notification options).
+                        <br>
+                        <br>
+                        The mobile number is not required, but it is extremely urged.
+                        <br>
+                        <br>
+
+                      </small>
+
+
 
 
                         <div class="form-group col-md-12">

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
 
@@ -200,22 +201,22 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                              <a class="nav-link active" style="color: black;">{{ listing.blog_name }}</a>
+                              <a class="nav-link active" style="color: black;">{{ listing.ig_name }}</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="{{ listing.blog_url}}" target="_blank" style="color: #007185;">
-                                {% if listing.blog_url.4 == "s" %}
-                                  {{ listing.blog_url|slice:"8:" }}
-                                {% elif listing.blog_url.4 == ":" %}
-                                  {{ listing.blog_url|slice:"7:" }}
+                              <a class="nav-link" href="https://instagram.com/{{ listing.ig_name}}" target="_blank" style="color: #007185;">
+                                <!--
+                                {% if listing.ig_url.4 == "s" %}
+                                  {{ listing.ig_url|slice:"8:" }}
+                                {% elif listing.ig_url.4 == ":" %}
+                                  {{ listing.ig_url|slice:"7:" }}
                                 {% endif %}
+                                -->
+                                instagram.com/{{ listing.ig_name }}
                               </a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link disabled" style="color: #636363;">Niche: {{ listing.niche }}</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link disabled" style="color: #636363;">Blog Age: {{ listing.age }}</a>
                             </li>
                         </ul>
                     </div>
@@ -225,7 +226,7 @@
 
                             <div class="col-5 pr-0">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 mb-4">
 
                                         <!--<img src="https://static.teamguru.com/data/images/thumb/180_da8e22ef6e.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">-->
 
@@ -234,29 +235,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-7 my-auto pt-0 pb-2">
-                                <h5>Overview</h5>
-                                <p class="mx-3">{{ listing.tagline }}</p>
+                            <div class="col-7 my-auto pt-0 pb-0">
+                                <h4 class="mx-3 mb-2 font-weight-normal">{{ listing.tagline }}</h4>
+
+                                <br>
+
+                                <table class="table table-borderless m-0">
+
+                                  <tbody>
+                                    <tr>
+                                      <td><b>Followers</b><br>{{ listing.followers|intcomma }}</td>
+                                      <td><b>Engagement Rate</b><br>{{ listing.engagement_rate }}%</td>
+                                    </tr>
+                                    <tr>
+                                      {% if listing.estimated_post_impressions %}
+                                        <td><b>Est. Impressions</b><br>{{ listing.estimated_post_impressions|intcomma }}</td>
+
+                                      {% else %}
+                                        <td><b>Est. Impressions</b><br>N/A</td>
+
+                                      {% endif %}
+                                      <td><b>Average Likes</b><br>{{ listing.avg_likes|intcomma }}</td>
+                                    </tr>
+                                  </tbody>
+
+                                </table>
 
 
                                   <!--
                                   <img class="pb-4" src="https://www.cookiebot.com/media/1082/googleanalytics.png?width=605&" style="width: 30%; height: 30%;">
                                   -->
 
-                                  <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}">
-                                    <button type="button" class="btn btn-primary mx-2 px-5 mt-3" style="border: 1px solid #0058b5;">View Listing</button>
-                                  </a>
 
 
-                                  {% if listing in watching %}
-
-                                    <button type="button" class="btn btn-success mx-2 px-5 mt-3" style="border: 1px solid #025e17;">Watching</button>
-
-                                  {% else %}
-
-                                    <button type="button" class="btn btn-outline-success mx-1 px-5 mt-3" style="border: 1px solid #025e17;">Not Watching</button>
-
-                                  {% endif %}
+                                  <!--
 
                                   {% if listing.google_a_csv %}
                                   <br>
@@ -265,8 +277,31 @@
 
                                   {% endif %}
 
+                                  -->
+
                             </div>
                         </div>
+
+                        <div class="d-flex">
+
+                          <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" class=" flex-fill">
+                            <button type="button" class="btn btn-primary px-5 w-100 mr-4" style="border: 1px solid #0058b5;">View Listing</button>
+                          </a>
+
+
+                          {% if listing in watching %}
+
+                            <button type="button" class="btn btn-success px-5 flex-fill ml-4" style="border: 1px solid #025e17;">Watching</button>
+
+                          {% else %}
+
+                            <button type="button" class="btn btn-outline-success px-5 flex-fill ml-4" style="border: 1px solid #025e17;">Not Watching</button>
+
+                          {% endif %}
+
+                        </div>
+
+
                     </div>
 
                 </div>
@@ -531,21 +566,51 @@
 
                     {% endif %}
 
-                    <h5 class="card-title text-center">{{ listing.blog_name }}</h5>
+                    <h5 class="card-title text-center">{{ listing.ig_name }}</h5>
                     <p class="card-text text-center">{{ listing.tagline }}</p>
                   </div>
                     <ul class="list-group list-group-flush text-center">
                       <li class="list-group-item">
-                        <a class="nav-link p-0" href="{{ listing.blog_url}}" target="_blank" style="color: #007185;">
-                          {% if listing.blog_url.4 == "s" %}
-                            {{ listing.blog_url|slice:"8:" }}
-                          {% elif listing.blog_url.4 == ":" %}
-                            {{ listing.blog_url|slice:"7:" }}
+                        <a class="nav-link p-0" href="https://instagram.com/{{ listing.ig_name}}" target="_blank" style="color: #007185;">
+                          <!--
+                          {% if listing.ig_url.4 == "s" %}
+                            {{ listing.ig_url|slice:"8:" }}
+                          {% elif listing.ig_url.4 == ":" %}
+                            {{ listing.ig_url|slice:"7:" }}
                           {% endif %}
+                          -->
+                          instagram.com/{{ listing.ig_name }}
                         </a>
                       </li>
-                      <li class="list-group-item">Niche: {{ listing.niche }}</li>
-                      <li class="list-group-item">Blog Age: {{ listing.age }}</li>
+                      <li class="list-group-item"><b>Niche </b>| {{ listing.niche }}</li>
+
+
+
+                      <table class="table table-borderless m-0">
+
+                        <tbody>
+                          <tr>
+                            <td><b>Followers</b><br>{{ listing.followers|intcomma }}</td>
+                            <td><b>Engagement Rate</b><br>{{ listing.engagement_rate }}%</td>
+                          </tr>
+                          <tr>
+                            {% if listing.estimated_post_impressions %}
+                              <td><b>Est. Impressions</b><br>{{ listing.estimated_post_impressions|intcomma }}</td>
+
+                            {% else %}
+                              <td><b>Est. Impressions</b><br>N/A</td>
+
+                            {% endif %}
+                            <td><b>Average Likes</b><br>{{ listing.avg_likes|intcomma }}</td>
+                          </tr>
+                        </tbody>
+
+                      </table>
+
+
+
+
+
 
                     </ul>
                   <div class="card-body text-center">

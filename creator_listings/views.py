@@ -54,15 +54,17 @@ def blogger_listing_creation(request):
 
         if form.is_valid():
             form.save(commit=False).creator = request.user
-            form.save(commit=False).blog_type = type_query
+            form.save(commit=False).ig_type = type_query
 
             form.save(commit=False).notification_type = request.POST.getlist('notification_types')
-            form.save(commit=False).blog_type = request.POST.getlist('types')
+            form.save(commit=False).ig_type = request.POST.getlist('types')
 
-            name = form.cleaned_data['blog_name']
+            name = form.cleaned_data['ig_name']
 
             kw = form.cleaned_data['search_keywords']
             form.save(commit=False).search_keywords = kw #.split(", ")
+
+            '''
 
             csv_file = form.cleaned_data['google_a_csv']
 
@@ -102,6 +104,8 @@ def blogger_listing_creation(request):
 
             if(csv_file is None):
                 CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='False')
+
+            '''
 
             #if(metric_ga):
                 #CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
@@ -196,6 +200,8 @@ def blogger_listing_update(request, id=None):
 
         context['search_kw'] = search_kw
 
+    '''
+
     if(listing.google_a_csv):
         ga_file_path = os.path.basename(listing.google_a_csv.name)
 
@@ -204,21 +210,23 @@ def blogger_listing_update(request, id=None):
 
         context['ga_file_name'] = ga_file_name
 
+    '''
+
     if request.method == 'POST':
         form = BlogListingCreationForm(request.POST,request.FILES, instance=listing)
         if form.is_valid():
             form.save(commit=False).notification_type_email = request.POST.getlist('notification_type_email')
             form.save(commit=False).notification_type_phone = request.POST.getlist('notification_type_phone')
-            form.save(commit=False).blog_type = request.POST.getlist('types')
+            form.save(commit=False).ig_type = request.POST.getlist('types')
 
             kw = form.cleaned_data['search_keywords']
 
             if(kw):
                 form.save(commit=False).search_keywords = kw.split(", ")
 
-            csv_file = form.cleaned_data['google_a_csv']
+            # csv_file = form.cleaned_data['google_a_csv']
 
-            print('======', type(csv_file))
+            '''
 
             if(csv_file is not None):
                 f = csv_file
@@ -243,9 +251,11 @@ def blogger_listing_update(request, id=None):
 
                     form.save(commit=False).monthly_views = avg_views
 
+            '''
+
             form.save()
 
-            messages.success(request, "%s has been successfully updated." % (listing.blog_name), extra_tags="blog_listing_update")
+            messages.success(request, "%s has been successfully updated." % (listing.ig_name), extra_tags="blog_listing_update")
 
         elif form.errors:
 
@@ -261,7 +271,7 @@ def blogger_listing_update(request, id=None):
 def blogger_listing_delete(request, id=None):
     listing = BlogListingCreationModel.objects.get(id=id)
 
-    messages.success(request, "%s has been successfully deleted." % (listing.blog_name), extra_tags="blog_listing_update")
+    messages.success(request, "%s has been successfully deleted." % (listing.ig_name), extra_tags="blog_listing_update")
 
     context = {
         'listing':listing

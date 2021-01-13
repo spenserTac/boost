@@ -17,8 +17,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('blog_url', models.CharField(max_length=300)),
                 ('niche', models.CharField(max_length=300)),
-                ('age', models.IntegerField()),
-                ('monthly_views', models.CharField(max_length=300)),
+                ('age', models.IntegerField())
+
             ],
         ),
     ]

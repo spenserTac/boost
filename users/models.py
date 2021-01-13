@@ -93,7 +93,7 @@ class SponsorOrderModel(models.Model):
     buyers_listing_s = models.ForeignKey(SponsorListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_s_listing_for_s_order")
     buyers_listing_c = models.ForeignKey(BlogListingCreationModel, on_delete=models.CASCADE, blank=True, null=True, related_name="buyers_c_listing_for_s_order")
 
-    services_creator_is_willing_to_provide = models.CharField(max_length=500, blank=False)
+    services_creator_is_willing_to_provide = models.CharField(max_length=500, blank=True)
     services_creator_is_willing_to_provide_detailed = models.TextField(max_length=1000, blank=True)
 
     # Accepted, denied, or the default in review

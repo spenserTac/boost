@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+    'django.contrib.humanize',
+
 
     # user created apps
     'creator_listings',

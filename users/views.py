@@ -120,7 +120,7 @@ def order_complete():
             c_order.delete()
 
 
-order_complete()
+#order_complete()
 
 
 

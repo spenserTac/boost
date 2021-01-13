@@ -1,90 +1,7 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block header %}
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-
-
-  google.charts.load('current', {
-    callback: function () {
-      drawChart();
-      $(window).resize(drawChart);
-    },
-    'packages':['line', 'corechart']
-  });
-  google.charts.setOnLoadCallback(drawChart);
-
-
-
-
-    function drawChart() {
-
-    var button = document.getElementById('change-chart');
-    var chartDiv = document.getElementById('chart_div');
-    var chartDiv2 = document.getElementById('chart_div2');
-
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Month');
-    data.addColumn('number', "Views");
-
-    data.addRows([
-      ['{{months.0}} {{prev_year}}', {{data.0.1}}],
-      ['{{months.1}}', {{data.1.1}}],
-      ['{{months.2}}', {{data.2.1}}],
-      ['{{months.3}}', {{data.3.1}}],
-      ['{{months.4}}', {{data.4.1}}],
-      ['{{months.5}}', {{data.5.1}}],
-      ['{{months.6}}', {{data.6.1}}],
-      ['{{months.7}}', {{data.7.1}}],
-      ['{{months.8}}', {{data.8.1}}],
-      ['{{months.9}}', {{data.9.1}}],
-      ['{{months.10}}', {{data.10.1}}],
-      ['{{months.11}} {{year}}', {{data.11.1}}],
-    ]);
-
-    var materialOptions = {
-
-        chart: {
-          title: '',
-
-        },
-
-        colors: ['#28b500'],
-        legend: { position: "none" },
-
-        series: {
-          // Gives each series an axis name that matches the Y-axis below.
-          0: {axis: 'Temps'},
-          1: {axis: 'Daylight'},
-
-        },
-        axes: {
-          // Adds labels to each axis; they don't have to match the axis names.
-          y: {
-            Temps: {label: 'Views'},
-            Daylight: {label: 'Daylight'}
-          }
-        }
-      };
-
-    function drawMaterialChart() {
-      var materialChart = new google.charts.Line(chartDiv);
-      materialChart.draw(data, materialOptions);
-
-      var materialChart2 = new google.charts.Line(chartDiv2);
-      materialChart2.draw(data, materialOptions);
-
-      button.innerText = 'Change to Classic';
-      button.onclick = drawClassicChart;
-    }
-
-    drawMaterialChart();
-    drawMaterialChart2();
-
-  }
-  </script>
-
 {% endblock header %}
 
 {% block content %}
@@ -127,22 +44,62 @@
 
                       <div class="row">
                         <div class="col">
-                          <a class="nav-link pl-0 pt-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+                          <a class="nav-link pl-0 pt-0 text-break" href="https://instagram.com/{{ listing.ig_name }}" target="_blank" style="color: #007185;">
 
-                            {% if listing.blog_url.4 == "s" %}
-                              {{ listing.blog_url|slice:"8:" }}
-                            {% elif listing.blog_url.4 == ":" %}
-                              {{ listing.blog_url|slice:"7:" }}
+                            <!--
+
+                            {% if listing.ig_url.4 == "s" %}
+                              {{ listing.ig_url|slice:"8:" }}
+                            {% elif listing.ig_url.4 == ":" %}
+                              {{ listing.ig_url|slice:"7:" }}
                             {% endif %}
+                            -->
+
+                            instagram.com/{{ listing.ig_name }}
 
                           </a>
-                          <h3 class="font-weight-normal pb-2" style="color: grey;">{{ listing.blog_name }}</h3>
+                          <h3 class="font-weight-normal pb-2 text-break" style="color: grey;">{{ listing.ig_name }}</h3>
                           <h4 class="pb-2">{{ listing.tagline }}</h4>
                           <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
                         </div>
                       </div>
 
                     </div>
+
+
+                    <div class="my-3 border rounded shadow" style="background-color: white;">
+
+                      <h4 class="card-header text-center">Statistics</h4>
+
+                      <div class="card-body">
+
+                        <table class="table table-borderless mx-auto my-auto">
+
+                          <tbody>
+                            <tr>
+                              <td class="text-center"><b><h5>Followers</h5></b><p>{{ listing.followers|intcomma }}</p></td>
+                              <td class="text-center"><b><h5>Engagement Rate</h5></b><p>{{ listing.engagement_rate }}%</p></td>
+                            </tr>
+                            <tr>
+                              {% if listing.estimated_post_impressions %}
+                                <td class="text-center"><b><h5>Est. Impressions</h5></b><p class="m-0">{{ listing.estimated_post_impressions|intcomma }}</p></td>
+
+                              {% else %}
+                                <td class="text-center"><b><h5>Estimated Impressions</h5></b><p class="m-0">N/A</p></td>
+
+                              {% endif %}
+                              <td class="text-center"><b><h5>Average Likes</h5></b><p class="m-0">{{ listing.avg_likes|intcomma }}</p></td>
+
+                            </tr>
+                          </tbody>
+
+                        </table>
+
+                      </div>
+
+                    </div>
+
+                  <!--
 
                     {% if is_google_a_data_good %}
 
@@ -256,6 +213,8 @@
                           </div>
 
                     {% endif %}
+
+                    -->
 
                     <hr class="my-4">
 
@@ -413,22 +372,43 @@
 
 
                     <div class="card shadow">
+
                       <h5 class="card-header text-center">Info</h5>
+
                       <div class="card-body">
-                        <h5 class="card-title">Domain Authority</h5>
-                        <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank" style="color: #007185;">Check it Out Here</a></p>
-                        <br>
-                        <h5 class="card-title">Blog Type</h5>
+
+                        <table class="table table-borderless mx-auto my-auto">
+                          <tbody>
+
+                            <tr>
+                              <td class="text-center"><b><h5>Niche</h5></b><p class="m-0">{{ listing.niche }}</p></td>
+                              <td class="text-center"><b><h5>Years Active</h5></b><p>{{ listing.age }}</p></td>
+                            </tr>
+
+                            <tr>
+                              <td class="text-center"><b><h5>Language</h5></b><p class="m-0">{{ listing.language }}</p></td>
+                              <td class="text-center text-break"><b><h5>Username</h5></b><p class="m-0">{{ listing.ig_name }}</p></td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+
+                        <!--
+
+                        <h5 class="card-title">Type</h5>
                         <p class="card-text">{{ blog_types }}</p>
                         <br>
                         <h5 class="card-title">Years Active</h5>
                         <p class="card-text">{{ listing.age }}</p>
                         <br>
-                        <h5 class="card-title">Blog Niche</h5>
+                        <h5 class="card-title">Niche</h5>
                         <p class="card-text">{{ listing.niche }}</p>
                         <br>
-                        <h5 class="card-title">Blog Language</h5>
+                        <h5 class="card-title">Language</h5>
                         <p class="card-text">{{ listing.language }}</p>
+
+                        -->
+
                       </div>
                     </div>
 
@@ -459,7 +439,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                   <div class="card-body">
                                     {% for l in all_users_listings %}
-                                      <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l.blog_name }}</a>
+                                      <a class="text-break" href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
                                       <br>
                                     {% endfor %}
                                   </div>
@@ -520,16 +500,20 @@
 
                   <div class="row">
                     <div class="col">
-                      <a class="nav-link pl-0 pt-0" href="{{ listing.blog_url }}" target="_blank" style="color: #007185;">
+                      <a class="nav-link pl-0 pt-0 text-break" href="https://instagram.com/{{ listing.ig_name }}" target="_blank" style="color: #007185;">
 
+                        <!--
                         {% if listing.blog_url.4 == "s" %}
                           {{ listing.blog_url|slice:"8:" }}
                         {% elif listing.blog_url.4 == ":" %}
                           {{ listing.blog_url|slice:"7:" }}
                         {% endif %}
+                        -->
+
+                        instagram.com/{{ listing.ig_name }}
 
                       </a>
-                      <h5 class="font-weight-normal" style="color: grey;">{{ listing.blog_name }}</h5>
+                      <h5 class="font-weight-normal text-break" style="color: grey;">{{ listing.ig_name }}</h5>
                       <h5 class="pb-2">{{ listing.tagline }}</h5>
                       <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
                     </div>
@@ -586,6 +570,8 @@
                     </div>
                   </div>
                 </div>
+
+                <!--
 
                 {% if is_google_a_data_good %}
 
@@ -701,7 +687,8 @@
 
                 {% endif %}
 
-                    <hr class="my-4">
+                -->
+
 
                     <div class="card shadow mb-3">
                       <h5 class="card-header text-center">Pricing Model</h5>
@@ -714,22 +701,25 @@
 
                         <div class="card shadow">
                           <h5 class="card-header text-center">Info</h5>
+
                           <div class="card-body">
-                            <h5 class="card-title">Domain Authority</h5>
-                            <p class="card-text"><a href="https://moz.com/domain-analysis?site={{listing.url}}" target="_blank" style="color: #007185;">Check it Out Here</a></p>
-                            <br>
-                            <h5 class="card-title">Blog Type</h5>
-                            <p class="card-text">{{ blog_types }}</p>
-                            <br>
-                            <h5 class="card-title">Years Active</h5>
-                            <p class="card-text">{{ listing.age }}</p>
-                            <br>
-                            <h5 class="card-title">Blog Niche</h5>
-                            <p class="card-text">{{ listing.niche }}</p>
-                            <br>
-                            <h5 class="card-title">Blog Language</h5>
-                            <p class="card-text">{{ listing.language }}</p>
+                            <table class="table table-borderless mx-auto my-auto">
+                              <tbody>
+
+                                <tr>
+                                  <td class="text-center"><b><h5>Niche</h5></b><p class="m-0">{{ listing.niche }}</p></td>
+                                  <td class="text-center"><b><h5>Years Active</h5></b><p>{{ listing.age }}</p></td>
+                                </tr>
+
+                                <tr>
+                                  <td class="text-center"><b><h5>Language</h5></b><p class="m-0">{{ listing.language }}</p></td>
+                                  <td class="text-center text-break"><b><h5>Username</h5></b><p class="m-0">{{ listing.ig_name }}</p></td>
+                                </tr>
+
+                              </tbody>
+                            </table>
                           </div>
+
                         </div>
 
                 </div class="my-3 p-3 border rounded" style="background-color: white;">
@@ -834,7 +824,7 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                               <div class="card-body">
                                 {% for l in all_users_listings %}
-                                  <a href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
+                                  <a class="text-break" href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
                                   <br>
                                 {% endfor %}
                               </div>

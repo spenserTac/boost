@@ -220,16 +220,6 @@ def creator_marketplace_listing_view(request, id=None):
         ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'oct', 'Nov'])
         '''
 
-    blog_typ = listing.blog_type.split(',')
-    blog_types = ""
-
-    for i in blog_typ:
-        blog_types += i
-        print(i)
-
-    blog_types = blog_types.replace('[', '')
-    blog_types = blog_types.replace(']', '')
-    blog_types = blog_types.replace('\'', '')
 
     context = {
 
@@ -237,9 +227,10 @@ def creator_marketplace_listing_view(request, id=None):
         'following': following,
         'ordered': ordered,
         'all_users_listings': all_users_listings,
-        'blog_types': blog_types,
 
     }
+
+    '''
 
     if(listing.google_a_csv):
         google_data = listing.google_a_csv.path
@@ -276,6 +267,8 @@ def creator_marketplace_listing_view(request, id=None):
             context['year'] = year
             context['months'] = months
             context['avg_views'] = avg_views
+
+    '''
 
     return render(request, 'creator_marketplace_listing_view.html', context)
 
@@ -365,14 +358,14 @@ def creator_marketplace_listing_order_view(request, id=None):
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_s = l
 
-            Messages.objects.create(sender=buyer, reciever=listing.creator, message="Hooray! %s Has Been Ordered." % (listing.blog_name))
-            messages.success(request, "%s has been successfully ordered" % (listing.blog_name), extra_tags="sponsor_orders_creator_success")
+            Messages.objects.create(sender=buyer, reciever=listing.creator, message="Hooray! %s Has Been Ordered." % (listing.ig_name))
+            messages.success(request, "%s has been successfully ordered" % (listing.ig_name), extra_tags="sponsor_orders_creator_success")
 
             if(listing.notification_type_email is not None):
                 if('Listing is Ordered' in listing.notification_type_email):
                     send_mail(
                         'Hooray! %s Has Been Ordered.' % (listing.blog_name),
-                        '%s has been ordered by %s! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.blog_name, buyer_listing),
+                        '%s has been ordered by %s! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.ig_name, buyer_listing),
                         'admin@getboostplatform.com',
                         [str(listing.email)],
                         fail_silently=False,
@@ -386,7 +379,7 @@ def creator_marketplace_listing_order_view(request, id=None):
 
                                 --- FROM: Boost ---
 
-            Hooray! %s Has Been Ordered. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.blog_name),
+            Hooray! %s Has Been Ordered. Check it Out https://getboostplatform.com/account/dashboard/.""" % (listing.ig_name),
                             from_=myTwilioNumber,
                             to=str(listing.number)
                             )
@@ -647,6 +640,8 @@ def sponsor_marketplace_listing_order_view(request, id=None):
         # add instance field for updating -> , instance=prev_c_order
         form = SponsorOrderForm(request.POST, instance=prev_s_order)
 
+        print('--->', form.errors)
+
         if (form.is_valid()):
             obj = form.save(commit=False)
 
@@ -666,8 +661,8 @@ def sponsor_marketplace_listing_order_view(request, id=None):
                 if (str(l) == str(buyer_listing)):
                     obj.buyers_listing_s = l
 
-
             obj.save()
+
             CreatorOrdersSponsorMetricModel.objects.create(order_id=obj.id)
 
             Messages.objects.create(sender=buyer, reciever=listing.creator, message="Hooray! %s Has Been Ordered." % (listing.product))
