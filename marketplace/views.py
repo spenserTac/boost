@@ -59,8 +59,14 @@ def creator_marketplace(request):
     niche_query = request.GET.getlist('niche')
     lang_query = request.GET.getlist('language')
     searchbar_keywords = request.GET.getlist('search_bar')
+
     blog_age_val = request.GET.get('blog_age_val')
-    monthly_views = request.GET.get('monthly_views')
+
+    followers = request.GET.get('followers')
+    eng_rate = request.GET.get('eng_rate')
+    impression_count = request.GET.get('impression_count')
+    likes = request.GET.get('likes')
+
     searchb = request.GET.get('search_bar')
     reset_button = request.GET.get('reset_button')
     searchbar_bool = False
@@ -77,15 +83,53 @@ def creator_marketplace(request):
         creator_listings = creator_listings.filter(age__gt=blog_age_val)
 
 
-    if(monthly_views):
-        monthly_views = int(monthly_views)
+    '''
 
-        if(monthly_views > 0):
-            creator_listings = creator_listings.filter(monthly_views__gt=monthly_views).exclude(google_a_csv=None, monthly_views=None)
+    followers = models.IntegerField(default=None, null=True, blank=True)
+    avg_likes = models.IntegerField(default=None, null=True, blank=True)
+    avg_comments = models.IntegerField(default=None, null=True, blank=True)
+    engagement_rate = models.DecimalField(max_digits=4, decimal_places=2, default=None, null=True, blank=True)
+    estimated_post_impressions = models.IntegerField(default=None, null=True, blank=True)
+
+    '''
 
 
-    if ga_check == "true":
-        creator_listings = creator_listings.filter(monthly_views__gt=1).exclude(google_a_csv=None)
+
+    if(followers):
+        followers = int(followers)
+
+        if(followers > 0):
+            creator_listings = creator_listings.filter(followers__gt=followers).exclude(followers=None)
+
+
+    if(eng_rate):
+        eng_rate = int(eng_rate)
+
+        if(eng_rate > 0):
+            creator_listings = creator_listings.filter(engagement_rate__gt=eng_rate).exclude(engagement_rate=None)
+
+
+    if(impression_count):
+        impression_count = int(impression_count)
+
+        if(impression_count > 0):
+            creator_listings = creator_listings.filter(estimated_post_impressions__gt=impression_count).exclude(estimated_post_impressions=None)
+
+    if(likes):
+        likes = int(likes)
+
+        if(likes > 0):
+            creator_listings = creator_listings.filter(avg_likes__gt=likes).exclude(avg_likes=None)
+
+
+
+
+
+
+
+
+    '''if ga_check == "true":
+        creator_listings = creator_listings.filter(monthly_views__gt=1).exclude(google_a_csv=None)'''
 
     niches = {
         "Apparel & Accessories": "",
@@ -171,7 +215,10 @@ def creator_marketplace(request):
         'langs': langs,
         'watching': watching,
         'blog_age_val': blog_age_val,
-        'monthly_views': monthly_views,
+        'followers': followers,
+        'eng_rate': eng_rate,
+        'impression_count': impression_count,
+        'likes': likes,
         'searchb': searchb,
         'searchbar_bool': searchbar_bool,
 
@@ -364,7 +411,7 @@ def creator_marketplace_listing_order_view(request, id=None):
             if(listing.notification_type_email is not None):
                 if('Listing is Ordered' in listing.notification_type_email):
                     send_mail(
-                        'Hooray! %s Has Been Ordered.' % (listing.blog_name),
+                        'Hooray! %s Has Been Ordered.' % (listing.ig_name),
                         '%s has been ordered by %s! Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.ig_name, buyer_listing),
                         'admin@getboostplatform.com',
                         [str(listing.email)],
@@ -415,14 +462,14 @@ def creator_marketplace_listing_unorder_view(request, id=None):
     current_users_profile = Profile.objects.get(user=request.user)
     creator_order = CreatorOrderModel.objects.get(buyer=request.user, creator_listing=marketplace_c_listing)
 
-    Messages.objects.create(sender=creator_order.buyer, reciever=creator_order.creator, message="%s Has Canceled Their Order" % (creator_order.creator_listing.blog_name))
-    messages.success(request, "%s has been successfully unordered" % (creator_order.creator_listing.blog_name), extra_tags="sponsor_unorders_creator_success")
+    Messages.objects.create(sender=creator_order.buyer, reciever=creator_order.creator, message="%s Has Canceled Their Order" % (creator_order.creator_listing.ig_name))
+    messages.success(request, "%s has been successfully unordered" % (creator_order.creator_listing.ig_name), extra_tags="sponsor_unorders_creator_success")
 
     if(marketplace_c_listing.notification_type_email is not None):
         if('Listing is Unordered' in marketplace_c_listing.notification_type_email):
             send_mail(
                 '%s Has Canceled Their Order' % (creator_order.buyers_listing_s.product),
-                '%s has canceled their order for %s. Check it Out https://getboostplatform.com/account/dashboard/.' % ( creator_order.buyers_listing_s.product, marketplace_c_listing.blog_name),
+                '%s has canceled their order for %s. Check it Out https://getboostplatform.com/account/dashboard/.' % ( creator_order.buyers_listing_s.product, marketplace_c_listing.ig_name),
                 'admin@getboostplatform.com',
                 [str(marketplace_c_listing.email)],
                 fail_silently=False,
@@ -721,7 +768,7 @@ def sponsor_marketplace_listing_unorder_view(request, id=None):
         if('Listing is Unordered' in listing.notification_type_email):
             send_mail(
                 '%s Has Canceled Their Order' % (listing.product),
-                '%s has canceled their order for %s. Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.product, sponsor_order.buyers_listing_c.blog_name),
+                '%s has canceled their order for %s. Check it Out https://getboostplatform.com/account/dashboard/.' % (listing.product, sponsor_order.buyers_listing_c.ig_name),
                 'admin@getboostplatform.com',
                 [str(listing.email)],
                 fail_silently=False,

@@ -153,7 +153,7 @@
 
                     {% csrf_token %}
 
-                    <button type="button" class="btn btn-primary btn-block my-5 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
+                    <button type="button" class="btn btn-primary btn-block mt-5 mb-3 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
                       Need Help?
                     </button>
 
@@ -183,6 +183,19 @@
                       </div>
                     </div>
 
+
+
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                      Your Instagram stats will be added shortly after you create/update your listing.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <br>
+
+
+
                     <h1 class="font-weight-normal text-center">Your Instagram's Info</h1>
                     <br>
 
@@ -210,6 +223,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="inputSiteAge">Years Active</label>
+                                <br>
+                                <small>Round to the nearest whole number.</small>
                                 <input value="{{ listing.age }}" type="number" name="age" class="form-control" id="inputSiteAge" placeholder="3" required>
                             </div>
                         </div>
@@ -291,8 +306,9 @@
                         -->
 
                       <div class="form-group">
-                          <label class="m-0" for="exampleFormControlTextarea1">Keywords</label>
+                          <label class="mb-2" for="exampleFormControlTextarea1">Keywords</label>
                           <br>
+
 
                           <textarea class="form-control" name="search_keywords" rows="2" placeholder="Example: tech phones review... Make sure all words are lowercase and seperated by a space.">{{ search_kw }}</textarea>
 

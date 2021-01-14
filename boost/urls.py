@@ -24,12 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', essentials_views.home, name='home'),
-    path('/cookies-policy', essentials_views.cookies_policy, name='cookies_policy'),
-    path('/disclaimer-policy', essentials_views.disclaimer_policy, name='disclaimer_policy'),
-    path('/terms-and-conditions', essentials_views.terms_and_conditions, name='terms_and_conditions'),
-    path('/return-policy', essentials_views.return_policy, name='return_policy'),
-    path('/privacy-policy', essentials_views.privacy_policy, name='privacy_policy'),
-    path('/about-us', essentials_views.about_us, name='about_us'),
+    path('cookies-policy', essentials_views.cookies_policy, name='cookies_policy'),
+    path('disclaimer-policy', essentials_views.disclaimer_policy, name='disclaimer_policy'),
+    path('terms-and-conditions', essentials_views.terms_and_conditions, name='terms_and_conditions'),
+    path('return-policy', essentials_views.return_policy, name='return_policy'),
+    path('privacy-policy', essentials_views.privacy_policy, name='privacy_policy'),
+    path('about-us', essentials_views.about_us, name='about_us'),
 
 
 

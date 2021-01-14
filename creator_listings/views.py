@@ -14,6 +14,22 @@ from metrics.models import CreatorListingMadeMetricModel
 
 from users.functions.csv_parser import csv_parser
 
+from twilio.rest import Client
+
+
+
+
+accountSID = 'AC1af4a638ba64727a7fc59d63836fe78d'
+authToken  = '84207d244c6aa2868cfdc5df45df008d'
+twilioCli = Client(accountSID, authToken)
+myTwilioNumber = '+13253996328' #(325) 399-6328
+myCellPhone = '13862995508'
+
+
+
+
+
+
 @login_required(login_url='login')
 def blogger_listing_creation(request):
     type_query = request.POST.getlist('blog_type')
@@ -113,10 +129,23 @@ def blogger_listing_creation(request):
             obj = form.save(commit=False)
             form.save()
 
+            try:
+                message = twilioCli.messages.create(
+                    body="""
+
+                        --- FROM: Boost ---
+
+    Add stats for: %s""" % (listing.ig_name),
+                    from_=myTwilioNumber,
+                    to=myCellPhone
+                    )
+            except:
+                pass
+
             just_created_listing = BlogListingCreationModel.objects.get(id=obj.id)
 
-            if(just_created_listing.google_a_csv):
-                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')
+            '''if(just_created_listing.google_a_csv):
+                CreatorListingMadeMetricModel.objects.create(listing_id=obj.id, ga_bool='True')'''
 
             messages.success(request, "%s has been successfully created." % (name), extra_tags="blog_listing_creation")
 
@@ -220,6 +249,7 @@ def blogger_listing_update(request, id=None):
             form.save(commit=False).ig_type = request.POST.getlist('types')
 
             kw = form.cleaned_data['search_keywords']
+            username = form.cleaned_data['ig_name']
 
             if(kw):
                 form.save(commit=False).search_keywords = kw.split(", ")
@@ -254,6 +284,19 @@ def blogger_listing_update(request, id=None):
             '''
 
             form.save()
+
+            try:
+                message = twilioCli.messages.create(
+                    body="""
+
+                        --- FROM: Boost ---
+
+    Update stats for: %s""" % (username),
+                    from_=myTwilioNumber,
+                    to=myCellPhone
+                    )
+            except:
+                pass
 
             messages.success(request, "%s has been successfully updated." % (listing.ig_name), extra_tags="blog_listing_update")
 

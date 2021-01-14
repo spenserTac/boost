@@ -8,7 +8,7 @@ class BlogListingCreationModel(models.Model):
 
     ig_url = models.CharField(max_length=1000, default=None, null=True, blank=True) # this is the url to the page, since IG has a website.
     niche = models.CharField(max_length=300, default=None, null=True, blank=True)
-    age = models.IntegerField(max_length=300, default=None, null=True, blank=True)
+    age = models.IntegerField(default=None, null=True, blank=True)
 
     monthly_views = models.IntegerField(default=None, null=True, blank=True) # useless
 
@@ -33,7 +33,6 @@ class BlogListingCreationModel(models.Model):
 
     followers = models.IntegerField(default=None, null=True, blank=True)
     avg_likes = models.IntegerField(default=None, null=True, blank=True)
-    avg_comments = models.IntegerField(default=None, null=True, blank=True)
     engagement_rate = models.DecimalField(max_digits=4, decimal_places=2, default=None, null=True, blank=True)
     estimated_post_impressions = models.IntegerField(default=None, null=True, blank=True)
 

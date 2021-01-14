@@ -67,31 +67,6 @@
 
 
 
-
-                              <hr>
-
-                                <div>
-
-
-                                        <div>
-                                            <ul style="list-style: none; padding-left: 0;">
-                                                    <li>
-                                                        <div class="form-check">
-                                                            <input name="ga" class="form-check-input font-weight-normal" type="checkbox" value="true" id="defaultCheck1" {% if ga_c %} checked="True" {% endif %}>
-                                                            <label class="form-check-label" for="defaultCheck1">
-                                                              <h6 class="font-weight-bold">Google Analytics</h6>
-                                                            </label>
-                                                        </div>
-                                                    </li>
-                                            </ul>
-                                        </div>
-
-                                </div>
-
-
-
-
-
                               <hr>
 
                                 <div>
@@ -121,14 +96,53 @@
                                 <div>
 
                                         <div>
-                                            <h6 class="font-weight-bold">Minimum Monthly Views</h6>
+                                            <h6 class="font-weight-bold">Followers</h6>
                                         </div>
 
                                         <small style="color: grey;">(At Least)</small>
 
                                         <div class="input-group input-group-sm mb-3">
 
-                                          <input name="monthly_views" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if monthly_views %} value="{{monthly_views}}" {% endif %}>
+                                          <input name="followers" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if followers %} value="{{followers}}" {% endif %}>
+                                        </div>
+
+                                        <!--        -->
+
+                                        <div>
+                                            <h6 class="font-weight-bold">Engagment Rate</h6>
+                                        </div>
+
+                                        <small style="color: grey;">(At Least)</small>
+
+                                        <div class="input-group input-group-sm mb-3">
+
+                                          <input name="eng_rate" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if eng_rate %} value="{{eng_rate}}" {% endif %}>
+                                        </div>
+
+                                        <!--        -->
+
+                                        <div>
+                                            <h6 class="font-weight-bold">Impressions</h6>
+                                        </div>
+
+                                        <small style="color: grey;">(At Least)</small>
+
+                                        <div class="input-group input-group-sm mb-3">
+
+                                          <input name="impression_count" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if impression_count %} value="{{impression_count}}" {% endif %}>
+                                        </div>
+
+                                        <!--        -->
+
+                                        <div>
+                                            <h6 class="font-weight-bold">Likes</h6>
+                                        </div>
+
+                                        <small style="color: grey;">(At Least)</small>
+
+                                        <div class="input-group input-group-sm mb-3">
+
+                                          <input name="likes" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if likes %} value="{{likes}}" {% endif %}>
                                         </div>
 
 
@@ -430,24 +444,6 @@
                             <h6 class="font-weight-bold">Search By Keywords</h6>
                             <input class="form-control" style="width: 100%;" type="search" placeholder="ex: tech books etc." aria-label="Search" name="search_bar" {% if searchbar_bool %}value="{{searchb}}"{% endif %}>
 
-                            <hr>
-
-                            <div>
-                                <div>
-                                    <ul style="list-style: none; padding-left: 0;">
-                                            <li>
-                                                <div class="form-check">
-                                                    <input name="ga" class="form-check-input font-weight-normal" type="checkbox" value="true" id="defaultCheck1" {% if ga_c %} checked="True" {% endif %}>
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                      <h6 class="font-weight-bold">Google Analytics</h6>
-                                                    </label>
-                                                </div>
-                                            </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
 
                             <hr>
 
@@ -477,16 +473,55 @@
 
                               <div>
 
-                                      <div>
-                                          <h6 class="font-weight-bold">Minimum Monthly Views</h6>
-                                      </div>
+                                <div>
+                                    <h6 class="font-weight-bold">Followers</h6>
+                                </div>
 
-                                      <small style="color: grey;">(At Least)</small>
+                                <small style="color: grey;">(At Least)</small>
 
-                                      <div class="input-group input-group-sm mb-3">
+                                <div class="input-group input-group-sm mb-3">
 
-                                        <input name="monthly_views" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if monthly_views %} value="{{monthly_views}}" {% endif %}>
-                                      </div>
+                                  <input name="followers" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if followers %} value="{{followers}}" {% endif %}>
+                                </div>
+
+                                <!--        -->
+
+                                <div>
+                                    <h6 class="font-weight-bold">Engagment Rate</h6>
+                                </div>
+
+                                <small style="color: grey;">(At Least)</small>
+
+                                <div class="input-group input-group-sm mb-3">
+
+                                  <input name="eng_rate" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if eng_rate %} value="{{eng_rate}}" {% endif %}>
+                                </div>
+
+                                <!--        -->
+
+                                <div>
+                                    <h6 class="font-weight-bold">Impressions</h6>
+                                </div>
+
+                                <small style="color: grey;">(At Least)</small>
+
+                                <div class="input-group input-group-sm mb-3">
+
+                                  <input name="impression_count" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if impression_count %} value="{{impression_count}}" {% endif %}>
+                                </div>
+
+                                <!--        -->
+
+                                <div>
+                                    <h6 class="font-weight-bold">Likes</h6>
+                                </div>
+
+                                <small style="color: grey;">(At Least)</small>
+
+                                <div class="input-group input-group-sm mb-3">
+
+                                  <input name="likes" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if likes %} value="{{likes}}" {% endif %}>
+                                </div>
 
 
                               </div>
