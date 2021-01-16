@@ -40,7 +40,7 @@
 
                 <div class="col-8 my-3">
 
-                    <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                    <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                       <div class="row">
                         <div class="col">
@@ -67,33 +67,104 @@
                     </div>
 
 
-                    <div class="my-3 border rounded shadow" style="background-color: white;">
+                    <div class="my-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
-                      <h4 class="card-header text-center">Statistics</h4>
+                      <h4 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Info</h4>
 
                       <div class="card-body">
 
-                        <table class="table table-borderless mx-auto my-auto">
+                        <div class="row">
 
-                          <tbody>
-                            <tr>
-                              <td class="text-center"><b><h5>Followers</h5></b><p>{{ listing.followers|intcomma }}</p></td>
-                              <td class="text-center"><b><h5>Engagement Rate</h5></b><p>{{ listing.engagement_rate }}%</p></td>
-                            </tr>
-                            <tr>
-                              {% if listing.estimated_post_impressions %}
-                                <td class="text-center"><b><h5>Est. Impressions</h5></b><p class="m-0">{{ listing.estimated_post_impressions|intcomma }}</p></td>
+                          <div class="col-7 px-0 border-right">
 
-                              {% else %}
-                                <td class="text-center"><b><h5>Estimated Impressions</h5></b><p class="m-0">N/A</p></td>
+                            <table class="table table-borderless mx-auto my-auto text-center">
 
-                              {% endif %}
-                              <td class="text-center"><b><h5>Average Likes</h5></b><p class="m-0">{{ listing.avg_likes|intcomma }}</p></td>
+                              <tbody>
+                                <tr>
 
-                            </tr>
-                          </tbody>
+                                  {% if listing.followers %}
+                                    <td><b>Followers</b><br>{{ listing.followers|intcomma }}</td>
 
-                        </table>
+                                  {% else %}
+                                    <td><b>Followers</b><br>N/A</td>
+
+                                  {% endif %}
+
+                                  {% if listing.engagement_rate %}
+                                    <td><b>Engagement Rate</b><br>{{ listing.engagement_rate|intcomma }}</td>
+
+                                  {% else %}
+                                    <td><b>Engagement Rate</b><br>N/A</td>
+
+                                  {% endif %}
+
+                                </tr>
+                                <tr>
+
+                                  {% if listing.estimated_post_impressions %}
+                                    <td><b>Avg. Impressions</b><br>{{ listing.estimated_post_impressions|intcomma }}</td>
+
+                                  {% else %}
+                                    <td><b>Avg. Impressions</b><br>N/A</td>
+
+                                  {% endif %}
+
+                                  {% if listing.avg_likes %}
+                                    <td><b>Average Likes</b><br>{{ listing.avg_likes|intcomma }}</td>
+
+                                  {% else %}
+                                    <td><b>Average Likes</b><br>N/A</td>
+
+                                  {% endif %}
+                                </tr>
+                              </tbody>
+
+                            </table>
+
+                          </div>
+
+                          <div class="col-5 text-center mt-3">
+
+                            <!--
+
+                            <table class="table table-borderless pr-1">
+                              <tbody>
+
+
+
+                                <tr>
+                                  <td class="text-center"><b>Niche</b><p class="m-0">{{ listing.niche }}</p></td>
+                                  <td class="text-center"><b>Years Active</b><p>{{ listing.age }}</p></td>
+                                </tr>
+
+                                <tr>
+                                  <td class="text-center pt-0"><b>Language</b><p class="m-0">{{ listing.language }}</p></td>
+                                  <td class="text-center pt-0"><b>Username</b><p class="m-0 text-break">{{ listing.ig_name }}</p></td>
+                                </tr>
+
+
+
+                              </tbody>
+                            </table>
+
+                            -->
+
+
+
+
+
+                            <b>Niche</b><p class="m-0">{{ listing.niche }}</p>
+                            <br>
+                            <b>Years Active</b><p class="mb-0">{{ listing.age }}</p>
+
+
+
+
+
+
+                          </div>
+
+                        </div>
 
                       </div>
 
@@ -218,7 +289,7 @@
 
                     <hr class="my-4">
 
-                    <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                    <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                         <div class="row">
                           <div class="col">
@@ -288,7 +359,7 @@
 
                     </div>
 
-                    <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
+                    <div class="card text-white bg-dark text-center mt-5 mb-3" style="border: 2px solid #32383e; border-radius: 25px;">
                       <div class="card-header">Watch this listing</div>
                       <div class="card-body">
                         <h5 class="card-title">Don't Miss A Thing!</h5>
@@ -310,7 +381,7 @@
                     <br>
                     <br>
 
-                    <div class="card shadow p-3">
+                    <div class="card shadow p-4" style="border: 2px solid #d8d8d8; border-radius: 25px;">
                       {% if following %}
                           <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
                       {% else %}
@@ -360,8 +431,8 @@
                     </div>
 
 
-                    <div class="card shadow mb-3">
-                      <h5 class="card-header text-center">Pricing Model</h5>
+                    <div class="card shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Pricing Model</h5>
                       <div class="card-body">
 
                         <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
@@ -369,7 +440,7 @@
                       </div>
                     </div>
 
-
+                    <!--
 
                     <div class="card shadow">
 
@@ -407,22 +478,21 @@
                         <h5 class="card-title">Language</h5>
                         <p class="card-text">{{ listing.language }}</p>
 
-                        -->
+
 
                       </div>
                     </div>
 
-
+                    -->
 
                     <br>
                     <hr>
                     <br>
 
 
-                        <div class="card shadow">
-                          <h5 class="card-header text-center">About The Creator</h5>
+                        <div class="card shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                          <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">About The Creator</h5>
                           <div class="card-body">
-                            <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
                             <p class="card-text">Listing Overview: {{ listing.tagline }}</p>
 
 
@@ -496,7 +566,7 @@
 
             <div class="col-12 mb-3">
 
-                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                   <div class="row">
                     <div class="col">
@@ -521,7 +591,7 @@
 
                 </div>
 
-                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                <div class="my-3 p-4 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                 {% if following %}
                     <a href="{% url 'creator_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
@@ -690,8 +760,8 @@
                 -->
 
 
-                    <div class="card shadow mb-3">
-                      <h5 class="card-header text-center">Pricing Model</h5>
+                    <div class="card shadow mb-3" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Pricing Model</h5>
                       <div class="card-body">
 
                         <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
@@ -699,142 +769,201 @@
                       </div>
                     </div>
 
-                        <div class="card shadow">
-                          <h5 class="card-header text-center">Info</h5>
 
-                          <div class="card-body">
-                            <table class="table table-borderless mx-auto my-auto">
-                              <tbody>
+                    <div class="card shadow mb-3" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Statistics</h5>
 
-                                <tr>
-                                  <td class="text-center"><b><h5>Niche</h5></b><p class="m-0">{{ listing.niche }}</p></td>
-                                  <td class="text-center"><b><h5>Years Active</h5></b><p>{{ listing.age }}</p></td>
-                                </tr>
+                      <div class="card-body">
+                        <table class="table table-borderless mx-auto my-auto text-center">
 
-                                <tr>
-                                  <td class="text-center"><b><h5>Language</h5></b><p class="m-0">{{ listing.language }}</p></td>
-                                  <td class="text-center text-break"><b><h5>Username</h5></b><p class="m-0">{{ listing.ig_name }}</p></td>
-                                </tr>
+                          <tbody>
+                            <tr>
 
-                              </tbody>
-                            </table>
-                          </div>
+                              {% if listing.followers %}
+                                <td><b>Followers</b><br>{{ listing.followers|intcomma }}</td>
 
-                        </div>
+                              {% else %}
+                                <td><b>Followers</b><br>N/A</td>
 
-                </div class="my-3 p-3 border rounded" style="background-color: white;">
+                              {% endif %}
+
+                              {% if listing.engagement_rate %}
+                                <td><b>Engagement Rate</b><br>{{ listing.engagement_rate|intcomma }}%</td>
+
+                              {% else %}
+                                <td><b>Engagement Rate</b><br>N/A</td>
+
+                              {% endif %}
+
+                            </tr>
+                            <tr>
+
+                              {% if listing.estimated_post_impressions %}
+                                <td><b>Avg. Impressions</b><br>{{ listing.estimated_post_impressions|intcomma }}</td>
+
+                              {% else %}
+                                <td><b>Avg. Impressions</b><br>N/A</td>
+
+                              {% endif %}
+
+                              {% if listing.avg_likes %}
+                                <td><b>Average Likes</b><br>{{ listing.avg_likes|intcomma }}</td>
+
+                              {% else %}
+                                <td><b>Average Likes</b><br>N/A</td>
+
+                              {% endif %}
+                            </tr>
+                          </tbody>
+
+                        </table>
+                      </div>
+
+                    </div>
 
 
 
 
-                <hr class="my-4">
+                    <div class="card shadow mb-3" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Info</h5>
 
-                <div class="my-3 p-3 mx-3 border rounded shadow" style="background-color: white;">
+                      <div class="card-body">
+                        <table class="table table-borderless mx-auto my-auto">
+                          <tbody>
 
-                    <div class="row">
-                      <div class="col">
+                            <tr>
+                              <td class="text-center"><b>Niche</b><p class="m-0">{{ listing.niche }}</p></td>
+                              <td class="text-center"><b>Years Active</b><p>{{ listing.age }}</p></td>
+                            </tr>
 
-                        <div class="card">
-                          <div class="card-header">
-                            <h5 class="m-0">Overview Description</h5>
-                          </div>
-                          <div class="card-body">
-                            <p class="card-text">{{ listing.overview_description|linebreaks }}</p>
-                          </div>
-                        </div>
+                            <tr>
+                              <td class="text-center"><b>Language</b><p class="m-0">{{ listing.language }}</p></td>
+                              <td class="text-center text-break"><b>Username</b><p class="m-0">{{ listing.ig_name }}</p></td>
+                            </tr>
 
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+
+            </div>
+
+
+
+
+            <hr class="my-4">
+
+
+            <div class="my-3 p-3 mx-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
+
+                <div class="row">
+                  <div class="col">
+
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="m-0">Overview Description</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text">{{ listing.overview_description|linebreaks }}</p>
                       </div>
                     </div>
 
-                    <br>
+                  </div>
+                </div>
 
-                    <div class="row">
-                      <div class="col">
+                <br>
 
-                        <div class="card">
-                          <div class="card-header">
-                            <h5 class="m-0">Audience Description</h5>
-                          </div>
-                          <div class="card-body">
-                            <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
-                          </div>
-                        </div>
+                <div class="row">
+                  <div class="col">
 
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="m-0">Audience Description</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
                       </div>
                     </div>
 
-                    <br>
+                  </div>
+                </div>
 
-                    <div class="row">
-                      <div class="col">
+                <br>
 
-                        <div class="card">
-                          <div class="card-header">
-                            <h5 class="m-0">What This Blogger Would Like From A Sponsor</h5>
-                          </div>
-                          <div class="card-body">
-                            <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
-                          </div>
-                        </div>
+                <div class="row">
+                  <div class="col">
 
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="m-0">What This Blogger Would Like From A Sponsor</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text">{{ listing.audience_description|linebreaks }}</p>
                       </div>
                     </div>
 
-                    <br>
+                  </div>
+                </div>
 
-                    <div class="row">
-                      <div class="col">
+                <br>
 
-                        <div class="card">
-                          <div class="card-header">
-                            <h5 class="m-0">Experience Description</h5>
-                          </div>
-                          <div class="card-body">
-                            <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
-                          </div>
-                        </div>
+                <div class="row">
+                  <div class="col">
 
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="m-0">Experience Description</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text">{{ listing.exp_description|linebreaks }}</p>
                       </div>
                     </div>
 
+                  </div>
+                </div>
+
+            </div>
+
+
+            <br>
+            <br>
+
+
+
+            <div class="card shadow mx-3" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+              <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">About The Creator</h5>
+              <div class="card-body">
+                <p class="card-text">Listing Info: {{ listing.tagline }}</p>
+
+                <small class="m-0 p-0 text-break" style="opacity: 0%;">Easter Egg! Easter Egg! Easter Egg! Easter Egg! Easter Egg! Easter Egg!</small>
+
+
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
+                          Other Listings By This Creator
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        {% for l in all_users_listings %}
+                          <a class="text-break" href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
+                          <br>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
 
-                <br>
-                <hr>
-                <br>
+              </div>
+            </div>
 
-                    <div class="card shadow mx-3">
-                      <h5 class="card-header text-center">About The Creator</h5>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
-                        <p class="card-text">Listing Info: {{ listing.tagline }}</p>
-
-
-                        <div class="accordion" id="accordionExample">
-                          <div class="card">
-                            <div class="card-header" id="headingOne">
-                              <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #007185;">
-                                  Other Listings By This Creator
-                                </button>
-                              </h2>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                              <div class="card-body">
-                                {% for l in all_users_listings %}
-                                  <a class="text-break" href="{% url 'creator_marketplace_listing_view' id=l.id %}" style="color: #007185;">{{ l }}</a>
-                                  <br>
-                                {% endfor %}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-
-                      </div>
-                    </div>
 
             </div>
 

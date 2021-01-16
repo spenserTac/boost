@@ -117,7 +117,6 @@ def order_complete():
 
             CompleteOrderMetricModel.objects.create(acc_order_id=c_order.id, completed_order_id=cc_order.id)
 
-            c_order.delete()
 
 
 #order_complete()
@@ -665,7 +664,7 @@ def dashboard_s_acc(request, id=None):
     }
 
 
-    return redirect('https://www.escrow.com/pay?token=%s' % (escrow_t["token"]), "_blank")
+    return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
 @dashboard_s_edit_decorator
 def dashboard_s_edit(request, id=None):

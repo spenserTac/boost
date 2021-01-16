@@ -35,7 +35,7 @@
 
               <div class="col-8 my-3">
 
-                  <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                  <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                     <div class="row">
                       <div class="col">
@@ -61,7 +61,7 @@
 
                   <hr class="my-4">
 
-                  <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                  <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                       <div class="row">
                         <div class="col">
@@ -131,7 +131,7 @@
 
                   </div>
 
-                  <div class="card text-white bg-dark text-center mt-5 mb-3" style="">
+                  <div class="card text-white bg-dark text-center mt-5 mb-3" style="border: 2px solid #32383e; border-radius: 25px;">
                     <div class="card-header">Watch this listing</div>
                     <div class="card-body">
                       <h5 class="card-title">Don't Miss A Thing!</h5>
@@ -152,7 +152,7 @@
                     <br>
                     <br>
 
-                    <div class="card shadow p-3">
+                    <div class="card shadow p-4" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
 
                       {% if following %}
                           <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
@@ -203,8 +203,8 @@
                     </div>
 
 
-                    <div class="card shadow mb-3">
-                      <h5 class="card-header text-center">Budget</h5>
+                    <div class="card shadow mb-3" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Budget</h5>
                       <div class="card-body">
 
                         <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
@@ -214,10 +214,9 @@
 
 
 
-                    <div class="card shadow">
-                      <h5 class="card-header text-center">About The Sponsor</h5>
+                    <div class="card shadow" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
+                      <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">About The Sponsor</h5>
                       <div class="card-body">
-                        <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
                         <p class="card-text">Listing Info: {{ listing.tagline }}</p>
 
 
@@ -290,7 +289,7 @@
 
             <div class="col-12 mb-3">
 
-                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                   <div class="row">
                     <div class="col">
@@ -311,7 +310,7 @@
 
                 </div>
 
-                <div class="card shadow p-3">
+                <div class="card shadow p-4" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
 
                   {% if following %}
                       <a href="{% url 'sponsor_marketplace_listing_unwatch_view' id=listing.id %}"><button class="btn btn-primary p-2 btn-block">Watching</button></a>
@@ -362,7 +361,7 @@
                 </div>
 
 
-                <div class="my-3 p-3 border rounded shadow" style="background-color: white;">
+                <div class="my-3 p-3 shadow" style="background-color: white; border: 2px solid #d8d8d8; border-radius: 25px;">
 
                     <div class="row">
                       <div class="col">
@@ -434,11 +433,11 @@
 
 
                 <br>
-                <hr>
+                <hr style="width: 90%;">
                 <br>
 
-                <div class="card shadow mb-3">
-                  <h5 class="card-header text-center">Budget</h5>
+                <div class="card shadow mb-3" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
+                  <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">Budget</h5>
                   <div class="card-body">
 
                     <p class="card-text">{{ listing.pricing_description|linebreaks }}</p>
@@ -446,10 +445,9 @@
                   </div>
                 </div>
 
-                <div class="card shadow">
-                  <h5 class="card-header text-center">About The Sponsor</h5>
+                <div class="card shadow" style=" border: 2px solid #d8d8d8; border-radius: 25px;">
+                  <h5 class="card-header text-center" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">About The Sponsor</h5>
                   <div class="card-body">
-                    <h5 class="card-title">{{ listing.creator.first_name }} {{ listing.creator.last_name }}</h5>
                     <p class="card-text">Listing Info: {{ listing.tagline }}</p>
 
 

@@ -61,14 +61,18 @@ def cipher_id(encrypted_id):
 
 
 # returns json response. It will contain: sponsor LANDING PAGE, ID, TOKEN
+# escrow: 14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W
+# escrow-sandbox: 1903_654mQOuPbybvpQ7ZMtoPlWFqXrb76mBKKVUQWyqpUUgAphioq9ZbtRlpyipDqsCO
 def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_name, sponsor_listing_name):
+
+    print("---> escrow_sponsor_pays ---> has been run.")
 
     fee = str(0.10 * float(amount))
 
     r = requests.post(
 
-    'https://api.escrow.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
+    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
+    auth=('admin@getboostplatform.com', '1903_654mQOuPbybvpQ7ZMtoPlWFqXrb76mBKKVUQWyqpUUgAphioq9ZbtRlpyipDqsCO'),
 
 
     json={
@@ -103,7 +107,7 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
                 # Title should be solid yet short description of transaction.
                 # desciption should give instructions for URL stuff.
                 "title": "Boost Sponsored Escrow Order",
-                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform.",
+                "description": "Thank You For Using Boost.",
                 "type": "milestone",
                 "inspection_period": 86400,
                 "quantity": 1,
@@ -152,12 +156,14 @@ def escrow_sponsor_pays(creator_email, sponsor_email, amount, creator_listing_na
 
 def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_name, sponsor_listing_name):
 
+    print("---> escrow_creator_pays ---> has been run.")
+
     fee = str(0.10 * float(amount))
 
     r = requests.post(
 
-    'https://api.escrow.com/integration/pay/2018-03-31',
-    auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
+    'https://api.escrow-sandbox.com/integration/pay/2018-03-31',
+    auth=('admin@getboostplatform.com', '1903_654mQOuPbybvpQ7ZMtoPlWFqXrb76mBKKVUQWyqpUUgAphioq9ZbtRlpyipDqsCO'),
 
 
     json={
@@ -192,7 +198,7 @@ def escrow_creator_pays(creator_email, sponsor_email, amount, creator_listing_na
                 # Title should be solid yet short description of transaction.
                 # desciption should give instructions for URL stuff.
                 "title": "Boost Sponsored Escrow Order",
-                "description": "After completion of status 3 (creator uploads content, see left-side status section), the creator will upload content URL on the Boost platform.",
+                "description": "Thank You For Using Boost.",
                 "type": "milestone",
                 "inspection_period": 86400,
                 "quantity": 1,
