@@ -203,7 +203,7 @@ def creator_marketplace(request):
 
 
     # ALWAYS KEEP THIS AT THE BOTTOM OF THE FUNCTION
-    paginator = Paginator(creator_listings, 10)
+    paginator = Paginator(creator_listings, 18)
     page = request.GET.get('page')
 
     creator_listings = paginator.get_page(page)

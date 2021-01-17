@@ -3,18 +3,27 @@
 
 {% block content %}
 
+
+
+
+
+
+
+
+
+
+
     <!-- Creator Marketplace view for desktops -->
-    <div class="d-none d-lg-block">
-      <div class="px-5 mx-auto" style="width: 80%;">
+
+      <div class="mx-auto d-none d-lg-block px-lg-5 px-md-3 px-sm-2 px-xs-2">
 
         <br>
 
-
-        <div class="row">
+        <div class="row pl-4">
 
             <!-- Filter Form -->
 
-            <div class="col-2 mt-2 px-4 shadow" style="height: 50%; border: 2px solid #d8d8d8; border-radius: 25px;">
+            <div class="col-2 d-none d-lg-block mt-2 px-4 py-2 shadow" style="height: 50%; border: 2px solid #d8d8d8; border-radius: 25px; max-width: 100%;">
                 <form method="GET">
                     <div class="col p-0">
 
@@ -203,147 +212,292 @@
 
             <!-- END Filter Form -->
 
+
             <!-- Listings -->
 
-            <div class="col-10">
-                {% for listing in creator_listings %}
+            <div class="col mt-3 p-0">
 
 
 
-                <div class="card text-center m-2 shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+              <div>
 
-                    <div class="card-header" style="border: 0px solid #d8d8d8; border-top-left-radius: 25px; border-top-right-radius: 25px;">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                              <a class="nav-link active" style="color: black;">{{ listing.ig_name }}</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="https://instagram.com/{{ listing.ig_name}}" target="_blank" style="color: #007185;">
-                                <!--
-                                {% if listing.ig_url.4 == "s" %}
-                                  {{ listing.ig_url|slice:"8:" }}
-                                {% elif listing.ig_url.4 == ":" %}
-                                  {{ listing.ig_url|slice:"7:" }}
-                                {% endif %}
-                                -->
-                                instagram.com/{{ listing.ig_name }}
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link disabled" style="color: #636363;">Niche: {{ listing.niche }}</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="d-none d-xl-block">
+                  <div class="d-flex flex-wrap justify-content-center">
 
-                    <div class="card-body">
-                        <div class="row">
-
-                            <div class="col-5 pr-0">
-                                <div class="row">
-                                    <div class="col-12 mb-4">
-
-                                        <!--<img src="https://static.teamguru.com/data/images/thumb/180_da8e22ef6e.jpg" class="card-img" style="max-width: 100%; max-height: 100%;">-->
-
-                                      <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%;">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-7 my-auto pt-0 pb-0">
-                                <h4 class="mx-3 mb-2 font-weight-normal">{{ listing.tagline }}</h4>
-
-                                <br>
-
-                                <table class="table table-borderless m-0">
-
-                                  <tbody>
-                                    <tr>
-
-                                      {% if listing.followers %}
-                                        <td><b>Followers</b><br>{{ listing.followers|intcomma }}</td>
-
-                                      {% else %}
-                                        <td><b>Followers</b><br>N/A</td>
-
-                                      {% endif %}
-
-                                      {% if listing.engagement_rate %}
-                                        <td><b>Engagement Rate</b><br>{{ listing.engagement_rate|intcomma }}</td>
-
-                                      {% else %}
-                                        <td><b>Engagement Rate</b><br>N/A</td>
-
-                                      {% endif %}
-
-                                    </tr>
-                                    <tr>
-
-                                      {% if listing.estimated_post_impressions %}
-                                        <td><b>Avg. Impressions</b><br>{{ listing.estimated_post_impressions|intcomma }}</td>
-
-                                      {% else %}
-                                        <td><b>Avg. Impressions</b><br>N/A</td>
-
-                                      {% endif %}
-
-                                      {% if listing.avg_likes %}
-                                        <td><b>Average Likes</b><br>{{ listing.avg_likes|intcomma }}</td>
-
-                                      {% else %}
-                                        <td><b>Average Likes</b><br>N/A</td>
-
-                                      {% endif %}
-                                    </tr>
-                                  </tbody>
-
-                                </table>
-
-
-                                  <!--
-                                  <img class="pb-4" src="https://www.cookiebot.com/media/1082/googleanalytics.png?width=605&" style="width: 30%; height: 30%;">
-                                  -->
+                    {% for listing in creator_listings %}
 
 
 
-                                  <!--
+                        <div class="card mx-3 mt-2 mb-5 shadow" style="width: 28%; border: 2px solid #d8d8d8; border-radius: 25px;">
 
-                                  {% if listing.google_a_csv %}
+                            <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}">
+                              <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%; border: 0px solid #d8d8d8; border-top-left-radius: 23px; border-top-right-radius: 23px;"">
+                            </a>
+
+                          <div class="card-body pt-1">
+
+                              <div class="row mt-2">
+
+                                  <h5 class="card-title ml-3 mb-0 text-break"><a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" style="color: #007185;">{{ listing.ig_name }}</a></h5
+
                                   <br>
 
-                                    <img class="mt-4 pt-3" src="{{MEDIA_URL}}uploads/google_img.jpg" class="card-img" style="max-width: 25%; max-height: 25%;">
+                                  <div class="ml-auto mr-3">
 
-                                  {% endif %}
+                                      {% if listing in watching %}
 
-                                  -->
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                                              <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+                                          </svg>
 
-                            </div>
+                                      {% else %}
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                      </svg>
+
+                                      {% endif %}
+
+
+                                 </div>
+
+                                  <br>
+
+                              </div>
+
+
+                            <small class="text-muted ml-1">{{ listing.niche }}</small>
+
+
+                            <table class="table table-borderless m-0">
+
+                                <tbody>
+                                  <tr>
+
+                                    {% if listing.followers %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.followers|intcomma }}</h5>
+                                          <small class="text-muted">Followers</small>
+                                      </td>
+
+                                    {% else %}
+
+                                     <td>
+                                         <h5 class="mb-0">N/A</h5>
+                                         <small class="text-muted">Followers</small>
+                                     </td>
+
+
+                                    {% endif %}
+
+                                    {% if listing.engagement_rate %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.engagement_rate|intcomma }}%</h5>
+                                          <small class="text-muted">Engagement Rate</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Engagement Rate</small>
+                                      </td>
+
+                                    {% endif %}
+
+                                  </tr>
+                                  <tr>
+
+                                    {% if listing.estimated_post_impressions %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.estimated_post_impressions|intcomma }}</h5>
+                                          <small class="text-muted">Avg. Impressions</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Avg. Impressions</small>
+                                      </td>
+
+                                    {% endif %}
+
+                                    {% if listing.avg_likes %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.avg_likes|intcomma }}</h5>
+                                          <small class="text-muted">Avg. Likes</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Avg. Likes</small>
+                                      </td>
+
+                                    {% endif %}
+                                  </tr>
+                                </tbody>
+
+                             </table>
+
+                          </div>
                         </div>
 
-                        <div class="d-flex">
-
-                          <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" class=" flex-fill">
-                            <button type="button" class="btn btn-primary px-5 w-100 mr-4" style="border: 1px solid #0058b5;">View Listing</button>
-                          </a>
 
 
-                          {% if listing in watching %}
+                    {% endfor %}
 
-                            <button type="button" class="btn btn-success px-5 flex-fill ml-4" style="border: 1px solid #025e17;">Watching</button>
-
-                          {% else %}
-
-                            <button type="button" class="btn btn-outline-success px-5 flex-fill ml-4" style="border: 1px solid #025e17;">Not Watching</button>
-
-                          {% endif %}
-
-                        </div>
-
-
-                    </div>
-
+                  </div>
                 </div>
 
-                {% endfor %}
+
+                <div class="d-none d-lg-block d-xl-none">
+                  <div class="d-flex flex-wrap justify-content-center">
+
+                    {% for listing in creator_listings %}
+
+
+
+                        <div class="card mx-3 mt-2 mb-5 shadow" style="width: 28%; border: 2px solid #d8d8d8; border-radius: 25px;">
+
+                            <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}">
+                              <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%; border: 0px solid #d8d8d8; border-top-left-radius: 23px; border-top-right-radius: 23px;"">
+                            </a>
+
+                          <div class="card-body pt-1 pl-2">
+
+                              <div class="row mt-2">
+
+                                  <h5 class="card-title ml-4 mb-0 text-break"><a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" style="color: #007185;">{{ listing.ig_name }}</a></h5
+
+                                  <br>
+
+                                  <div class="ml-auto mr-3">
+
+                                      {% if listing in watching %}
+
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                                              <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+                                          </svg>
+
+                                      {% else %}
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                      </svg>
+
+                                      {% endif %}
+
+
+                                 </div>
+
+                                  <br>
+
+                              </div>
+
+
+                            <small class="text-muted ml-3">{{ listing.niche }}</small>
+
+
+                            <table class="table table-borderless m-0">
+
+                                <tbody>
+                                  <tr>
+
+                                    {% if listing.followers %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.followers|intcomma }}</h5>
+                                          <small class="text-muted">Followers</small>
+                                      </td>
+
+                                    {% else %}
+
+                                     <td>
+                                         <h5 class="mb-0">N/A</h5>
+                                         <small class="text-muted">Followers</small>
+                                     </td>
+
+
+                                    {% endif %}
+
+                                    {% if listing.engagement_rate %}
+
+                                      <td>
+                                          <h5 class="mb-0 mr">{{ listing.engagement_rate|intcomma }}%</h5>
+                                          <small class="text-muted">Engagement Rate</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Engagement Rate</small>
+                                      </td>
+
+                                    {% endif %}
+
+                                  </tr>
+                                  <tr>
+
+                                    {% if listing.estimated_post_impressions %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.estimated_post_impressions|intcomma }}</h5>
+                                          <small class="text-muted">Avg. Impressions</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Avg. Impressions</small>
+                                      </td>
+
+                                    {% endif %}
+
+                                    {% if listing.avg_likes %}
+
+                                      <td>
+                                          <h5 class="mb-0">{{ listing.avg_likes|intcomma }}</h5>
+                                          <small class="text-muted">Avg. Likes</small>
+                                      </td>
+
+                                    {% else %}
+
+                                      <td>
+                                          <h5 class="mb-0">N/A</h5>
+                                          <small class="text-muted">Avg. Likes</small>
+                                      </td>
+
+                                    {% endif %}
+                                  </tr>
+                                </tbody>
+
+                             </table>
+
+                          </div>
+                        </div>
+
+
+
+                    {% endfor %}
+
+                  </div>
+                </div>
+
+
+
+              </div>
+
 
                 <nav class="mt-5" aria-label="Page navigation example">
                   <ul class="pagination justify-content-center">
@@ -389,10 +543,319 @@
         </div>
 
     </div>
+
+
+
+  <div class="d-none d-sm-block d-md-block d-lg-none px-md-3 px-sm-2">
+
+
+      <div class="row mx-5 mb-3">
+        <div class="col-4 px-2 mx-auto">
+
+          <a class="btn btn-primary btn-block mt-3" style="border: 1px solid #0058b5" data-toggle="collapse" data-target="#collapseCreatorOrdersSmToMdBlock" role="button">
+              Filter By
+          </a>
+
+         </div>
+
+        <div class="col-8 pr-2 pl-0 mx-auto">
+
+        <button type="button" class="btn btn-primary btn-block my-3" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModalMobileSmToMdBlock">
+          Need Help?
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="helpVideoModalMobileSmToMdBlock" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Listing Creation/Updating Help Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12 embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="//www.youtube.com/embed/6LLFgGmY_cA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+      <div class="collapse" id="collapseCreatorOrdersSmToMdBlock">
+
+        <form method="GET">
+            <div class="col">
+                <div class="dropdown mx-5">
+
+
+                    <h4 class="mt-3 text-left">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-filter" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                      </svg>
+                      Filter By
+                    </h4>
+
+                    <hr>
+
+                    <div>
+
+                      <h6 class="font-weight-bold">Search By Keywords</h6>
+                      <input class="form-control" style="width: 100%;" type="search" placeholder="ex: tech books etc." aria-label="Search" name="search_bar" {% if searchbar_bool %}value="{{searchb}}"{% endif %}>
+
+
+                      <hr>
+
+                        <div>
+                            <div>
+                                <h6 class="font-weight-bold">Niche</h6>
+                            </div>
+
+                                <div>
+                                    <ul style="list-style: none; padding-left: 0;">
+                                        {% for niche, check in niches.items %}
+                                            <li>
+                                                <div class="form-check">
+                                                    <input name="niche" class="form-check-input font-weight-normal" type="checkbox" value="{{ niche }}" id="defaultCheck1" {% if check == 'checked' %} checked="True" {% endif %}>
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                    {{ niche }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div>
+
+                          <div>
+                              <h6 class="font-weight-bold">Followers</h6>
+                          </div>
+
+                          <small style="color: grey;">(At Least)</small>
+
+                          <div class="input-group input-group-sm mb-3">
+
+                            <input name="followers" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if followers %} value="{{followers}}" {% endif %}>
+                          </div>
+
+                          <!--        -->
+
+                          <div>
+                              <h6 class="font-weight-bold">Engagment Rate</h6>
+                          </div>
+
+                          <small style="color: grey;">(At Least)</small>
+
+                          <div class="input-group input-group-sm mb-3">
+
+                            <input name="eng_rate" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if eng_rate %} value="{{eng_rate}}" {% endif %}>
+                          </div>
+
+                          <!--        -->
+
+                          <div>
+                              <h6 class="font-weight-bold">Avg. Impressions</h6>
+                          </div>
+
+                          <small style="color: grey;">(At Least)</small>
+
+                          <div class="input-group input-group-sm mb-3">
+
+                            <input name="impression_count" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if impression_count %} value="{{impression_count}}" {% endif %}>
+                          </div>
+
+                          <!--        -->
+
+                          <div>
+                              <h6 class="font-weight-bold">Likes</h6>
+                          </div>
+
+                          <small style="color: grey;">(At Least)</small>
+
+                          <div class="input-group input-group-sm mb-3">
+
+                            <input name="likes" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" {% if likes %} value="{{likes}}" {% endif %}>
+                          </div>
+
+
+                        </div>
+
+
+                        <hr>
+
+                        <div>
+
+                                <div>
+                                    <h6 class="font-weight-bold">Years Active</h6>
+                                </div>
+
+                                <small style="color: grey;">(At Least)</small>
+                                <div class="d-flex justify-content-center mB-4">
+
+                                  <input type="range" id="rangeInput" name="blog_age_val" min="0" max="10" value="{{blog_age_val}}" oninput="amount.value=rangeInput.value">
+
+                                  <output class="ml-1" id="amount" name="amount" for="rangeInput">{{blog_age_val}}</output>
+
+                                </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <div>
+                                <h6 class="font-weight-bold">Language</h6>
+                            </div>
+
+                                <div>
+                                  <ul style="list-style: none; padding-left: 0;">
+                                      {% for l, check in langs.items %}
+                                          <li>
+                                              <div class="form-check">
+                                                  <input name="language" class="form-check-input font-weight-normal" type="checkbox" value="{{ l }}" id="defaultCheck2" {% if check == 'checked' %} checked="True" {% endif %}>
+                                                  <label class="form-check-label" for="defaultCheck2">
+                                                  {{ l }}
+                                                  </label>
+                                              </div>
+                                          </li>
+                                      {% endfor %}
+                                  </ul>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-block btn-success" style="border: 1px solid #025e17" type="submit">Search</button>
+                <input class="btn btn-block btn-primary mb-3" style="border: 1px solid #0058b5" type="submit" value="Reset" name="reset_button">
+
+                <br>
+                <hr class="mb-3">
+                <br>
+
+            </div>
+        </form>
+
+      </div>
+
+
+
+      <div class="d-none d-md-block d-lg-none">
+        <div class="d-flex flex-wrap justify-content-center">
+
+          {% for listing in creator_listings %}
+
+
+
+              <div class="card mx-3 my-2" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">MD</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+
+
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+
+
+      <div class="d-none d-sm-block d-md-none">
+        <div class="d-flex flex-wrap justify-content-center">
+
+          {% for listing in creator_listings %}
+
+
+
+              <div class="card mx-3 my-2" style="width: 13rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">SM</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+
+
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+
+      <nav class="mt-5" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          {% if creator_listings.has_previous %}
+            <li class="page-item">
+              <a class="page-link m-1" href="?page={{creator_listings.previous_page_number}}" tabindex="-1" aria-disabled="true" style="background-color: #f5f6f9; border-color: #acafb4; color: #3b3b3b;">Previous</a>
+            </li>
+
+            <li class="page-item"><a class="page-link m-1" href="?page={{creator_listings.previous_page_number}}" style="background-color: #f5f6f9; border-color: #acafb4; color: #3b3b3b;">{{creator_listings.previous_page_number}}</a></li>
+
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link m-1" style="border-color: #acafb4;" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+
+          {% endif %}
+
+          <li class="page-item"><a class="page-link m-1" href="?page={{creator_listings.number}}" style="background-color: white; border-color: #007bff;"><b>{{creator_listings.number}}</b></a></li>
+
+
+          {% if creator_listings.has_next %}
+            <li class="page-item"><a class="page-link m-1" href="?page={{creator_listings.next_page_number}}" style="background-color: #f5f6f9; border-color: #acafb4; color: #3b3b3b;">{{creator_listings.next_page_number}}</a></li>
+
+            <li class="page-item">
+              <a class="page-link m-1" href="?page={{creator_listings.next_page_number}}" style="background-color: #f5f6f9; border-color: #acafb4; color: #3b3b3b;">Next</a>
+            </li>
+
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link m-1" style="border-color: #acafb4;" href="#" tabindex="-1" aria-disabled="true">Next</a>
+            </li>
+
+          {% endif %}
+
+
+        </ul>
+      </nav>
+
+
+
   </div>
 
+
+
+
+
+
     <!-- Creator Marketplace view for phones and tablets -->
-    <div class="d-lg-none">
+    <div class="d-sm-none">
       <div class="container">
 
         <div class="row">
@@ -447,10 +910,6 @@
               <form method="GET">
                   <div class="col">
                       <div class="dropdown">
-
-
-
-
 
 
                           <h4 class="mt-3 text-left">
@@ -764,6 +1223,6 @@
            </div>
        </div>
     </div>
-</div>
+    </div>
 
 {% endblock content %}
