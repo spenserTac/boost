@@ -6,13 +6,13 @@
 
 
 
-    <div class="view d-none d-lg-block" style=" height: 300px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="view d-none d-lg-block" style=" height: 250px; background-image: url({{MEDIA_URL}}/styled_background.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
       <div class="container d-flex h-100 align-items-center justify-content-center">
         <div class="row">
           <div class="col-md-12 white-text text-center">
             <div class="col-md-12 p-lg-5 mx-auto my-auto">
 
-              <h1 class="display-2 font-weight-bold text-center">Choose Your Path</h1>
+              <h1 class="display-2 font-weight-bold text-center">Who Are You?</h1>
 
 
             </div>
@@ -28,7 +28,7 @@
           <div class="col-sm-12 col-xs-12 white-text text-center">
             <br>
 
-            <h1 class="font-weight-bold display-4">Choose Your Path</h1>
+            <h1 class="font-weight-bold display-4">Who Are You?</h1>
 
           </div>
         </div>
@@ -41,14 +41,22 @@
       <br>
 
 
-      <section class="dark-grey-text text-center">
+      <section class="dark-grey-text text-center shadow" style="background-color: #ffffff; border: 2px solid #d8d8d8; border-radius: 20px;">
+
+
+
+
+         <div class="card-header mb-4">
+            <h1 class="display-4 font-weight-bold text-center my-2" style="color: #1d1d1f">Choose Your Path</h1>
+          </div>
 
         <!-- <h3 class="font-weight-bold pt-4 mb-4">Choose Your Path</h3> -->
 
         <!--<h5 class="font-weight-bold font-italic mb-5">At vero eos et accusamus et iusto odio dignissimos qui cupiditate non provident.</h5>-->
 
-        <div class="row mx-2 mx-lg-0 p-3 shadow" style="background-color: #f7f7f7; border-radius: 20px;">
-          <div class="col mr-lg-3">
+        <div class="row px-4 pb-4">
+
+          <div class="col mr-lg-3 p-2" style="border: 0px solid #4abbf7; border-radius: 25px;">
 
             <div class="view">
               <h2 class="m-0 text-center">Creator</h2>
@@ -58,10 +66,10 @@
 
             </div>
 
-            <div class="p-2" style="border: 2px solid #c8c8c8; border-radius: 15px;">
+            <div class="p-2" style="border: 0px solid #c8c8c8; border-radius: 15px;">
 
             <h4 class="font-weight-bold mt-3">Create a Listing and Get Sponsored</h4>
-            <p class="grey-text px-3 mx-3">Create a listing for your blog and it will be placed on the open marketplace so sponsors can view it.</p>
+            <p class="grey-text px-3 mx-3">Create a listing for your Instagram and it will be placed on the open marketplace so sponsors can view it.</p>
 
             <br>
 
@@ -76,23 +84,34 @@
           </div>
 
             <br>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_c' %}" role="button">I'm a Creator</a>
-            </p>
 
+            {% if user.profile.type == 'sponsor'%}
+              <p class="lead">
+                <a class="btn btn-primary btn-lg disabled" href="{% url 'blog_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Creator Listing</a>
+              </p>
+
+            {% else %}
+
+              <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'blog_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Creator Listing</a>
+              </p>
+
+            {% endif %}
 
             <div class="d-lg-none">
               <hr class="my-3" style="opacity: 0%;">
               <br>
-              <hr class="my-3" style="width: 80%;">
+              <hr class="my-3" style="width: 90%;">
               <br>
             </div>
 
-          </div>
+            </div>
 
 
 
-          <div class="col m-0 ml-lg-3">
+
+
+            <div class="col m-0 ml-lg-3 p-2" style="border: 0px solid #7c3de6; border-radius: 25px;">
 
             <div class="view m-0">
               <h2 class="m-0 text-center">Sponsor</h2>
@@ -100,7 +119,7 @@
               <img src="{{MEDIA_URL}}/pics/sponsor_pic_home.png" class="img-fluid mt-4 mb-5" alt="smaple image">
             </div>
 
-            <div class="p-2" style="border: 2px solid #c8c8c8; border-radius: 15px;">
+            <div class="p-2" style="border: 0px solid #c8c8c8; border-radius: 15px;">
 
             <h4 class="font-weight-bold mt-3">Create a Listing and Attract Creators</h4>
             <p class="grey-text px-3 mx-3">Create a listing for your product/business and it will be placed on the open marketplace so creators can view it.</p>
@@ -120,13 +139,25 @@
            </div>
 
             <br>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="{% url 'dashboard_type_s' %}" role="button">I'm a Sponsor</a>
-            </p>
+
+              {% if user.profile.type == 'creator'%}
+
+                <p class="lead">
+                  <a class="btn btn-primary btn-lg disabled" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
+                </p>
+
+            {% else %}
+
+              <p class="lead mb-0">
+                <a class="btn btn-primary btn-lg" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
+              </p>
+
+            {% endif %}
 
 
 
           </div>
+
         </div>
 
       </section>
