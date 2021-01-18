@@ -46,13 +46,12 @@ def order_complete():
         transaction_id = order.transaction_id
 
         r = requests.get(
-            'https://api.escrow.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
-              auth=('admin@getboostplatform.com', '14464_SnugYOEta03vUh9aAMlwz5KG3RMo8vk86uvdyHN9BWLtfjwoNhsj5ZibhhULli2W'),
+            'https://api.escrow-sandbox.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
+              auth=('admin@getboostplatform.com', '1903_654mQOuPbybvpQ7ZMtoPlWFqXrb76mBKKVUQWyqpUUgAphioq9ZbtRlpyipDqsCO'),
             )
 
         status = r.json()['items'][0]['status'].get('accepted')
-        print('\n---> status: ', status)
-        print('\n\n r.json(): \n\n', r.json())
+
 
         if(status == True):
 
@@ -116,6 +115,8 @@ def order_complete():
             cc_order.save()
 
             CompleteOrderMetricModel.objects.create(acc_order_id=c_order.id, completed_order_id=cc_order.id)
+
+            c_order.delete()
 
 
 
