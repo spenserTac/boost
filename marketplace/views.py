@@ -585,7 +585,7 @@ def sponsor_marketplace(request):
 
 
     # ALWAYS KEEP THIS AT THE BOTTOM OF THE FUNCTION
-    paginator = Paginator(sponsor_listings, 10)
+    paginator = Paginator(sponsor_listings, 18)
     page = request.GET.get('page')
 
     sponsor_listings = paginator.get_page(page)
