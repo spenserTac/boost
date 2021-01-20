@@ -192,11 +192,13 @@
 
                 {% csrf_token %}
 
-
-                <!-- Button trigger modal -->
+                <!--
                 <button type="button" class="btn btn-primary btn-block my-5 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
                   Need Help?
                 </button>
+                -->
+
+                <a class="btn btn-primary btn-block my-5 py-2" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

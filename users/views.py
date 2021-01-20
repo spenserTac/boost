@@ -46,8 +46,8 @@ def order_complete():
         transaction_id = order.transaction_id
 
         r = requests.get(
-            'https://api.escrow-sandbox.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
-              auth=('admin@getboostplatform.com', '1903_654mQOuPbybvpQ7ZMtoPlWFqXrb76mBKKVUQWyqpUUgAphioq9ZbtRlpyipDqsCO'),
+            'https://api.escrow.com/2017-09-01/transaction/{transaction_id}'.format(transaction_id=transaction_id),
+              auth=('admin@getboostplatform.com', '14490_8NV4AibVVPvovHAT3ZbUaZMEv5iCfVNTEBmVs0urmI2mxwzOmYq25GFnA2bl1UQn'),
             )
 
         status = r.json()['items'][0]['status'].get('accepted')
@@ -120,7 +120,7 @@ def order_complete():
 
 
 
-#order_complete()
+order_complete()
 
 
 
@@ -612,9 +612,6 @@ def dashboard_s_acc(request, id=None):
         #listing.transaction_id = encrypt_id(escrow_t["transaction_id"])
         listing.transaction_id = escrow_t["transaction_id"]
 
-        print('\n\n---------> ', escrow_t)
-
-
         listing.save()
 
     elif (listing.who_initiated_order == 'creator'):
@@ -665,7 +662,7 @@ def dashboard_s_acc(request, id=None):
     }
 
 
-    return redirect('https://www.escrow-sandbox.com/pay?token=%s' % (escrow_t["token"]), "_blank")
+    return redirect('https://www.escrow.com/pay?token=%s' % (escrow_t["token"]), "_blank")
 
 @dashboard_s_edit_decorator
 def dashboard_s_edit(request, id=None):

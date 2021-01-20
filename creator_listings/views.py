@@ -285,18 +285,6 @@ def blogger_listing_update(request, id=None):
 
             form.save()
 
-            try:
-                message = twilioCli.messages.create(
-                    body="""
-
-                        --- FROM: Boost ---
-
-    Update stats for: %s""" % (username),
-                    from_=myTwilioNumber,
-                    to=myCellPhone
-                    )
-            except:
-                pass
 
             messages.success(request, "%s has been successfully updated." % (listing.ig_name), extra_tags="blog_listing_update")
 

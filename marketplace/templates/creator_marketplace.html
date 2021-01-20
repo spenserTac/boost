@@ -17,9 +17,13 @@
                 <form method="GET">
                     <div class="col p-0">
 
+                    <!--
                       <button type="button" class="btn btn-primary btn-block mt-3 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
                         Need Help?
                       </button>
+                    -->
+
+                      <a class="btn btn-primary btn-block mt-3 py-2" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
 
                       <!-- Modal -->
@@ -388,7 +392,7 @@
 
 
 
-                            <h5 class="card-title ml-2 mb-0 text-break"><a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" style="color: #007185;">{{ listing.ig_name }}</a></h5>
+                            <h6 class="card-title ml-2 mb-0 text-break"><a href="{% url 'creator_marketplace_listing_view' id=listing.id %}" style="color: #007185;">{{ listing.ig_name }}</a></h6>
 
 
 
@@ -403,14 +407,14 @@
                                     {% if listing.followers %}
 
                                       <td>
-                                          <h5 class="mb-0">{{ listing.followers|intcomma }}</h5>
+                                          <h6 class="mb-0">{{ listing.followers|intcomma }}</h6>
                                           <small class="text-muted">Followers</small>
                                       </td>
 
                                     {% else %}
 
                                      <td>
-                                         <h5 class="mb-0">N/A</h5>
+                                         <h6 class="mb-0">N/A</h6>
                                          <small class="text-muted">Followers</small>
                                      </td>
 
@@ -420,14 +424,14 @@
                                     {% if listing.engagement_rate %}
 
                                       <td>
-                                          <h5 class="mb-0 mr">{{ listing.engagement_rate|intcomma }}%</h5>
+                                          <h6 class="mb-0 mr">{{ listing.engagement_rate|intcomma }}%</h6>
                                           <small class="text-muted">Engagement Rate</small>
                                       </td>
 
                                     {% else %}
 
                                       <td>
-                                          <h5 class="mb-0">N/A</h5>
+                                          <h6 class="mb-0">N/A</h6>
                                           <small class="text-muted">Engagement Rate</small>
                                       </td>
 
@@ -439,14 +443,14 @@
                                     {% if listing.estimated_post_impressions %}
 
                                       <td>
-                                          <h5 class="mb-0">{{ listing.estimated_post_impressions|intcomma }}</h5>
+                                          <h6 class="mb-0">{{ listing.estimated_post_impressions|intcomma }}</h6>
                                           <small class="text-muted">Avg. Impressions</small>
                                       </td>
 
                                     {% else %}
 
                                       <td>
-                                          <h5 class="mb-0">N/A</h5>
+                                          <h6 class="mb-0">N/A</h6>
                                           <small class="text-muted">Avg. Impressions</small>
                                       </td>
 
@@ -455,14 +459,14 @@
                                     {% if listing.avg_likes %}
 
                                       <td>
-                                          <h5 class="mb-0">{{ listing.avg_likes|intcomma }}</h5>
+                                          <h6 class="mb-0">{{ listing.avg_likes|intcomma }}</h6>
                                           <small class="text-muted">Avg. Likes</small>
                                       </td>
 
                                     {% else %}
 
                                       <td>
-                                          <h5 class="mb-0">N/A</h5>
+                                          <h6 class="mb-0">N/A</h6>
                                           <small class="text-muted">Avg. Likes</small>
                                       </td>
 
@@ -549,9 +553,13 @@
 
             <div class="col-8 pr-2 pl-0 mx-auto">
 
+            <!--
             <button type="button" class="btn btn-primary btn-block my-3" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModalMobileSmToMdBlock">
               Need Help?
             </button>
+            -->
+
+            <a class="btn btn-primary btn-block my-3" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
             <!-- Modal -->
             <div class="modal fade" id="helpVideoModalMobileSmToMdBlock" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1079,9 +1087,13 @@
 
           <div class="col-8 pr-2 pl-0 mx-auto">
 
+        <!--
           <button type="button" class="btn btn-primary btn-block my-3" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModalMobile">
             Need Help?
           </button>
+          -->
+
+          <a class="btn btn-primary btn-block my-3" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
           <!-- Modal -->
           <div class="modal fade" id="helpVideoModalMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1282,7 +1294,7 @@
             <div class="col">
                 {% for listing in creator_listings %}
 
-                <div class="card mx-3 mt-2 mb-5 shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+                <div class="card mx-3 mt-2 shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
 
                     <a href="{% url 'creator_marketplace_listing_view' id=listing.id %}">
                       <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%; border: 0px solid #d8d8d8; border-top-left-radius: 23px; border-top-right-radius: 23px;"">

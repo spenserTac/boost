@@ -17,9 +17,13 @@
            <form method="GET">
                <div class="col p-0">
 
+                 <!--
                  <button type="button" class="btn btn-primary btn-block mt-3 py-2" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModal">
                    Need Help?
                  </button>
+                 -->
+
+                 <a class="btn btn-primary btn-block mt-3 py-2" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
 
                  <!-- Modal -->
@@ -353,9 +357,13 @@
 
        <div class="col-8 pr-2 pl-0 mx-auto">
 
+    <!--
        <button type="button" class="btn btn-primary btn-block my-3" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModalMobileSmToMdBlock">
          Need Help?
        </button>
+       -->
+
+       <a class="btn btn-primary btn-block my-3" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
        <!-- Modal -->
        <div class="modal fade" id="helpVideoModalMobileSmToMdBlock" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -708,9 +716,13 @@
 
      <div class="col-8 pr-2 pl-0 mx-auto">
 
+    <!--
      <button type="button" class="btn btn-primary btn-block my-3" style="border: 1px solid #0058b5;" data-toggle="modal" data-target="#helpVideoModalMobile">
        Need Help?
      </button>
+     -->
+
+     <a class="btn btn-primary btn-block my-3" href="{% url 'support_contact' %}" style="border: 1px solid #0058b5;">Need Help?</a>
 
      <!-- Modal -->
      <div class="modal fade" id="helpVideoModalMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -830,7 +842,7 @@
        <div class="col">
            {% for listing in sponsor_listings %}
 
-           <div class="card mx-3 mt-2 mb-5 shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
+           <div class="card mx-3 mt-2 shadow" style="border: 2px solid #d8d8d8; border-radius: 25px;">
 
                <a href="{% url 'sponsor_marketplace_listing_view' id=listing.id %}">
                  <img src="{{MEDIA_URL}}{{listing.listing_img}}" class="card-img" style="max-width: 100%; max-height: 100%; border: 0px solid #d8d8d8; border-top-left-radius: 23px; border-top-right-radius: 23px;"">
