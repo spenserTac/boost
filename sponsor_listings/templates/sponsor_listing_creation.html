@@ -91,21 +91,12 @@
 
            </div>
 
-            <br>
-
-              {% if user.profile.type == 'creator'%}
-
-                <p class="lead">
-                  <a class="btn btn-primary btn-lg disabled" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
-                </p>
-
-            {% else %}
-
-              <p class="lead mb-0">
-                <a class="btn btn-primary btn-lg" href="{% url 'sponsor_listing' %}" style="border: 1px solid #0058b5;" role="button">Make a Sponsor Listing</a>
-              </p>
-
-            {% endif %}
+           <br>
+               <p class="lead">
+                 <a class="btn btn-primary btn-lg" href="{% url 'sponsor_listing_creation_type_s' %}" role="button">I'm a Sponsor</a>
+               </p>
+               <br>
+               <a href="{% url 'blog_listing' %}">I'm Actually a Creator</a>
 
 
 
